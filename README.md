@@ -1,2 +1,2 @@
 # albireo
-Educational Astronomy Software
+Albireo Astronomy Toolbox - Educational Astronomy Software
