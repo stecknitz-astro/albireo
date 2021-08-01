@@ -1,0 +1,762 @@
+object F__ADM: TF__ADM
+  Left = 2339
+  Height = 575
+  Top = 250
+  Width = 867
+  Caption = 'Albireo Database Manager'
+  ClientHeight = 575
+  ClientWidth = 867
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '2.0.10.0'
+  object PC__ADM: TPageControl
+    Left = 0
+    Height = 531
+    Top = 0
+    Width = 867
+    ActivePage = TS__SIMBAD_IMP
+    Align = alClient
+    TabIndex = 1
+    TabOrder = 0
+    object TS__PLANETS: TTabSheet
+      Caption = 'Asteroids'
+      ClientHeight = 503
+      ClientWidth = 859
+      object ED__ECCENTRICITY: TLabeledEdit
+        Left = 24
+        Height = 23
+        Top = 152
+        Width = 66
+        EditLabel.Height = 15
+        EditLabel.Width = 66
+        EditLabel.Caption = 'Eccentricity'
+        EditLabel.ParentColor = False
+        TabOrder = 0
+        TextHint = '0.0'
+      end
+      object ED__INCLINATION: TLabeledEdit
+        Left = 104
+        Height = 23
+        Top = 152
+        Width = 66
+        EditLabel.Height = 15
+        EditLabel.Width = 66
+        EditLabel.Caption = 'Inclination'
+        EditLabel.ParentColor = False
+        TabOrder = 1
+        TextHint = '0.0'
+      end
+      object ED__NAME_DE: TLabeledEdit
+        Left = 24
+        Height = 23
+        Top = 88
+        Width = 184
+        EditLabel.Height = 15
+        EditLabel.Width = 184
+        EditLabel.Caption = 'Name (German)'
+        EditLabel.ParentColor = False
+        TabOrder = 2
+        TextHint = '(000) Asteroid'
+      end
+      object ED__NAME_EN: TLabeledEdit
+        Left = 224
+        Height = 23
+        Top = 88
+        Width = 184
+        EditLabel.Height = 15
+        EditLabel.Width = 184
+        EditLabel.Caption = 'Name (English)'
+        EditLabel.ParentColor = False
+        TabOrder = 3
+        TextHint = '(000) Asteroid'
+      end
+      object ED__SMAXIS: TLabeledEdit
+        Left = 24
+        Height = 23
+        Top = 208
+        Width = 146
+        EditLabel.Height = 15
+        EditLabel.Width = 146
+        EditLabel.Caption = 'Semimajor Axis (AU)'
+        EditLabel.ParentColor = False
+        TabOrder = 4
+        TextHint = '0.0'
+      end
+      object ED__OPERIOD: TLabeledEdit
+        Left = 24
+        Height = 23
+        Top = 264
+        Width = 146
+        EditLabel.Height = 15
+        EditLabel.Width = 146
+        EditLabel.Caption = 'Orbital period (Years)'
+        EditLabel.ParentColor = False
+        TabOrder = 5
+        TextHint = '0.0'
+      end
+      object ED__APERI: TLabeledEdit
+        Left = 24
+        Height = 23
+        Top = 320
+        Width = 184
+        EditLabel.Height = 15
+        EditLabel.Width = 184
+        EditLabel.Caption = 'Argument or perihelion [°]'
+        EditLabel.ParentColor = False
+        TabOrder = 6
+        TextHint = '0.0'
+      end
+      object ED__LAN: TLabeledEdit
+        Left = 224
+        Height = 23
+        Top = 320
+        Width = 184
+        EditLabel.Height = 15
+        EditLabel.Width = 184
+        EditLabel.Caption = 'Longitude of ascending node [°]'
+        EditLabel.ParentColor = False
+        TabOrder = 7
+        TextHint = '0.0'
+      end
+      object ED__OMEGA_Q: TLabeledEdit
+        Left = 464
+        Height = 23
+        Top = 320
+        Width = 184
+        EditLabel.Height = 15
+        EditLabel.Width = 184
+        EditLabel.Caption = 'OmegaQ [°]'
+        EditLabel.ParentColor = False
+        TabOrder = 8
+        TextHint = '0.0'
+      end
+      object ED__LEPOCH: TLabeledEdit
+        Left = 24
+        Height = 23
+        Top = 420
+        Width = 184
+        EditLabel.Height = 15
+        EditLabel.Width = 184
+        EditLabel.Caption = 'Longitude at the epoch [°]'
+        EditLabel.ParentColor = False
+        EditLabel.ParentFont = False
+        EditLabel.Font.CharSet = ANSI_CHARSET
+        EditLabel.Font.Color = clBlack
+        EditLabel.Font.Height = -12
+        EditLabel.Font.Name = 'Segoe UI'
+        EditLabel.Font.Pitch = fpVariable
+        EditLabel.Font.Quality = fqDraft
+        EditLabel.Font.Style = [fsBold]
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 9
+        TextHint = '0.0'
+      end
+      object B__CALC_OMEGA: TButton
+        Left = 408
+        Height = 23
+        Top = 320
+        Width = 57
+        Caption = '> Calc >'
+        OnClick = B__CALC_OMEGAClick
+        TabOrder = 10
+      end
+      object B__CALC_LEPOCH: TButton
+        Left = 208
+        Height = 64
+        Top = 400
+        Width = 56
+        Caption = '< Calc <'
+        OnClick = B__CALC_LEPOCHClick
+        TabOrder = 11
+      end
+      object GBX__CALC_LEPOCH: TGroupBox
+        Left = 264
+        Height = 122
+        Top = 366
+        Width = 592
+        Caption = 'Target data'
+        ClientHeight = 102
+        ClientWidth = 588
+        TabOrder = 12
+        object ED__CALC_LE_DATE: TDateEdit
+          Left = 8
+          Height = 23
+          Top = 16
+          Width = 121
+          CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
+          DateOrder = doNone
+          ButtonWidth = 23
+          NumGlyphs = 1
+          MaxLength = 0
+          TabOrder = 0
+        end
+        object ED__CALC_LE_TIME: TTimeEdit
+          Left = 136
+          Height = 23
+          Top = 16
+          Width = 125
+          ButtonWidth = 23
+          NumGlyphs = 1
+          MaxLength = 0
+          TabOrder = 1
+        end
+        object L__CALC_LE_DATE: TLabel
+          Left = 8
+          Height = 15
+          Top = -2
+          Width = 24
+          Caption = 'Date'
+          ParentColor = False
+        end
+        object L__CALC_LE_TIME: TLabel
+          Left = 136
+          Height = 15
+          Top = -2
+          Width = 27
+          Caption = 'Time'
+          ParentColor = False
+        end
+        object ED__CALC_LE_RA_HH: TLabeledEdit
+          Left = 280
+          Height = 23
+          Top = 16
+          Width = 40
+          EditLabel.Height = 15
+          EditLabel.Width = 40
+          EditLabel.Caption = 'RA HH'
+          EditLabel.ParentColor = False
+          TabOrder = 2
+          TextHint = '00'
+        end
+        object ED__CALC_LE_DEC_DEG: TLabeledEdit
+          Left = 424
+          Height = 23
+          Top = 16
+          Width = 48
+          EditLabel.Height = 15
+          EditLabel.Width = 48
+          EditLabel.Caption = 'DEC Deg'
+          EditLabel.ParentColor = False
+          TabOrder = 5
+          TextHint = '000'
+        end
+        object ED__MAXITER: TLabeledEdit
+          Left = 8
+          Height = 23
+          Top = 67
+          Width = 88
+          EditLabel.Height = 15
+          EditLabel.Width = 88
+          EditLabel.Caption = 'Max Iterations'
+          EditLabel.ParentColor = False
+          TabOrder = 8
+          Text = '10'
+          TextHint = '10'
+        end
+        object ED__EPSILON: TLabeledEdit
+          Left = 136
+          Height = 23
+          Top = 67
+          Width = 88
+          EditLabel.Height = 15
+          EditLabel.Width = 88
+          EditLabel.Caption = 'Epsilon'
+          EditLabel.ParentColor = False
+          TabOrder = 9
+          Text = '0.5'
+          TextHint = '0.5'
+        end
+        object ED__CALC_LE_RA_MM: TLabeledEdit
+          Left = 322
+          Height = 23
+          Top = 16
+          Width = 40
+          EditLabel.Height = 15
+          EditLabel.Width = 40
+          EditLabel.Caption = 'MM'
+          EditLabel.ParentColor = False
+          TabOrder = 3
+          TextHint = '00'
+        end
+        object ED__CALC_LE_RA_SS: TLabeledEdit
+          Left = 365
+          Height = 23
+          Top = 16
+          Width = 35
+          EditLabel.Height = 15
+          EditLabel.Width = 35
+          EditLabel.Caption = 'SS'
+          EditLabel.ParentColor = False
+          TabOrder = 4
+          TextHint = '00'
+        end
+        object ED__CALC_LE_DEC_MM: TLabeledEdit
+          Left = 474
+          Height = 23
+          Top = 16
+          Width = 32
+          EditLabel.Height = 15
+          EditLabel.Width = 32
+          EditLabel.Caption = 'MM'
+          EditLabel.ParentColor = False
+          TabOrder = 6
+          TextHint = '00'
+        end
+        object ED__CALC_LE_DEC_SS: TLabeledEdit
+          Left = 508
+          Height = 23
+          Top = 16
+          Width = 32
+          EditLabel.Height = 15
+          EditLabel.Width = 32
+          EditLabel.Caption = 'SS'
+          EditLabel.ParentColor = False
+          TabOrder = 7
+          TextHint = '00'
+        end
+      end
+      object ED__MASS: TLabeledEdit
+        Left = 224
+        Height = 23
+        Top = 152
+        Width = 94
+        EditLabel.Height = 15
+        EditLabel.Width = 94
+        EditLabel.Caption = 'Mass 10^18 [kg]'
+        EditLabel.ParentColor = False
+        TabOrder = 13
+        TextHint = '0.0'
+      end
+      object ED__DIAMETER: TLabeledEdit
+        Left = 224
+        Height = 23
+        Top = 208
+        Width = 94
+        EditLabel.Height = 15
+        EditLabel.Width = 94
+        EditLabel.Caption = 'Diameter [km]'
+        EditLabel.ParentColor = False
+        TabOrder = 14
+        TextHint = '0.0'
+      end
+      object ED__MAG: TLabeledEdit
+        Left = 224
+        Height = 23
+        Top = 264
+        Width = 94
+        EditLabel.Height = 15
+        EditLabel.Width = 94
+        EditLabel.Caption = 'Magnitude'
+        EditLabel.ParentColor = False
+        TabOrder = 15
+        TextHint = '0.0'
+      end
+      object MM__INFO: TMemo
+        Left = 440
+        Height = 272
+        Top = 8
+        Width = 416
+        ScrollBars = ssAutoBoth
+        TabOrder = 16
+      end
+      object CB__ASTEROID: TComboBox
+        Left = 24
+        Height = 23
+        Top = 26
+        Width = 184
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Font.Style = [fsBold]
+        ItemHeight = 15
+        OnChange = CB__ASTEROIDChange
+        ParentFont = False
+        TabOrder = 17
+      end
+      object L__ASTEROID: TLabel
+        Left = 28
+        Height = 15
+        Top = 8
+        Width = 47
+        Caption = 'Asteroid'
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object ED__VDIAM_AS: TLabeledEdit
+        Left = 352
+        Height = 23
+        Top = 208
+        Width = 80
+        EditLabel.Height = 15
+        EditLabel.Width = 80
+        EditLabel.Caption = 'Vis. diam asec'
+        EditLabel.ParentColor = False
+        TabOrder = 18
+        TextHint = '0.0'
+      end
+      object B__CALC_ARCSEC: TButton
+        Left = 317
+        Height = 22
+        Top = 208
+        Width = 37
+        Caption = '> C >'
+        OnClick = B__CALC_ARCSECClick
+        TabOrder = 19
+      end
+    end
+    object TS__SIMBAD_IMP: TTabSheet
+      Caption = 'Simbad'
+      ClientHeight = 503
+      ClientWidth = 859
+      object MM__SIMBARDCONF_S: TMemo
+        Left = 8
+        Height = 272
+        Top = 32
+        Width = 400
+        Lines.Strings = (
+          'Simbad resource: http://http://simbad.u-strasbg.fr/simbad/sim-fsam'
+          ''
+          'Simbad Configuration:'
+          ''
+          'Criteria Query: '
+          'vmag > 6.0 & vmag <= 7.0 & otype=''*'''
+          ''
+          'Output Options (object and list display):'
+          '- Output format: ASCII (aligned, |-separator)  and  file output'
+          '- Identifier: all / checked'
+          '- Object type: always / checked'
+          '- Coordinates1: always / checked - decimal format'
+          '- Parallax: checked / checked'
+          '- Fluxes/Magnitudes: checked / checked - ''V'' checked'
+          '- Spectral type: checked / checked'
+          ''
+        )
+        ScrollBars = ssAutoBoth
+        TabOrder = 0
+      end
+      object B__PROCESS: TButton
+        Left = 8
+        Height = 25
+        Top = 344
+        Width = 176
+        Caption = 'Process  Simbad output file'
+        OnClick = B__PROCESSClick
+        TabOrder = 1
+      end
+      object L__PROCESSED_CNT_TITLE: TLabel
+        Left = 8
+        Height = 15
+        Top = 384
+        Width = 103
+        Caption = 'Processed Datasets:'
+        ParentColor = False
+      end
+      object L__PROCESSED_CNT: TLabel
+        Left = 152
+        Height = 15
+        Top = 384
+        Width = 7
+        Caption = '0'
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object RB__GEN_DS_STARS: TRadioButton
+        Left = 8
+        Height = 19
+        Top = 8
+        Width = 137
+        Caption = 'Generate Star Datasets'
+        Checked = True
+        TabOrder = 2
+        TabStop = True
+      end
+      object RB__GEN_DS_GALAXIES: TRadioButton
+        Left = 440
+        Height = 19
+        Top = 8
+        Width = 151
+        Caption = 'Generate Galaxy Datasets'
+        TabOrder = 3
+      end
+      object MM__SIMBARDCONF_G: TMemo
+        Left = 440
+        Height = 272
+        Top = 32
+        Width = 408
+        Lines.Strings = (
+          'Simbad resource: http://http://simbad.u-strasbg.fr/simbad/sim-fsam'
+          ''
+          'Simbad Configuration:'
+          ''
+          'Criteria Query: '
+          '('
+          'Umag > 11 |  '
+          'Bmag > 11 |  '
+          'Vmag > 11 |  '
+          'Rmag > 11 |  '
+          'Imag > 11 |  '
+          'Gmag > 11 |  '
+          'Jmag > 11 |  '
+          'Kmag > 11 |  '
+          'Hmag > 11 |'
+          'umag > 11 |'
+          'gmag > 11 |'
+          'rmag > 11 |'
+          'imag > 11 |'
+          'zmag > 11 '
+          ') '
+          '&'
+          '('
+          'Umag <= 11.05 |  '
+          'Bmag <= 11.05 |  '
+          'Vmag <= 11.05 |  '
+          'Rmag <= 11.05 |  '
+          'Imag <= 11.05 |  '
+          'Gmag <= 11.05 |  '
+          'Jmag <= 11.05 |  '
+          'Kmag <= 11.05 |  '
+          'Hmag <= 11.05 |'
+          'umag <= 11.05 |'
+          'gmag <= 11.05 |'
+          'rmag <= 11.05 |'
+          'imag <= 11.05 |'
+          'zmag <= 11.05 '
+          ') '
+          '& maintypes=''G'''
+          ''
+          'Output Options (object and list display):'
+          '- Output format: ASCII  (aligned, |-separator)  and  file output'
+          '- Identifier: all / checked'
+          '- Object type: always / checked'
+          '- Coordinates1: always / checked - decimal format'
+          '- Radial velocity: checked /checked - redshift  checked / radial velocity checked / cz velocity checked'
+          '- Fluxes/Magnitudes: checked / checked - All 14 fluxes checked'
+          '- Morphological  type: checked / checked'
+          '- Angular size: checked /checked'
+          ''
+        )
+        ScrollBars = ssAutoBoth
+        TabOrder = 4
+      end
+      object L__EXCLUDED_CNT_TITLE: TLabel
+        Left = 8
+        Height = 15
+        Top = 400
+        Width = 97
+        Caption = 'Excluded Datasets:'
+        ParentColor = False
+      end
+      object L__EXCLUDED_CNT: TLabel
+        Left = 152
+        Height = 15
+        Top = 400
+        Width = 7
+        Caption = '0'
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object MM__SKIPPED: TMemo
+        Left = 208
+        Height = 173
+        Top = 328
+        Width = 312
+        TabOrder = 5
+      end
+      object L__SKIPPED: TLabel
+        Left = 208
+        Height = 15
+        Top = 312
+        Width = 42
+        Caption = 'Skipped'
+        ParentColor = False
+      end
+      object MM__ADDED: TMemo
+        Left = 528
+        Height = 173
+        Top = 328
+        Width = 320
+        TabOrder = 6
+      end
+      object L__ADDED: TLabel
+        Left = 528
+        Height = 15
+        Top = 312
+        Width = 35
+        Caption = 'Added'
+        ParentColor = False
+      end
+      object L__TOTAL_CNT_TITLE: TLabel
+        Left = 8
+        Height = 15
+        Top = 424
+        Width = 27
+        Caption = 'Total'
+        ParentColor = False
+      end
+      object L__TOTAL_CNT: TLabel
+        Left = 152
+        Height = 15
+        Top = 424
+        Width = 7
+        Caption = '0'
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+    end
+    object TS__LIBMOD: TTabSheet
+      Caption = 'LibMod'
+      ClientHeight = 503
+      ClientWidth = 859
+      object GBX__LINEDELETE: TGroupBox
+        Left = 8
+        Height = 120
+        Top = 8
+        Width = 488
+        Caption = 'Line Delete'
+        ClientHeight = 100
+        ClientWidth = 484
+        TabOrder = 0
+        object B__LINEDELETE: TButton
+          Left = 8
+          Height = 25
+          Top = 8
+          Width = 75
+          Caption = 'Excecute'
+          OnClick = B__LINEDELETEClick
+          TabOrder = 0
+        end
+        object L__LD_TOTAL_TITLE: TLabel
+          Left = 8
+          Height = 15
+          Top = 48
+          Width = 86
+          Caption = 'Lines processed:'
+          ParentColor = False
+        end
+        object L__LD_TOTAL: TLabel
+          Left = 112
+          Height = 15
+          Top = 48
+          Width = 18
+          Caption = '000'
+          ParentColor = False
+        end
+        object L__LD_CNT_TITLE: TLabel
+          Left = 8
+          Height = 15
+          Top = 72
+          Width = 72
+          Caption = 'Lines deleted:'
+          ParentColor = False
+        end
+        object L__LD_CNT: TLabel
+          Left = 112
+          Height = 15
+          Top = 72
+          Width = 18
+          Caption = '000'
+          ParentColor = False
+        end
+        object ED__DEL_STRING: TEdit
+          Left = 108
+          Height = 23
+          Top = 10
+          Width = 176
+          TabOrder = 1
+          TextHint = 'Deletion string'
+        end
+        object L__IGNOREPOS: TLabel
+          Left = 320
+          Height = 15
+          Top = -8
+          Width = 149
+          Caption = 'Ignore at minimum Position'
+          ParentColor = False
+        end
+        object ED__IGNOREPOS: TSpinEdit
+          Left = 325
+          Height = 23
+          Top = 10
+          Width = 67
+          TabOrder = 2
+        end
+      end
+    end
+  end
+  object P__BUTTONS: TPanel
+    Left = 0
+    Height = 44
+    Top = 531
+    Width = 867
+    Align = alBottom
+    ClientHeight = 44
+    ClientWidth = 867
+    TabOrder = 1
+    object B__ADDTOLIB: TButton
+      Left = 168
+      Height = 28
+      Top = 8
+      Width = 137
+      Caption = 'Add to library'
+      OnClick = B__ADDTOLIBClick
+      TabOrder = 0
+    end
+    object B__ADDTEMP: TButton
+      Left = 16
+      Height = 28
+      Top = 8
+      Width = 137
+      Caption = 'Add temporarily'
+      OnClick = B__ADDTEMPClick
+      TabOrder = 1
+    end
+  end
+  object ODLG: TOpenDialog
+    DefaultExt = '.txt'
+    Left = 576
+    Top = 40
+  end
+  object SDLG: TSaveDialog
+    DefaultExt = '.dat'
+    Left = 624
+    Top = 40
+  end
+end

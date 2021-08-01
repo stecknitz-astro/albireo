@@ -1,0 +1,207 @@
+object F__DEVICES: TF__DEVICES
+  Left = 2613
+  Height = 504
+  Top = 271
+  Width = 755
+  Caption = 'Device Management'
+  ClientHeight = 504
+  ClientWidth = 755
+  LCLVersion = '2.0.10.0'
+  object GBX__ADEV_PROP: TGroupBox
+    Left = 0
+    Height = 416
+    Top = 53
+    Width = 755
+    Align = alClient
+    Caption = 'Geräteeigenschaften'
+    ClientHeight = 396
+    ClientWidth = 751
+    TabOrder = 0
+    object PC__ADEV: TPageControl
+      Left = 0
+      Height = 396
+      Top = 0
+      Width = 751
+      ActivePage = TA__ADEV_GENERAL
+      Align = alClient
+      TabIndex = 0
+      TabOrder = 0
+      object TA__ADEV_GENERAL: TTabSheet
+        Caption = 'Allgemein'
+        ClientHeight = 368
+        ClientWidth = 743
+        object P__ADEV_GENERAL: TPanel
+          Left = 0
+          Height = 368
+          Top = 0
+          Width = 426
+          Align = alLeft
+          ClientHeight = 368
+          ClientWidth = 426
+          TabOrder = 0
+          object L__ADEV_DESCR: TLabel
+            Left = 14
+            Height = 15
+            Top = 23
+            Width = 72
+            Caption = 'Beschreibung'
+            ParentColor = False
+          end
+          object ED__ADEV_DESCR: TEdit
+            Left = 86
+            Height = 23
+            Top = 21
+            Width = 323
+            TabOrder = 0
+          end
+          object L__ADEV_MANU: TLabel
+            Left = 14
+            Height = 15
+            Top = 55
+            Width = 50
+            Caption = 'Hersteller'
+            ParentColor = False
+          end
+          object ED__ADEV_MANU: TEdit
+            Left = 86
+            Height = 23
+            Top = 51
+            Width = 168
+            TabOrder = 1
+          end
+          object L__ADEV_ARTNO: TLabel
+            Left = 14
+            Height = 15
+            Top = 88
+            Width = 80
+            Caption = 'Artikelnummer'
+            ParentColor = False
+          end
+          object ED__ADEV_ARTNO: TEdit
+            Left = 86
+            Height = 23
+            Top = 83
+            Width = 168
+            TabOrder = 2
+          end
+        end
+        object GBX__ADEV_PHOTO: TGroupBox
+          Left = 426
+          Height = 368
+          Top = 0
+          Width = 317
+          Align = alClient
+          Caption = 'Foto'
+          ClientHeight = 348
+          ClientWidth = 313
+          TabOrder = 1
+          object P__ADEV_PHOTO_BUTTONS: TPanel
+            Left = 0
+            Height = 37
+            Top = 311
+            Width = 313
+            Align = alBottom
+            ClientHeight = 37
+            ClientWidth = 313
+            TabOrder = 0
+            object B__ADEV_PHOTO_ADD: TButton
+              Left = 6
+              Height = 25
+              Top = 6
+              Width = 75
+              Caption = 'Hinzufügen'
+              TabOrder = 0
+            end
+            object B__ADEV_PHOTO_DEL: TButton
+              Left = 86
+              Height = 25
+              Top = 6
+              Width = 75
+              Caption = 'Löschen'
+              TabOrder = 1
+            end
+          end
+          object IMG__ADEV_PHOTO: TImage
+            Left = 0
+            Height = 311
+            Top = 0
+            Width = 313
+            Align = alClient
+          end
+        end
+      end
+      object TS__DETAIL: TTabSheet
+        Caption = 'Details'
+      end
+    end
+  end
+  object P__BUTTON: TPanel
+    Left = 0
+    Height = 35
+    Top = 469
+    Width = 755
+    Align = alBottom
+    ClientHeight = 35
+    ClientWidth = 755
+    TabOrder = 1
+    object B__ADEV_ADD: TButton
+      Left = 16
+      Height = 25
+      Top = 5
+      Width = 75
+      Caption = 'Hinzufügen'
+      OnClick = B__ADEV_ADDClick
+      TabOrder = 0
+    end
+    object B__ADEV_MOD: TButton
+      Left = 232
+      Height = 25
+      Top = 5
+      Width = 75
+      Caption = 'Ändern'
+      OnClick = B__ADEV_MODClick
+      TabOrder = 1
+    end
+    object B__ADEV_DEL: TButton
+      Left = 312
+      Height = 25
+      Top = 5
+      Width = 75
+      Caption = 'Löschen'
+      OnClick = B__ADEV_DELClick
+      TabOrder = 2
+    end
+  end
+  object P__TOP: TPanel
+    Left = 0
+    Height = 53
+    Top = 0
+    Width = 755
+    Align = alTop
+    ClientHeight = 53
+    ClientWidth = 755
+    TabOrder = 2
+    object L__ADEV_NAME: TLabel
+      Left = 16
+      Height = 15
+      Top = 8
+      Width = 64
+      Caption = 'Gerätename'
+      ParentColor = False
+    end
+    object CB__ADEV_NAME: TComboBox
+      Left = 16
+      Height = 23
+      Top = 24
+      Width = 172
+      ItemHeight = 15
+      OnChange = CB__ADEV_NAMEChange
+      Style = csDropDownList
+      TabOrder = 0
+    end
+  end
+  object ODLG__IMAGE: TOpenPictureDialog
+    Left = 616
+    Top = 424
+  end
+end

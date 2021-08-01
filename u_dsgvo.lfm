@@ -1,0 +1,81 @@
+object F__DSGVO: TF__DSGVO
+  Left = 2689
+  Height = 553
+  Top = 356
+  Width = 681
+  Caption = 'Datenschutz'
+  ClientHeight = 553
+  ClientWidth = 681
+  OnShow = FormShow
+  LCLVersion = '2.0.10.0'
+  object MM__DE: TMemo
+    Left = 62
+    Height = 443
+    Top = 16
+    Width = 579
+    Lines.Strings = (
+      'Datenschutzerklärung'
+      '-----------------------'
+      ''
+      'Ansprechpartner﻿'
+      '-----------------'
+      'Ansprechpartner für Datenschutzfragen des Astronomieprogramme ''Albireo Astronomy Toolbox'' ist:'
+      ''
+      'Frank Szemkus'
+      'eMail-Adresse: kontakt@stecknitz-astronomie.de'
+      ''
+      ''
+      '﻿Welche personenbezogenen Daten warum gesammelt werden'
+      '------------------------------------------------------------------'
+      'Die Software Albireo Astronomy Toolbox, die Du unter www.stecknitz-astronomie.de downloaden kannst, '
+      'erfasst Dein Geburtsjahr und den von Dir eingetragenen Beobachtungsort als lokalen Datensatz, '
+      'der ausschließlich auf Deinem Gerät gespeichert wird. Eine Weiterleitung dieser Daten z.B. über das Internet erfolgt nicht. '
+      'Die Angabe des Geburtsjahres dient der Berechnung der optimalen Austrittspupille bei den Teleskop-Eigenschaften. '
+      'Der Beobachtungsort ist hingegen für die korrekte Darstellung des Sternenhimmels erforderlich.'
+      ''
+      'Wird der Spenden-Button betätigt oder klickt der Benutzer auf die Hilfstexte im Dialog ''Info'', '
+      'wird der Standard-Internetbrowser geöffnet und eine Internetverbindung zu Seiten von '
+      '''https://www.stecknitz-astronomie.de'' aufgebaut und es können rudimentäre persönliche Daten übertragen werden, '
+      'die zum Aufbau der Internetverbindung erforderlich sind (z.B. Deine IP-Adresse). '
+      'Um welche Daten es sich im Einzelnen handelt, findest Du in der Datenschutzerklärung auf stecknitz-astronomie.de '
+      'unter der Adresse https://www.stecknitz-astronomie.de/datenschutzerklaerung/.'
+    )
+    TabOrder = 0
+  end
+  object MM__EN: TMemo
+    Left = 66
+    Height = 70
+    Top = 475
+    Width = 572
+    Lines.Strings = (
+      'Data privacy statement'
+      '------------------------'
+      ''
+      'Contact Person'
+      '-----------------'
+      'Contact person for any data privacy issues of the astronomy program ''Albireo Astronomy Toolbox'' is:'
+      ''
+      'Frank Szemkus'
+      'eMail-Address: kontakt@stecknitz-astronomie.de'
+      ''
+      ''
+      'What kind of personal data are collected'
+      '-------------------------------------------'
+      'The Software Albireo Astronomy Toolbox, which you can download under www.stecknitz-astronomie.de'
+      'needs your year of birth and your place of location as a local dataset.'
+      'The dataset is stored on you local computer. A transfer of this data takes not place.'
+      'The year of birth is needed to calculate telsecope capablites. The place ot location is needed to calculate'
+      'the local view if the starry sky.'
+      ''
+      'A connection to the site www.stecknitz-astronomie.de will be opened, using the default internet browser, if you press'
+      '- the donation button'
+      '- Help-Labels  in dialogue ''Info'''
+      'For this case personal data in terms of your IP-address can be transmitted to the site'
+      'www.stecknitz-astronomie.de.'
+      ''
+      'If you need more information about the privacy statment of  www.stecknitz-astronomie.de please'
+      'go to site  https://www.stecknitz-astronomie.de/datenschutzerklaerung/.'
+    )
+    TabOrder = 1
+  end
+end

@@ -1,0 +1,60 @@
+object F__PICTUREVIEWER: TF__PICTUREVIEWER
+  Left = 187
+  Height = 601
+  Top = 116
+  Width = 918
+  Caption = 'Picture View'
+  ClientHeight = 0
+  ClientWidth = 0
+  KeyPreview = True
+  OnKeyPress = FormKeyPress
+  Position = poDesktopCenter
+  LCLVersion = '2.0.6.0'
+  object P__BUTTONS: TPanel
+    Left = 0
+    Height = 44
+    Top = 557
+    Width = 918
+    Align = alBottom
+    ClientHeight = 44
+    ClientWidth = 918
+    Color = clSilver
+    ParentColor = False
+    TabOrder = 0
+    object BT__CLOSE: TBitBtn
+      Left = 818
+      Height = 30
+      Top = 8
+      Width = 96
+      Anchors = [akTop, akRight]
+      DefaultCaption = True
+      Kind = bkClose
+      ModalResult = 11
+      TabOrder = 0
+    end
+    object B__SAVEAS: TButton
+      Left = 13
+      Height = 28
+      Top = 8
+      Width = 129
+      Caption = 'Speichern unter...'
+      OnClick = B__SAVEASClick
+      TabOrder = 1
+    end
+  end
+  object IMG__PIC: TImage
+    Left = 0
+    Height = 557
+    Top = 0
+    Width = 918
+    Align = alClient
+    Proportional = True
+    Stretch = True
+  end
+  object SDLG: TSaveDialog
+    DefaultExt = '.*.jpg'
+    Filter = 'JPEG-Files|*.jpg|PNG-Files|*.png|TIF-Files|*.tif'
+    left = 8
+    top = 632
+  end
+end
