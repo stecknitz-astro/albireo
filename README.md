@@ -1,6 +1,5 @@
 # albireo
-Albireo Astronomy Toolbox - Educational Astronomy Software
-Software used for teaching & illustrating astronomy. 
+Albireo Astronomy Toolbox - Educational Astronomy Software used for teaching & illustrating astronomy. 
 
 
 ## Main Items 
