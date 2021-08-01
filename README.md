@@ -1,0 +1,2 @@
+# albireo
+Educational Astronomy Software
