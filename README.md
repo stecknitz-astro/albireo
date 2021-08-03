@@ -15,6 +15,8 @@ Albireo Astronomy Toolbox - Educational Astronomy Software used for teaching & i
 
 ## Programming Environment
 Lazarus IDE v. 2.0.10 / Free Pascal
+The Image Library which must be located in path USERDIR\AppData\Local\Albireo\lib and can be downloaded from 
+https://www.stecknitz-astronomie.de/?ddownload=10262
 
 
 ## Platforms supported currently
