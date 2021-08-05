@@ -67,6 +67,7 @@ begin
     if(sText = 'Abbildung in Winkel und Pixel') then begin Result := 'Image in angle and pixel'; exit; end;
     if(sText = 'Abbrechen') then begin Result := 'Cancel'; exit; end;
     if(sText = 'Abschnitt') then begin Result := 'Section'; exit; end;
+    if(sText = 'Administrieren') then begin Result := 'Administrate'; exit; end;
     if(sText = 'AE') then begin Result := 'AU'; exit; end;
     if(sText = 'Albireo Datenbank') then begin Result := 'Albireo Database'; exit; end;
     if(sText = 'Alle') then begin Result := 'All'; exit; end;
@@ -141,6 +142,7 @@ begin
     if(sText = 'DB') then begin Result := 'TC'; exit; end;
     if(sText = 'Datei') then begin Result := 'File'; exit; end;
     if(sText = 'Datenbank') then begin Result := 'Database'; exit; end;
+    if(sText = 'Datenbank-Information') then begin Result := 'Database Information'; exit; end;
     if(sText = 'Datenbank Suchfilter') then begin Result := 'Database Search Filter'; exit; end;
     if(sText = 'Datenschutz') then begin Result := 'Privacy Statement'; exit; end;
     if(sText = 'Datum') then begin Result := 'Date'; exit; end;
@@ -205,6 +207,7 @@ begin
     if(sText = 'Geräte') then begin Result := 'Devices'; exit; end;
     if(sText = 'Geräteeigenschaften') then begin Result := 'Device Properties'; exit; end;
     if(sText = 'Gerätename') then begin Result := 'Device Name'; exit; end;
+    if(sText = 'Geringe PC-Ressourcen') then begin Result := 'Low PC Resources'; exit; end;
     if(sText = 'Grad') then begin Result := 'Degree'; exit; end;
     if(sText = 'Grad - Minuten - Sekunden') then begin Result := 'Degree - Minutes - Seconds'; exit; end;
     if(sText = 'Grad (dezimal)') then begin Result := 'Degree (decimal)'; exit; end;
@@ -441,6 +444,7 @@ begin
     if(sText = 'Accept') then begin Result := 'Übernehmen'; exit; end;
     if(sText = 'Add') then begin Result := 'Hinzufügen'; exit; end;
     if(sText = 'Add picture') then begin Result := 'Bild hinzufügen'; exit; end;
+    if(sText = 'Administrate') then begin Result := 'Administrieren'; exit; end;
     if(sText = 'Albireo Database') then begin Result := 'Albireo Datenbank'; exit; end;
     if(sText = 'Algin to object') then begin Result := 'Auf Objekt ausrichten'; exit; end;
     if(sText = 'Align to starry object') then begin Result := 'Auf Himmelsobjekt ausrichten'; exit; end;
@@ -506,6 +510,7 @@ begin
     if(sText = 'Dark current reference [e-/s]') then begin Result := 'Referenzdunkelstrom [e-/s]'; exit; end;
     if(sText = 'Dark current signal') then begin Result := 'Dunkelstromsignal'; exit; end;
     if(sText = 'Database') then begin Result := 'Datenbank'; exit; end;
+    if(sText = 'Database Information') then begin Result := 'Datenbank-Information'; exit; end;
     if(sText = 'Database Search Filter') then begin Result := 'Datenbank Suchfilter'; exit; end;
     if(sText = 'Date') then begin Result := 'Datum'; exit; end;
     if(sText = 'Date, Time to Year decimal (date of perihelion transit)') then begin Result := 'Datum, Zeit nach Dezimaljahr (date of perihelion transit)'; exit; end;
@@ -612,6 +617,7 @@ begin
     if(sText = 'Location') then begin Result := 'Standort'; exit; end;
     if(sText = 'Longitude east of Greenwich') then begin Result := 'Länge östl. Greenwich'; exit; end;
     if(sText = 'Low') then begin Result := 'Wenig'; exit; end;
+    if(sText = 'Low PC Resources') then begin Result := 'Geringe PC-Ressourcen'; exit; end;
     if(sText = 'Luminosity Classes') then begin Result := 'Leuchtkraftklassen'; exit; end;
     if(sText = 'Lunar Eclipses') then begin Result := 'Mondfinsternisse'; exit; end;
     if(sText = 'Manual GoTo') then begin Result := 'Manuelles GoTo'; exit; end;

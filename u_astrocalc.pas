@@ -1361,7 +1361,7 @@ begin
   L__RES_ATMOSPH.Caption:= FloatToStrF(iStarDiam/2.0,ffFixed,8,1) + '''''';
   L__OPTPX.Caption:= FloatToStrF(iStarDiam/2.0 * ED__FOCALLENGTH.Value/206,ffFixed,8,1) + ' mym';
 
-  if(gciCommLvl > 0) and (mslCustCameraList = nil) then
+  if(mslCustCameraList = nil) then
   begin
     // Adding user-defined manufacturers
     mslCustCameraList := TStringList.Create;
@@ -3075,10 +3075,10 @@ begin
 
   mrS0 := GetStarBaseSignalCompact(ED__APERTURE.Value,L__TELTYPE.Caption);
 
-  TS__NYQUIST.TabVisible:=(gciCommLvl > 0);
-  TS__SIGNALS.TabVisible:=(gciCommLvl > 0);
-  TS__CONV.TabVisible:=(gciCommLvl > 0);
-  B__NEWCAM.Visible:=(gciCommLvl > 0);
+  TS__NYQUIST.TabVisible:=true;
+  TS__SIGNALS.TabVisible:=true;
+  TS__CONV.TabVisible:=true;
+  B__NEWCAM.Visible:=true;
 
   mslCustCameraList := nil;
 
@@ -3087,9 +3087,7 @@ end;
 procedure TF__ASTROCALC.FormDestroy(Sender: TObject);
 begin
   mCamera.Destroy;
-
-  if(gciCommLvl > 0) then
-    mslCustCameraList.Free
+  mslCustCameraList.Free
 end;
 
 procedure TF__ASTROCALC.FormShow(Sender: TObject);
@@ -3101,20 +3099,17 @@ begin
   if(mADevice = nil) then
     IniAstroCalc();
 
-  if(gciCommLvl > 0) then
-  begin
-    // Adding user-defined manufacturers
-    //mslCustCameraList := TStringList.Create;
-    //ImportCameraList(mslCustCameraList,msAlbireoLocalDir + gcsCAMLISTFILE);
+  // Adding user-defined manufacturers
+  //mslCustCameraList := TStringList.Create;
+  //ImportCameraList(mslCustCameraList,msAlbireoLocalDir + gcsCAMLISTFILE);
 
-    for i:=0 to mslCustCameraList.Count-1 do
+  for i:=0 to mslCustCameraList.Count-1 do
+  begin
+    if(CB__PXC_MANUF.Items.IndexOf((mslCustCameraList.Objects[i] as TCamera).sManufacturer) = -1 ) then
     begin
-      if(CB__PXC_MANUF.Items.IndexOf((mslCustCameraList.Objects[i] as TCamera).sManufacturer) = -1 ) then
-      begin
-        CB__PXC_MANUF.Items.AddObject((mslCustCameraList.Objects[i] as TCamera).sManufacturer,mslCustCameraList.Objects[i] as TCamera);
-      end;
+      CB__PXC_MANUF.Items.AddObject((mslCustCameraList.Objects[i] as TCamera).sManufacturer,mslCustCameraList.Objects[i] as TCamera);
     end;
-  end; // gciCommLvl..
+  end;
 
   if(msLANG_ID = 'EN') then
   begin

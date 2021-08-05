@@ -39,6 +39,7 @@ type
     B__OK: TButton;
     CBX__DST: TCheckBox;
     CBX__HDUST: TCheckBox;
+    CBX__LOWHIGHRES: TCheckBox;
     ED__GOTO_OUT: TEdit;
     ED__BIRTH_YEAR: TEdit;
     ED__COUNTRY: TEdit;
@@ -352,6 +353,11 @@ begin
   else if(RB__HOR_2.Checked) then
     miLandscapeNo := 2;
 
+  if(CBX__LOWHIGHRES.Checked) then
+    giRSCLvl := 0
+  else
+    giRSCLvl := 1;
+
   msGotoOutputDir := ED__GOTO_OUT.Text;
 
 end;
@@ -434,6 +440,7 @@ begin
   IniFile.WriteInteger('CONF','FIRSTSTART',miFirstStart);
   IniFile.WriteInteger('CONF','LANDSCAPE',miLandscapeNo);
   IniFile.WriteString('CONF','GOTOOUTDIR',msGotoOutputDir);
+  IniFile.WriteInteger('CONF','RSCLVL',giRSCLvl);
 
   if(mbHDust) then
     IniFile.WriteInteger('CONF','HDUST',1)

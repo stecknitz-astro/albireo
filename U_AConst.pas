@@ -31,12 +31,14 @@ uses
 
 const
   gcsVersion = '1';
-  gcsSubVersion = '4';
-  gcsBuildVersion = '0';
-  gcsCommVersion = 'Open Source'; gciCommLvl = 1; // 0: Low computation resources (uses smaller astro database), 1: Normal computation resources (uses standard astro database)
+  gcsSubVersion = '5'; // New Features
+  gcsBuildVersion = '0'; // Bug Fixed
+  gcsCommVersion = 'Open Source';
+  //gciCommLvl = 1; //: SmallInt; // = 1; // 0: Low computation resources (uses smaller astro database), 1: Normal computation resources (uses standard astro database)
 
   gcsAlbireoVersion = '- V.' + gcsVersion + '.' + gcsSubVersion + '.' + gcsBuildVersion + ' - ' + gcsCommVersion;
 
+  // Low-Resource-Mode: giCommLvl = 0:
   gciMaxLowResStars = 100000;
   gciMaxLowResGalaxies = 1000;
 
@@ -117,6 +119,13 @@ type // Localize special datase ranges in AOList so spped up access control
     iMax_PN: Integer;
     iMin_N: Integer;
     iMax_N: Integer;
+
+    iMin_P: Integer;
+    iMax_P: Integer;
+    iMin_PA: Integer;
+    iMax_PA: Integer;
+    iMin_C: Integer;
+    iMax_C: Integer;
   end;
 
 type
@@ -444,7 +453,7 @@ var
   gsActMName: string; // Active Method Name
   gsAlbireoLocalDir: string; // Albireo's database & runtime resource directory
   grecAOIndexControl: TAOIndexControl;
-  giCommLvl: Integer; // Auto-Set by gciCommLvl when main form ist created
+  giRSCLvl: Integer; // Auto-Set by gciCommLvl when main form ist created
 
   procedure BeginMethod(sMName: string);
   procedure EndMethod(sMName: string);

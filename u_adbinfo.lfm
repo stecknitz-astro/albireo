@@ -1,0 +1,191 @@
+object F__ADBINFO: TF__ADBINFO
+  Left = 716
+  Height = 552
+  Top = 140
+  Width = 630
+  Caption = 'Datenbank-Information'
+  ClientHeight = 552
+  ClientWidth = 630
+  OnCreate = FormCreate
+  LCLVersion = '2.0.10.0'
+  object L__CNT_S_TITLE: TLabel
+    Left = 136
+    Height = 15
+    Top = 48
+    Width = 150
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Anzahl Sterne'
+    ParentColor = False
+  end
+  object L__CNT_S: TLabel
+    Left = 304
+    Height = 15
+    Top = 48
+    Width = 6
+    Caption = '0'
+    ParentColor = False
+  end
+  object L__CNT_G_TITLE: TLabel
+    Left = 136
+    Height = 15
+    Top = 72
+    Width = 150
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Anzahl Galaxien'
+    ParentColor = False
+  end
+  object L__CNT_G: TLabel
+    Left = 304
+    Height = 15
+    Top = 72
+    Width = 6
+    Caption = '0'
+    ParentColor = False
+  end
+  object L__CNT_GC_TITLE: TLabel
+    Left = 136
+    Height = 15
+    Top = 120
+    Width = 150
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Anzahl Kugelsternhaufen'
+    ParentColor = False
+  end
+  object L__CNT_GC: TLabel
+    Left = 304
+    Height = 15
+    Top = 120
+    Width = 6
+    Caption = '0'
+    ParentColor = False
+  end
+  object L__CNT_N_TITLE: TLabel
+    Left = 136
+    Height = 15
+    Top = 144
+    Width = 150
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Anzahl galaktische Nebel'
+    ParentColor = False
+  end
+  object L__CNT_N: TLabel
+    Left = 304
+    Height = 15
+    Top = 144
+    Width = 6
+    Caption = '0'
+    ParentColor = False
+  end
+  object L__CNT_PN_TITLE: TLabel
+    Left = 136
+    Height = 15
+    Top = 168
+    Width = 150
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Anzahl planetarische Nebel'
+    ParentColor = False
+  end
+  object L__CNT_PN: TLabel
+    Left = 304
+    Height = 15
+    Top = 168
+    Width = 6
+    Caption = '0'
+    ParentColor = False
+  end
+  object L__CNT_OC_TITLE: TLabel
+    Left = 136
+    Height = 15
+    Top = 192
+    Width = 150
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Anzahl offene Sternhaufen'
+    ParentColor = False
+  end
+  object L__CNT_OC: TLabel
+    Left = 304
+    Height = 15
+    Top = 192
+    Width = 6
+    Caption = '0'
+    ParentColor = False
+  end
+  object L__CNT_P_TITLE: TLabel
+    Left = 136
+    Height = 15
+    Top = 248
+    Width = 150
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Anzahl Planeten'
+    ParentColor = False
+  end
+  object L__CNT_P: TLabel
+    Left = 304
+    Height = 15
+    Top = 248
+    Width = 6
+    Caption = '0'
+    ParentColor = False
+  end
+  object L__CNT_PA_TITLE: TLabel
+    Left = 136
+    Height = 15
+    Top = 272
+    Width = 150
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Anzahl Asteroiden'
+    ParentColor = False
+  end
+  object L__CNT_PA: TLabel
+    Left = 304
+    Height = 15
+    Top = 272
+    Width = 6
+    Caption = '0'
+    ParentColor = False
+  end
+  object L__CNT_C_TITLE: TLabel
+    Left = 136
+    Height = 15
+    Top = 296
+    Width = 150
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Anzahl Kometen'
+    ParentColor = False
+  end
+  object L__CNT_C: TLabel
+    Left = 304
+    Height = 15
+    Top = 296
+    Width = 6
+    Caption = '0'
+    ParentColor = False
+  end
+  object L__CNT_Q_TITLE: TLabel
+    Left = 128
+    Height = 15
+    Top = 96
+    Width = 150
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Anzahl Quasare'
+    ParentColor = False
+  end
+  object L__CNT_Q: TLabel
+    Left = 304
+    Height = 15
+    Top = 96
+    Width = 6
+    Caption = '0'
+    ParentColor = False
+  end
+end

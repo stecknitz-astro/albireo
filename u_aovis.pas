@@ -285,7 +285,7 @@ begin
 
       GetSpecIDData(sSpec,iTMin,iTMax,iSTemp);
 
-      if(gciCommLvl > 0) and (iSTemp > 0) then
+      if (iSTemp > 0) then
         GenStarSpecChart(iSTemp,GetColorFromSpecType(sSpec),1);
 
       SHP__HRD.Brush.Color := GetColorFromSpecType(sSpec);
@@ -479,7 +479,7 @@ begin
   // Show Position Curve
   P__MOONPOS.Visible:=false;
 
-  if(gciCommLvl > 0) and (Moon.dtZeroPass > 0) and (Moon.rOrbitalPeriod_d > 0) then
+  if (Moon.dtZeroPass > 0) and (Moon.rOrbitalPeriod_d > 0) then
   begin
     DecodeDate(mdtWT,iYear,iMonth,iDay);
     iEndDay := DaysOfMonth(mdtWT) - 1;
@@ -1406,9 +1406,8 @@ begin
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := IntToStr(iSTemp) + 'K';
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
-    if(gciCommLvl > 0) and (iSTemp > 0) then
+    if (iSTemp > 0) then
       GenStarSpecChart(iSTemp,GetColorFromSpecType(sSpecType),1);
-      //GenStarSpecChart((mAObject as TStar).iSTemp,GetColorFromSpecType((mAObject as TStar).sSpType),1);
 
     if((mAObject as TStar).rSolFrac > 0) then
     begin
@@ -1515,7 +1514,7 @@ begin
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := IntToStr(iSTemp) + 'K';
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
-    if(gciCommLvl > 0) and (iSTemp > 0) then
+    if (iSTemp > 0) then
       GenStarSpecChart(iSTemp,GetColorFromSpecType(sSpecType),1);
       //GenStarSpecChart((mAObject as TStar).iSTemp,GetColorFromSpecType((mAObject as TStar).sSpType),1);
 
@@ -1611,8 +1610,7 @@ begin
     GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Oberflächentemperatur';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := '5777 K';
 
-    if(gciCommLvl > 0) then
-      GenStarSpecChart(5777.0,clYellow,0);
+    GenStarSpecChart(5777.0,clYellow,0);
 
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
     GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Spektraltyp';
@@ -1649,8 +1647,7 @@ begin
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := '5777 K';
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
-    if(gciCommLvl > 0) then
-      GenStarSpecChart(5777.0,clYellow,0);
+    GenStarSpecChart(5777.0,clYellow,0);
 
     GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Spectral Type';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := 'G2V';
@@ -2358,9 +2355,9 @@ begin
 
   if(LeftStr((mAObject as TAObject).sAOType,1) = 'S') then
   begin
-    TGB__STARSTRUCT.Visible:= (gciCommLvl > 0);
-    CHART__SPEC.Visible := (gciCommLvl > 0);
-    TS__HRD.TabVisible := (gciCommLvl > 0);
+    TGB__STARSTRUCT.Visible:= true;
+    CHART__SPEC.Visible := true;
+    TS__HRD.TabVisible := true;
     GRD__HRD_MK.Visible:=true;
 
     GRD__HRD_MK.ColWidths[0] := 30;
@@ -2456,7 +2453,7 @@ begin
 
     if((mAObject as TAObject).sAOType = 'SUN') then
     begin
-      TGB__STARSTRUCT.Visible:=(gciCommLvl > 0);
+      TGB__STARSTRUCT.Visible:=true;
       IMG__AO.Picture.LoadFromFile(ConvertWinPath(msAlbireoLocalDir + 'img\GStar.jpg'));
       IMG__AOVIS.Picture.LoadFromFile(ConvertWinPath(msAlbireoLocalDir + 'img\GStar.jpg'));
     end;
@@ -3179,7 +3176,7 @@ begin
       IMG__AOVIS.Tag := 0;
     end;
   end
-  else if(gciCommLvl > 0) then
+  else
   begin
     TGB__STARSTRUCT.Checked:=true;
     ShowStarStruc(miMStarIndex);

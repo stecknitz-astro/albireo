@@ -701,6 +701,31 @@ begin
       if(grecAOIndexControl.iMaxMessier < iAOListIndex) then
         grecAOIndexControl.iMaxMessier:=iAOListIndex;
     end;
+  end
+  else if(AObject.sAOType = 'P') then
+  begin
+
+    if((AObject as TPlanet).sPlanetType <> 'A') then
+    begin
+      if(iLocalIndex = 1) then
+        grecAOIndexControl.iMin_P:=iAOListIndex;
+
+      grecAOIndexControl.iMax_P:=iAOListIndex;
+    end
+    else
+    begin
+      if(iLocalIndex = 1) then
+        grecAOIndexControl.iMin_PA:=iAOListIndex;
+
+      grecAOIndexControl.iMax_PA:=iAOListIndex;
+    end;
+  end
+  else if(AObject.sAOType = 'C') then
+  begin
+    if(iLocalIndex = 1) then
+      grecAOIndexControl.iMin_C:=iAOListIndex;
+
+    grecAOIndexControl.iMax_C:=iAOListIndex;
   end;
 end;
 
@@ -2233,6 +2258,7 @@ end;
     rDEC_SS: Real;
     rRs, rRho: Real;
     bIsHeader: Boolean;
+    iLineCnt: Integer;
   begin
     bIsHeader := true;
 
@@ -2243,6 +2269,8 @@ end;
     //AssignFile(tfAO,ConvertWinPath('AO-C.dat'));
     AssignFile(tfAO,ConvertWinPath(sAOFileName));
     Reset(tfAO);
+
+    iLineCnt := 1;
 
     while not eof(tfAO) do
     begin
@@ -2326,9 +2354,13 @@ end;
         Comet.rRho := rRho;
 
         SetAOLabel(Comet,sLANG_ID);
+
+        AOIndexControl(Comet,iLineCnt,olAOList.Count);
+
         olAOList.Add(Comet);
       end;
 
+      Inc(iLineCnt);
     end;
 
     CloseFile(tfAO);
@@ -2471,6 +2503,7 @@ end;
     rDEC_SS: Real;
     bIsHeader: Boolean;
     rR: Real;
+    iLineCntP, iLineCntPA: Integer;
   begin
     bIsHeader := true;
 
@@ -2481,6 +2514,9 @@ end;
     //AssignFile(tfAO,ConvertWinPath('AO-P.dat'));
     AssignFile(tfAO,ConvertWinPath(sAOFileName));
     Reset(tfAO);
+
+    iLineCntP := 1;
+    iLineCntPA := 1;
 
     while not eof(tfAO) do
     begin
@@ -2557,7 +2593,14 @@ end;
          13: if(StrIsNum(true,sVar)) then Planet.rDiameterRatio := StrToFloatExt4(sVar);
          14: if(StrIsNum(true,sVar)) then Planet.rMassRatio := StrToFloatExt4(sVar);
          15: Planet.Color := StringToColor(slBuffer[i]);
-         16: Planet.sPlanetType := slBuffer[i];
+         16:
+         begin
+           Planet.sPlanetType := slBuffer[i];
+
+           if(Planet.sPlanetType <> 'A') then
+             iLineCntPA := 1;
+
+         end;
          17: Planet.sAOType := slBuffer[i];
         end; // case
       end;
@@ -2585,8 +2628,19 @@ end;
         Planet.SetImage();
 
         SetAOLabel(Planet,sLANG_ID);
+
+        if(Planet.sPlanetType <> 'A') then
+          AOIndexControl(Planet,iLineCntP,olAOList.Count)
+        else
+          AOIndexControl(Planet,iLineCntPA,olAOList.Count);
+
         olAOList.Add(Planet);
       end;
+
+      if(Planet.sPlanetType <> 'A') then
+        Inc(iLineCntP)
+      else
+        Inc(iLineCntPA);
 
     end;
 
@@ -2769,7 +2823,7 @@ end;
     iLineCnt := 1;
     while (
       (not eof(tfAO)) and
-      (not ((gciCommLvl = 0) and (iLineCnt > (gciMaxLowResStars + 1))))
+      (not ((giRSCLvl = 0) and (iLineCnt > (gciMaxLowResStars + 1))))
       ) do
     begin
       Star := nil;
@@ -3109,7 +3163,7 @@ procedure ImportCatalog_MW(var olAOList: TObjectList; sLANG_ID: string; rGLat: R
     //while not eof(tfAO) do
     while (
       (not eof(tfAO)) and
-      (not ((gciCommLvl = 0) and (iLineCnt > (gciMaxLowResGalaxies + 1) )))
+      (not ((giRSCLvl = 0) and (iLineCnt > (gciMaxLowResGalaxies + 1) )))
       ) do
     begin
       Galaxy := nil;

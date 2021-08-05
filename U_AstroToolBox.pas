@@ -38,11 +38,11 @@ uses
   U_Prefs, U_ALib, U_AlbireoLib,
   U_ABase, U_AConst,
   U_Translation, U_TimeStat,
-  U_AOVis, U_SVG,
+  U_AOVis,
   U_About, U_SetPrefsInfo, U_DSGVO, U_AstroCalc, U_StartUp,
   U_MShower, U_ADM, U_PictureViewer,
   U_AstroVoids,
-  U_StrmDlg, U_HorCust;
+  U_StrmDlg, U_HorCust, U_ADBInfo;
 
 const
  // Astro-Object type index
@@ -246,6 +246,8 @@ type
     MenuItem11: TMenuItem;
     MenuItem14: TMenuItem;
     MenuItem15: TMenuItem;
+    MENU__ADB_ADMIN: TMenuItem;
+    MENU__ADB_SHOW: TMenuItem;
     MENU__SCLASS_CARBON: TMenuItem;
     MENU__SCLASS_Y: TMenuItem;
     MENU__SCLASS_T: TMenuItem;
@@ -365,7 +367,7 @@ type
     P__ALBIREO_INFO: TPanel;
     P__SELMAG: TPanel;
     P__SETTIME: TPanel;
-    MENU__ADM: TMenuItem;
+    MENU__ADB: TMenuItem;
     PMENU__CONSTELLATIONS: TMenuItem;
     MenuItem12: TMenuItem;
     MenuItem13: TMenuItem;
@@ -773,6 +775,8 @@ type
     procedure L__ZC_RClick(Sender: TObject);
     procedure L__ZC_UClick(Sender: TObject);
     procedure MenuItem11Click(Sender: TObject);
+    procedure MENU__ADB_ADMINClick(Sender: TObject);
+    procedure MENU__ADB_SHOWClick(Sender: TObject);
     procedure MENU__LCLASS_0Click(Sender: TObject);
     procedure MENU__LCLASS_1Click(Sender: TObject);
     procedure MENU__LCLASS_2Click(Sender: TObject);
@@ -802,7 +806,6 @@ type
     procedure PMENU__ASClick(Sender: TObject);
     procedure PMENU__DEC_SCALAClick(Sender: TObject);
     procedure PMENU__HSClick(Sender: TObject);
-    procedure MENU__ADMClick(Sender: TObject);
     procedure MENU__COMMENTClick(Sender: TObject);
     procedure MENU__DOWNLOADClick(Sender: TObject);
     procedure MENU__HORClick(Sender: TObject);
@@ -1376,6 +1379,7 @@ type
     procedure OnSelSpecClass(iClass,iType: SmallInt);
     function SLFilter(sSpecType: string): Boolean;
     procedure IniLiveTableMode();
+    procedure OpenADBInfo();
 
   public
 
@@ -1397,6 +1401,17 @@ implementation
 {$R *.lfm}
 
 { TF__ASTROTOOLBOX }
+
+procedure TF__ASTROTOOLBOX.OpenADBInfo();
+begin
+  F__ADBINFO := TF__ADBINFO.Create(nil);
+  F__ADBINFO.msLANG_ID:=msLANG_ID;
+
+  IniText(F__ADBINFO,msLANG_ID);
+
+  F__ADBINFO.ShowModal;
+  F__ADBINFO.Destroy;
+end;
 
 procedure TF__ASTROTOOLBOX.IniLiveTableMode();
 begin
@@ -3669,7 +3684,7 @@ begin
 
   //P__NOW.Visible:=true;
 
-  P__COUNTRIES.Visible := (gciCommLvl > 0);
+  P__COUNTRIES.Visible := true;
 
   ReCalcPlanetPos(CB__WT.Date);
   TrigST();
@@ -6005,18 +6020,15 @@ begin
       if(LeftStr(F__AOVIS.mAObject.sAOType,1) = 'S') then
         F__AOVIS.WindowState:=wsMaximized;
 
-      if(gciCommLvl > 0) then
-      begin
-        F__AOVIS.P__USERCOMMENT.Visible := true;
-        F__AOVIS.ED__COMMENT.Text:=(molAOList[iIndex] as TAObject).sComment;
-        sCommentPrev := F__AOVIS.ED__COMMENT.Text;
-        F__AOVIS.P__MOONPOS.Visible := true;
-      end;
+      F__AOVIS.P__USERCOMMENT.Visible := true;
+      F__AOVIS.ED__COMMENT.Text:=(molAOList[iIndex] as TAObject).sComment;
+      sCommentPrev := F__AOVIS.ED__COMMENT.Text;
+      F__AOVIS.P__MOONPOS.Visible := true;
 
       F__AOVIS.ShowModal;
 
       // Check for updating comment...
-      if(gciCommLvl > 0) and (sCommentPrev <> F__AOVIS.mAObject.sComment) then
+      if (sCommentPrev <> F__AOVIS.mAObject.sComment) then
       begin
         (molAOList[iIndex] as TAObject).sComment := F__AOVIS.mAObject.sComment;
         SaveAOUserFields('COMMENT',iIndex,F__AOVIS.mAObject.sComment);
@@ -12807,6 +12819,7 @@ begin
   F__PREFS.miLThickness := miLThickness;
   F__PREFS.miLandscapeNo := miLandscapeNo;
   F__PREFS.msGotoOutputDir:=msGotoOutputDir;
+  F__PREFS.CBX__LOWHIGHRES.Checked:=(giRSCLvl = 0);
 
   if(F__PREFS.ShowModal = mrOK) then
   begin
@@ -12827,6 +12840,11 @@ begin
     miLThickness := F__PREFS.miLThickness;
     miLandscapeNo := F__PREFS.miLandscapeNo;
     msGotoOutputDir := F__PREFS.msGotoOutputDir;
+
+    if(F__PREFS.CBX__LOWHIGHRES.Checked) then
+      giRSCLvl := 0
+    else
+      giRSCLvl := 1;
 
     case miLandscapeNo of
       0:
@@ -12973,7 +12991,7 @@ begin
   mbOnSolSysPaintBusy := false;
   {$ENDIF Darwin}
 
-  giCommLvl := gciCommLvl;
+  giRSCLvl := 1; // Begin with high resource mode by default.
 
   mslEclipses := TStringList.Create;
 
@@ -13097,12 +13115,12 @@ begin
   ReadDSImgList();
 
   // Free version restrictions
-  B__ASTROCALC.Visible:=(gciCommLvl > 0);
-  MENU__ADM.Visible:=(gciCommLvl >= 10); // Available for developers only to adjust asteroid ephemerides
-  //MENU__ADM.Visible := true;
-  MENU__COMMENT.Visible:=(gciCommLvl > 0);
-  RB__MESSIER.Visible:=(gciCommLvl > 0);
-  MENU__STRM.Visible:=(gciCommLvl > 0);
+  B__ASTROCALC.Visible:=true;
+  MENU__ADB.Visible:=true; // Available for developers only to adjust asteroid ephemerides
+  //MENU__ADB.Visible := true;
+  MENU__COMMENT.Visible:=true;
+  RB__MESSIER.Visible:=true;
+  MENU__STRM.Visible:=true;
 
   TS__MAG_GAL.TabVisible := false;
 
@@ -13273,7 +13291,6 @@ begin
   if(not DirectoryExists(gsAlbireoLocalDir)) then
     CreateDir(gsAlbireoLocalDir);
 
-  //if(FileExists(GetUserDir() + 'ATB.ini')) then
   if(FileExists(gsAlbireoLocalDir + 'ATB.ini')) then
   begin
     F__STARTUP := TF__STARTUP.Create(nil);
@@ -13314,12 +13331,13 @@ begin
 
     msUserPath := IniFile.ReadString('USER','PATH','');
 
-
     mbHDust := (IniFile.ReadInteger('CONF','HDUST',1) = 1);
     miLThickness := IniFile.ReadInteger('CONF','LTHICKNESS',1);
     PMENU__LT_1.Checked:=(miLThickness = 1);
     PMENU__LT_2.Checked:=(miLThickness = 2);
     PMENU__LT_3.Checked:=(miLThickness = 3);
+
+    giRSCLvl := IniFile.ReadInteger('CONF','RSCLVL',1);
 
     miLandscapeNo := IniFile.ReadInteger('CONF','LANDSCAPE',0);
 
@@ -13550,8 +13568,7 @@ begin
   B__LOC_RESET.Visible:=false;
   IniCountries();
 
-  if(gciCommLvl > 0) then
-    AssignAOUserFields();
+  AssignAOUserFields();
 
   if(RB__S.Checked) then
   begin
@@ -14119,6 +14136,16 @@ begin
   ToggleStrmFlipAll();
 end;
 
+procedure TF__ASTROTOOLBOX.MENU__ADB_ADMINClick(Sender: TObject);
+begin
+  OpenADM();
+end;
+
+procedure TF__ASTROTOOLBOX.MENU__ADB_SHOWClick(Sender: TObject);
+begin
+  OpenADBInfo();
+end;
+
 procedure TF__ASTROTOOLBOX.MENU__LCLASS_0Click(Sender: TObject);
 begin
   OnSelSpecClass(1,1);
@@ -14311,11 +14338,6 @@ end;
 procedure TF__ASTROTOOLBOX.PMENU__HSClick(Sender: TObject);
 begin
   ActivateAOFeature(ciAOF_SM_HS, not PMENU__HS.Checked);
-end;
-
-procedure TF__ASTROTOOLBOX.MENU__ADMClick(Sender: TObject);
-begin
-  OpenADM();
 end;
 
 procedure TF__ASTROTOOLBOX.MENU__COMMENTClick(Sender: TObject);
@@ -15120,7 +15142,7 @@ begin
 
     //P__NOW.Visible:=true;
 
-    P__COUNTRIES.Visible := (gciCommLvl > 0);
+    P__COUNTRIES.Visible := true;
 
     CB__WT.Enabled := true;
     ED__WT_HH.Enabled := true;
@@ -15967,7 +15989,7 @@ begin
 
   sCommentFile := ConvertWinPath(gsAlbireoLocalDir + 'AOUserFields.dat');
 
-  if(gciCommLvl > 0) and (mslAOUserFields.Count > 0) then
+  if(mslAOUserFields.Count > 0) then
     mslAOUserFields.SaveToFile(sCommentFile);
 
 end;
