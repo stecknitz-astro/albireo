@@ -181,6 +181,7 @@ type
     IMG__RECOMMEND: TImage;
     IMG__MW: TImage;
     IMG__SOLSYS: TImage;
+    L__ANGLE_PA: TLabel;
     L__LT_INTERVAL: TLabel;
     L__SOLSYS_PLUTO: TLabel;
     L__DELTA_AZ_ZOOM: TLabel;
@@ -4054,22 +4055,16 @@ begin
   dtHA_KOCHAB := GetHA(dtST,cfRA_KOCHAB);
 
   SHP__NCP.Left := P__KOCHABMETHOD.Width div 2 - SHP__NCP.Width div 2;
-  //SHP__NCP.Top := (P__KOCHABMETHOD.Height + P__PK.Height) div 2 - SHP__NCP.Height div 2;
   SHP__NCP.Top := P__KOCHABMETHOD.Height div 2 - SHP__NCP.Height div 2;
 
   iX0 := P__KOCHABMETHOD.Width div 2;
-  //iY0 := (P__KOCHABMETHOD.Height + P__PK.Height) div 2;
   iY0 := P__KOCHABMETHOD.Height div 2;
-  (*
-  if(iX0 < P__KOCHABMETHOD.Height-iY0) then
-    rRad := 0.9*iX0
-  else
-    rRad := 0.9*(P__KOCHABMETHOD.Height-iY0);
-  *)
   rRad := 1.8*sqrt(iX0*iX0 + iY0*iY0);
 
   rBaseK := rRad*cos(cfDEC_KOCHAB*Pi/180);
   rBaseP := rRad*cos(cfDEC_POLARIS*Pi/180);
+
+  L__ANGLE_PA.Caption := HourToHHMMStr((1.0-dtHA_KOCHAB)*12.0);
 
   SHP__POLARIS.Left := Round(iX0 - rBaseP*sin(dtHA_POLARIS*2*Pi)) - SHP__POLARIS.Width div 2;
   SHP__POLARIS.Top := Round(iY0 - rBaseP*cos(dtHA_POLARIS*2*Pi)) - SHP__POLARIS.Height div 2;

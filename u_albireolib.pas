@@ -2323,7 +2323,7 @@ end;
          //0: // Do nothing.
          1: Comet.sName_DE := AnsiReplaceStr(slBuffer[i],'~',' ');
          2: Comet.sName_EN := AnsiReplaceStr(slBuffer[i],'~',' ');
-         3: if(StrIsNum(true,sVar)) then Comet.rP := StrToFloatExt4(sVar);
+         3: if(StrIsNum(true,sVar)) then Comet.rP := StrToFloatExt4(sVar); // Date of perihelion transit
          4: if(StrIsNum(true,sVar)) then Comet.rOmegaQ := StrToFloatExt4(sVar);
          5: if(StrIsNum(true,sVar)) then Comet.rOmega := StrToFloatExt4(sVar);
          6: if(StrIsNum(true,sVar)) then Comet.rTp := StrToFloatExt4(sVar);
