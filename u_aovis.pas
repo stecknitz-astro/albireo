@@ -2098,6 +2098,96 @@ begin
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
 
+  GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Magnituden';
+  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Magnitudes';
+  GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+
+  if((mAObject as TGalaxy).rMagB <> 999) then
+  begin
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'MagB';
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStrF((mAObject as TGalaxy).rMagB,ffFixed,8,3);
+    GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+  end;
+  if((mAObject as TGalaxy).rMagG <> 999) then
+  begin
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'MagG';
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStrF((mAObject as TGalaxy).rMagG,ffFixed,8,3);
+    GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+  end;
+  if((mAObject as TGalaxy).rMagH <> 999) then
+  begin
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'MagH';
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStrF((mAObject as TGalaxy).rMagH,ffFixed,8,3);
+    GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+  end;
+  if((mAObject as TGalaxy).rMagI <> 999) then
+  begin
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'MagI';
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStrF((mAObject as TGalaxy).rMagI,ffFixed,8,3);
+    GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+  end;
+  if((mAObject as TGalaxy).rMagJ <> 999) then
+  begin
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'MagJ';
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStrF((mAObject as TGalaxy).rMagJ,ffFixed,8,3);
+    GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+  end;
+  if((mAObject as TGalaxy).rMagK <> 999) then
+  begin
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'MagK';
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStrF((mAObject as TGalaxy).rMagK,ffFixed,8,3);
+    GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+  end;
+  if((mAObject as TGalaxy).rMagR <> 999) then
+  begin
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'MagR';
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStrF((mAObject as TGalaxy).rMagR,ffFixed,8,3);
+    GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+  end;
+  if((mAObject as TGalaxy).rMagsg <> 999) then
+  begin
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Mag-sg';
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStrF((mAObject as TGalaxy).rMagsg,ffFixed,8,3);
+    GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+  end;
+  if((mAObject as TGalaxy).rMagsi <> 999) then
+  begin
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Mag-si';
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStrF((mAObject as TGalaxy).rMagsi,ffFixed,8,3);
+    GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+  end;
+  if((mAObject as TGalaxy).rMagsr <> 999) then
+  begin
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Mag-sr';
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStrF((mAObject as TGalaxy).rMagsr,ffFixed,8,3);
+    GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+  end;
+  if((mAObject as TGalaxy).rMagsu <> 999) then
+  begin
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Mag-su';
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStrF((mAObject as TGalaxy).rMagsu,ffFixed,8,3);
+    GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+  end;
+  if((mAObject as TGalaxy).rMagsz <> 999) then
+  begin
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Mag-sz';
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStrF((mAObject as TGalaxy).rMagsz,ffFixed,8,3);
+    GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+  end;
+  if((mAObject as TGalaxy).rMagU <> 999) then
+  begin
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'MagU';
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStrF((mAObject as TGalaxy).rMagU,ffFixed,8,3);
+    GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+  end;
+  if((mAObject as TGalaxy).rMagV <> 999) then
+  begin
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'MagV';
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStrF((mAObject as TGalaxy).rMagV,ffFixed,8,3);
+    GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+  end;
+
 end;
 
 procedure TF__AOVIS.ShowAOData_Q();
