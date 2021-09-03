@@ -414,6 +414,7 @@ begin
     if(sText = 'Visualisierung') then begin Result := 'Visualisation'; exit; end;
     if(sText = 'Voreinstellungen') then begin Result := 'Preferences'; exit; end;
     if(sText = 'Viel') then begin Result := 'High'; exit; end;
+    if(sText = 'Vis. Horizonthöhe') then begin Result := 'Vis. Horizon Limit'; exit; end;
     if(sText = 'Wenig') then begin Result := 'Low'; exit; end;
     if(sText = 'Willkommen bei Albireo!') then begin Result := 'Welcome to Albireo!'; exit; end;
     if(sText = 'Winkel') then begin Result := 'Angles'; exit; end;
@@ -788,6 +789,7 @@ begin
     if(sText = 'Virgo Cluster') then begin Result := 'Virgohaufen'; exit; end;
     if(sText = 'Visible Universe') then begin Result := 'Sichtbares Universum'; exit; end;
     if(sText = 'Visualisation') then begin Result := 'Visualisierung'; exit; end;
+    if(sText = 'Vis. Horizon Limit') then begin Result := 'Vis. Horizonthöhe'; exit; end;
     if(sText = 'Welcome to Albireo!') then begin Result := 'Willkommen bei Albireo!'; exit; end;
     if(sText = 'Year of Birth') then begin Result := 'Geburtsjahr'; exit; end;
     if(sText = 'Your firstname') then begin Result := 'Dein Vorname'; exit; end;

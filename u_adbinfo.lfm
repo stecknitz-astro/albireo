@@ -1,7 +1,7 @@
 object F__ADBINFO: TF__ADBINFO
-  Left = 716
+  Left = 2730
   Height = 552
-  Top = 140
+  Top = 219
   Width = 630
   Caption = 'Datenbank-Information'
   ClientHeight = 552

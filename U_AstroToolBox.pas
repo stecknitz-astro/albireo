@@ -247,6 +247,7 @@ type
     MenuItem11: TMenuItem;
     MenuItem14: TMenuItem;
     MenuItem15: TMenuItem;
+    MENU__EYEFAC: TMenuItem;
     MENU__ADB_ADMIN: TMenuItem;
     MENU__ADB_SHOW: TMenuItem;
     MENU__SCLASS_CARBON: TMenuItem;
@@ -778,6 +779,7 @@ type
     procedure MenuItem11Click(Sender: TObject);
     procedure MENU__ADB_ADMINClick(Sender: TObject);
     procedure MENU__ADB_SHOWClick(Sender: TObject);
+    procedure MENU__EYEFACClick(Sender: TObject);
     procedure MENU__LCLASS_0Click(Sender: TObject);
     procedure MENU__LCLASS_1Click(Sender: TObject);
     procedure MENU__LCLASS_2Click(Sender: TObject);
@@ -1179,6 +1181,8 @@ type
     mbExecZoom: Boolean; // Suppresses new left zoom co.ordinates as long ZoomExec is active!
 
     miAOTableSec: Integer;
+
+    mrEyeFacH: Real; // Visual horizon view height
 
     {$IFDEF Darwin}
     mbOnStarmapPaintBusy: Boolean;
@@ -3237,10 +3241,10 @@ begin
     Memo1.Lines.Add('P__STARMAP.Height: ' + IntToStr(P__STARMAP.Height) + ' - mrZoomY1: ' + FloatToStr(mrZoomY1) + ', mrZoomY2: ' + FloatToStr(mrZoomY2));
     *)
 
-    HMouseCooToHorizon(P__STARMAP.Width,P__STARMAP.Height,msHorDir,mrZoomX1,mrZoomY1,raAz[1],raAlt[1]);
-    HMouseCooToHorizon(P__STARMAP.Width,P__STARMAP.Height,msHorDir,mrZoomX1,mrZoomY2,raAz[2],raAlt[2]);
-    HMouseCooToHorizon(P__STARMAP.Width,P__STARMAP.Height,msHorDir,mrZoomX2,mrZoomY1,raAz[3],raAlt[3]);
-    HMouseCooToHorizon(P__STARMAP.Width,P__STARMAP.Height,msHorDir,mrZoomX2,mrZoomY2,raAz[4],raAlt[4]);
+    HMouseCooToHorizon(P__STARMAP.Width,P__STARMAP.Height,msHorDir,mrZoomX1,mrZoomY1,mrEyeFacH,raAz[1],raAlt[1]);
+    HMouseCooToHorizon(P__STARMAP.Width,P__STARMAP.Height,msHorDir,mrZoomX1,mrZoomY2,mrEyeFacH,raAz[2],raAlt[2]);
+    HMouseCooToHorizon(P__STARMAP.Width,P__STARMAP.Height,msHorDir,mrZoomX2,mrZoomY1,mrEyeFacH,raAz[3],raAlt[3]);
+    HMouseCooToHorizon(P__STARMAP.Width,P__STARMAP.Height,msHorDir,mrZoomX2,mrZoomY2,mrEyeFacH,raAz[4],raAlt[4]);
 
     //Memo1.Lines.Add('raAlt1: ' + FloatToStr(raAlt[1]) + ', raAlt2: ' + FloatToStr(raAlt[2]) + ', raAlt3: ' + FloatToStr(raAlt[3]) + ', raAlt4: ' + FloatToStr(raAlt[4]));
 
@@ -7037,7 +7041,7 @@ begin
   // W: Az = P/2 (90)
 
   if(miStarmapView > 0) and (not mbZoomMode) then
-    rHgt := rHgt / crEyeFacH;
+    rHgt := rHgt / mrEyeFacH;
 
   if(miStarmapView > 0) then
   begin
@@ -7319,28 +7323,35 @@ end;
 
 function TF__ASTROTOOLBOX.GetVisualObjectHeight(rAngle_Minutes: Real; iVisuFac: Integer): Integer;
 begin
-  Result := 20;
+  Result := iVisuFac; //iVisuFac: Illustration factor, non-physical
 
   if(mbZoomMode) and ((mrZoomHgtMax - mrZoomHgtMin) > 0) then
   begin
     if(miStarMapView = 0) then
-      Result := Round(rAngle_Minutes/60.0 * P__STARMAP.Height / (mrZoomHgtMax - mrZoomHgtMin))
+      Result := Round(rAngle_Minutes/60.0 * Pi/180.0 * P__STARMAP.Height / ((mrZoomHgtMax - mrZoomHgtMin)*Pi/180.0 ))
     else
-      Result := Round(rAngle_Minutes/60.0 * (P__STARMAP.Height - P__LANDSCAPE.Height)/ (mrZoomHgtMax - mrZoomHgtMin));
+      Result := Round(rAngle_Minutes/60.0 * Pi/180.0 * (P__STARMAP.Height - P__LANDSCAPE.Height)/ ((mrZoomHgtMax - mrZoomHgtMin)*Pi/180.0));
+
+    //ShowMessage('Internal: Angle: '+ FloatToStr(rAngle_Minutes*60.0) + ', ' + FloatToStr(rAngle_Minutes/60.0 * Pi/180.0 * P__STARMAP.Height / ((mrZoomHgtMax - mrZoomHgtMin)*Pi/180.0 )));
+
   end
   else
   begin
     if(miStarMapView = 0) then
-      Result := Round(rAngle_Minutes/60.0 * P__STARMAP.Height / 180.0)
+      Result := Round(iVisuFac * rAngle_Minutes/60.0 * Pi/180.0 * P__STARMAP.Height / Pi)// / 180.0)
     else
-      Result := Round(rAngle_Minutes/60.0 * (P__STARMAP.Height - P__LANDSCAPE.Height)/ 90.0);
+    begin
+      if(mrEyeFacH = crEyeFacH_70) then
+        Result := Round(rAngle_Minutes/60.0 * Pi/180.0 * (P__STARMAP.Height - P__LANDSCAPE.Height)/ (70.0*Pi/180.0))
+      else
+        Result := Round(rAngle_Minutes/60.0 * Pi/180.0 * (P__STARMAP.Height - P__LANDSCAPE.Height)/ (Pi/2.0));
 
-    Result := Result * iVisuFac; //*7: Illustration factor, non-physical
+    end;
 
   end;
 
   if(Result < iVisuFac) then
-    Result := iVisuFac; // Return always a value > 0
+    Result := iVisuFac; // Return always a value > 0 - but plat smaller icons!
 
 end;
 
@@ -8030,7 +8041,11 @@ begin
          (molAOList[i] as TPlanet).IMG.Visible:=true;
 
         //GetVisualObjectHeight(32,7);
-        (molAOList[i] as TPlanet).IMG.Height := GetVisualObjectHeight((molAOList[i] as TPlanet).rVisuAngle_arcsec/60.0,7);
+        if( (molAOList[i] as TPlanet).sName_DE = 'Saturn' ) then
+          (molAOList[i] as TPlanet).IMG.Height := GetVisualObjectHeight((molAOList[i] as TPlanet).rVisuAngle_arcsec/60.0,15)
+        else
+          (molAOList[i] as TPlanet).IMG.Height := GetVisualObjectHeight((molAOList[i] as TPlanet).rVisuAngle_arcsec/60.0,10);
+
         (molAOList[i] as TPlanet).IMG.Width := (molAOList[i] as TPlanet).IMG.Height;
         (*
 
@@ -13112,20 +13127,17 @@ begin
   // Free version restrictions
   B__ASTROCALC.Visible:=true;
   MENU__ADB.Visible:=true; // Available for developers only to adjust asteroid ephemerides
-  //MENU__ADB.Visible := true;
   MENU__COMMENT.Visible:=true;
   RB__MESSIER.Visible:=true;
   MENU__STRM.Visible:=true;
 
   TS__MAG_GAL.TabVisible := false;
 
-  //miZoomLevel := -1; // Zoom inactive
-
   msStrmDir := 'C:';
   miStrmDataPeriod := 60;
   miStrmViewFlipPeriod := 0; // Viewflip stopped
 
-  //P__STARMAP.Canvas.AntialiasingMode:=amOn;
+  mrEyeFacH := crEyeFacH_70;
 end;
 
 procedure TF__ASTROTOOLBOX.FormDestroy(Sender: TObject);
@@ -14139,6 +14151,25 @@ end;
 procedure TF__ASTROTOOLBOX.MENU__ADB_SHOWClick(Sender: TObject);
 begin
   OpenADBInfo();
+end;
+
+procedure TF__ASTROTOOLBOX.MENU__EYEFACClick(Sender: TObject);
+begin
+  if(not MENU__EYEFAC.Checked) then
+  begin
+    MENU__EYEFAC.Checked := true;
+    mrEyeFacH := crEyeFacH_70;
+  end
+  else
+  begin
+    MENU__EYEFAC.Checked := false;
+    mrEyeFacH := crEyeFacH_90;
+  end;
+
+  // Refresh view if any horizon view is active
+  if(miStarMapView > 0) then
+    CleanStartOfStarmap();
+
 end;
 
 procedure TF__ASTROTOOLBOX.MENU__LCLASS_0Click(Sender: TObject);
@@ -16888,7 +16919,7 @@ begin
   if(miStarmapView = 0) then
     MouseCooToHorizon(iX0,iY0,iR0,X,Y,rAz,rAlt)
   else
-    HMouseCooToHorizon(P__STARMAP.Width,P__STARMAP.Height,msHorDir,X,Y,rAz,rAlt);
+    HMouseCooToHorizon(P__STARMAP.Width,P__STARMAP.Height,msHorDir,X,Y,mrEyeFacH,rAz,rAlt);
 
   if(rAlt >=0) and (rAz >= 0) then
   begin

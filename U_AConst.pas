@@ -67,7 +67,9 @@ const
   clDkGray2  = TColor($404040); // clGray alias
 
   //crEyeFacH = 70.0/90.0; // < 1 // Eye cannot see the zenith for horizon view
-  crEyeFacH = 90.0/90.0; // < 1 // Eye can see the zenith for horizon view
+  //crEyeFacH = 90.0/90.0; // < 1 // Eye can see the zenith for horizon view
+  crEyeFacH_90 = 90.0/90.0; // < 1 // Eye can see the zenith for horizon view
+  crEyeFacH_70 = 70.0/90.0; // < 1 // Eye cannot see the zenith for horizon view
 
   // Math. Constants
   crPIDIV180 = Pi/180; //0.0174533;

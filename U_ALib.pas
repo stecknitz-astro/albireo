@@ -129,7 +129,7 @@ uses
   function StrToFloatExt4(sValue: string): Real;
   function IsNumeric(sValue: string): Boolean;
 
-  procedure HMouseCooToHorizon(iWidth, iHeight: Integer; sHMode: string; rMouseX, rMouseY: Real; var rAz: Real; var rAlt: Real);
+  procedure HMouseCooToHorizon(iWidth, iHeight: Integer; sHMode: string; rMouseX, rMouseY, rEyeFacH: Real; var rAz: Real; var rAlt: Real);
   procedure MouseCooToHorizon(iX0, iY0, iR0: Integer; rMouseX, rMouseY: Real; var rAz: Real; var rAlt: Real);
   function GetHA(dtST,dtRA: TDateTime): TDateTime;
   procedure CalcAZCoo(iDEC_DEG, iDEC_MIN: SmallInt; rDEC_SS: Real; iHA_HH, iHA_MIN, iHA_SS: SmallInt;
@@ -1563,12 +1563,12 @@ end;
 {$ENDIF}
 
 
-procedure HMouseCooToHorizon(iWidth, iHeight: Integer; sHMode: string; rMouseX, rMouseY: Real; var rAz: Real; var rAlt: Real);
+procedure HMouseCooToHorizon(iWidth, iHeight: Integer; sHMode: string; rMouseX, rMouseY, rEyeFacH: Real; var rAz: Real; var rAlt: Real);
 {
 S: 0, W: 90, N: 180, O: 270
 }
 begin
-  rAlt := crEyeFacH*Pi/2*(iHeight-rMouseY)/iHeight;
+  rAlt := rEyeFacH*Pi/2*(iHeight-rMouseY)/iHeight;
   //rAlt := arcsin((iHeight - rMouseY)/iHeight);
 
   if(sHMode = 'S') then
