@@ -13,6 +13,7 @@ type
   { TF__ADBINFO }
 
   TF__ADBINFO = class(TForm)
+    L__INFO_DEEPSKY: TLabel;
     L__CNT_G: TLabel;
     L__CNT_Q: TLabel;
     L__CNT_Q_TITLE: TLabel;
@@ -33,6 +34,7 @@ type
     L__CNT_PA_TITLE: TLabel;
     L__CNT_S: TLabel;
     L__CNT_S_TITLE: TLabel;
+    L__INFO_SOLARSYSTEM: TLabel;
     procedure FormCreate(Sender: TObject);
   private
 

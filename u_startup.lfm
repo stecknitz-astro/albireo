@@ -1,7 +1,7 @@
 object F__STARTUP: TF__STARTUP
-  Left = 895
+  Left = 2723
   Height = 364
-  Top = 216
+  Top = 241
   Width = 478
   BorderIcons = [biSystemMenu]
   BorderStyle = bsNone
@@ -1792,20 +1792,19 @@ object F__STARTUP: TF__STARTUP
       ParentFont = False
     end
     object L__VERSION: TLabel
-      Left = 160
+      Left = 330
       Height = 100
-      Top = 120
+      Top = 80
       Width = 152
       Alignment = taCenter
       AutoSize = False
       Caption = 'Version'
       Font.CharSet = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -24
+      Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Pitch = fpVariable
       Font.Quality = fqDraft
-      Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
       WordWrap = True

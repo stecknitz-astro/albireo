@@ -1,191 +1,364 @@
 object F__ADBINFO: TF__ADBINFO
-  Left = 2730
-  Height = 552
-  Top = 219
+  Left = 2365
+  Height = 434
+  Top = 197
   Width = 630
   Caption = 'Datenbank-Information'
-  ClientHeight = 552
+  ClientHeight = 434
   ClientWidth = 630
+  Color = clGray
   OnCreate = FormCreate
   LCLVersion = '2.0.10.0'
   object L__CNT_S_TITLE: TLabel
-    Left = 136
+    Left = 232
     Height = 15
-    Top = 48
+    Top = 72
     Width = 150
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Anzahl Sterne'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clAqua
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_S: TLabel
-    Left = 304
-    Height = 15
-    Top = 48
-    Width = 6
+    Left = 400
+    Height = 17
+    Top = 72
+    Width = 7
     Caption = '0'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clAqua
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_G_TITLE: TLabel
-    Left = 136
+    Left = 232
     Height = 15
-    Top = 72
+    Top = 96
     Width = 150
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Anzahl Galaxien'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clAqua
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_G: TLabel
-    Left = 304
-    Height = 15
-    Top = 72
-    Width = 6
+    Left = 400
+    Height = 17
+    Top = 96
+    Width = 7
     Caption = '0'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clAqua
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_GC_TITLE: TLabel
-    Left = 136
+    Left = 232
     Height = 15
-    Top = 120
+    Top = 144
     Width = 150
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Anzahl Kugelsternhaufen'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clAqua
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_GC: TLabel
-    Left = 304
-    Height = 15
-    Top = 120
-    Width = 6
+    Left = 400
+    Height = 17
+    Top = 144
+    Width = 7
     Caption = '0'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clAqua
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_N_TITLE: TLabel
-    Left = 136
+    Left = 232
     Height = 15
-    Top = 144
+    Top = 168
     Width = 150
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Anzahl galaktische Nebel'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clAqua
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_N: TLabel
-    Left = 304
-    Height = 15
-    Top = 144
-    Width = 6
+    Left = 400
+    Height = 17
+    Top = 168
+    Width = 7
     Caption = '0'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clAqua
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_PN_TITLE: TLabel
-    Left = 136
+    Left = 216
     Height = 15
-    Top = 168
-    Width = 150
+    Top = 192
+    Width = 166
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Anzahl planetarische Nebel'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clAqua
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_PN: TLabel
-    Left = 304
-    Height = 15
-    Top = 168
-    Width = 6
+    Left = 400
+    Height = 17
+    Top = 192
+    Width = 7
     Caption = '0'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clAqua
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_OC_TITLE: TLabel
-    Left = 136
+    Left = 224
     Height = 15
-    Top = 192
-    Width = 150
+    Top = 216
+    Width = 158
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Anzahl offene Sternhaufen'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clAqua
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_OC: TLabel
-    Left = 304
-    Height = 15
-    Top = 192
-    Width = 6
+    Left = 400
+    Height = 17
+    Top = 216
+    Width = 7
     Caption = '0'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clAqua
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_P_TITLE: TLabel
-    Left = 136
+    Left = 232
     Height = 15
-    Top = 248
+    Top = 320
     Width = 150
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Anzahl Planeten'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clYellow
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_P: TLabel
-    Left = 304
-    Height = 15
-    Top = 248
-    Width = 6
+    Left = 400
+    Height = 17
+    Top = 320
+    Width = 7
     Caption = '0'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clYellow
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_PA_TITLE: TLabel
-    Left = 136
+    Left = 232
     Height = 15
-    Top = 272
+    Top = 344
     Width = 150
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Anzahl Asteroiden'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clYellow
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_PA: TLabel
-    Left = 304
-    Height = 15
-    Top = 272
-    Width = 6
+    Left = 400
+    Height = 17
+    Top = 344
+    Width = 7
     Caption = '0'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clYellow
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_C_TITLE: TLabel
-    Left = 136
+    Left = 232
     Height = 15
-    Top = 296
+    Top = 368
     Width = 150
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Anzahl Kometen'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clYellow
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_C: TLabel
-    Left = 304
-    Height = 15
-    Top = 296
-    Width = 6
+    Left = 400
+    Height = 17
+    Top = 368
+    Width = 7
     Caption = '0'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clYellow
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_Q_TITLE: TLabel
-    Left = 128
+    Left = 224
     Height = 15
-    Top = 96
+    Top = 120
     Width = 150
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Anzahl Quasare'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clAqua
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
   end
   object L__CNT_Q: TLabel
-    Left = 304
-    Height = 15
-    Top = 96
-    Width = 6
+    Left = 400
+    Height = 17
+    Top = 120
+    Width = 7
     Caption = '0'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clAqua
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     ParentColor = False
+    ParentFont = False
+  end
+  object L__INFO_DEEPSKY: TLabel
+    Left = 192
+    Height = 32
+    Top = 32
+    Width = 98
+    Caption = 'DeepSky'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clAqua
+    Font.Height = -24
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object L__INFO_SOLARSYSTEM: TLabel
+    Left = 192
+    Height = 32
+    Top = 272
+    Width = 165
+    Caption = 'Sonnensystem'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clYellow
+    Font.Height = -24
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
   end
 end

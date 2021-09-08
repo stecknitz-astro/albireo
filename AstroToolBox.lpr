@@ -38,7 +38,7 @@ uses
 {$R *.res}
 
 begin
-  Application.Title:='Albireo Astronomy Toolbox';
+  Application.Title:='Albireo - Astronomy Toolbox';
   Application.Initialize;
   Application.CreateForm(TF__ASTROTOOLBOX, F__ASTROTOOLBOX);
   Application.CreateForm(TF__ADBINFO, F__ADBINFO);

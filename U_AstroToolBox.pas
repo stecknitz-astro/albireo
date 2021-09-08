@@ -181,6 +181,7 @@ type
     IMG__RECOMMEND: TImage;
     IMG__MW: TImage;
     IMG__SOLSYS: TImage;
+    L__LIVETABLES: TLabel;
     L__ANGLE_PA: TLabel;
     L__LT_INTERVAL: TLabel;
     L__SOLSYS_PLUTO: TLabel;
@@ -247,6 +248,24 @@ type
     MenuItem11: TMenuItem;
     MenuItem14: TMenuItem;
     MenuItem15: TMenuItem;
+    MENU__ASTROPHOTO_SIGNAL: TMenuItem;
+    MENU__ASTROPHOTO_NYS: TMenuItem;
+    MENU__ASTRPHOTO_SIMAGE: TMenuItem;
+    MENU__ASTROPHOTO_SETTINGS: TMenuItem;
+    MENU__ASTROPHOTO: TMenuItem;
+    MENU__DONATION: TMenuItem;
+    MENU__KOCHAB: TMenuItem;
+    MENU__REFRESH_APP: TMenuItem;
+    MENU__T_STARTSTOP: TMenuItem;
+    MENU__APPCONTROL: TMenuItem;
+    MENU__GOTO: TMenuItem;
+    MENU__MY_TEL: TMenuItem;
+    MENU__TABLES: TMenuItem;
+    MENU__SPACELAB: TMenuItem;
+    MENU__SOLSYS: TMenuItem;
+    MENU__MAP: TMenuItem;
+    MENU__TODAY: TMenuItem;
+    MENU__MODULES: TMenuItem;
     MENU__EYEFAC: TMenuItem;
     MENU__ADB_ADMIN: TMenuItem;
     MENU__ADB_SHOW: TMenuItem;
@@ -779,7 +798,14 @@ type
     procedure MenuItem11Click(Sender: TObject);
     procedure MENU__ADB_ADMINClick(Sender: TObject);
     procedure MENU__ADB_SHOWClick(Sender: TObject);
+    procedure MENU__ASTROPHOTO_NYSClick(Sender: TObject);
+    procedure MENU__ASTROPHOTO_SETTINGSClick(Sender: TObject);
+    procedure MENU__ASTROPHOTO_SIGNALClick(Sender: TObject);
+    procedure MENU__ASTRPHOTO_SIMAGEClick(Sender: TObject);
+    procedure MENU__DONATIONClick(Sender: TObject);
     procedure MENU__EYEFACClick(Sender: TObject);
+    procedure MENU__GOTOClick(Sender: TObject);
+    procedure MENU__KOCHABClick(Sender: TObject);
     procedure MENU__LCLASS_0Click(Sender: TObject);
     procedure MENU__LCLASS_1Click(Sender: TObject);
     procedure MENU__LCLASS_2Click(Sender: TObject);
@@ -789,6 +815,9 @@ type
     procedure MENU__LCLASS_6Click(Sender: TObject);
     procedure MENU__LCLASS_7Click(Sender: TObject);
     procedure MENU__LCLASS_ALLClick(Sender: TObject);
+    procedure MENU__MAPClick(Sender: TObject);
+    procedure MENU__MY_TELClick(Sender: TObject);
+    procedure MENU__REFRESH_APPClick(Sender: TObject);
     procedure MENU__SCLASS_AClick(Sender: TObject);
     procedure MENU__SCLASS_ALLClick(Sender: TObject);
     procedure MENU__SCLASS_BClick(Sender: TObject);
@@ -806,6 +835,10 @@ type
     procedure MENU__SCLASS_SClick(Sender: TObject);
     procedure MENU__SCLASS_TClick(Sender: TObject);
     procedure MENU__SCLASS_YClick(Sender: TObject);
+    procedure MENU__SPACELABClick(Sender: TObject);
+    procedure MENU__TABLESClick(Sender: TObject);
+    procedure MENU__TODAYClick(Sender: TObject);
+    procedure MENU__T_STARTSTOPClick(Sender: TObject);
     procedure PMENU__ASClick(Sender: TObject);
     procedure PMENU__DEC_SCALAClick(Sender: TObject);
     procedure PMENU__HSClick(Sender: TObject);
@@ -1013,8 +1046,6 @@ type
     procedure TB__SOLSYSMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure TB__TIME_24HChange(Sender: TObject);
-    procedure TB__TIME_24HKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
     procedure TB__TIME_24HMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure TB__TIME_24HMouseEnter(Sender: TObject);
@@ -1385,6 +1416,7 @@ type
     function SLFilter(sSpecType: string): Boolean;
     procedure IniLiveTableMode();
     procedure OpenADBInfo();
+    procedure RefreshApp();
 
   public
 
@@ -1406,6 +1438,19 @@ implementation
 {$R *.lfm}
 
 { TF__ASTROTOOLBOX }
+
+procedure TF__ASTROTOOLBOX.RefreshApp();
+begin
+  case PC__WORKBENCH.ActivePageIndex of
+  ciPAGE_STARMAP:
+    CleanStartOfStarMap();
+  ciPAGE_SOLSYS:
+    ShowSolSys();
+  ciPAGE_DB:
+    ExecTable();
+  end; // case
+
+end;
 
 procedure TF__ASTROTOOLBOX.OpenADBInfo();
 begin
@@ -1891,7 +1936,6 @@ begin
   LB__SEARCHRES.Clear;
   LB__SEARCHRES.Visible:=false;
 
-  Refresh;
   Application.ProcessMessages;
 
   if(not mbSearch) then exit;
@@ -3142,37 +3186,6 @@ begin
         miZoomLvl := 1;
       end;
 
-      // Starting zoom with mouse wheel instead of rectangular area, the miZoomX/Y1/2 borders could be extended
-      (*
-      if(iWheelDelta = -999) then
-      begin
-        miZoomLvl := 1;
-
-        // Started whith wheeled zoome:
-        if((mrZoomX2 - mrZoomX1) < 1) then
-        begin
-          mrZoomX1 := mrZoomX2 - 100;
-          mrZoomX2 := mrZoomX2 + 100;
-        end;
-
-        if((mrZoomY2 - mrZoomY1) < 20) then
-        begin
-          mrZoomY1 := mrZoomY2 - 100;
-          mrZoomY2 := mrZoomY2 + 100;
-        end;
-
-      end;
-      *)
-      (*
-      if(miStarMapView > 0) and (iWheelDelta <> -998) then
-      begin
-        mrZoomY2 := mrZoomY1 + P__STARMAP.Height*(mrZoomX2 - mrZoomX1)/P__STARMAP.Width;
-
-        //mrZoomY1 := Round(mrZoomY1 / ((P__STARMAP.Height - P__LANDSCAPE.Height)/P__STARMAP.Height) );
-        //mrZoomY2 := Round(mrZoomY2 / ((P__STARMAP.Height - P__LANDSCAPE.Height)/P__STARMAP.Height) );
-
-      end;
-      *)
       mrMagPos := crMagPosStdZoom;
       mrMagPos_G := crMagPosStdZoom_G;
 
@@ -6016,8 +6029,8 @@ begin
       F__AOVIS.mdtWT := GetWTime();
       F__AOVIS.mbTimePlay := mbTimePlay;
 
-      if(LeftStr(F__AOVIS.mAObject.sAOType,1) = 'S') then
-        F__AOVIS.WindowState:=wsMaximized;
+      //if(LeftStr(F__AOVIS.mAObject.sAOType,1) = 'S') then
+      //  F__AOVIS.WindowState:=wsMaximized;
 
       F__AOVIS.P__USERCOMMENT.Visible := true;
       F__AOVIS.ED__COMMENT.Text:=(molAOList[iIndex] as TAObject).sComment;
@@ -7338,7 +7351,7 @@ begin
   else
   begin
     if(miStarMapView = 0) then
-      Result := Round(iVisuFac * rAngle_Minutes/60.0 * Pi/180.0 * P__STARMAP.Height / Pi)// / 180.0)
+      Result := Round(rAngle_Minutes/60.0 * Pi/180.0 * P__STARMAP.Height / Pi)// / 180.0)
     else
     begin
       if(mrEyeFacH = crEyeFacH_70) then
@@ -7441,7 +7454,7 @@ begin
       GenMapPos(iR0, iX0, iY0, rAz,rHgt*180/Pi,iLeft,iTop);
       if(iLeft > 0) then
       begin
-        SHP__POS_SUN.Height := GetVisualObjectHeight(32,7);
+        SHP__POS_SUN.Height := GetVisualObjectHeight(32,15);
         SHP__POS_SUN.Width:=SHP__POS_SUN.Height;
 
         SHP__POS_SUN.Top := Round(iTop) - SHP__POS_SUN.Height div 2;
@@ -7513,7 +7526,7 @@ begin
       GenMapPos(iR0, iX0, iY0, rAz,rHgt,iLeft,iTop);
       if(iLeft > 0) then
       begin
-        IMG__POS_MOON.Height := GetVisualObjectHeight(32,7);
+        IMG__POS_MOON.Height := GetVisualObjectHeight(32,15);
         IMG__POS_MOON.Width := IMG__POS_MOON.Height;
 
         IMG__POS_MOON.Top := Round(iTop) - IMG__POS_MOON.Height div 2;
@@ -11105,7 +11118,7 @@ begin
           else
             iModDiv := 1000;
 
-          if((iRow mod iModDiv) = 0) then begin Refresh; Application.ProcessMessages; Refresh; end;
+          if((iRow mod iModDiv) = 0) then begin Refresh(); Application.ProcessMessages; Refresh(); end;
 
           if(msLANG_ID = 'DE') then
           begin
@@ -11721,7 +11734,7 @@ begin
           else
             iModDiv := 1000;
 
-          if((iRow mod iModDiv) = 0) then begin Refresh; Application.ProcessMessages; Refresh; end;
+          if((iRow mod iModDiv) = 0) then begin Refresh(); Application.ProcessMessages; Refresh(); end;
 
           if(msLANG_ID = 'DE') then
           begin
@@ -13175,24 +13188,50 @@ end;
 procedure TF__ASTROTOOLBOX.FormKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  //if(PC__WORKBENCH.ActivePageIndex = ciPAGE_STARMAP) then
   case PC__WORKBENCH.ActivePageIndex of
     ciPAGE_STARMAP:
     begin
-      (*
-      if (Key = VK_F1) then
+      if(Key = VK_ESCAPE) then
       begin
-        P__SELECT.Visible:= not P__SELECT.Visible;
-        MENU__VIEW_TIMECONTROL.Checked:=P__SELECT.Visible;
-        GenMap(P__STARMAP);
-      end;
-      *)
+        if(mbZoomMode) then
+        begin
+          mrZoomHgtMax := -999;
+          mrZoomHgtMin := -999;
+          mrZoomAzMax := -999;
+          mrZoomAzMin := -999;
+          mbZoomMode := false;
+          mbFastZoom := false;
+
+          P__FASTZOOM.Visible := mbZoomMode;
+
+          mrZoomX1 := 0;
+          mrZoomY1 := 0;
+          miX_P := 0;
+          miY_P := 0;
+
+          mrMagPos := crMagPosStd;
+          mrMagPos_G := crMagPosStd_G;
+          L__MAGSIZE.Caption:=AnsiReplaceStr(FloatToStrF(mrMagPos,ffFixed,8,1),',','.');
+          TB__MAG.Position:=Round(10*mrMagPos);
+
+          TIMER__GENMAP.Enabled:=false;
+          SetGenMapInterval(false);
+
+          CleanStartOfStarMap();
+          //GenMap(P__STARMAP);
+        end
+        else if(mbTimePlay) then
+          SwitchTimePlay();
+
+      end; // Key = VK_ESCAPE..
+    end;
+  end; // case
+  (*
+  case PC__WORKBENCH.ActivePageIndex of
+    ciPAGE_STARMAP:
+    begin
       if (Key = VK_F5) then
-      begin
-       //mbFastZoom := false;
-       //GenMap(P__STARMAP);
        CleanStartOfStarMap();
-      end;
 
       if(Key = VK_ESCAPE) then
       begin
@@ -13228,8 +13267,11 @@ begin
 
       end; // Key = VK_ESCAPE..
     end;
-    ciPAGE_SOLSYS: ShowSolSys();
+    ciPAGE_SOLSYS:
+      if (Key = VK_F5) then
+        ShowSolSys();
   end; // case
+  *)
 end;
 
 procedure TF__ASTROTOOLBOX.FormResize(Sender: TObject);
@@ -13237,7 +13279,9 @@ begin
   case PC__WORKBENCH.ActivePageIndex of
     ciPAGE_STARMAP:
     begin
-      if(not mbTimePlay) then SwitchTimePlay();
+      if(not mbTimePlay) then
+        SwitchTimePlay();
+
       SetGenMapInterval(true); //ciGraphFastRefreshTime; // Strange. MUST be set to repaint the frame.
     end;
     ciPAGE_SOLSYS:
@@ -13611,7 +13655,9 @@ begin
     case PC__WORKBENCH.ActivePageIndex of
       ciPAGE_STARMAP:
       begin
-        if(not mbTimePlay) then SwitchTimePlay();
+        if(not mbTimePlay) then
+          SwitchTimePlay();
+
         SetGenMapInterval(true); //ciGraphFastRefreshTime; // Strange. MUST be set to repaint the frame.
       end;
       ciPAGE_SOLSYS:
@@ -14153,6 +14199,43 @@ begin
   OpenADBInfo();
 end;
 
+procedure TF__ASTROTOOLBOX.MENU__ASTROPHOTO_NYSClick(Sender: TObject);
+begin
+  EnableMenu('MENU__ASTROCALC');
+  ShowAstroCalc(nil);
+  F__ASTROCALC.PC__ASTROCALC.ActivePageIndex:=2;
+  F__ASTROCALC.PC__APP.ActivePageIndex:=2;
+end;
+
+procedure TF__ASTROTOOLBOX.MENU__ASTROPHOTO_SETTINGSClick(Sender: TObject);
+begin
+  EnableMenu('MENU__ASTROCALC');
+  ShowAstroCalc(nil);
+  F__ASTROCALC.PC__ASTROCALC.ActivePageIndex:=2;
+  F__ASTROCALC.PC__APP.ActivePageIndex:=0;
+end;
+
+procedure TF__ASTROTOOLBOX.MENU__ASTROPHOTO_SIGNALClick(Sender: TObject);
+begin
+  EnableMenu('MENU__ASTROCALC');
+  ShowAstroCalc(nil);
+  F__ASTROCALC.PC__ASTROCALC.ActivePageIndex:=2;
+  F__ASTROCALC.PC__APP.ActivePageIndex:=3;
+end;
+
+procedure TF__ASTROTOOLBOX.MENU__ASTRPHOTO_SIMAGEClick(Sender: TObject);
+begin
+  EnableMenu('MENU__ASTROCALC');
+  ShowAstroCalc(nil);
+  F__ASTROCALC.PC__ASTROCALC.ActivePageIndex:=2;
+  F__ASTROCALC.PC__APP.ActivePageIndex:=1;
+end;
+
+procedure TF__ASTROTOOLBOX.MENU__DONATIONClick(Sender: TObject);
+begin
+  ExecOpen('https://www.tipeeestream.com/stecknitzastro/donation');
+end;
+
 procedure TF__ASTROTOOLBOX.MENU__EYEFACClick(Sender: TObject);
 begin
   if(not MENU__EYEFAC.Checked) then
@@ -14170,6 +14253,18 @@ begin
   if(miStarMapView > 0) then
     CleanStartOfStarmap();
 
+end;
+
+procedure TF__ASTROTOOLBOX.MENU__GOTOClick(Sender: TObject);
+begin
+  P__GO_HOURANGLE.Color:=$00101010;
+  ExecHA();
+end;
+
+procedure TF__ASTROTOOLBOX.MENU__KOCHABClick(Sender: TObject);
+begin
+  ControlKochabPanel();
+  MENU__KOCHAB.Checked := not MENU__KOCHAB.Checked;
 end;
 
 procedure TF__ASTROTOOLBOX.MENU__LCLASS_0Click(Sender: TObject);
@@ -14227,6 +14322,21 @@ begin
   end;
 
   ShowAOTable();
+end;
+
+procedure TF__ASTROTOOLBOX.MENU__MAPClick(Sender: TObject);
+begin
+  ExecMAP();
+end;
+
+procedure TF__ASTROTOOLBOX.MENU__MY_TELClick(Sender: TObject);
+begin
+  ExecDevices();
+end;
+
+procedure TF__ASTROTOOLBOX.MENU__REFRESH_APPClick(Sender: TObject);
+begin
+  RefreshApp();
 end;
 
 procedure TF__ASTROTOOLBOX.MENU__SCLASS_AClick(Sender: TObject);
@@ -14351,6 +14461,28 @@ begin
   OnSelSpecClass(0,16);
 end;
 
+procedure TF__ASTROTOOLBOX.MENU__SPACELABClick(Sender: TObject);
+begin
+  EnableMenu('MENU__ASTROCALC');
+  ShowAstroCalc(nil);
+end;
+
+procedure TF__ASTROTOOLBOX.MENU__TABLESClick(Sender: TObject);
+begin
+  P__TABLES.Color:=$00101010;
+  ExecTable();
+end;
+
+procedure TF__ASTROTOOLBOX.MENU__TODAYClick(Sender: TObject);
+begin
+  ExecAlbireo();
+end;
+
+procedure TF__ASTROTOOLBOX.MENU__T_STARTSTOPClick(Sender: TObject);
+begin
+  SwitchTimePLAY();
+end;
+
 procedure TF__ASTROTOOLBOX.PMENU__ASClick(Sender: TObject);
 begin
   ActivateAOFeature(ciAOF_SM_AS, not PMENU__AS.Checked);
@@ -14414,29 +14546,23 @@ begin
 end;
 
 procedure TF__ASTROTOOLBOX.MENU__PDFClick(Sender: TObject);
-begin
-  if(msLANG_ID = 'DE') then
-    OpenDocument('Albireo.pdf')
-  else
-    OpenDocument('Albireo_EN.pdf')
-end;
-
-{
 var
-  sCommExt: string;
+  sDocFileName: string;
 begin
-  sCommExt := '';
-
-  if(gcsCommVersion <> '') then
-    sCommExt := '-' + gcsCommVersion;
-
   if(msLANG_ID = 'DE') then
-    OpenDocument('Albireo' + sCommExt + '.pdf')
+    sDocFileName := 'Albireo.pdf'
   else
-    OpenDocument('Albireo_EN' + sCommExt + '.pdf')
+    sDocFileName := 'Albireo_EN.pdf';
+
+  sDocFileName := ExtractFilePath(Application.ExeName) + sDocFileName;
+
+  if(FileExists(sDocFileName)) then
+    OpenDocument(sDocFileName)
+  else
+    MessageDlg('Error',sDocFileName + ': Document not found here.',mtError,[mbOK],0);
 
 end;
-}
+
 procedure TF__ASTROTOOLBOX.MENU__SHOW_MESSIERONLYClick(Sender: TObject);
 begin
   MENU__SHOW_MESSIERONLY.Checked:=not MENU__SHOW_MESSIERONLY.Checked;
@@ -16323,7 +16449,7 @@ begin
         RB__S.Checked:=true;
       end;
       Application.ProcessMessages;
-      Refresh;
+      Refresh();
       SelSign();
 
       P__KOCHAB.Visible:=false;
@@ -17577,12 +17703,6 @@ begin
   TB__TIME_24H.Hint := FormatDateTime('hh:nn:ss',1.0*TB__TIME_24H.Position / 1440);
 end;
 
-procedure TF__ASTROTOOLBOX.TB__TIME_24HKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-  SetTimePlayOFF();
-end;
-
 procedure TF__ASTROTOOLBOX.TB__TIME_24HMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
@@ -17631,7 +17751,7 @@ begin
       SetGenMapInterval(false);
       if(mbTimePlay) then
       begin
-        SwitchTimePlay(); // Stop always real-time after fast refresh inluding previous real-time mode.
+        SwitchTimePlay(); // Stop always real-time after fast Refresh inluding previous real-time mode.
 
         if(msLANG_ID = 'DE') then
           L__BOTTOM_INFO.Caption:= csREALTIMESTOPPED_DE

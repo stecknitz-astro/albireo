@@ -245,6 +245,7 @@ begin
     if(sText = 'Kameramodell') then begin Result := 'Camera Model'; exit; end;
     if(sText = 'Kataloge') then begin Result := 'Catalogs'; exit; end;
     if(sText = 'Kein Bild verfügbar') then begin Result := 'No Picture available'; exit; end;
+    if(sText = 'Kochab Einnordungspanel') then begin Result := 'Kochab northing panel'; exit; end;
     if(sText = 'Kohlenstoffklassen') then begin Result := 'Carbon Classes'; exit; end;
     if(sText = 'Kometen') then begin Result := 'Comets'; exit; end;
     if(sText = 'Kommentar') then begin Result := 'Comment'; exit; end;
@@ -280,6 +281,7 @@ begin
     if(sText = 'Minimale Belichtungszeit') then begin Result := 'Minimum exposure time'; exit; end;
     if(sText = 'mittel') then begin Result := 'medium'; exit; end;
     if(sText = 'Modell') then begin Result := 'Model'; exit; end;
+    if(sText = 'Module') then begin Result := 'Modules'; exit; end;
     if(sText = 'Monat') then begin Result := 'Month'; exit; end;
     if(sText = 'Mond') then begin Result := 'Moon'; exit; end;
     if(sText = 'Mondaufgang') then begin Result := 'Moonrise'; exit; end;
@@ -344,12 +346,14 @@ begin
     if(sText = 'schwach') then begin Result := 'faint'; exit; end;
     if(sText = 'Saison/Jahreszeit') then begin Result := 'Season'; exit; end;
     if(sText = 'Sekunden') then begin Result := 'Seconds'; exit; end;
+    if(sText = 'Sensorbild') then begin Result := 'Sensor Image'; exit; end;
     if(sText = 'Sensordynamik') then begin Result := 'Sensor Dynamics'; exit; end;
     if(sText = 'Sensorformat') then begin Result := 'Sensor Format'; exit; end;
     if(sText = 'Sensortyp') then begin Result := 'Sensor Type'; exit; end;
     if(sText = 'Sichern') then begin Result := 'Save'; exit; end;
     if(sText = 'Sichtbares Universum') then begin Result := 'Visible Universe'; exit; end;
     if(sText = 'Siderische Zeit') then begin Result := 'Siderial Time'; exit; end;
+    if(sText = 'Signalanalyse') then begin Result := 'Signal Analysis'; exit; end;
     if(sText = 'Signalpegel & Belichtung') then begin Result := 'Signal level & Exposure'; exit; end;
     if(sText = 'Signalwerte') then begin Result := 'Signal Values'; exit; end;
     if(sText = 'Skalierung') then begin Result := 'Scaling'; exit; end;
@@ -601,6 +605,7 @@ begin
     if(sText = 'Interval') then begin Result := 'Intervall'; exit; end;
     if(sText = 'I accept the terms of licensing') then begin Result := 'Ich akzeptiere die Lizenzbedingungen'; exit; end;
     if(sText = 'Julian Time') then begin Result := 'Julianische Zeit'; exit; end;
+    if(sText = 'Kochab northing panel') then begin Result := 'Kochab Einnordungspanel'; exit; end;
     if(sText = 'Labels') then begin Result := 'Beschriftungen'; exit; end;
     if(sText = 'Latitude') then begin Result := 'Geographische Breite'; exit; end;
     if(sText = 'Language') then begin Result := 'Sprache'; exit; end;
@@ -638,6 +643,7 @@ begin
     if(sText = 'Minimum exposure time') then begin Result := 'Minimale Belichtungszeit'; exit; end;
     if(sText = 'Minutes') then begin Result := 'Minuten'; exit; end;
     if(sText = 'Model') then begin Result := 'Modell'; exit; end;
+    if(sText = 'Modules') then begin Result := 'Module'; exit; end;
     if(sText = 'Moon') then begin Result := 'Mond'; exit; end;
     if(sText = 'Moonrise') then begin Result := 'Mondaufgang'; exit; end;
     if(sText = 'Moonset') then begin Result := 'Monduntergang'; exit; end;
@@ -730,6 +736,7 @@ begin
     if(sText = 'Scaling') then begin Result := 'Skalierung'; exit; end;
     if(sText = 'Season') then begin Result := 'Saison/Jahreszeit'; exit; end;
     if(sText = 'Select Horizons') then begin Result := 'Horizonte auswählen'; exit; end;
+    if(sText = 'Sensor Image') then begin Result := 'Sensorbild'; exit; end;
     if(sText = 'Sensor Dynamics') then begin Result := 'Sensordynamik'; exit; end;
     if(sText = 'Sensor Format') then begin Result := 'Sensorformat'; exit; end;
     if(sText = 'Sensor Type') then begin Result := 'Sensortyp'; exit; end;
@@ -738,6 +745,7 @@ begin
     if(sText = 'Show Options') then begin Result := 'Zeige Optionen'; exit; end;
     if(sText = 'Show Planets') then begin Result := 'Planeten anzeigen'; exit; end;
     if(sText = 'Siderial Time') then begin Result := 'Siderische Zeit'; exit; end;
+    if(sText = 'Signal Analysis') then begin Result := 'Signalanalyse'; exit; end;
     if(sText = 'Signal level & Exposure') then begin Result := 'Signalpegel & Belichtung'; exit; end;
     if(sText = 'Signal Values') then begin Result := 'Signalwerte'; exit; end;
     if(sText = 'Single frame [s]') then begin Result := 'Einzelframe [s]'; exit; end;

@@ -1,7 +1,7 @@
 object F__ASTROCALC: TF__ASTROCALC
-  Left = 2142
+  Left = 367
   Height = 831
-  Top = 189
+  Top = 125
   Width = 1549
   BorderIcons = []
   BorderStyle = bsSingle
@@ -44128,654 +44128,688 @@ object F__ASTROCALC: TF__ASTROCALC
         Color = 4605510
         ParentColor = False
         TabOrder = 1
-        object P__TELESCOPE: TPanel
+        object PC__APP: TPageControl
           Left = 8
-          Height = 232
+          Height = 600
           Top = 8
-          Width = 250
-          ClientHeight = 232
-          ClientWidth = 250
-          Color = clGray
-          ParentColor = False
+          Width = 488
+          ActivePage = TS__SETTINGS
+          TabIndex = 0
           TabOrder = 0
-          object P__TELESCOPE_TITLE: TPanel
-            Left = 1
-            Height = 26
-            Top = 1
-            Width = 248
-            Align = alTop
-            Caption = 'Teleskop'
-            Color = clGreen
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -16
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            TabOrder = 0
-          end
-          object L__FOCALLENGTH: TLabel
-            Left = 8
-            Height = 16
-            Top = 56
-            Width = 109
-            Caption = 'Brennweite (mm)'
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold, fsUnderline]
-            ParentColor = False
-            ParentFont = False
-          end
-          object ED__FOCALLENGTH: TSpinEdit
-            Left = 8
-            Height = 24
-            Top = 79
-            Width = 78
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold, fsUnderline]
-            MaxValue = 10000
-            MinValue = 10
-            OnChange = ED__FOCALLENGTHChange
-            ParentFont = False
-            TabOrder = 1
-            Value = 750
-          end
-          object L__RES_TELESCOPE_TITLE: TLabel
-            Left = 8
-            Height = 16
-            Top = 200
-            Width = 133
-            Caption = 'Auflösungsvermögen'
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold, fsUnderline]
-            ParentColor = False
-            ParentFont = False
-          end
-          object L__RES_TELESCOPE: TLabel
-            Left = 144
-            Height = 16
-            Top = 200
-            Width = 12
-            Caption = '---'
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold, fsUnderline]
-            ParentColor = False
-            ParentFont = False
-          end
-          object L__APERTURE: TLabel
-            Left = 136
-            Height = 16
-            Top = 56
-            Width = 86
-            Caption = 'Öffnung (mm)'
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold, fsUnderline]
-            ParentColor = False
-            ParentFont = False
-          end
-          object ED__APERTURE: TSpinEdit
-            Left = 136
-            Height = 24
-            Top = 79
-            Width = 78
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold, fsUnderline]
-            MaxValue = 10000
-            MinValue = 10
-            OnChange = ED__APERTUREChange
-            ParentFont = False
-            TabOrder = 2
-            Value = 150
-          end
-          object L__FRATIO_TITLE: TLabel
-            Left = 8
-            Height = 16
-            Top = 128
-            Width = 142
-            Caption = 'Öffnungsverhältnis: f / '
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold, fsUnderline]
-            ParentColor = False
-            ParentFont = False
-          end
-          object ED__FRATIO: TFloatSpinEdit
-            Left = 8
-            Height = 24
-            Top = 152
-            Width = 79
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold, fsUnderline]
-            Increment = 0.1
-            OnChange = ED__FRATIOChange
-            ParentFont = False
-            TabOrder = 3
-          end
-          object L__FRATIO: TLabel
-            Left = 96
-            Height = 16
-            Top = 152
-            Width = 45
-            Caption = 'Blende'
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold, fsUnderline]
-            ParentColor = False
-            ParentFont = False
-          end
-          object L__TELTYPE_TITLE: TLabel
-            Left = 8
-            Height = 16
-            Top = 2
-            Width = 26
-            Caption = 'Typ:'
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-          end
-          object L__TELTYPE: TLabel
-            Left = 45
-            Height = 16
-            Top = 32
-            Width = 154
-            Caption = 'Newton Spiegelteleskop'
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-          end
-        end
-        object P__PXC_INFO: TPanel
-          Left = 264
-          Height = 233
-          Top = 8
-          Width = 208
-          ClientHeight = 233
-          ClientWidth = 208
-          Color = clGray
-          ParentColor = False
-          TabOrder = 1
-          object P__PXC_INFO_TITLE: TPanel
-            Left = 1
-            Height = 26
-            Top = 1
-            Width = 206
-            Align = alTop
-            Caption = 'Info'
-            Color = clGreen
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -16
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            TabOrder = 0
-          end
-          object L__RES_EYE_TITLE: TLabel
-            Left = 8
-            Height = 16
-            Top = 40
-            Width = 122
-            Caption = 'Auflösung Auge: 1 '''
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold, fsUnderline]
-            ParentColor = False
-            ParentFont = False
-          end
-          object L__RES_ATMOSPH_TITLE: TLabel
-            Left = 8
-            Height = 16
-            Top = 62
-            Width = 130
-            Caption = 'Auflösung Atmosph.:'
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold, fsUnderline]
-            ParentColor = False
-            ParentFont = False
-          end
-          object L__RES_HUBBLE_TITLE: TLabel
-            Left = 8
-            Height = 16
-            Top = 88
-            Width = 155
-            Caption = 'Auflösung Hubble: 0.05 '''''
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold, fsUnderline]
-            ParentColor = False
-            ParentFont = False
-          end
-          object L__RES_CAMERA_TITLE: TLabel
-            Left = 8
-            Height = 16
-            Top = 110
-            Width = 125
-            Caption = 'Auflösung Kamera: '
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-          end
-          object L__RES_CAMERA: TLabel
-            Left = 133
-            Height = 16
-            Top = 110
-            Width = 12
-            Caption = '---'
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-          end
-          object L__ISCALE: TLabel
-            Left = 8
-            Height = 16
-            Top = 130
-            Width = 133
-            Caption = '(Abbildungsmaßstab)'
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold, fsUnderline]
-            ParentColor = False
-            ParentFont = False
-          end
-          object L__RES_ATMOSPH: TLabel
-            Left = 144
-            Height = 16
-            Top = 62
-            Width = 12
-            Caption = '---'
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold, fsUnderline]
-            ParentColor = False
-            ParentFont = False
-          end
-        end
-        object P__CAMERA: TPanel
-          Left = 8
-          Height = 288
-          Top = 248
-          Width = 464
-          ClientHeight = 288
-          ClientWidth = 464
-          Color = clGray
-          ParentColor = False
-          TabOrder = 2
-          object CB__PXC_MANUF: TComboBox
-            Left = 17
-            Height = 24
-            Top = 72
-            Width = 211
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold, fsUnderline]
-            ItemHeight = 16
-            Items.Strings = (
-              'Canon'
-              'Nikon'
-              'Olympus'
-              'Sony Alpha'
-              'SBIG'
-            )
-            OnChange = CB__PXC_MANUFChange
-            ParentFont = False
-            TabOrder = 0
-          end
-          object L__PXC_MANUF: TLabel
-            Left = 16
-            Height = 16
-            Top = 55
-            Width = 61
-            Caption = 'Hersteller'
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-          end
-          object L__PXC_MODEL: TLabel
-            Left = 16
-            Height = 16
-            Top = 113
-            Width = 43
-            Caption = 'Modell'
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-          end
-          object CB__PXC_MODEL: TComboBox
-            Left = 17
-            Height = 24
-            Top = 131
-            Width = 211
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold, fsUnderline]
-            ItemHeight = 16
-            OnChange = CB__PXC_MODELChange
-            ParentFont = False
-            TabOrder = 1
-          end
-          object GBX__PXC_SENSOR: TGroupBox
-            Left = 264
-            Height = 217
-            Top = 48
-            Width = 184
-            Caption = 'Sensor'
-            ClientHeight = 196
-            ClientWidth = 180
-            TabOrder = 2
-            object L__PXC_SIZE: TLabel
-              Left = 16
-              Height = 16
-              Top = 96
-              Width = 101
-              Caption = 'Pixelgröße (µm)'
+          object TS__SETTINGS: TTabSheet
+            Caption = 'Einstellungen'
+            ClientHeight = 571
+            ClientWidth = 480
+            object P__SETTINGS: TPanel
+              Left = 0
+              Height = 26
+              Top = 0
+              Width = 480
+              Align = alTop
+              Caption = 'Teleskop- und Kamerasensor'
+              Color = clGreen
               Font.CharSet = ANSI_CHARSET
-              Font.Color = clBlack
-              Font.Height = -13
+              Font.Color = clWhite
+              Font.Height = -16
               Font.Name = 'Arial'
               Font.Pitch = fpVariable
               Font.Quality = fqDraft
-              Font.Style = [fsBold, fsUnderline]
+              Font.Style = [fsBold]
               ParentColor = False
-              ParentFont = False
-            end
-            object ED__PXC_PX_SIZE: TFloatSpinEdit
-              Left = 16
-              Height = 24
-              Top = 112
-              Width = 101
-              Font.CharSet = ANSI_CHARSET
-              Font.Color = clBlack
-              Font.Height = -13
-              Font.Name = 'Arial'
-              Font.Pitch = fpVariable
-              Font.Quality = fqDraft
-              Font.Style = [fsBold, fsUnderline]
-              MaxValue = 1000000000000
-              OnChange = ED__PXC_PX_SIZEChange
               ParentFont = False
               TabOrder = 0
             end
-            object CB__PXC_SFORMAT: TComboBox
-              Left = 16
-              Height = 24
-              Top = 17
-              Width = 160
-              Font.CharSet = ANSI_CHARSET
-              Font.Color = clBlack
-              Font.Height = -13
-              Font.Name = 'Arial'
-              Font.Pitch = fpVariable
-              Font.Quality = fqDraft
-              Font.Style = [fsBold, fsUnderline]
-              ItemHeight = 16
-              Items.Strings = (
-                '1/3.2'''' (4.5 x 3.4)'
-                '1/2.7'''' (5.4 x 4.0)'
-                '1/2.5'''' (5.8 x 4.3)'
-                '1/1.8'''' (7.2 x 5.4)'
-                '2/3'''' (8.8 x 6.6)'
-                '1'''' (13.2 x 8.8)'
-                'Four-Thirds (17.3 x 13.0)'
-                'Foveon (20.7 x 13.8)'
-                'APS-C (22.2 x 14.8)'
-                'APS-H (27.9 x 18.6)'
-                'DX (23.7 x 15.6)'
-                'Kleinbild, 35mm format (36 x 24)'
-                'Mittelformat (48 x 36)'
-                'Canon DCS 3 (20.5 x 16.4)'
-                'Canon DCS 1 (28.7 x 19.1)'
-                'Nikon FX (24 x 36)'
-                'Nikon DX (16 x 24)'
-                '1/1.63'''''
-                '1.1 (14.4 x 9.9)'
-                '1/2 (7.4 x 5.95)'
-                'SBIG (10.24 x 10.24)'
-              )
-              OnChange = CB__PXC_SFORMATChange
-              ParentFont = False
+            object P__CAMSETTINGS: TPanel
+              Left = 0
+              Height = 545
+              Top = 26
+              Width = 480
+              Align = alClient
+              ClientHeight = 545
+              ClientWidth = 480
               TabOrder = 1
-            end
-            object L__PXC_SFORMAT: TLabel
-              Left = 16
-              Height = 16
-              Top = 0
-              Width = 85
-              Caption = 'Sensorformat'
-              Font.CharSet = ANSI_CHARSET
-              Font.Color = clBlack
-              Font.Height = -13
-              Font.Name = 'Arial'
-              Font.Pitch = fpVariable
-              Font.Quality = fqDraft
-              Font.Style = [fsBold, fsUnderline]
-              ParentColor = False
-              ParentFont = False
-            end
-            object L__PXC_MP: TLabel
-              Left = 16
-              Height = 16
-              Top = 48
-              Width = 99
-              Caption = 'Megapixel (MP)'
-              Font.CharSet = ANSI_CHARSET
-              Font.Color = clBlack
-              Font.Height = -13
-              Font.Name = 'Arial'
-              Font.Pitch = fpVariable
-              Font.Quality = fqDraft
-              Font.Style = [fsBold, fsUnderline]
-              ParentColor = False
-              ParentFont = False
-            end
-            object ED__PXC_MP: TFloatSpinEdit
-              Left = 16
-              Height = 24
-              Top = 64
-              Width = 102
-              Font.CharSet = ANSI_CHARSET
-              Font.Color = clBlack
-              Font.Height = -13
-              Font.Name = 'Arial'
-              Font.Pitch = fpVariable
-              Font.Quality = fqDraft
-              Font.Style = [fsBold, fsUnderline]
-              MaxValue = 1000
-              OnChange = ED__PXC_MPChange
-              ParentFont = False
-              TabOrder = 2
-              Value = 10
-            end
-            object B__CAMERAINFO: TButton
-              Left = 16
-              Height = 25
-              Top = 160
-              Width = 152
-              Caption = 'Kamera öffnen'
-              Enabled = False
-              OnClick = B__CAMERAINFOClick
-              TabOrder = 3
+              object P__TELESCOPE: TPanel
+                Left = 8
+                Height = 232
+                Top = 8
+                Width = 250
+                ClientHeight = 232
+                ClientWidth = 250
+                Color = clGray
+                ParentColor = False
+                TabOrder = 0
+                object P__TELESCOPE_TITLE: TPanel
+                  Left = 1
+                  Height = 26
+                  Top = 1
+                  Width = 248
+                  Align = alTop
+                  Caption = 'Teleskop'
+                  Color = clGreen
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clWhite
+                  Font.Height = -16
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentColor = False
+                  ParentFont = False
+                  TabOrder = 0
+                end
+                object L__FOCALLENGTH: TLabel
+                  Left = 8
+                  Height = 16
+                  Top = 56
+                  Width = 109
+                  Caption = 'Brennweite (mm)'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object ED__FOCALLENGTH: TSpinEdit
+                  Left = 8
+                  Height = 24
+                  Top = 79
+                  Width = 78
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  MaxValue = 10000
+                  MinValue = 10
+                  OnChange = ED__FOCALLENGTHChange
+                  ParentFont = False
+                  TabOrder = 1
+                  Value = 750
+                end
+                object L__RES_TELESCOPE_TITLE: TLabel
+                  Left = 8
+                  Height = 16
+                  Top = 200
+                  Width = 133
+                  Caption = 'Auflösungsvermögen'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object L__RES_TELESCOPE: TLabel
+                  Left = 144
+                  Height = 16
+                  Top = 200
+                  Width = 12
+                  Caption = '---'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object L__APERTURE: TLabel
+                  Left = 136
+                  Height = 16
+                  Top = 56
+                  Width = 86
+                  Caption = 'Öffnung (mm)'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object ED__APERTURE: TSpinEdit
+                  Left = 136
+                  Height = 24
+                  Top = 79
+                  Width = 78
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  MaxValue = 10000
+                  MinValue = 10
+                  OnChange = ED__APERTUREChange
+                  ParentFont = False
+                  TabOrder = 2
+                  Value = 150
+                end
+                object L__FRATIO_TITLE: TLabel
+                  Left = 8
+                  Height = 16
+                  Top = 128
+                  Width = 142
+                  Caption = 'Öffnungsverhältnis: f / '
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object ED__FRATIO: TFloatSpinEdit
+                  Left = 8
+                  Height = 24
+                  Top = 152
+                  Width = 79
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  Increment = 0.1
+                  OnChange = ED__FRATIOChange
+                  ParentFont = False
+                  TabOrder = 3
+                end
+                object L__FRATIO: TLabel
+                  Left = 96
+                  Height = 16
+                  Top = 152
+                  Width = 45
+                  Caption = 'Blende'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object L__TELTYPE_TITLE: TLabel
+                  Left = 8
+                  Height = 16
+                  Top = 2
+                  Width = 26
+                  Caption = 'Typ:'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object L__TELTYPE: TLabel
+                  Left = 45
+                  Height = 16
+                  Top = 32
+                  Width = 154
+                  Caption = 'Newton Spiegelteleskop'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentColor = False
+                  ParentFont = False
+                end
+              end
+              object P__PXC_INFO: TPanel
+                Left = 264
+                Height = 233
+                Top = 8
+                Width = 208
+                ClientHeight = 233
+                ClientWidth = 208
+                Color = clGray
+                ParentColor = False
+                TabOrder = 1
+                object P__PXC_INFO_TITLE: TPanel
+                  Left = 1
+                  Height = 26
+                  Top = 1
+                  Width = 206
+                  Align = alTop
+                  Caption = 'Info'
+                  Color = clGreen
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clWhite
+                  Font.Height = -16
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentColor = False
+                  ParentFont = False
+                  TabOrder = 0
+                end
+                object L__RES_EYE_TITLE: TLabel
+                  Left = 8
+                  Height = 16
+                  Top = 40
+                  Width = 122
+                  Caption = 'Auflösung Auge: 1 '''
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object L__RES_ATMOSPH_TITLE: TLabel
+                  Left = 8
+                  Height = 16
+                  Top = 62
+                  Width = 130
+                  Caption = 'Auflösung Atmosph.:'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object L__RES_HUBBLE_TITLE: TLabel
+                  Left = 8
+                  Height = 16
+                  Top = 88
+                  Width = 155
+                  Caption = 'Auflösung Hubble: 0.05 '''''
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object L__RES_CAMERA_TITLE: TLabel
+                  Left = 8
+                  Height = 16
+                  Top = 110
+                  Width = 125
+                  Caption = 'Auflösung Kamera: '
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object L__RES_CAMERA: TLabel
+                  Left = 133
+                  Height = 16
+                  Top = 110
+                  Width = 12
+                  Caption = '---'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object L__ISCALE: TLabel
+                  Left = 8
+                  Height = 16
+                  Top = 130
+                  Width = 133
+                  Caption = '(Abbildungsmaßstab)'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object L__RES_ATMOSPH: TLabel
+                  Left = 144
+                  Height = 16
+                  Top = 62
+                  Width = 12
+                  Caption = '---'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  ParentColor = False
+                  ParentFont = False
+                end
+              end
+              object P__CAMERA: TPanel
+                Left = 8
+                Height = 288
+                Top = 248
+                Width = 464
+                ClientHeight = 288
+                ClientWidth = 464
+                Color = clGray
+                ParentColor = False
+                TabOrder = 2
+                object CB__PXC_MANUF: TComboBox
+                  Left = 17
+                  Height = 24
+                  Top = 72
+                  Width = 211
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  ItemHeight = 16
+                  Items.Strings = (
+                    'Canon'
+                    'Nikon'
+                    'Olympus'
+                    'Sony Alpha'
+                    'SBIG'
+                  )
+                  OnChange = CB__PXC_MANUFChange
+                  ParentFont = False
+                  TabOrder = 0
+                end
+                object L__PXC_MANUF: TLabel
+                  Left = 16
+                  Height = 16
+                  Top = 55
+                  Width = 61
+                  Caption = 'Hersteller'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object L__PXC_MODEL: TLabel
+                  Left = 16
+                  Height = 16
+                  Top = 113
+                  Width = 43
+                  Caption = 'Modell'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object CB__PXC_MODEL: TComboBox
+                  Left = 17
+                  Height = 24
+                  Top = 131
+                  Width = 211
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  ItemHeight = 16
+                  OnChange = CB__PXC_MODELChange
+                  ParentFont = False
+                  TabOrder = 1
+                end
+                object GBX__PXC_SENSOR: TGroupBox
+                  Left = 264
+                  Height = 217
+                  Top = 48
+                  Width = 184
+                  Caption = 'Sensor'
+                  ClientHeight = 196
+                  ClientWidth = 180
+                  TabOrder = 2
+                  object L__PXC_SIZE: TLabel
+                    Left = 16
+                    Height = 16
+                    Top = 96
+                    Width = 101
+                    Caption = 'Pixelgröße (µm)'
+                    Font.CharSet = ANSI_CHARSET
+                    Font.Color = clBlack
+                    Font.Height = -13
+                    Font.Name = 'Arial'
+                    Font.Pitch = fpVariable
+                    Font.Quality = fqDraft
+                    Font.Style = [fsBold, fsUnderline]
+                    ParentColor = False
+                    ParentFont = False
+                  end
+                  object ED__PXC_PX_SIZE: TFloatSpinEdit
+                    Left = 16
+                    Height = 24
+                    Top = 112
+                    Width = 101
+                    Font.CharSet = ANSI_CHARSET
+                    Font.Color = clBlack
+                    Font.Height = -13
+                    Font.Name = 'Arial'
+                    Font.Pitch = fpVariable
+                    Font.Quality = fqDraft
+                    Font.Style = [fsBold, fsUnderline]
+                    MaxValue = 1000000000000
+                    OnChange = ED__PXC_PX_SIZEChange
+                    ParentFont = False
+                    TabOrder = 0
+                  end
+                  object CB__PXC_SFORMAT: TComboBox
+                    Left = 16
+                    Height = 24
+                    Top = 17
+                    Width = 160
+                    Font.CharSet = ANSI_CHARSET
+                    Font.Color = clBlack
+                    Font.Height = -13
+                    Font.Name = 'Arial'
+                    Font.Pitch = fpVariable
+                    Font.Quality = fqDraft
+                    Font.Style = [fsBold, fsUnderline]
+                    ItemHeight = 16
+                    Items.Strings = (
+                      '1/3.2'''' (4.5 x 3.4)'
+                      '1/2.7'''' (5.4 x 4.0)'
+                      '1/2.5'''' (5.8 x 4.3)'
+                      '1/1.8'''' (7.2 x 5.4)'
+                      '2/3'''' (8.8 x 6.6)'
+                      '1'''' (13.2 x 8.8)'
+                      'Four-Thirds (17.3 x 13.0)'
+                      'Foveon (20.7 x 13.8)'
+                      'APS-C (22.2 x 14.8)'
+                      'APS-H (27.9 x 18.6)'
+                      'DX (23.7 x 15.6)'
+                      'Kleinbild, 35mm format (36 x 24)'
+                      'Mittelformat (48 x 36)'
+                      'Canon DCS 3 (20.5 x 16.4)'
+                      'Canon DCS 1 (28.7 x 19.1)'
+                      'Nikon FX (24 x 36)'
+                      'Nikon DX (16 x 24)'
+                      '1/1.63'''''
+                      '1.1 (14.4 x 9.9)'
+                      '1/2 (7.4 x 5.95)'
+                      'SBIG (10.24 x 10.24)'
+                    )
+                    OnChange = CB__PXC_SFORMATChange
+                    ParentFont = False
+                    TabOrder = 1
+                  end
+                  object L__PXC_SFORMAT: TLabel
+                    Left = 16
+                    Height = 16
+                    Top = 0
+                    Width = 85
+                    Caption = 'Sensorformat'
+                    Font.CharSet = ANSI_CHARSET
+                    Font.Color = clBlack
+                    Font.Height = -13
+                    Font.Name = 'Arial'
+                    Font.Pitch = fpVariable
+                    Font.Quality = fqDraft
+                    Font.Style = [fsBold, fsUnderline]
+                    ParentColor = False
+                    ParentFont = False
+                  end
+                  object L__PXC_MP: TLabel
+                    Left = 16
+                    Height = 16
+                    Top = 48
+                    Width = 99
+                    Caption = 'Megapixel (MP)'
+                    Font.CharSet = ANSI_CHARSET
+                    Font.Color = clBlack
+                    Font.Height = -13
+                    Font.Name = 'Arial'
+                    Font.Pitch = fpVariable
+                    Font.Quality = fqDraft
+                    Font.Style = [fsBold, fsUnderline]
+                    ParentColor = False
+                    ParentFont = False
+                  end
+                  object ED__PXC_MP: TFloatSpinEdit
+                    Left = 16
+                    Height = 24
+                    Top = 64
+                    Width = 102
+                    Font.CharSet = ANSI_CHARSET
+                    Font.Color = clBlack
+                    Font.Height = -13
+                    Font.Name = 'Arial'
+                    Font.Pitch = fpVariable
+                    Font.Quality = fqDraft
+                    Font.Style = [fsBold, fsUnderline]
+                    MaxValue = 1000
+                    OnChange = ED__PXC_MPChange
+                    ParentFont = False
+                    TabOrder = 2
+                    Value = 10
+                  end
+                  object B__CAMERAINFO: TButton
+                    Left = 16
+                    Height = 25
+                    Top = 160
+                    Width = 152
+                    Caption = 'Kamera öffnen'
+                    Enabled = False
+                    OnClick = B__CAMERAINFOClick
+                    TabOrder = 3
+                  end
+                end
+                object CBX__MANUAL_SENSORSEL: TCheckBox
+                  Left = 19
+                  Height = 20
+                  Top = 240
+                  Width = 180
+                  Caption = 'Manuelle Sensorauswahl'
+                  OnChange = CBX__MANUAL_SENSORSELChange
+                  TabOrder = 3
+                end
+                object CBX__CAMERA_STD: TCheckBox
+                  Left = 19
+                  Height = 20
+                  Top = 168
+                  Width = 208
+                  Caption = 'Standardkamera für Teleskop'
+                  Enabled = False
+                  TabOrder = 4
+                end
+                object B__NEWCAM: TButton
+                  Left = 17
+                  Height = 25
+                  Top = 192
+                  Width = 211
+                  Caption = 'Neue Kamera erfassen'
+                  OnClick = B__NEWCAMClick
+                  TabOrder = 5
+                end
+                object P__CAMERA_TITLE: TPanel
+                  Left = 1
+                  Height = 26
+                  Top = 1
+                  Width = 462
+                  Align = alTop
+                  Caption = 'Kamera'
+                  Color = clGreen
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clWhite
+                  Font.Height = -16
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentColor = False
+                  ParentFont = False
+                  TabOrder = 6
+                end
+              end
             end
           end
-          object CBX__MANUAL_SENSORSEL: TCheckBox
-            Left = 19
-            Height = 20
-            Top = 240
-            Width = 180
-            Caption = 'Manuelle Sensorauswahl'
-            OnChange = CBX__MANUAL_SENSORSELChange
-            TabOrder = 3
-          end
-          object CBX__CAMERA_STD: TCheckBox
-            Left = 19
-            Height = 20
-            Top = 168
-            Width = 208
-            Caption = 'Standardkamera für Teleskop'
-            Enabled = False
-            TabOrder = 4
-          end
-          object B__NEWCAM: TButton
-            Left = 17
-            Height = 25
-            Top = 192
-            Width = 211
-            Caption = 'Neue Kamera erfassen'
-            OnClick = B__NEWCAMClick
-            TabOrder = 5
-          end
-          object P__CAMERA_TITLE: TPanel
-            Left = 1
-            Height = 26
-            Top = 1
-            Width = 462
-            Align = alTop
-            Caption = 'Kamera'
-            Color = clGreen
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -16
-            Font.Name = 'Arial'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            TabOrder = 6
-          end
-        end
-        object PC__APP: TPageControl
-          Left = 480
-          Height = 528
-          Top = 8
-          Width = 536
-          ActivePage = TS__NYQUIST
-          TabIndex = 1
-          TabOrder = 3
           object TS__OBJ_PX: TTabSheet
             Caption = 'Object in Px'
-            ClientHeight = 499
-            ClientWidth = 528
+            ClientHeight = 571
+            ClientWidth = 480
             object P__OBJ__PX: TPanel
               Left = 0
-              Height = 499
+              Height = 571
               Top = 0
-              Width = 528
+              Width = 480
               Align = alClient
-              ClientHeight = 499
-              ClientWidth = 528
+              ClientHeight = 571
+              ClientWidth = 480
               Color = clGray
               ParentColor = False
               TabOrder = 0
@@ -45010,7 +45044,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 Left = 1
                 Height = 26
                 Top = 1
-                Width = 526
+                Width = 478
                 Align = alTop
                 Caption = 'Abbildung in Winkel und Pixel'
                 Color = clGreen
@@ -45029,16 +45063,16 @@ object F__ASTROCALC: TF__ASTROCALC
           end
           object TS__NYQUIST: TTabSheet
             Caption = 'Nyquist'
-            ClientHeight = 499
-            ClientWidth = 528
+            ClientHeight = 571
+            ClientWidth = 480
             object P__NYQUIST: TPanel
               Left = 0
-              Height = 499
+              Height = 571
               Top = 0
-              Width = 528
+              Width = 480
               Align = alClient
-              ClientHeight = 499
-              ClientWidth = 528
+              ClientHeight = 571
+              ClientWidth = 480
               Color = clGray
               ParentColor = False
               TabOrder = 0
@@ -45046,7 +45080,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 Left = 1
                 Height = 26
                 Top = 1
-                Width = 526
+                Width = 478
                 Align = alTop
                 Caption = 'Nyquist-Kriterium'
                 Color = clGreen
@@ -45254,7 +45288,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 ParentFont = False
               end
               object GBX__OPT_FL: TGroupBox
-                Left = 21
+                Left = 1
                 Height = 94
                 Top = 392
                 Width = 480
@@ -45315,16 +45349,16 @@ object F__ASTROCALC: TF__ASTROCALC
           end
           object TS__SIGNALS: TTabSheet
             Caption = 'Signalwerte'
-            ClientHeight = 499
-            ClientWidth = 528
+            ClientHeight = 571
+            ClientWidth = 480
             object P__SIGNALS: TPanel
               Left = 0
-              Height = 499
+              Height = 571
               Top = 0
-              Width = 528
+              Width = 480
               Align = alClient
-              ClientHeight = 499
-              ClientWidth = 528
+              ClientHeight = 571
+              ClientWidth = 480
               Color = clGray
               ParentColor = False
               TabOrder = 0
@@ -45809,7 +45843,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 Left = 1
                 Height = 26
                 Top = 1
-                Width = 526
+                Width = 478
                 Align = alTop
                 Caption = 'Signalpegel & Belichtung'
                 Color = clGreen

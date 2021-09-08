@@ -58,7 +58,8 @@ implementation
 procedure TF__STARTUP.FormCreate(Sender: TObject);
 begin
   Caption := 'Startup...';
-  L__VERSION.Caption:= gcsAlbireoVersion + ' Version';
+
+  L__VERSION.Caption:= gcsAlbireoVersion;
 end;
 
 end.
