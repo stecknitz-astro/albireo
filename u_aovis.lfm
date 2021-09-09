@@ -1,7 +1,7 @@
 object F__AOVIS: TF__AOVIS
-  Left = -1636
+  Left = 2174
   Height = 957
-  Top = 37
+  Top = 59
   Width = 1554
   Caption = 'Object Visualisation'
   ClientHeight = 957
@@ -83,9 +83,9 @@ object F__AOVIS: TF__AOVIS
       Height = 905
       Top = 1
       Width = 1552
-      ActivePage = TS__PHOTOS
+      ActivePage = TS__GRAPHICS
       Align = alClient
-      TabIndex = 4
+      TabIndex = 0
       TabOrder = 0
       OnChange = PC__MAIN_VISUChange
       object TS__GRAPHICS: TTabSheet
@@ -153,11 +153,11 @@ object F__AOVIS: TF__AOVIS
             ParentColor = False
             TabOrder = 1
             object IMG__AOVIS: TImage
-              Left = 344
-              Height = 610
-              Top = 80
-              Width = 720
-              Anchors = [akTop, akLeft, akRight, akBottom]
+              Left = 1
+              Height = 758
+              Top = 1
+              Width = 1207
+              Align = alClient
               Center = True
               OnClick = IMG__AOVISClick
               Proportional = True

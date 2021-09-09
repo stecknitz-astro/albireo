@@ -675,6 +675,8 @@ begin
     SHP__REF.Width := iRefWidth;
 
     IMG__AOVIS.Visible := true;
+    IMG__AOVIS.Align := alNone;
+
     IMG__REF.Visible := false;
 
     ShowStarImage(IMG__AO,sSpecID);

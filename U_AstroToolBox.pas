@@ -12432,19 +12432,9 @@ end;
 
 procedure TF__ASTROTOOLBOX.SignActive(iSignIndex: Integer; bActive: Boolean);
 // Set bActive PMENU__DAY of a Sign and re-generate the starmap
-//var
-  //Sign: TSign;
-  //iSignIndex: Integer;
 begin
-  // Find sign from combobox-objectlist
-  //Sign := GetSignObj(sCon,iSignIndex);
-
   if(iSignIndex > -1) and (iSignIndex < molSignList.Count) then
-  begin
-    (molSignList[iSignIndex] as TSign).bSelected:=bActive;
-
-    //GenMap();
-  end;
+    (molSignList[iSignIndex] as TSign).bSelected := bActive;
 end;
 
 procedure TF__ASTROTOOLBOX.SendUpdateReq;
@@ -16189,10 +16179,17 @@ begin
   // Switch selection status!
   if(Sign <> nil) then
   begin
+    (*
+    if((molAOList[iAOIndex] as TStar).bSelSign) then
+      ShowMessage('Index: ' + IntToStr(iAOIndex) + ', bSelSign is TRUE')
+    else
+      ShowMessage('Index: ' + IntToStr(iAOIndex) + ', bSelSign is FALSE');
+    *)
     (molAOList[iAOIndex] as TStar).bSelSign := not Sign.bSelected; // Save selection status in star object
 
     SignActive(iSignIndex,not Sign.bSelected);
-    GenMap(P__STARMAP);
+    CleanStartOfStarMap();
+    //GenMap(P__STARMAP);
   end;
 
 end;
@@ -17136,8 +17133,6 @@ var
   bTimerEnabled: Boolean;
 begin
   bTimerEnabled := TIMER__GENMAP.Enabled;
-
-  //mbFastZoom := false;
 
   if(bTimerEnabled) then
     TIMER__GENMAP.Enabled:=false;
