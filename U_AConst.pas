@@ -31,12 +31,14 @@ uses
 
 const
   gcsVersion = '1';
-  gcsSubVersion = '5'; // New Features
-  gcsBuildVersion = '0'; // Bug Fixed
+  gcsSubVersion = '4'; // New Features
+  gcsBuildVersion = '1'; // Subfeatures / changes
+  gcsErrVersion = '0'; // Bugfixes / Hotfixes without any new features
+
   gcsCommVersion = 'OSS';
   //gciCommLvl = 1; //: SmallInt; // = 1; // 0: Low computation resources (uses smaller astro database), 1: Normal computation resources (uses standard astro database)
 
-  gcsAlbireoVersion = gcsCommVersion + ' - V.' + gcsVersion + '.' + gcsSubVersion + '.' + gcsBuildVersion;
+  gcsAlbireoVersion = gcsCommVersion + ' - V.' + gcsVersion + '.' + gcsSubVersion + '.' + gcsBuildVersion + '.' + gcsErrVersion;
 
   // Low-Resource-Mode: giCommLvl = 0:
   gciMaxLowResStars = 100000;
