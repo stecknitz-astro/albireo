@@ -44132,19 +44132,19 @@ object F__ASTROCALC: TF__ASTROCALC
           Left = 8
           Height = 600
           Top = 8
-          Width = 488
+          Width = 528
           ActivePage = TS__SETTINGS
           TabIndex = 0
           TabOrder = 0
           object TS__SETTINGS: TTabSheet
             Caption = 'Einstellungen'
             ClientHeight = 571
-            ClientWidth = 480
+            ClientWidth = 520
             object P__SETTINGS: TPanel
               Left = 0
               Height = 26
               Top = 0
-              Width = 480
+              Width = 520
               Align = alTop
               Caption = 'Teleskop & Kamerasensor'
               Color = clGreen
@@ -44163,10 +44163,10 @@ object F__ASTROCALC: TF__ASTROCALC
               Left = 0
               Height = 545
               Top = 26
-              Width = 480
+              Width = 520
               Align = alClient
               ClientHeight = 545
-              ClientWidth = 480
+              ClientWidth = 520
               TabOrder = 1
               object P__TELESCOPE: TPanel
                 Left = 8
@@ -44385,9 +44385,9 @@ object F__ASTROCALC: TF__ASTROCALC
                 Left = 264
                 Height = 233
                 Top = 8
-                Width = 208
+                Width = 248
                 ClientHeight = 233
-                ClientWidth = 208
+                ClientWidth = 248
                 Color = clGray
                 ParentColor = False
                 TabOrder = 1
@@ -44395,7 +44395,7 @@ object F__ASTROCALC: TF__ASTROCALC
                   Left = 1
                   Height = 26
                   Top = 1
-                  Width = 206
+                  Width = 246
                   Align = alTop
                   Caption = 'Info'
                   Color = clGreen
@@ -44522,14 +44522,46 @@ object F__ASTROCALC: TF__ASTROCALC
                   ParentColor = False
                   ParentFont = False
                 end
+                object L__MAG_FP_TITLE: TLabel
+                  Left = 8
+                  Height = 16
+                  Top = 176
+                  Width = 232
+                  Caption = 'Vergrößerung bei fokaler Projektion:'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object L__MAG_FP: TLabel
+                  Left = 8
+                  Height = 16
+                  Top = 192
+                  Width = 7
+                  Caption = '0'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentColor = False
+                  ParentFont = False
+                end
               end
               object P__CAMERA: TPanel
                 Left = 8
                 Height = 288
                 Top = 248
-                Width = 464
+                Width = 504
                 ClientHeight = 288
-                ClientWidth = 464
+                ClientWidth = 504
                 Color = clGray
                 ParentColor = False
                 TabOrder = 2
@@ -44607,9 +44639,9 @@ object F__ASTROCALC: TF__ASTROCALC
                   TabOrder = 1
                 end
                 object GBX__PXC_SENSOR: TGroupBox
-                  Left = 264
+                  Left = 280
                   Height = 217
-                  Top = 48
+                  Top = 55
                   Width = 184
                   Caption = 'Sensor'
                   ClientHeight = 196
@@ -44780,7 +44812,7 @@ object F__ASTROCALC: TF__ASTROCALC
                   Left = 1
                   Height = 26
                   Top = 1
-                  Width = 462
+                  Width = 502
                   Align = alTop
                   Caption = 'Kamera'
                   Color = clGreen
@@ -44801,15 +44833,15 @@ object F__ASTROCALC: TF__ASTROCALC
           object TS__OBJ_PX: TTabSheet
             Caption = 'Object in Px'
             ClientHeight = 571
-            ClientWidth = 480
+            ClientWidth = 520
             object P__OBJ__PX: TPanel
               Left = 0
               Height = 571
               Top = 0
-              Width = 480
+              Width = 520
               Align = alClient
               ClientHeight = 571
-              ClientWidth = 480
+              ClientWidth = 520
               Color = clGray
               ParentColor = False
               TabOrder = 0
@@ -45044,7 +45076,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 Left = 1
                 Height = 26
                 Top = 1
-                Width = 478
+                Width = 518
                 Align = alTop
                 Caption = 'Abbildung in Winkel und Pixel'
                 Color = clGreen

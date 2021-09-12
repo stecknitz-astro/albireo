@@ -1,7 +1,7 @@
 object F__AOVIS: TF__AOVIS
-  Left = 2333
+  Left = 329
   Height = 703
-  Top = 139
+  Top = 146
   Width = 1074
   Caption = 'Object Visualisation'
   ClientHeight = 703

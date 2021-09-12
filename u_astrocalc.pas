@@ -172,6 +172,8 @@ type
     L__LY_D_VIRGO_DIST: TLabel;
     L__LY_D_VUNIV: TLabel;
     L__LY_M42: TLabel;
+    L__MAG_FP: TLabel;
+    L__MAG_FP_TITLE: TLabel;
     L__MOON_ANGLE: TLabel;
     L__MOON_DIAMETER_DIAM: TLabel;
     L__NYQUIST: TLabel;
@@ -386,6 +388,7 @@ type
     procedure MDownDistLabel(DistLabel: TLabel);
     procedure CalcOptFL_LIMG();
     procedure CalcOptFL_DSIMG();
+    procedure CalcMag_FP();
 
   public
     msLANG_ID: string;
@@ -438,6 +441,15 @@ implementation
 {$R *.lfm}
 
 { TF__ASTROCALC }
+
+procedure TF__ASTROCALC.CalcMag_FP();
+begin
+  // Source: https://astrofotografie.hohmann-edv.de/aufnahmetechniken/grundlagen.fokale.projektion.php
+
+  if(ED__FOCALLENGTH.Value > 0) and (ED__PXC_PX_SIZE.Value > 0) then
+    L__MAG_FP.Caption :=
+      IntToStr(Round(2.0 * 0.29 * ED__FOCALLENGTH.Value / ED__PXC_PX_SIZE.Value)) + 'x';
+end;
 
 procedure TF__ASTROCALC.CalcOptFL_LIMG();
   // Lucky Imaging: Nyquist criteria applied on telescope resolution! Gets to large focal lengths used for planet photography
@@ -1272,6 +1284,7 @@ begin
 
   CalcOptFL_LIMG();
   CalcOptFL_DSIMG();
+  CalcMag_FP();
 
 end;
 
