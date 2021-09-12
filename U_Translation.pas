@@ -166,6 +166,7 @@ begin
     if(sText = 'Einblenden') then begin Result := 'Fade in'; exit; end;
     if(sText = 'Eingabemaske leeren') then begin Result := 'Clear Input Mask'; exit; end;
     if(sText = 'Einheit') then begin Result := 'Unit'; exit; end;
+    if(sText = 'Einstellungen') then begin Result := 'Settings'; exit; end;
     if(sText = 'Einzelframe [s]') then begin Result := 'Single frame [s]'; exit; end;
     if(sText = 'Ekliptik') then begin Result := 'Ecliptic'; exit; end;
     if(sText = 'Ende astronomische Dämmerung') then begin Result := 'End of astronomical twilight'; exit; end;
@@ -241,6 +242,7 @@ begin
     if(sText = 'Intervall') then begin Result := 'Interval'; exit; end;
     if(sText = 'Jetzt') then begin Result := 'Now'; exit; end;
     if(sText = 'Julianische Zeit') then begin Result := 'Julian Time'; exit; end;
+    if(sText = 'Kamera') then begin Result := 'Camera'; exit; end;
     if(sText = 'Kamera öffnen') then begin Result := 'Open Camera'; exit; end;
     if(sText = 'Kameramodell') then begin Result := 'Camera Model'; exit; end;
     if(sText = 'Kataloge') then begin Result := 'Catalogs'; exit; end;
@@ -371,7 +373,8 @@ begin
     if(sText = 'Spektralklassen') then begin Result := 'Spectral Classes'; exit; end;
     if(sText = 'Spektralklasse && Scheinbare Helligkeit') then begin Result := 'Spectral Class && Apparent Magnitude'; exit; end;
     if(sText = 'Spektraltyp') then begin Result := 'Spectral Type'; exit; end;
-    if(sText = 'Spenden') then begin Result := 'Donate'; exit; end;
+    if(sText = 'Spende') then begin Result := 'Donate'; exit; end;
+    if(sText = 'Spenden') then begin Result := 'Donations'; exit; end;
     if(sText = 'Spezifische Klassen') then begin Result := 'Specific Classes'; exit; end;
     if(sText = 'Sprache') then begin Result := 'Language'; exit; end;
     if(sText = 'Staat oder Land') then begin Result := 'State or Province'; exit; end;
@@ -485,6 +488,7 @@ begin
     if(sText = 'Calculate object size') then begin Result := 'Berechne Objektgröße'; exit; end;
     if(sText = 'Calculate SNR') then begin Result := 'Berechne SNR'; exit; end;
     if(sText = 'Calculate # Pixel') then begin Result := 'Berechne # Pixel'; exit; end;
+    if(sText = 'Camera') then begin Result := 'Kamera'; exit; end;
     if(sText = 'Camera Model') then begin Result := 'Kameramodell'; exit; end;
     if(sText = 'Cancel') then begin Result := 'Abbrechen'; exit; end;
     if(sText = 'Carbon Classes') then begin Result := 'Kohlenstoffklassen'; exit; end;
@@ -547,7 +551,8 @@ begin
     if(sText = 'Distance Virgo Cluster') then begin Result := 'Entfernung Virgohaufen'; exit; end;
     if(sText = 'Distances') then begin Result := 'Entfernungen'; exit; end;
     if(sText = 'Distance Calculation') then begin Result := 'Entfernungsumrechnung'; exit; end;
-    if(sText = 'Donate') then begin Result := 'Spenden'; exit; end;
+    if(sText = 'Donate') then begin Result := 'Spende'; exit; end;
+    if(sText = 'Donations') then begin Result := 'Spenden'; exit; end;
     if(sText = 'DST Delay in Hours') then begin Result := 'Sommerzeit/Winterzeit-Zeitverschiebung in Stunden'; exit; end;
     if(sText = 'Earth') then begin Result := 'Erde'; exit; end;
     if(sText = 'East') then begin Result := 'Ost'; exit; end;
@@ -742,6 +747,7 @@ begin
     if(sText = 'Sensor Type') then begin Result := 'Sensortyp'; exit; end;
     if(sText = 'Sensor value validity') then begin Result := 'Validität der Sensorwerte'; exit; end;
     if(sText = 'Set') then begin Result := 'Untergang'; exit; end;
+    if(sText = 'Settings') then begin Result := 'Einstellungen'; exit; end;
     if(sText = 'Show Options') then begin Result := 'Zeige Optionen'; exit; end;
     if(sText = 'Show Planets') then begin Result := 'Planeten anzeigen'; exit; end;
     if(sText = 'Siderial Time') then begin Result := 'Siderische Zeit'; exit; end;

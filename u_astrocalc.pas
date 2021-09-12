@@ -3122,6 +3122,18 @@ begin
 
     IMG__ANGLE_DE.Visible:=false;
     IMG__ANGLE_EN.Visible:=true;
+
+    GBX__OPT_FL.Caption := 'Optimal focal lengths';
+    L__LIMG_TITLE.Caption := 'Lucky Imaging (short exposures):';
+    L__DSIMG_TITLE.Caption := 'For DeepSky with selected seeing (long exposures):';
+    P__SETTINGS.Caption:='Telescope & Camera Sensor';
+  end
+  else
+  begin
+    GBX__OPT_FL.Caption := 'Optimale Brennweiten';
+    L__LIMG_TITLE.Caption := 'Lucky Imaging (kleine Bel.-Zeiten):';
+    L__DSIMG_TITLE.Caption := 'Für DeepSky bei ausgew. Seeing (große Bel.-Zeiten):';
+    P__SETTINGS.Caption:='Teleskop & Kamerasensor';
   end;
 
   if(mbSetFormDim) then

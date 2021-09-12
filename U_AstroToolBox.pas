@@ -248,6 +248,8 @@ type
     MenuItem11: TMenuItem;
     MenuItem14: TMenuItem;
     MenuItem15: TMenuItem;
+    MenuItem16: TMenuItem;
+    MENU__EYEFAC: TMenuItem;
     MENU__ASTROPHOTO_SIGNAL: TMenuItem;
     MENU__ASTROPHOTO_NYS: TMenuItem;
     MENU__ASTRPHOTO_SIMAGE: TMenuItem;
@@ -266,7 +268,6 @@ type
     MENU__MAP: TMenuItem;
     MENU__TODAY: TMenuItem;
     MENU__MODULES: TMenuItem;
-    MENU__EYEFAC: TMenuItem;
     MENU__ADB_ADMIN: TMenuItem;
     MENU__ADB_SHOW: TMenuItem;
     MENU__SCLASS_CARBON: TMenuItem;
@@ -14228,7 +14229,7 @@ end;
 
 procedure TF__ASTROTOOLBOX.MENU__EYEFACClick(Sender: TObject);
 begin
-  if(not MENU__EYEFAC.Checked) then
+    if(not MENU__EYEFAC.Checked) then
   begin
     MENU__EYEFAC.Checked := true;
     mrEyeFacH := crEyeFacH_70;

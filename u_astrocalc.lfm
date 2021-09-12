@@ -18,7 +18,7 @@ object F__ASTROCALC: TF__ASTROCALC
     Height = 831
     Top = 0
     Width = 1549
-    ActivePage = TS__ASTROMETRY
+    ActivePage = TS__PIXCALC
     Align = alClient
     Font.CharSet = ANSI_CHARSET
     Font.Color = clAqua
@@ -28,7 +28,7 @@ object F__ASTROCALC: TF__ASTROCALC
     Font.Quality = fqDraft
     Font.Style = [fsBold, fsUnderline]
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 0
     object TS__ASTROMETRY: TTabSheet
       Caption = 'Entfernungsrechner'
@@ -44146,7 +44146,7 @@ object F__ASTROCALC: TF__ASTROCALC
               Top = 0
               Width = 480
               Align = alTop
-              Caption = 'Teleskop- und Kamerasensor'
+              Caption = 'Teleskop & Kamerasensor'
               Color = clGreen
               Font.CharSet = ANSI_CHARSET
               Font.Color = clWhite
