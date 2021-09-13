@@ -3140,6 +3140,7 @@ begin
     L__LIMG_TITLE.Caption := 'Lucky Imaging (short exposures):';
     L__DSIMG_TITLE.Caption := 'For DeepSky with selected seeing (long exposures):';
     P__SETTINGS.Caption:='Telescope & Camera Sensor';
+    L__MAG_FP_TITLE.Caption:='Focal Projection Magnification';
   end
   else
   begin
@@ -3147,6 +3148,7 @@ begin
     L__LIMG_TITLE.Caption := 'Lucky Imaging (kleine Bel.-Zeiten):';
     L__DSIMG_TITLE.Caption := 'Für DeepSky bei ausgew. Seeing (große Bel.-Zeiten):';
     P__SETTINGS.Caption:='Teleskop & Kamerasensor';
+    L__MAG_FP_TITLE.Caption:='Vergrößerung bei fokaler Projektion';
   end;
 
   if(mbSetFormDim) then

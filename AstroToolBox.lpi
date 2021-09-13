@@ -316,8 +316,8 @@
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="16"/>
-        <TopLine Value="1258"/>
-        <CursorPos X="3" Y="1288"/>
+        <TopLine Value="3127"/>
+        <CursorPos X="28" Y="3143"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -636,123 +636,123 @@
     </OtherDefines>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="16177" Column="15" TopLine="16165"/>
-      </Position1>
-      <Position2>
         <Filename Value="U_AConst.pas"/>
         <Caret Line="463" Column="22" TopLine="445"/>
+      </Position1>
+      <Position2>
+        <Filename Value="u_aovis.pas"/>
+        <Caret Line="2078" Column="7" TopLine="2065"/>
       </Position2>
       <Position3>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="2078" Column="7" TopLine="2065"/>
       </Position3>
       <Position4>
-        <Filename Value="u_aovis.pas"/>
-      </Position4>
-      <Position5>
         <Filename Value="u_astrocalc.pas"/>
         <Caret Line="3099" Column="54" TopLine="3088"/>
+      </Position4>
+      <Position5>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="16188" Column="19" TopLine="16165"/>
       </Position5>
       <Position6>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="16188" Column="19" TopLine="16165"/>
+        <Caret Line="14247" Column="121" TopLine="14228"/>
       </Position6>
       <Position7>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="14247" Column="121" TopLine="14228"/>
+        <Caret Line="14248" Column="121" TopLine="14229"/>
       </Position7>
       <Position8>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="14248" Column="121" TopLine="14229"/>
+        <Caret Line="14265" Column="121" TopLine="14241"/>
       </Position8>
       <Position9>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="14265" Column="121" TopLine="14241"/>
+        <Caret Line="14249" Column="41" TopLine="14241"/>
       </Position9>
       <Position10>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="14249" Column="41" TopLine="14241"/>
+        <Caret Line="14259" Column="5" TopLine="14259"/>
       </Position10>
       <Position11>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="14259" Column="5" TopLine="14259"/>
+        <Caret Line="10318" Column="5" TopLine="10305"/>
       </Position11>
       <Position12>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="10318" Column="5" TopLine="10305"/>
+        <Caret Line="809" TopLine="794"/>
       </Position12>
       <Position13>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="809" TopLine="794"/>
+        <Caret Line="808" TopLine="793"/>
       </Position13>
       <Position14>
-        <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="808" TopLine="793"/>
+        <Filename Value="u_astrocalc.pas"/>
+        <Caret Line="3136" Column="11" TopLine="3115"/>
       </Position14>
       <Position15>
         <Filename Value="u_astrocalc.pas"/>
-        <Caret Line="3136" Column="11" TopLine="3115"/>
+        <Caret Line="3137" Column="11" TopLine="3116"/>
       </Position15>
       <Position16>
         <Filename Value="u_astrocalc.pas"/>
-        <Caret Line="3137" Column="11" TopLine="3116"/>
+        <Caret Line="3136" Column="11" TopLine="3115"/>
       </Position16>
       <Position17>
         <Filename Value="u_astrocalc.pas"/>
-        <Caret Line="3136" Column="11" TopLine="3115"/>
+        <Caret Line="3137" Column="11" TopLine="3116"/>
       </Position17>
       <Position18>
         <Filename Value="u_astrocalc.pas"/>
-        <Caret Line="3137" Column="11" TopLine="3116"/>
+        <Caret Line="3138" Column="11" TopLine="3117"/>
       </Position18>
       <Position19>
         <Filename Value="u_astrocalc.pas"/>
-        <Caret Line="3138" Column="11" TopLine="3117"/>
+        <Caret Line="3137" Column="11" TopLine="3116"/>
       </Position19>
       <Position20>
         <Filename Value="u_astrocalc.pas"/>
-        <Caret Line="3137" Column="11" TopLine="3116"/>
+        <Caret Line="3138" Column="11" TopLine="3117"/>
       </Position20>
       <Position21>
         <Filename Value="u_astrocalc.pas"/>
-        <Caret Line="3138" Column="11" TopLine="3117"/>
+        <Caret Line="2734" Column="3" TopLine="2729"/>
       </Position21>
       <Position22>
         <Filename Value="u_astrocalc.pas"/>
-        <Caret Line="2734" Column="3" TopLine="2729"/>
+        <Caret Line="363" Column="30" TopLine="348"/>
       </Position22>
       <Position23>
         <Filename Value="u_astrocalc.pas"/>
-        <Caret Line="363" Column="30" TopLine="348"/>
+        <Caret Line="1275" Column="13" TopLine="1252"/>
       </Position23>
       <Position24>
         <Filename Value="u_astrocalc.pas"/>
-        <Caret Line="1275" Column="13" TopLine="1252"/>
+        <Caret Line="390" Column="30" TopLine="375"/>
       </Position24>
       <Position25>
         <Filename Value="u_astrocalc.pas"/>
-        <Caret Line="390" Column="30" TopLine="375"/>
+        <Caret Line="451" Column="83" TopLine="438"/>
       </Position25>
       <Position26>
         <Filename Value="u_astrocalc.pas"/>
-        <Caret Line="451" Column="83" TopLine="438"/>
+        <Caret Line="450" Column="83" TopLine="437"/>
       </Position26>
       <Position27>
         <Filename Value="u_astrocalc.pas"/>
-        <Caret Line="450" Column="83" TopLine="437"/>
+        <Caret Line="451" Column="83" TopLine="438"/>
       </Position27>
       <Position28>
         <Filename Value="u_astrocalc.pas"/>
-        <Caret Line="451" Column="83" TopLine="438"/>
+        <Caret Line="450" Column="83" TopLine="437"/>
       </Position28>
       <Position29>
         <Filename Value="u_astrocalc.pas"/>
-        <Caret Line="450" Column="83" TopLine="437"/>
+        <Caret Line="454" Column="39" TopLine="426"/>
       </Position29>
       <Position30>
         <Filename Value="u_astrocalc.pas"/>
-        <Caret Line="454" Column="39" TopLine="426"/>
+        <Caret Line="1288" Column="3" TopLine="1252"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>
