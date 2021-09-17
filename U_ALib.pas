@@ -35,12 +35,12 @@ interface
 {$IFDEF LAZARUS}
 uses
   Classes, SysUtils,
-  Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls, StdCtrls, StrUtils, ShlObj,// ContNrs,
+  Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls, StdCtrls, StrUtils, // ContNrs,
   Menus, DateUtils, Math, LCLIntf,
   U_AConst, U_Translation,
   {$IFDEF Windows}
-  Windows, ShellAPI,
-  {$ENDIF WIndows}
+  ShlObj, Windows, ShellAPI,
+  {$ENDIF Windows}
   {$IFDEF Darwin}
   MacOSAll, CocoaAll,
   {$ENDIF Darwin}
@@ -189,9 +189,11 @@ uses
   function GetCitiesList(sCountrySel, sLANG_ID: string; var slCities: TStringList; sAOFileName: string): Boolean;
   function CycleDiff(fVal1,fVal2,fCycleVal: Real): Real;
   function GetLocalUserAppDataPath(): string;
+  {$IFDEF Windows}
   function GetVolumeLabel(DriveChar: Char): string;
   function GetVolumeID(cDriveChar: Char): string;
   function GetDriveChar(): Char;
+  {$ENDIF Windows}
   function GetStarBaseSignal(iAperture_mm: Integer; sTelType: string; var iOptArea_qcm: Integer; var fTransmission: Real): Real;
   function GetStarBaseSignalCompact(iAperture_mm: Integer; sTelType: string): Real;
   procedure EquToAZCoo(dtDateTime: TDateTime;
@@ -655,6 +657,17 @@ begin
 end;
 
 function GetLocalUserAppDataPath(): string;
+begin
+  Result := '';
+  {$IFDEF Windows}
+  Result := GetUserDir() + 'AppData\Local';
+  {$ELSE}
+  Result := GetUserDir();
+  {$ENDIF Windows}
+
+end;
+
+(*
 // works at least with IE4 and Win 95 or later
 var
    bSuccess: Bool;
@@ -666,6 +679,7 @@ begin
    if bSuccess then Result := sPath
    else Result := '';
 end;
+*)
 
 function CycleDiff(fVal1,fVal2,fCycleVal: Real): Real;
 var
@@ -981,7 +995,7 @@ begin
   Result := Integer((rgb)); // https://www.delphipraxis.net/6963-getrvalue-getbvalue-und-getgvalue.html
   {$ENDIF Darwin}
   {$IFDEF LINUX}
-  Result := Integer((rgb));
+  Result := GetRValue(rgb);
   {$ENDIF LINUX}
 
 end;
@@ -995,7 +1009,7 @@ begin
   Result := Integer((rgb shr 8));
   {$ENDIF Darwin}
   {$IFDEF LINUX}
-  Result := Integer((rgb shr 8));
+  Result := GetGValue(rgb);
   {$ENDIF LINUX}
 end;
 
@@ -1008,7 +1022,7 @@ begin
   Result := Integer((rgb shr 16));
   {$ENDIF Darwin}
   {$IFDEF LINUX}
-  Result := Integer((rgb shr 16));
+  Result := GetBValue(rgb);
   {$ENDIF LINUX}
 end;
 

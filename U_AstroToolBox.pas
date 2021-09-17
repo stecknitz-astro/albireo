@@ -28,7 +28,10 @@ interface
 uses
   Classes, SysUtils, FileUtil, SpinEx, Forms, Controls, Graphics, Dialogs,
   ExtCtrls, StdCtrls, ComCtrls, ActnList, Menus, Buttons, EditBtn, Spin, Grids,
-  ExtDlgs, DateUtils, IniFiles, Windows, StrUtils,
+  ExtDlgs, DateUtils, IniFiles, StrUtils,
+  {$IFDEF Windows}
+  Windows,
+  {$ENDIF Windows}
   LCLType, // HBitmap type
   IntfGraphics, // TLazIntfImage type
   fpImage, // TFPColor type
@@ -4101,6 +4104,9 @@ begin
   {$IFDEF Windows}
   SolSys();
   {$ENDIF Windows}
+  {$IFDEF LINUX}
+  SolSys();
+  {$ENDIF LINUX}
 end;
 
 procedure TF__ASTROTOOLBOX.SolSys();
@@ -4271,7 +4277,7 @@ begin
 
         if(bDoPlot) then
         begin
-          if(FileExists(gsAlbireoLocalDir + 'img\' + Planet.sName_EN + '.png')) then
+          if(FileExists(ConvertWinPath(gsAlbireoLocalDir + 'img\' + Planet.sName_EN + '.png'))) then
           begin
             PImage := Planet.IMG;
             PImage.Width:=20;
@@ -6455,7 +6461,9 @@ begin
   P__STARMAP.Canvas.Pen.Color:=Control.Color;
   P__STARMAP.Canvas.FillRect(0,0,P__STARMAP.Width,P__STARMAP.Height);
 
-  P__STARMAP.Refresh;
+  //P__STARMAP.Refresh;
+  Application.ProcessMessages; // Works both for Windows and Linux
+
   P__HORDUST.Color := Control.Color;
 
 end;
@@ -6735,6 +6743,9 @@ begin
   {$IFDEF Windows}
   GenMapExec(CustomControl);
   {$ENDIF Windows}
+  {$IFDEF LINUX}
+  GenMapExec(CustomControl);
+  {$ENDIF LINUX}
 end;
 
 procedure TF__ASTROTOOLBOX.ShowMeridian(iX0, iY0: Integer);
@@ -13005,11 +13016,38 @@ begin
   mbOnSolSysPaintBusy := false;
   {$ENDIF Darwin}
 
+  {$IFDEF LINUX}
+  ED__WT_HH.Font.Size := 22;
+  ED__WT_MM.Font.Size := 22;
+  ED__WT_SS.Font.Size := 22;
+
+  P__MAGSIZE.Width:=120;
+
+  P__REWIND_MINUS.Font.Size:=22;
+  P__REWIND_MINUS.Caption:='-';
+  L__STARTSTOP.Font.Size:=22;
+  L__STARTSTOP.Caption:='STOP';
+  P__FORWARD_PLUS.Font.Size:=22;
+  P__FORWARD_PLUS.Caption:='+';
+  {$ENDIF LINUX}
+
+  {$IFDEF Windows}
+  ED__WT_HH.Font.Size := 34;
+  ED__WT_MM.Font.Size := 34;
+  ED__WT_SS.Font.Size := 34;
+
+  P__MAGSIZE.Width:=70;
+  {$ENDIF Windows}
+
   giRSCLvl := 1; // Begin with high resource mode by default.
 
   mslEclipses := TStringList.Create;
 
-  gsAlbireoLocalDir := GetLocalUserAppDataPath() + '\Albireo\';
+  {$IFDEF LINUX}
+    gsAlbireoLocalDir := GetLocalUserAppDataPath() + '.albireo/';
+  {$ELSE}
+    gsAlbireoLocalDir := GetLocalUserAppDataPath() + '\Albireo\';
+  {$ENDIF LINUX}
 
   grecAOIndexControl.iMaxMessier:=0;
   grecAOIndexControl.iMax_Q:=0;
@@ -15263,7 +15301,13 @@ begin
     SetGenMapInterval(false); //ciGraphNormalRefreshTime;
     TIMER__GENMAP.Enabled:=true;
 
+    {$IFDEF Windows}
     L__STARTSTOP.Caption:=';'; // Webdings font ||
+    {$ENDIF Windows}
+
+    {$IFDEF LINUX}
+    L__STARTSTOP.Caption:='STOP';
+    {$ENDIF LINUX}
 
     P__REWIND_MINUS.Tag := 0;
     P__FORWARD_PLUS.Tag := 0;
@@ -15292,7 +15336,13 @@ begin
     ED__WT_MM.Enabled := true;
     ED__WT_SS.Enabled := true;
 
-    L__STARTSTOP.Caption:='4'; // Webdings font >
+    {$IFDEF Windows}
+    L__STARTSTOP.Caption:='4'; // Webdings font ||
+    {$ENDIF Windows}
+
+    {$IFDEF LINUX}
+    L__STARTSTOP.Caption:='START';
+    {$ENDIF LINUX}
 
     P__REWIND_MINUS.Tag := 0;
     P__FORWARD_PLUS.Tag := 0;
