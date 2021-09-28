@@ -252,6 +252,7 @@ type
     MenuItem14: TMenuItem;
     MenuItem15: TMenuItem;
     MenuItem16: TMenuItem;
+    MENU__ORBITPARA: TMenuItem;
     MENU__EYEFAC: TMenuItem;
     MENU__ASTROPHOTO_SIGNAL: TMenuItem;
     MENU__ASTROPHOTO_NYS: TMenuItem;
@@ -308,6 +309,9 @@ type
     MENU__SPCLASS: TMenuItem;
     MENU__LCLASS: TMenuItem;
     MENU__SHOW_STARS: TMenuItem;
+    P__ZOOM_MINUS: TPanel;
+    P__ZOOM: TPanel;
+    P__ZOOM_PLUS: TPanel;
     P__ASTROCALC: TPanel;
     P__AZIMUTH_DIR: TPanel;
     P__HA_TITLE: TPanel;
@@ -641,6 +645,7 @@ type
     GRD__RECOM_P: TStringGrid;
     GRD__RECOM_MS: TStringGrid;
     GRD__RECOM_ECL: TStringGrid;
+    TB__SOLSYS: TTrackBar;
     TIMER__STRM_VIEWFLIP: TTimer;
     TIMER__STRM_DATA: TTimer;
     TB__LT: TTrackBar;
@@ -660,7 +665,6 @@ type
     TB__MAG_G: TTrackBar;
     TS__MAG_GAL: TTabSheet;
     TS__MAG_STARS: TTabSheet;
-    TB__SOLSYS: TTrackBar;
     TB__TIME_24H: TTrackBar;
     TS__AZIMUTH: TTabSheet;
     TS__PARALLACTIC: TTabSheet;
@@ -821,6 +825,7 @@ type
     procedure MENU__LCLASS_ALLClick(Sender: TObject);
     procedure MENU__MAPClick(Sender: TObject);
     procedure MENU__MY_TELClick(Sender: TObject);
+    procedure MENU__ORBITPARAClick(Sender: TObject);
     procedure MENU__REFRESH_APPClick(Sender: TObject);
     procedure MENU__SCLASS_AClick(Sender: TObject);
     procedure MENU__SCLASS_ALLClick(Sender: TObject);
@@ -992,6 +997,8 @@ type
     procedure P__TABLESMouseEnter(Sender: TObject);
     procedure P__TABLESMouseLeave(Sender: TObject);
     procedure P__ZC_CONTROLClick(Sender: TObject);
+    procedure P__ZOOM_MINUSClick(Sender: TObject);
+    procedure P__ZOOM_PLUSClick(Sender: TObject);
     procedure RB__MESSIERChange(Sender: TObject);
     procedure RB__OCChange(Sender: TObject);
     procedure RB__COMETSChange(Sender: TObject);
@@ -14363,6 +14370,12 @@ begin
   ExecDevices();
 end;
 
+procedure TF__ASTROTOOLBOX.MENU__ORBITPARAClick(Sender: TObject);
+begin
+  ShowAstroCalc(nil);
+  F__ASTROCALC.PC__ASTROCALC.ActivePageIndex:=3;
+end;
+
 procedure TF__ASTROTOOLBOX.MENU__REFRESH_APPClick(Sender: TObject);
 begin
   RefreshApp();
@@ -17219,6 +17232,22 @@ end;
 procedure TF__ASTROTOOLBOX.P__ZC_CONTROLClick(Sender: TObject);
 begin
   ControlZoomPanel();
+end;
+
+procedure TF__ASTROTOOLBOX.P__ZOOM_MINUSClick(Sender: TObject);
+begin
+  if(TB__SOLSYS.Min < TB__SOLSYS.Position) then
+    TB__SOLSYS.Position := TB__SOLSYS.Position - 1;
+
+  ShowSolSys();
+end;
+
+procedure TF__ASTROTOOLBOX.P__ZOOM_PLUSClick(Sender: TObject);
+begin
+  if(TB__SOLSYS.Max > TB__SOLSYS.Position) then
+    TB__SOLSYS.Position := TB__SOLSYS.Position + 1;
+
+  ShowSolSys();
 end;
 
 procedure TF__ASTROTOOLBOX.RB__MESSIERChange(Sender: TObject);

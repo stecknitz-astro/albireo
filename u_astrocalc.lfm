@@ -8,6 +8,7 @@ object F__ASTROCALC: TF__ASTROCALC
   Caption = 'SpaceLab'
   ClientHeight = 831
   ClientWidth = 1549
+  Color = 1052688
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
@@ -18,7 +19,7 @@ object F__ASTROCALC: TF__ASTROCALC
     Height = 831
     Top = 0
     Width = 1549
-    ActivePage = TS__PIXCALC
+    ActivePage = TS__ASTROMETRY
     Align = alClient
     Font.CharSet = ANSI_CHARSET
     Font.Color = clAqua
@@ -28,7 +29,7 @@ object F__ASTROCALC: TF__ASTROCALC
     Font.Quality = fqDraft
     Font.Style = [fsBold, fsUnderline]
     ParentFont = False
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 0
     object TS__ASTROMETRY: TTabSheet
       Caption = 'Entfernungsrechner'
@@ -31838,11 +31839,12 @@ object F__ASTROCALC: TF__ASTROCALC
       ClientHeight = 802
       ClientWidth = 1541
       Font.CharSet = ANSI_CHARSET
-      Font.Color = clBlack
+      Font.Color = clAqua
       Font.Height = -13
       Font.Name = 'Arial'
       Font.Pitch = fpVariable
       Font.Quality = fqDraft
+      Font.Style = [fsBold]
       ParentFont = False
       object IMG__AM_DIST1: TImage
         Left = 0
@@ -44130,15 +44132,15 @@ object F__ASTROCALC: TF__ASTROCALC
         TabOrder = 1
         object PC__APP: TPageControl
           Left = 8
-          Height = 480
+          Height = 456
           Top = 8
           Width = 920
-          ActivePage = TS__SIGNALS
-          TabIndex = 3
+          ActivePage = TS__OBJ_PX
+          TabIndex = 1
           TabOrder = 0
           object TS__SETTINGS: TTabSheet
             Caption = 'Einstellungen'
-            ClientHeight = 491
+            ClientHeight = 427
             ClientWidth = 912
             object P__SETTINGS: TPanel
               Left = 0
@@ -44161,11 +44163,11 @@ object F__ASTROCALC: TF__ASTROCALC
             end
             object P__CAMSETTINGS: TPanel
               Left = 0
-              Height = 465
+              Height = 401
               Top = 26
               Width = 912
               Align = alClient
-              ClientHeight = 465
+              ClientHeight = 401
               ClientWidth = 912
               TabOrder = 1
               object P__TELESCOPE: TPanel
@@ -44209,7 +44211,7 @@ object F__ASTROCALC: TF__ASTROCALC
                   Font.Name = 'Arial'
                   Font.Pitch = fpVariable
                   Font.Quality = fqDraft
-                  Font.Style = [fsBold, fsUnderline]
+                  Font.Style = [fsBold]
                   ParentColor = False
                   ParentFont = False
                 end
@@ -44244,12 +44246,12 @@ object F__ASTROCALC: TF__ASTROCALC
                   Font.Name = 'Arial'
                   Font.Pitch = fpVariable
                   Font.Quality = fqDraft
-                  Font.Style = [fsBold, fsUnderline]
+                  Font.Style = [fsBold]
                   ParentColor = False
                   ParentFont = False
                 end
                 object L__RES_TELESCOPE: TLabel
-                  Left = 144
+                  Left = 160
                   Height = 16
                   Top = 200
                   Width = 12
@@ -44260,7 +44262,7 @@ object F__ASTROCALC: TF__ASTROCALC
                   Font.Name = 'Arial'
                   Font.Pitch = fpVariable
                   Font.Quality = fqDraft
-                  Font.Style = [fsBold, fsUnderline]
+                  Font.Style = [fsBold]
                   ParentColor = False
                   ParentFont = False
                 end
@@ -44276,7 +44278,7 @@ object F__ASTROCALC: TF__ASTROCALC
                   Font.Name = 'Arial'
                   Font.Pitch = fpVariable
                   Font.Quality = fqDraft
-                  Font.Style = [fsBold, fsUnderline]
+                  Font.Style = [fsBold]
                   ParentColor = False
                   ParentFont = False
                 end
@@ -44311,7 +44313,7 @@ object F__ASTROCALC: TF__ASTROCALC
                   Font.Name = 'Arial'
                   Font.Pitch = fpVariable
                   Font.Quality = fqDraft
-                  Font.Style = [fsBold, fsUnderline]
+                  Font.Style = [fsBold]
                   ParentColor = False
                   ParentFont = False
                 end
@@ -44344,7 +44346,7 @@ object F__ASTROCALC: TF__ASTROCALC
                   Font.Name = 'Arial'
                   Font.Pitch = fpVariable
                   Font.Quality = fqDraft
-                  Font.Style = [fsBold, fsUnderline]
+                  Font.Style = [fsBold]
                   ParentColor = False
                   ParentFont = False
                 end
@@ -44422,7 +44424,7 @@ object F__ASTROCALC: TF__ASTROCALC
                   Font.Name = 'Arial'
                   Font.Pitch = fpVariable
                   Font.Quality = fqDraft
-                  Font.Style = [fsBold, fsUnderline]
+                  Font.Style = [fsBold]
                   ParentColor = False
                   ParentFont = False
                 end
@@ -44438,7 +44440,7 @@ object F__ASTROCALC: TF__ASTROCALC
                   Font.Name = 'Arial'
                   Font.Pitch = fpVariable
                   Font.Quality = fqDraft
-                  Font.Style = [fsBold, fsUnderline]
+                  Font.Style = [fsBold]
                   ParentColor = False
                   ParentFont = False
                 end
@@ -44454,7 +44456,7 @@ object F__ASTROCALC: TF__ASTROCALC
                   Font.Name = 'Arial'
                   Font.Pitch = fpVariable
                   Font.Quality = fqDraft
-                  Font.Style = [fsBold, fsUnderline]
+                  Font.Style = [fsBold]
                   ParentColor = False
                   ParentFont = False
                 end
@@ -44493,7 +44495,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 object L__ISCALE: TLabel
                   Left = 8
                   Height = 16
-                  Top = 130
+                  Top = 128
                   Width = 133
                   Caption = '(Abbildungsmaßstab)'
                   Font.CharSet = ANSI_CHARSET
@@ -44502,7 +44504,7 @@ object F__ASTROCALC: TF__ASTROCALC
                   Font.Name = 'Arial'
                   Font.Pitch = fpVariable
                   Font.Quality = fqDraft
-                  Font.Style = [fsBold, fsUnderline]
+                  Font.Style = [fsBold]
                   ParentColor = False
                   ParentFont = False
                 end
@@ -44518,7 +44520,7 @@ object F__ASTROCALC: TF__ASTROCALC
                   Font.Name = 'Arial'
                   Font.Pitch = fpVariable
                   Font.Quality = fqDraft
-                  Font.Style = [fsBold, fsUnderline]
+                  Font.Style = [fsBold]
                   ParentColor = False
                   ParentFont = False
                 end
@@ -44570,7 +44572,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 object CB__PXC_MANUF: TComboBox
                   Left = 17
                   Height = 24
-                  Top = 72
+                  Top = 57
                   Width = 211
                   Font.CharSet = ANSI_CHARSET
                   Font.Color = clBlack
@@ -44594,7 +44596,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 object L__PXC_MANUF: TLabel
                   Left = 16
                   Height = 16
-                  Top = 55
+                  Top = 40
                   Width = 61
                   Caption = 'Hersteller'
                   Font.CharSet = ANSI_CHARSET
@@ -44610,7 +44612,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 object L__PXC_MODEL: TLabel
                   Left = 16
                   Height = 16
-                  Top = 113
+                  Top = 98
                   Width = 43
                   Caption = 'Modell'
                   Font.CharSet = ANSI_CHARSET
@@ -44626,7 +44628,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 object CB__PXC_MODEL: TComboBox
                   Left = 17
                   Height = 24
-                  Top = 131
+                  Top = 116
                   Width = 211
                   Font.CharSet = ANSI_CHARSET
                   Font.Color = clBlack
@@ -44643,7 +44645,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 object GBX__PXC_SENSOR: TGroupBox
                   Left = 240
                   Height = 217
-                  Top = 55
+                  Top = 40
                   Width = 184
                   Caption = 'Sensor'
                   ClientHeight = 196
@@ -44661,7 +44663,7 @@ object F__ASTROCALC: TF__ASTROCALC
                     Font.Name = 'Arial'
                     Font.Pitch = fpVariable
                     Font.Quality = fqDraft
-                    Font.Style = [fsBold, fsUnderline]
+                    Font.Style = [fsBold]
                     ParentColor = False
                     ParentFont = False
                   end
@@ -44676,7 +44678,7 @@ object F__ASTROCALC: TF__ASTROCALC
                     Font.Name = 'Arial'
                     Font.Pitch = fpVariable
                     Font.Quality = fqDraft
-                    Font.Style = [fsBold, fsUnderline]
+                    Font.Style = [fsBold]
                     MaxValue = 1000000000000
                     OnChange = ED__PXC_PX_SIZEChange
                     ParentFont = False
@@ -44734,7 +44736,7 @@ object F__ASTROCALC: TF__ASTROCALC
                     Font.Name = 'Arial'
                     Font.Pitch = fpVariable
                     Font.Quality = fqDraft
-                    Font.Style = [fsBold, fsUnderline]
+                    Font.Style = [fsBold]
                     ParentColor = False
                     ParentFont = False
                   end
@@ -44750,7 +44752,7 @@ object F__ASTROCALC: TF__ASTROCALC
                     Font.Name = 'Arial'
                     Font.Pitch = fpVariable
                     Font.Quality = fqDraft
-                    Font.Style = [fsBold, fsUnderline]
+                    Font.Style = [fsBold]
                     ParentColor = False
                     ParentFont = False
                   end
@@ -44765,7 +44767,7 @@ object F__ASTROCALC: TF__ASTROCALC
                     Font.Name = 'Arial'
                     Font.Pitch = fpVariable
                     Font.Quality = fqDraft
-                    Font.Style = [fsBold, fsUnderline]
+                    Font.Style = [fsBold]
                     MaxValue = 1000
                     OnChange = ED__PXC_MPChange
                     ParentFont = False
@@ -44779,35 +44781,67 @@ object F__ASTROCALC: TF__ASTROCALC
                     Width = 152
                     Caption = 'Kamera öffnen'
                     Enabled = False
+                    Font.CharSet = ANSI_CHARSET
+                    Font.Color = clAqua
+                    Font.Height = -13
+                    Font.Name = 'Arial'
+                    Font.Pitch = fpVariable
+                    Font.Quality = fqDraft
+                    Font.Style = [fsBold]
                     OnClick = B__CAMERAINFOClick
+                    ParentFont = False
                     TabOrder = 3
                   end
                 end
                 object CBX__MANUAL_SENSORSEL: TCheckBox
                   Left = 19
                   Height = 20
-                  Top = 240
+                  Top = 225
                   Width = 180
                   Caption = 'Manuelle Sensorauswahl'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clAqua
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
                   OnChange = CBX__MANUAL_SENSORSELChange
+                  ParentFont = False
                   TabOrder = 3
                 end
                 object CBX__CAMERA_STD: TCheckBox
                   Left = 19
                   Height = 20
-                  Top = 168
+                  Top = 153
                   Width = 208
                   Caption = 'Standardkamera für Teleskop'
                   Enabled = False
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clAqua
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentFont = False
                   TabOrder = 4
                 end
                 object B__NEWCAM: TButton
                   Left = 17
                   Height = 25
-                  Top = 192
+                  Top = 177
                   Width = 211
                   Caption = 'Neue Kamera erfassen'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clAqua
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
                   OnClick = B__NEWCAMClick
+                  ParentFont = False
                   TabOrder = 5
                 end
                 object P__CAMERA_TITLE: TPanel
@@ -44834,15 +44868,15 @@ object F__ASTROCALC: TF__ASTROCALC
           end
           object TS__OBJ_PX: TTabSheet
             Caption = 'Object in Px'
-            ClientHeight = 491
+            ClientHeight = 427
             ClientWidth = 912
             object P__OBJ__PX: TPanel
               Left = 0
-              Height = 491
+              Height = 427
               Top = 0
               Width = 912
               Align = alClient
-              ClientHeight = 491
+              ClientHeight = 427
               ClientWidth = 912
               Color = clGray
               ParentColor = False
@@ -45097,15 +45131,15 @@ object F__ASTROCALC: TF__ASTROCALC
           end
           object TS__NYQUIST: TTabSheet
             Caption = 'Nyquist'
-            ClientHeight = 491
+            ClientHeight = 427
             ClientWidth = 912
             object P__NYQUIST: TPanel
               Left = 0
-              Height = 491
+              Height = 427
               Top = 0
               Width = 912
               Align = alClient
-              ClientHeight = 491
+              ClientHeight = 427
               ClientWidth = 912
               Color = clGray
               ParentColor = False
@@ -45133,7 +45167,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 Left = 16
                 Height = 233
                 Top = 32
-                Width = 424
+                Width = 440
                 AutoFill = True
                 Caption = 'Picering Seeing Scale'
                 ChildSizing.LeftRightSpacing = 6
@@ -45144,7 +45178,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
                 ClientHeight = 212
-                ClientWidth = 420
+                ClientWidth = 436
                 Color = clForm
                 Items.Strings = (
                   '01 - Extremely BAD. Diameter > 13'''''
@@ -45163,7 +45197,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 TabOrder = 1
               end
               object L__NYQUIST_TITLE: TLabel
-                Left = 464
+                Left = 472
                 Height = 16
                 Top = 160
                 Width = 117
@@ -45179,22 +45213,23 @@ object F__ASTROCALC: TF__ASTROCALC
                 ParentFont = False
               end
               object L__NYQUIST: TLabel
-                Left = 464
-                Height = 14
-                Top = 178
-                Width = 12
+                Left = 472
+                Height = 19
+                Top = 184
+                Width = 15
                 Caption = '---'
                 Font.CharSet = ANSI_CHARSET
                 Font.Color = clBlack
-                Font.Height = -11
+                Font.Height = -16
                 Font.Name = 'Arial'
                 Font.Pitch = fpVariable
                 Font.Quality = fqDraft
+                Font.Style = [fsBold]
                 ParentColor = False
                 ParentFont = False
               end
               object L__PXPSTAR_TITLE: TLabel
-                Left = 464
+                Left = 472
                 Height = 16
                 Top = 64
                 Width = 71
@@ -45205,38 +45240,39 @@ object F__ASTROCALC: TF__ASTROCALC
                 Font.Name = 'Arial'
                 Font.Pitch = fpVariable
                 Font.Quality = fqDraft
-                Font.Style = [fsBold, fsUnderline]
+                Font.Style = [fsBold]
                 ParentColor = False
                 ParentFont = False
               end
               object L__PIXPSTAR: TLabel
-                Left = 557
-                Height = 16
+                Left = 640
+                Height = 19
                 Top = 64
-                Width = 12
+                Width = 15
                 Caption = '---'
                 Font.CharSet = ANSI_CHARSET
                 Font.Color = clBlack
-                Font.Height = -13
+                Font.Height = -16
                 Font.Name = 'Arial'
                 Font.Pitch = fpVariable
                 Font.Quality = fqDraft
-                Font.Style = [fsBold, fsUnderline]
+                Font.Style = [fsBold]
                 ParentColor = False
                 ParentFont = False
               end
               object L__NYQUIST2: TLabel
-                Left = 464
-                Height = 14
-                Top = 198
-                Width = 12
+                Left = 472
+                Height = 19
+                Top = 216
+                Width = 15
                 Caption = '---'
                 Font.CharSet = ANSI_CHARSET
                 Font.Color = clBlack
-                Font.Height = -11
+                Font.Height = -16
                 Font.Name = 'Arial'
                 Font.Pitch = fpVariable
                 Font.Quality = fqDraft
+                Font.Style = [fsBold]
                 ParentColor = False
                 ParentFont = False
               end
@@ -45252,28 +45288,28 @@ object F__ASTROCALC: TF__ASTROCALC
                 Font.Name = 'Arial'
                 Font.Pitch = fpVariable
                 Font.Quality = fqDraft
-                Font.Style = [fsBold, fsUnderline]
+                Font.Style = [fsBold]
                 ParentColor = False
                 ParentFont = False
               end
               object L__D_AIRY: TLabel
-                Left = 779
-                Height = 16
+                Left = 808
+                Height = 19
                 Top = 40
-                Width = 12
+                Width = 15
                 Caption = '---'
                 Font.CharSet = ANSI_CHARSET
                 Font.Color = clBlack
-                Font.Height = -13
+                Font.Height = -16
                 Font.Name = 'Arial'
                 Font.Pitch = fpVariable
                 Font.Quality = fqDraft
-                Font.Style = [fsBold, fsUnderline]
+                Font.Style = [fsBold]
                 ParentColor = False
                 ParentFont = False
               end
               object L__D_AIRY_TITLE: TLabel
-                Left = 464
+                Left = 472
                 Height = 16
                 Top = 40
                 Width = 310
@@ -45284,15 +45320,15 @@ object F__ASTROCALC: TF__ASTROCALC
                 Font.Name = 'Arial'
                 Font.Pitch = fpVariable
                 Font.Quality = fqDraft
-                Font.Style = [fsBold, fsUnderline]
+                Font.Style = [fsBold]
                 ParentColor = False
                 ParentFont = False
                 WordWrap = True
               end
               object L__OPTPX_TITLE: TLabel
-                Left = 625
+                Left = 472
                 Height = 16
-                Top = 64
+                Top = 96
                 Width = 136
                 Caption = 'Optimale Pixelgröße:'
                 Font.CharSet = ANSI_CHARSET
@@ -45301,23 +45337,23 @@ object F__ASTROCALC: TF__ASTROCALC
                 Font.Name = 'Arial'
                 Font.Pitch = fpVariable
                 Font.Quality = fqDraft
-                Font.Style = [fsBold, fsUnderline]
+                Font.Style = [fsBold]
                 ParentColor = False
                 ParentFont = False
               end
               object L__OPTPX: TLabel
-                Left = 779
-                Height = 16
-                Top = 64
-                Width = 12
+                Left = 640
+                Height = 19
+                Top = 96
+                Width = 15
                 Caption = '---'
                 Font.CharSet = ANSI_CHARSET
                 Font.Color = clBlack
-                Font.Height = -13
+                Font.Height = -16
                 Font.Name = 'Arial'
                 Font.Pitch = fpVariable
                 Font.Quality = fqDraft
-                Font.Style = [fsBold, fsUnderline]
+                Font.Style = [fsBold]
                 ParentColor = False
                 ParentFont = False
               end
@@ -45325,10 +45361,10 @@ object F__ASTROCALC: TF__ASTROCALC
                 Left = 16
                 Height = 94
                 Top = 272
-                Width = 480
+                Width = 440
                 Caption = 'Optimale Brennweiten'
                 ClientHeight = 73
-                ClientWidth = 476
+                ClientWidth = 436
                 Font.CharSet = ANSI_CHARSET
                 Font.Color = clBlack
                 Font.Height = -13
@@ -45339,10 +45375,12 @@ object F__ASTROCALC: TF__ASTROCALC
                 ParentFont = False
                 TabOrder = 2
                 object L__LIMG_TITLE: TLabel
-                  Left = 16
+                  Left = 20
                   Height = 16
                   Top = 8
-                  Width = 220
+                  Width = 332
+                  Alignment = taRightJustify
+                  AutoSize = False
                   Caption = 'Lucky Imaging (kleine Bel.-Zeiten):'
                   Font.CharSet = ANSI_CHARSET
                   Font.Color = clBlack
@@ -45355,7 +45393,7 @@ object F__ASTROCALC: TF__ASTROCALC
                   ParentFont = False
                 end
                 object L__LIMG: TLabel
-                  Left = 254
+                  Left = 376
                   Height = 16
                   Top = 8
                   Width = 36
@@ -45367,11 +45405,13 @@ object F__ASTROCALC: TF__ASTROCALC
                   Height = 16
                   Top = 40
                   Width = 336
+                  Alignment = taRightJustify
+                  AutoSize = False
                   Caption = 'Für DeepSky bei ausgew. Seeing (große Bel.-Zeiten):'
                   ParentColor = False
                 end
                 object L__DSIMG: TLabel
-                  Left = 365
+                  Left = 376
                   Height = 16
                   Top = 40
                   Width = 36
@@ -45383,15 +45423,15 @@ object F__ASTROCALC: TF__ASTROCALC
           end
           object TS__SIGNALS: TTabSheet
             Caption = 'Signalwerte'
-            ClientHeight = 451
+            ClientHeight = 427
             ClientWidth = 912
             object P__SIGNALS: TPanel
               Left = 0
-              Height = 451
+              Height = 427
               Top = 0
               Width = 912
               Align = alClient
-              ClientHeight = 451
+              ClientHeight = 427
               ClientWidth = 912
               Color = clGray
               ParentColor = False
@@ -45399,7 +45439,7 @@ object F__ASTROCALC: TF__ASTROCALC
               object BV__ASTAR: TBevel
                 Left = 8
                 Height = 41
-                Top = 79
+                Top = 80
                 Width = 511
                 Shape = bsFrame
               end
@@ -45431,7 +45471,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 Font.Name = 'Arial'
                 Font.Pitch = fpVariable
                 Font.Quality = fqDraft
-                Font.Style = [fsBold, fsUnderline]
+                Font.Style = [fsBold]
                 ParentColor = False
                 ParentFont = False
               end
@@ -45458,7 +45498,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 Font.Name = 'Arial'
                 Font.Pitch = fpVariable
                 Font.Quality = fqDraft
-                Font.Style = [fsBold, fsUnderline]
+                Font.Style = [fsBold]
                 ParentColor = False
                 ParentFont = False
               end
@@ -45490,7 +45530,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 Font.Name = 'Arial'
                 Font.Pitch = fpVariable
                 Font.Quality = fqDraft
-                Font.Style = [fsBold, fsUnderline]
+                Font.Style = [fsBold]
                 ParentColor = False
                 ParentFont = False
               end
@@ -45506,7 +45546,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 Font.Name = 'Arial'
                 Font.Pitch = fpVariable
                 Font.Quality = fqDraft
-                Font.Style = [fsBold, fsUnderline]
+                Font.Style = [fsBold]
                 ParentColor = False
                 ParentFont = False
               end
@@ -45549,7 +45589,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 Font.Name = 'Arial'
                 Font.Pitch = fpVariable
                 Font.Quality = fqDraft
-                Font.Style = [fsBold, fsUnderline]
+                Font.Style = [fsBold]
                 ParentColor = False
                 ParentFont = False
               end
@@ -45576,23 +45616,31 @@ object F__ASTROCALC: TF__ASTROCALC
                 Font.Name = 'Arial'
                 Font.Pitch = fpVariable
                 Font.Quality = fqDraft
-                Font.Style = [fsBold, fsUnderline]
+                Font.Style = [fsBold]
                 ParentColor = False
                 ParentFont = False
               end
               object GBX__EXP_SN_CALC: TGroupBox
                 Left = 8
-                Height = 248
-                Top = 200
+                Height = 232
+                Top = 192
                 Width = 509
                 Caption = 'Belichtung && SNR-Wert'
-                ClientHeight = 227
+                ClientHeight = 211
                 ClientWidth = 505
+                Font.CharSet = ANSI_CHARSET
+                Font.Color = clAqua
+                Font.Height = -13
+                Font.Name = 'Arial'
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                Font.Style = [fsBold]
+                ParentFont = False
                 TabOrder = 3
                 object L__EXP_S: TLabel
-                  Left = 189
+                  Left = 16
                   Height = 16
-                  Top = 5
+                  Top = 8
                   Width = 94
                   Caption = 'Einzelframe [s]'
                   Font.CharSet = ANSI_CHARSET
@@ -45601,14 +45649,14 @@ object F__ASTROCALC: TF__ASTROCALC
                   Font.Name = 'Arial'
                   Font.Pitch = fpVariable
                   Font.Quality = fqDraft
-                  Font.Style = [fsBold, fsUnderline]
+                  Font.Style = [fsBold]
                   ParentColor = False
                   ParentFont = False
                 end
                 object ED__EXP_S: TSpinEdit
-                  Left = 189
+                  Left = 192
                   Height = 24
-                  Top = 24
+                  Top = 8
                   Width = 82
                   Font.CharSet = ANSI_CHARSET
                   Font.Color = clBlack
@@ -45625,9 +45673,9 @@ object F__ASTROCALC: TF__ASTROCALC
                   Value = 60
                 end
                 object L__EXP_CNT: TLabel
-                  Left = 112
+                  Left = 16
                   Height = 16
-                  Top = 200
+                  Top = 40
                   Width = 95
                   Caption = 'Anzahl Frames'
                   Font.CharSet = ANSI_CHARSET
@@ -45636,14 +45684,14 @@ object F__ASTROCALC: TF__ASTROCALC
                   Font.Name = 'Arial'
                   Font.Pitch = fpVariable
                   Font.Quality = fqDraft
-                  Font.Style = [fsBold, fsUnderline]
+                  Font.Style = [fsBold]
                   ParentColor = False
                   ParentFont = False
                 end
                 object ED__EXP_CNT: TSpinEdit
-                  Left = 24
+                  Left = 192
                   Height = 24
-                  Top = 192
+                  Top = 40
                   Width = 82
                   Font.CharSet = ANSI_CHARSET
                   Font.Color = clBlack
@@ -45659,55 +45707,10 @@ object F__ASTROCALC: TF__ASTROCALC
                   TabOrder = 1
                   Value = 1
                 end
-                object L__SNR: TLabel
-                  Left = 11
-                  Height = 22
-                  Top = 106
-                  Width = 51
-                  Caption = 'SNR: '
-                  Font.CharSet = ANSI_CHARSET
-                  Font.Color = clBlack
-                  Font.Height = -19
-                  Font.Name = 'Arial'
-                  Font.Pitch = fpVariable
-                  Font.Quality = fqDraft
-                  Font.Style = [fsBold]
-                  ParentColor = False
-                  ParentFont = False
-                end
-                object L__SNR_TXT: TLabel
-                  Left = 80
-                  Height = 52
-                  Top = 106
-                  Width = 184
-                  AutoSize = False
-                  Caption = '---'
-                  Font.CharSet = ANSI_CHARSET
-                  Font.Color = clBlack
-                  Font.Height = -19
-                  Font.Name = 'Arial'
-                  Font.Pitch = fpVariable
-                  Font.Quality = fqDraft
-                  Font.Style = [fsBold]
-                  ParentColor = False
-                  ParentFont = False
-                  WordWrap = True
-                end
-                object CBX__DBEL: TCheckBox
-                  Left = 24
-                  Height = 20
-                  Top = 168
-                  Width = 153
-                  Caption = 'Benutze dB (Dezibel)'
-                  Checked = True
-                  OnChange = CBX__DBELChange
-                  State = cbChecked
-                  TabOrder = 2
-                end
                 object L__EXP_MIN: TLabel
-                  Left = 10
+                  Left = 16
                   Height = 16
-                  Top = 5
+                  Top = 88
                   Width = 160
                   Caption = 'Minimale Belichtungszeit'
                   Color = clSilver
@@ -45723,9 +45726,9 @@ object F__ASTROCALC: TF__ASTROCALC
                   Transparent = False
                 end
                 object L__BGL: TLabel
-                  Left = 10
+                  Left = 192
                   Height = 20
-                  Top = 28
+                  Top = 84
                   Width = 82
                   AutoSize = False
                   Caption = '---'
@@ -45735,15 +45738,15 @@ object F__ASTROCALC: TF__ASTROCALC
                   Font.Name = 'Arial'
                   Font.Pitch = fpVariable
                   Font.Quality = fqDraft
-                  Font.Style = [fsBold, fsUnderline]
+                  Font.Style = [fsBold]
                   ParentColor = False
                   ParentFont = False
                   WordWrap = True
                 end
                 object L__BGL_TITLE: TLabel
-                  Left = 24
+                  Left = 288
                   Height = 16
-                  Top = 48
+                  Top = 88
                   Width = 133
                   Caption = '(Hintergrundlimitierung)'
                   Font.CharSet = ANSI_CHARSET
@@ -45756,9 +45759,9 @@ object F__ASTROCALC: TF__ASTROCALC
                   ParentFont = False
                 end
                 object L__EXP_MIN1: TLabel
-                  Left = 312
+                  Left = 16
                   Height = 16
-                  Top = 5
+                  Top = 120
                   Width = 164
                   Caption = 'Maximale Belichtungszeit'
                   Color = clSilver
@@ -45774,10 +45777,11 @@ object F__ASTROCALC: TF__ASTROCALC
                   Transparent = False
                 end
                 object L__50_EXPTIME: TLabel
-                  Left = 312
+                  Left = 192
                   Height = 16
-                  Top = 28
-                  Width = 12
+                  Top = 120
+                  Width = 82
+                  AutoSize = False
                   Caption = '---'
                   Font.CharSet = ANSI_CHARSET
                   Font.Color = clBlack
@@ -45789,9 +45793,9 @@ object F__ASTROCALC: TF__ASTROCALC
                   ParentFont = False
                 end
                 object L__50_EXPTIME_TITLE: TLabel
-                  Left = 336
+                  Left = 288
                   Height = 16
-                  Top = 48
+                  Top = 120
                   Width = 140
                   Caption = '(50% Fullwell-Sättigung)'
                   Font.CharSet = ANSI_CHARSET
@@ -45804,9 +45808,9 @@ object F__ASTROCALC: TF__ASTROCALC
                   ParentFont = False
                 end
                 object L__STAR_SATUR: TLabel
-                  Left = 312
+                  Left = 192
                   Height = 16
-                  Top = 72
+                  Top = 152
                   Width = 12
                   Caption = '---'
                   Font.CharSet = ANSI_CHARSET
@@ -45815,14 +45819,14 @@ object F__ASTROCALC: TF__ASTROCALC
                   Font.Name = 'Arial'
                   Font.Pitch = fpVariable
                   Font.Quality = fqDraft
-                  Font.Style = [fsBold, fsUnderline]
+                  Font.Style = [fsBold]
                   ParentColor = False
                   ParentFont = False
                 end
                 object L__STAR_SATUR_TITLE: TLabel
-                  Left = 336
+                  Left = 16
                   Height = 16
-                  Top = 88
+                  Top = 152
                   Width = 92
                   Caption = '(Sternsättigung)'
                   Font.CharSet = ANSI_CHARSET
@@ -45834,29 +45838,37 @@ object F__ASTROCALC: TF__ASTROCALC
                   ParentColor = False
                   ParentFont = False
                 end
-                object BV__SNR: TBevel
-                  Left = 8
-                  Height = 155
-                  Top = 69
-                  Width = 261
-                end
-                object P__EXP_WARN: TPanel
-                  Left = 11
-                  Height = 24
-                  Top = 78
-                  Width = 254
-                  Color = clGreen
+                object L__SENSDYN_TITLE: TLabel
+                  Left = 13
+                  Height = 16
+                  Top = 176
+                  Width = 98
+                  Caption = 'Sensordynamik'
                   Font.CharSet = ANSI_CHARSET
                   Font.Color = clBlack
                   Font.Height = -13
                   Font.Name = 'Arial'
                   Font.Pitch = fpVariable
                   Font.Quality = fqDraft
-                  Font.Style = [fsBold, fsUnderline]
+                  Font.Style = [fsBold]
                   ParentColor = False
                   ParentFont = False
-                  TabOrder = 3
-                  Visible = False
+                end
+                object L__SENSDYN: TLabel
+                  Left = 192
+                  Height = 16
+                  Top = 176
+                  Width = 12
+                  Caption = '---'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentColor = False
+                  ParentFont = False
                 end
               end
               object BV_BG: TBevel
@@ -45867,7 +45879,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 Shape = bsFrame
               end
               object BV__DC: TBevel
-                Left = 8
+                Left = 6
                 Height = 64
                 Top = 128
                 Width = 511
@@ -45892,37 +45904,78 @@ object F__ASTROCALC: TF__ASTROCALC
                 ParentFont = False
                 TabOrder = 4
               end
-              object L__SENSDYN: TLabel
-                Left = 152
-                Height = 16
-                Top = 168
-                Width = 12
-                Caption = '---'
-                Font.CharSet = ANSI_CHARSET
-                Font.Color = clBlack
-                Font.Height = -13
-                Font.Name = 'Arial'
-                Font.Pitch = fpVariable
-                Font.Quality = fqDraft
-                Font.Style = [fsBold, fsUnderline]
-                ParentColor = False
-                ParentFont = False
-              end
-              object L__SENSDYN_TITLE: TLabel
-                Left = 24
-                Height = 16
-                Top = 168
-                Width = 98
-                Caption = 'Sensordynamik'
-                Font.CharSet = ANSI_CHARSET
-                Font.Color = clBlack
-                Font.Height = -13
-                Font.Name = 'Arial'
-                Font.Pitch = fpVariable
-                Font.Quality = fqDraft
-                Font.Style = [fsBold, fsUnderline]
-                ParentColor = False
-                ParentFont = False
+              object GBX__SIGNAL: TGroupBox
+                Left = 528
+                Height = 400
+                Top = 24
+                Width = 376
+                Caption = 'Signal'
+                ClientHeight = 379
+                ClientWidth = 372
+                TabOrder = 5
+                object P__EXP_WARN: TPanel
+                  Left = 8
+                  Height = 24
+                  Top = 8
+                  Width = 361
+                  Color = clGreen
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold, fsUnderline]
+                  ParentColor = False
+                  ParentFont = False
+                  TabOrder = 0
+                  Visible = False
+                end
+                object L__SNR: TLabel
+                  Left = 16
+                  Height = 19
+                  Top = 48
+                  Width = 35
+                  Caption = 'SNR'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -16
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object L__SNR_TXT: TLabel
+                  Left = 16
+                  Height = 52
+                  Top = 80
+                  Width = 344
+                  AutoSize = False
+                  Caption = '---'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -16
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentColor = False
+                  ParentFont = False
+                  WordWrap = True
+                end
+                object CBX__DBEL: TCheckBox
+                  Left = 216
+                  Height = 20
+                  Top = 352
+                  Width = 153
+                  Caption = 'Benutze dB (Dezibel)'
+                  Checked = True
+                  OnChange = CBX__DBELChange
+                  State = cbChecked
+                  TabOrder = 1
+                end
               end
             end
           end

@@ -36,7 +36,6 @@ type
   { TF__ASTROCALC }
 
   TF__ASTROCALC = class(TForm)
-    BV__SNR: TBevel;
     BV_BG: TBevel;
     BV__ASTAR: TBevel;
     BV__DC: TBevel;
@@ -95,6 +94,7 @@ type
     GBX__PXC_SENSOR: TGroupBox;
     GBX__RESULT: TGroupBox;
     GBX__OPT_FL: TGroupBox;
+    GBX__SIGNAL: TGroupBox;
     IMG__ANGLE_EN: TImage;
     IMG__ANGLE_DE: TImage;
     IMG__AM_DIST: TImage;
@@ -225,9 +225,9 @@ type
     P__CAMSETTINGS: TPanel;
     P__AM_DIST_TITLE: TPanel;
     P__DEG_MM_SS_TITLE: TPanel;
-    P__EXP_WARN: TPanel;
     P__ANGLE_EXAMPLES_TITLE: TPanel;
     P__APP_SIZE_TITLE: TPanel;
+    P__EXP_WARN: TPanel;
     P__HH_MM_SS_TITLE: TPanel;
     P__LAE_TITLE: TPanel;
     P__LAE: TPanel;
