@@ -471,7 +471,7 @@ begin
 
   // Show Picture
   if((mAObject as TPlanet).sPlanetType = 'E') then
-    IMG__MOON.Picture.LoadFromFile(msAlbireoLocalDir + 'img\Moon.jpeg')
+    IMG__MOON.Picture.LoadFromFile(ConvertWinPath(msAlbireoLocalDir + 'img\Moon.jpeg'))
   else
     LoadImgRes(IMG__MOON,Moon.sName_EN,'JPG');
 
@@ -2564,7 +2564,7 @@ begin
       ((mAObject as TAObject).sAOType = 'PN') or
       ((mAObject as TAObject).sAOType = 'N'))) then
     begin
-      sPath := msAlbireoLocalDir + 'img\InterstellarLib\' + (mAObject as TInterstellarObject).sNGC + '.jpeg';
+      sPath := ConvertWinPath(msAlbireoLocalDir + 'img\InterstellarLib\' + (mAObject as TInterstellarObject).sNGC + '.jpeg');
     end;
 
     if((mAObject as TAObject).sAOType = 'Q') then

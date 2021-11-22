@@ -75,6 +75,7 @@ begin
 
   {$IFDEF Darwin}
   sFilePath := AnsiReplaceStr(sFilePath,'\','/');
+
   //if(LeftStr(sFilePath,1) = '/') or (LeftStr(sFilePath,2) = 'C:') or (LeftStr(sFilePath,2) = 'D:') then
   if(LeftStr(sFilePath,1) = '/') or (AnsiContainsStr(LeftStr(sFilePath,2),':')) then
     Result := sFilePath

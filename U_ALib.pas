@@ -39,7 +39,8 @@ uses
   Menus, DateUtils, Math, LCLIntf,
   U_AConst, U_Translation,
   {$IFDEF Windows}
-  ShlObj, Windows, ShellAPI,
+  //ShlObj,
+  Windows, ShellAPI,
   {$ENDIF Windows}
   {$IFDEF Darwin}
   MacOSAll, CocoaAll,
@@ -222,8 +223,14 @@ uses
   function MaxFloatValue(const data : array of Real): Real;
 
   function Get_arcsec(fPlanetRatio,fDist_AU: Real): Real;
+  function GetSensorViewAngleDeg(fPixSize_mym,fMegaPix,fFocalLength_mm: Real): Real;
 
 implementation
+
+function GetSensorViewAngleDeg(fPixSize_mym,fMegaPix,fFocalLength_mm: Real): Real;
+begin
+  Result := 2.0 * arctan(fPixSize_mym * sqrt(fMegaPix*1000000) / (1000 * fFocalLength_mm)) * 180/Pi * sqrt(2); // sqrt(2): Approx. diagonal of square
+end;
 
 function Get_arcsec(fPlanetRatio,fDist_AU: Real): Real;
 begin
@@ -600,6 +607,7 @@ begin
   Result := 2.8 * Result; // Estimated total value over all other spectal bands (U+B(+V)+R+I)
 end;
 
+{$IFDEF Windows}
 function GetDriveChar(): Char;
 begin
   Result := 'X';
@@ -655,6 +663,7 @@ begin
     SetString(Result, Buf, StrLen(Buf));   { Set return result }
     Result:=AnsiUpperCase(Result)
 end;
+{$ENDIF Windows}
 
 function GetLocalUserAppDataPath(): string;
 begin

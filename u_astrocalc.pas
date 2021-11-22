@@ -173,7 +173,9 @@ type
     L__LY_D_VUNIV: TLabel;
     L__LY_M42: TLabel;
     L__MAG_FP: TLabel;
+    L__FPRO_ANGLE: TLabel;
     L__MAG_FP_TITLE: TLabel;
+    L__FPRO_ANGLE_TITLE: TLabel;
     L__MOON_ANGLE: TLabel;
     L__MOON_DIAMETER_DIAM: TLabel;
     L__NYQUIST: TLabel;
@@ -400,7 +402,9 @@ type
     //mbIsRegistered: Boolean;
     mbSetFormDim: Boolean;
     miFormLeft, miFormTop, miFormHeight, miFormWidth: Integer;
+    mfSensorDeg: Real;
 
+    procedure IniCamera(sManufacturer, sModel: string; var Camera: TCamera);
     procedure IniAstroCalc();
     procedure ActivateCamera();
     procedure GetCameraModels();
@@ -447,8 +451,16 @@ begin
   // Source: https://astrofotografie.hohmann-edv.de/aufnahmetechniken/grundlagen.fokale.projektion.php
 
   if(ED__FOCALLENGTH.Value > 0) and (ED__PXC_PX_SIZE.Value > 0) then
+  begin
     L__MAG_FP.Caption :=
       IntToStr(Round(2.0 * 0.29 * ED__FOCALLENGTH.Value / ED__PXC_PX_SIZE.Value)) + 'x';
+
+    mfSensorDeg := GetSensorViewAngleDeg(ED__PXC_PX_SIZE.Value,ED__PXC_MP.Value,ED__FOCALLENGTH.Value);
+
+    L__FPRO_ANGLE.Caption :=
+      IntToStr(Round(mfSensorDeg * 60)) +  '''';
+
+  end;
 end;
 
 procedure TF__ASTROCALC.CalcOptFL_LIMG();
@@ -1127,6 +1139,29 @@ begin
 
 end;
 
+procedure TF__ASTROCALC.IniCamera(sManufacturer, sModel: string; var Camera: TCamera);
+begin
+  if(Camera = nil) then
+    exit;
+
+  Camera.sManufacturer:=sManufacturer;
+  Camera.sModel:=sModel;
+
+  Camera.iEstimated:=1; // Estimated sensor data
+
+  if(sManuFacturer = 'Canon') then GetCanonModelData(sModel,Camera)// iFIndex,fMPValue)
+  else if(sManuFacturer = 'Nikon') then GetNikonModelData(sModel,Camera)// iFIndex,fMPValue)
+  else if(sManuFacturer = 'Olympus') then GetOlympusModelData(sModel,Camera)// iFIndex,fMPValue)
+  else if(sManuFacturer = 'Sony Alpha') then GetSonyModelData(sModel,Camera)// iFIndex,fMPValue)
+  else if(sManuFacturer = 'SBIG') then GetSBIGModelData(sModel,Camera)// iFIndex,fMPValue)
+  else
+  begin
+    Camera.iEstimated:=-1; // Userdefinded sensor data
+    GetCustomModelData(sModel,sManufacturer,Camera);
+  end;
+
+end;
+
 procedure TF__ASTROCALC.ActivateCamera();
 var
   sManufacturer, sModel: string;
@@ -1139,21 +1174,7 @@ begin
   sModel := CB__PXC_MODEL.Text;
   fX := 0; fY := 0;
 
-  mCamera.sManufacturer:=sManufacturer;
-  mCamera.sModel:=sModel;
-
-  mCamera.iEstimated:=1; // Estimated sensor data
-
-  if(sManuFacturer = 'Canon') then GetCanonModelData(sModel,mCamera)// iFIndex,fMPValue)
-  else if(sManuFacturer = 'Nikon') then GetNikonModelData(sModel,mCamera)// iFIndex,fMPValue)
-  else if(sManuFacturer = 'Olympus') then GetOlympusModelData(sModel,mCamera)// iFIndex,fMPValue)
-  else if(sManuFacturer = 'Sony Alpha') then GetSonyModelData(sModel,mCamera)// iFIndex,fMPValue)
-  else if(sManuFacturer = 'SBIG') then GetSBIGModelData(sModel,mCamera)// iFIndex,fMPValue)
-  else
-  begin
-    mCamera.iEstimated:=-1; // Userdefinded sensor data
-    GetCustomModelData(sModel,sManufacturer,mCamera);
-  end;
+  IniCamera(sManufacturer, sModel, mCamera);
 
   // Modify S0 by Camera Value, if given
   if(mCamera.iQEff > 0) and (mCamera.iQEff <= 100) then
@@ -3140,7 +3161,8 @@ begin
     L__LIMG_TITLE.Caption := 'Lucky Imaging (short exposures):';
     L__DSIMG_TITLE.Caption := 'For DeepSky with selected seeing (long exposures):';
     P__SETTINGS.Caption:='Telescope & Camera Sensor';
-    L__MAG_FP_TITLE.Caption:='Focal Projection Magnification';
+    L__MAG_FP_TITLE.Caption:='Focal Projection Magnification:';
+    L__FPRO_ANGLE_TITLE.Caption := 'Angle Area of Sensor:';
   end
   else
   begin
@@ -3148,7 +3170,8 @@ begin
     L__LIMG_TITLE.Caption := 'Lucky Imaging (kleine Bel.-Zeiten):';
     L__DSIMG_TITLE.Caption := 'Für DeepSky bei ausgew. Seeing (große Bel.-Zeiten):';
     P__SETTINGS.Caption:='Teleskop & Kamerasensor';
-    L__MAG_FP_TITLE.Caption:='Vergrößerung bei fokaler Projektion';
+    L__MAG_FP_TITLE.Caption:='Vergrößerung bei fokaler Projektion:';
+    L__FPRO_ANGLE_TITLE.Caption := 'Winkelbereich Kamerasensor:';
   end;
 
   if(mbSetFormDim) then

@@ -1,7 +1,7 @@
 object F__ASTROCALC: TF__ASTROCALC
-  Left = 2275
+  Left = 2132
   Height = 831
-  Top = 125
+  Top = 231
   Width = 1549
   BorderIcons = []
   BorderStyle = bsSingle
@@ -19,7 +19,7 @@ object F__ASTROCALC: TF__ASTROCALC
     Height = 831
     Top = 0
     Width = 1549
-    ActivePage = TS__ASTROMETRY
+    ActivePage = TS__PIXCALC
     Align = alClient
     Font.CharSet = ANSI_CHARSET
     Font.Color = clAqua
@@ -29,7 +29,7 @@ object F__ASTROCALC: TF__ASTROCALC
     Font.Quality = fqDraft
     Font.Style = [fsBold, fsUnderline]
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 0
     object TS__ASTROMETRY: TTabSheet
       Caption = 'Entfernungsrechner'
@@ -44135,8 +44135,8 @@ object F__ASTROCALC: TF__ASTROCALC
           Height = 456
           Top = 8
           Width = 920
-          ActivePage = TS__OBJ_PX
-          TabIndex = 1
+          ActivePage = TS__SETTINGS
+          TabIndex = 0
           TabOrder = 0
           object TS__SETTINGS: TTabSheet
             Caption = 'Einstellungen'
@@ -44463,7 +44463,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 object L__RES_CAMERA_TITLE: TLabel
                   Left = 8
                   Height = 16
-                  Top = 110
+                  Top = 124
                   Width = 125
                   Caption = 'Auflösung Kamera: '
                   Font.CharSet = ANSI_CHARSET
@@ -44477,9 +44477,9 @@ object F__ASTROCALC: TF__ASTROCALC
                   ParentFont = False
                 end
                 object L__RES_CAMERA: TLabel
-                  Left = 133
+                  Left = 149
                   Height = 16
-                  Top = 110
+                  Top = 128
                   Width = 12
                   Caption = '---'
                   Font.CharSet = ANSI_CHARSET
@@ -44495,7 +44495,7 @@ object F__ASTROCALC: TF__ASTROCALC
                 object L__ISCALE: TLabel
                   Left = 8
                   Height = 16
-                  Top = 128
+                  Top = 144
                   Width = 133
                   Caption = '(Abbildungsmaßstab)'
                   Font.CharSet = ANSI_CHARSET
@@ -44527,8 +44527,8 @@ object F__ASTROCALC: TF__ASTROCALC
                 object L__MAG_FP_TITLE: TLabel
                   Left = 8
                   Height = 40
-                  Top = 160
-                  Width = 149
+                  Top = 176
+                  Width = 136
                   AutoSize = False
                   Caption = 'Vergrößerung bei fokaler Projektion:'
                   Font.CharSet = ANSI_CHARSET
@@ -44543,9 +44543,43 @@ object F__ASTROCALC: TF__ASTROCALC
                   WordWrap = True
                 end
                 object L__MAG_FP: TLabel
-                  Left = 16
+                  Left = 152
                   Height = 19
-                  Top = 198
+                  Top = 184
+                  Width = 9
+                  Caption = '0'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -16
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentColor = False
+                  ParentFont = False
+                end
+                object L__FPRO_ANGLE_TITLE: TLabel
+                  Left = 8
+                  Height = 32
+                  Top = 217
+                  Width = 97
+                  AutoSize = False
+                  Caption = 'Winkelbereich Kamerasensor:'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
+                  ParentColor = False
+                  ParentFont = False
+                  WordWrap = True
+                end
+                object L__FPRO_ANGLE: TLabel
+                  Left = 152
+                  Height = 19
+                  Top = 224
                   Width = 9
                   Caption = '0'
                   Font.CharSet = ANSI_CHARSET

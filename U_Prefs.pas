@@ -25,7 +25,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ComCtrls, Buttons, Spin, ExtCtrls, IniFiles, U_Translation, U_ALib, U_AConst,
+  ComCtrls, Buttons, Spin, ExtCtrls, IniFiles, U_Translation, U_ABase, U_ALib, U_AConst,
   StrUtils;
 
 type
@@ -93,6 +93,7 @@ type
     procedure B__OKClick(Sender: TObject);
     procedure B__RESETClick(Sender: TObject);
     procedure ED__REFRESHRATEChange(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: char);
     procedure FormShow(Sender: TObject);
@@ -147,12 +148,12 @@ begin
   if(msLANG_ID = 'DE') then
   begin
     Caption := 'Voreinstellungen';
-    sCityFileName := msAlbireoLocalDir + 'CityCoo.txt';
+    sCityFileName := ConvertWinPath(msAlbireoLocalDir + 'CityCoo.txt');
   end
   else
   begin
     Caption := 'Preferences';
-    sCityFileName := msAlbireoLocalDir + 'CityCoo_EN.txt';
+    sCityFileName := ConvertWinPath(msAlbireoLocalDir + 'CityCoo_EN.txt');
   end;
 
   ED__BIRTH_YEAR.Text := IntToStr(gciBirthYear);
@@ -255,8 +256,15 @@ begin
   if(SDIRDLG.Execute and (DirectoryExists(SDIRDLG.FileName))) then
   begin
     sDir := SDIRDLG.FileName;
+
+    {$IFDEF LINUX}
+    if (RightStr(sDir,1) <> '/') then
+      sDir := sDir + '/';
+    {$ENDIF LINUX}
+    {$IFDEF Windows}
     if (RightStr(sDir,1) <> '\') then
       sDir := sDir + '\';
+    {$ENDIF Windows}
 
     ED__GOTO_OUT.Text := sDir;
   end;
@@ -286,7 +294,12 @@ begin
   RB__HOR_1.Checked:=false;
   RB__HOR_2.Checked:=false;
 
+  {$IFDEF LINUX}
+  ED__GOTO_OUT.Text := '~/';
+  {$ENDIF LINUX}
+  {$IFDEF Windows}
   ED__GOTO_OUT.Text := 'C:\';
+  {$ENDIF Windows}
 
   ShowData();
 end;
@@ -294,6 +307,16 @@ end;
 procedure TF__PREFS.ED__REFRESHRATEChange(Sender: TObject);
 begin
 
+end;
+
+procedure TF__PREFS.FormActivate(Sender: TObject);
+begin
+  {$IFDEF LINUX}
+  ED__GOTO_OUT.Text := '~/';
+  {$ENDIF LINUX}
+  {$IFDEF Windows}
+  ED__GOTO_OUT.Text := 'C:\';
+  {$ENDIF Windows}
 end;
 
 procedure TF__PREFS.FormCreate(Sender: TObject);

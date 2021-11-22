@@ -184,6 +184,7 @@ type
     IMG__RECOMMEND: TImage;
     IMG__MW: TImage;
     IMG__SOLSYS: TImage;
+    L__SENSOR_ZOOMED: TLabel;
     L__LIVETABLES: TLabel;
     L__ANGLE_PA: TLabel;
     L__LT_INTERVAL: TLabel;
@@ -640,6 +641,7 @@ type
     SHP__ZL: TShape;
     SHP__ZR: TShape;
     SHP__ZU: TShape;
+    SPL__DS_IMG: TSplitter;
     SPL__TELPROP: TSplitter;
     SPL__DEV: TSplitter;
     GRD__RECOM_P: TStringGrid;
@@ -1225,6 +1227,7 @@ type
     miAOTableSec: Integer;
 
     mrEyeFacH: Real; // Visual horizon view height
+    mfSensorDeg: Real; // Sensor View Angle in Degree
 
     {$IFDEF Darwin}
     mbOnStarmapPaintBusy: Boolean;
@@ -1428,6 +1431,7 @@ type
     procedure IniLiveTableMode();
     procedure OpenADBInfo();
     procedure RefreshApp();
+    function GetSelADev(var iIndex: Integer): TADevice;
 
   public
 
@@ -2629,7 +2633,12 @@ begin
   iRnd := Random(mslDSImgList.Count);
 
   if(iRnd >= 0) and (iRnd < mslDSImgList.Count) then
+  {$IFDEF LINUX}
+    Result := gsAlbireoLocalDir + 'img/InterstellarLib/' + mslDSImgList[iRnd] + '.jpeg';
+  {$ENDIF LINUX}
+  {$IFDEF Windows}
     Result := gsAlbireoLocalDir + 'img\InterstellarLib\' + mslDSImgList[iRnd] + '.jpeg';
+  {$ENDIF Windows}
 
 end;
 
@@ -2681,7 +2690,12 @@ var
 begin
   mslDSImgList.Clear;
 
+  {$IFDEF LINUX}
+  If (SysUtils.FindFirst (gsAlbireoLocalDir + 'img/InterstellarLib/' + '*.jpeg',faAnyFile,Info) = 0) then
+  {$ENDIF LINUX}
+  {$IFDEF Windows}
   If (SysUtils.FindFirst (gsAlbireoLocalDir + 'img\InterstellarLib\' + '*.jpeg',faAnyFile,Info) = 0) then
+  {$ENDIF Windows}
   begin
     repeat
       sFileName := ExtractFileName(Info.Name);
@@ -2864,7 +2878,6 @@ procedure TF__ASTROTOOLBOX.GetRecommendations(Date: TDateTime);
 {22.09.2020/fs
 Show DeepSky recommendations
 
-// sPath := msAlbireoLocalDir + 'img\InterstellarLib\' + (mAObject as TInterstellarObject).sNGC + '.jpeg';
 }
 var
   i, iGCnt, iFound, iRA_Comp, iRA_Object: Integer;
@@ -3040,8 +3053,15 @@ begin
         begin
           iFound := mslDSImgList.IndexOf((molAOList[i] as TInterstellarObject).sNGC);
           if(iFound > -1) then
+          {$IFDEF LINUX}
+            mslRecommendedPics.AddObject(gsAlbireoLocalDir + 'img/InterstellarLib/' + mslDSImgList[iFound] + '.jpeg',
+              (molAOList[i] as TInterstellarObject));
+          {$ENDIF LINUX}
+          {$IFDEF Windows}
             mslRecommendedPics.AddObject(gsAlbireoLocalDir + 'img\InterstellarLib\' + mslDSImgList[iFound] + '.jpeg',
               (molAOList[i] as TInterstellarObject));
+          {$ENDIF Windows}
+
         end;
       end;
     end;
@@ -3926,21 +3946,21 @@ begin
     if(miGLat_DEG < -10) then // Southern hemisphere
     begin
       iVisMonth := 13 - GetMonth(dtDT);
-      sFileName := gsAlbireoLocalDir + csLandscapeRelDir + 'Landscape_' + IntToStr(miLandscapeNo) + '_' + msHorDir + '_' + IntToStr(iVisMonth) + '_DAY.png';
+      sFileName := ConvertWinPath(gsAlbireoLocalDir + csLandscapeRelDir + 'Landscape_' + IntToStr(miLandscapeNo) + '_' + msHorDir + '_' + IntToStr(iVisMonth) + '_DAY.png');
       if(not FileExists(sFileName)) then
-        sFileName := gsAlbireoLocalDir + csLandscapeRelDir + 'Landscape_' + IntToStr(miLandscapeNo) + '_' + msHorDir + '_DAY.png'
+        sFileName := ConvertWinPath(gsAlbireoLocalDir + csLandscapeRelDir + 'Landscape_' + IntToStr(miLandscapeNo) + '_' + msHorDir + '_DAY.png')
     end
     else if(abs(miGLat_DEG) <= 10) then
     begin
       iVisMonth := 0; // Near equator - no season dependence of horizon image
-      sFileName := gsAlbireoLocalDir + csLandscapeRelDir + 'Landscape_' + IntToStr(miLandscapeNo) + '_' + msHorDir + '_DAY.png';
+      sFileName := ConvertWinPath(gsAlbireoLocalDir + csLandscapeRelDir + 'Landscape_' + IntToStr(miLandscapeNo) + '_' + msHorDir + '_DAY.png');
     end
     else
     begin
       iVisMonth := GetMonth(dtDT); // Northern hemisphere
-      sFileName := gsAlbireoLocalDir + csLandscapeRelDir + 'Landscape_' + IntToStr(miLandscapeNo) + '_' + msHorDir + '_' + IntToStr(iVisMonth) + '_DAY.png';
+      sFileName := ConvertWinPath(gsAlbireoLocalDir + csLandscapeRelDir + 'Landscape_' + IntToStr(miLandscapeNo) + '_' + msHorDir + '_' + IntToStr(iVisMonth) + '_DAY.png');
       if(not FileExists(sFileName)) then
-        sFileName := gsAlbireoLocalDir + csLandscapeRelDir + 'Landscape_' + IntToStr(miLandscapeNo) + '_' + msHorDir + '_DAY.png'
+        sFileName := ConvertWinPath(gsAlbireoLocalDir + csLandscapeRelDir + 'Landscape_' + IntToStr(miLandscapeNo) + '_' + msHorDir + '_DAY.png')
     end;
 
     Dec(iTryCnt);
@@ -4045,6 +4065,7 @@ begin
 
   F__ASTROCALC.Show; //ShowModal;
 
+  // This code  until 'end' could be failed because we have a non-modal form!
   if(F__ASTROCALC.CBX__CAMERA_STD.Checked) and (ADevice <> nil) then
   begin
     if((not bCameraCheckedIni)
@@ -4054,6 +4075,7 @@ begin
     begin
       ADevice.sCManu := F__ASTROCALC.CB__PXC_MANUF.Text;
       ADevice.sCModel := F__ASTROCALC.CB__PXC_MODEL.Text;
+
       mbADEVChanged:=true;
     end;
   end;
@@ -4063,6 +4085,8 @@ begin
   begin
     ADevice.sCManu := '';
     ADevice.sCModel := '';
+    ADevice.fSensorDeg := 0;
+
     mbADEVChanged:=true;
   end;
 
@@ -4935,6 +4959,17 @@ begin
   P__SEARCHALL.Visible:=true;
 
   miTimePlayMode := 0;
+
+  if(Assigned(F__ASTROCALC)) then
+  begin
+    mfSensorDeg := F__ASTROCALC.mfSensorDeg;
+
+    if(mfSensorDeg > 0) then
+      L__SENSOR_ZOOMED.Caption:='Sensor: ' + FloatToStrF(mfSensorDeg,ffFixed,8,2)
+    else
+      L__SENSOR_ZOOMED.Caption:='Sensor: ';
+
+  end;
 
   CleanStartOfStarmap();
 end;
@@ -5844,6 +5879,18 @@ begin
 
 end;
 
+function TF__ASTROTOOLBOX.GetSelADev(var iIndex: Integer): TADevice;
+var
+  sName: string;
+begin
+  Result := nil;
+  sName := Trim(CB__ADEV_NAME.Text);
+  iIndex := -1;
+  if(sName = '') then exit;
+
+  Result := GetADev(sName, iIndex);
+end;
+
 procedure TF__ASTROTOOLBOX.ModADev();
 {2013/04/16 / fs
 Modify Astronomical Device
@@ -6083,6 +6130,7 @@ begin
   if(Button = mbLeft) then
     ShowAOVis(iIndex);
 
+  ShowSolSys();
 end;
 
 procedure TF__ASTROTOOLBOX.ShowLatLong();
@@ -8064,7 +8112,6 @@ begin
         (molAOList[i] as TAObject).SHP.Width:=12;
       end;
 
-      //if(mbPlanetImage) and (Uppercase((molAOList[i] as TPlanet).sPlanetType) = 'P') and FileExists(ConvertWinPath('img\' + (molAOList[i] as TPlanet).sName_EN + '.png')) then
       if(mbPlanetImage) and (Uppercase((molAOList[i] as TPlanet).sPlanetType) = 'P') and ((molAOList[i] as TPlanet).bHasImage) then
       begin
          (molAOList[i] as TPlanet).IMG.PopupMenu := PMENU__AOBJECT;
@@ -13187,6 +13234,8 @@ begin
   miStrmViewFlipPeriod := 0; // Viewflip stopped
 
   mrEyeFacH := crEyeFacH_70;
+  mfSensorDeg := 0;
+
 end;
 
 procedure TF__ASTROTOOLBOX.FormDestroy(Sender: TObject);
@@ -15598,21 +15647,21 @@ end;
 
 procedure TF__ASTROTOOLBOX.IniADev();
 begin
-CB__ADEV_NAME.Text  := '';
-ED__ADEV_DESCR.Text := '';
-ED__ADEV_MANU.Text  := '';
-ED__ADEV_ARTNO.Text := '';
-ED__ADEV_FW.Text    := '';
-ED__ADEV_APT.Text   := '';
-ED__MAG.Text := '';
-CB__ADEV_TYPE.Text := '';
+  CB__ADEV_NAME.Text  := '';
+  ED__ADEV_DESCR.Text := '';
+  ED__ADEV_MANU.Text  := '';
+  ED__ADEV_ARTNO.Text := '';
+  ED__ADEV_FW.Text    := '';
+  ED__ADEV_APT.Text   := '';
+  ED__MAG.Text := '';
+  CB__ADEV_TYPE.Text := '';
 
-IMG__ADEV_PHOTO.Picture := nil;
+  IMG__ADEV_PHOTO.Picture := nil;
 
-ED__ADEV_MANU.SetFocus;
-CB__ADEV_NAME.Enabled:=false;
+  ED__ADEV_MANU.SetFocus;
+  CB__ADEV_NAME.Enabled:=false;
 
-CBX__TELESCOPE_DEF.Checked:=false;
+  CBX__TELESCOPE_DEF.Checked:=false;
 
 end;
 
@@ -16536,6 +16585,7 @@ begin
       P__KOCHAB.Visible:=true;
       P__AOTYPE.Visible := false;
       TIMER__GENMAP.Enabled:=mbTimePlay;
+
     end;
     else
     begin
