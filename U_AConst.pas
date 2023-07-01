@@ -32,7 +32,7 @@ uses
 const
   gcsVersion = '1';
   gcsSubVersion = '4'; // New Features
-  gcsBuildVersion = '2'; // Subfeatures / changes
+  gcsBuildVersion = '3'; // Subfeatures / changes
   gcsErrVersion = '1'; // Bugfixes / Hotfixes without any new features
 
   gcsCommVersion = 'OSS';

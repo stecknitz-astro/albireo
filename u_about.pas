@@ -48,10 +48,12 @@ type
     L__VERSION_TITLE2: TLabel;
     L__WEB: TLabel;
     L__WEB_TITLE: TLabel;
+    P__DONATE: TPanel;
     procedure FormActivate(Sender: TObject);
     procedure L__DOWNLOADClick(Sender: TObject);
     procedure L__SUPPORTClick(Sender: TObject);
     procedure L__WEBClick(Sender: TObject);
+    procedure P__DONATEClick(Sender: TObject);
   private
     { private declarations }
   public
@@ -100,6 +102,11 @@ end;
 procedure TF__ABOUT.L__WEBClick(Sender: TObject);
 begin
   ExecOpen(gcsWebInfo);
+end;
+
+procedure TF__ABOUT.P__DONATEClick(Sender: TObject);
+begin
+  ExecOpen('https://www.tipeeestream.com/stecknitzastro/donation');
 end;
 
 end.

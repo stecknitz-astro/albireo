@@ -1,7 +1,7 @@
 object F__HOR_CUST: TF__HOR_CUST
-  Left = -1096
+  Left = 416
   Height = 786
-  Top = 215
+  Top = 255
   Width = 893
   Caption = 'Benutzerdefinierte Horizonte'
   ClientHeight = 786

@@ -30,10 +30,10 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms, tachartlazaruspkg, lazcontrols, U_ALib,
   //turbopoweripro,
-  U_AstroToolBox, U_Prefs, U_AConst, U_TimeStat, U_Translation, U_AOVis,
-  U_Devices, U_About, U_SetPrefsInfo, U_PictureViewer, U_AlbireoLib, U_DSGVO,
-  u_astrocalc, U_STARTUP, U_ABase, U_MShower, U_ADM, U_NewCam,
-  U_AstroVoids, U_ECLIPSE_EXPL, U_SelLang, U_StrmDlg, U_HorCust, u_adbinfo;
+  U_Prefs, U_AConst, U_TimeStat, U_Translation, U_AOVis, U_Devices, U_About,
+  U_SetPrefsInfo, U_PictureViewer, U_AlbireoLib, U_DSGVO, u_astrocalc,
+  U_STARTUP, U_ABase, U_MShower, U_ADM, U_NewCam, U_AstroVoids, U_ECLIPSE_EXPL,
+  U_SelLang, U_StrmDlg, U_HorCust, u_adbinfo, U_AstroToolBox;
 
 {$R *.res}
 
@@ -41,7 +41,7 @@ begin
   Application.Title:='Albireo - Astronomy Toolbox';
   Application.Initialize;
   Application.CreateForm(TF__ASTROTOOLBOX, F__ASTROTOOLBOX);
-  Application.CreateForm(TF__ADBINFO, F__ADBINFO);
+  //Application.CreateForm(TF__ADBINFO, F__ADBINFO);
   //Application.CreateForm(TF__AOVIS, F__AOVIS);
   Application.Run;
 end.

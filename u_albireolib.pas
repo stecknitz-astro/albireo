@@ -88,13 +88,13 @@ function GetSingleSpecType(sSpecType: string; iMStarIndex: Integer): string;
 function GetSpecIDData(sSingleSpecType: string; var iTMin: Integer; var iTMax: Integer; var iSTemp: Integer): string;
 
 function GetColorFromSpecType(sSpecType: string): TColor;
-function GetColorFromSpecTypeExt(sSpecType: string; iMStarIndex: Integer;
+function GetColorFromSpecTypeExt(Star: TStar; iMStarIndex: Integer;
   var iSTemp: Integer; var sMKKTypeDE: string; var sMKKTypeEN: string; var sSpecID: string): TColor;
 
 function GetSpecDX(sSpecType: string; iIndex: Integer; iXMin, iXMax: Integer): Integer;
 function GetHR_XProz_FromSpecType(sSpecType: string): Integer;
 function GetHR_YProz_FromSpecType(sSpecType: string): Integer;
-function GetMKKFromSpecType(sSpecType: string; iMStarIndex: Integer; var sMKKTypeDE: string; var sMKKTypeEN: string): Boolean;
+function GetMKKFromSpecType(Star: TStar; iMStarIndex: Integer; var sMKKTypeDE: string; var sMKKTypeEN: string): Boolean;
 function GetLClassCore(sSpecType, sSym: string): string;
 function GetLClass(sSpecType: string): string;
 function GetLClass_MS(sSpecType: string): string;
@@ -1246,12 +1246,14 @@ begin
 
 end;
 
-function GetMKKFromSpecType(sSpecType: string; iMStarIndex: Integer; var sMKKTypeDE: string; var sMKKTypeEN: string): Boolean;
+function GetMKKFromSpecType(Star: TStar; iMStarIndex: Integer; var sMKKTypeDE: string; var sMKKTypeEN: string): Boolean;
 var
   sMultiStarDE, sMultiStarEN: string;
   iCountMStar: Integer;
+  sSpecType: string;
 begin
   Result := false;
+  sSpecType := Star.sSpType;
 
   sMKKTypeDE := '';
   sMKKTypeEN := '';
@@ -1279,6 +1281,14 @@ begin
     end;
   end;
 
+  // Re-Check for double star criteria:
+  if(iCountMStar = 0) and (Star.rMAttend > 0)then
+  begin
+    sMultiStarEN := 'Double Star';
+    sMultiStarDE := 'Doppelstern';
+  end;
+
+  (*
   // if last symbol is '+':
   case iCountMStar of
     0:
@@ -1294,6 +1304,8 @@ begin
       sMultiStarEN := 'Multi Star'; sMultiStarDE := 'Mehrfachstern';
     end;
   end; // case
+  end;
+  *)
 
   sSpecType := GetSingleSpecType(sSpecType,iMStarIndex);
 
@@ -1593,15 +1605,18 @@ begin
 
 end;
 
-function GetColorFromSpecTypeExt(sSpecType: string; iMStarIndex: Integer; var iSTemp: Integer;
+function GetColorFromSpecTypeExt(Star: TStar; iMStarIndex: Integer; var iSTemp: Integer;
   var sMKKTypeDE: string; var sMKKTypeEN: string; var sSpecID: string): TColor;
 var
   iTMin, iTMax: Integer;
+  sSpecType: string;
 begin
   sMKKTypeDE := '';
   sMKKTypeEN := '';
   sSpecID := '';
   iTMin:=0; iTMax:=0; iSTemp:=0;
+
+  sSpecType := Star.sSpType;
 
   // Extract the correct spectral part if a multistar notation is used
   sSpecType := GetSingleSpecType(sSpecType,iMStarIndex);
@@ -1611,7 +1626,7 @@ begin
   if(Length(sSpecType) = 0) then
     exit;
 
-  GetMKKFromSpecType(sSpecType,0,sMKKTypeDE,sMKKTypeEN);
+  GetMKKFromSpecType(Star,iMStarIndex,sMKKTypeDE,sMKKTypeEN);
   sSpecID := GetSpecIDData(sSpecType,iTMin,iTMax,iSTemp);
 
 end;
@@ -2958,7 +2973,7 @@ end;
         Star.iAOIndex := olAOList.Count; // Next Index
 
         iSTemp := -1;
-        Star.Color := GetColorFromSpecTypeExt(sSPType,0,iSTemp,sMKKTypeDE,sMKKTypeEN,sSpecID);
+        Star.Color := GetColorFromSpecTypeExt(Star,Star.iAOIndex,iSTemp,sMKKTypeDE,sMKKTypeEN,sSpecID);
         ///Star.iSTemp := iSTemp;
         //Star.sMKKTypeDE := sMKKTypeDE;
         //Star.sMKKTypeEN := sMKKTypeEN;

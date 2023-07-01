@@ -75,8 +75,10 @@ uses
   function HourToHHMMStr(rHour: Real): string;
   procedure DegToDEG_MM_SS(fAngle: Real; var iDEG: SmallInt; var iMM: SmallInt; var rSS: Real; IsCircleAngle: Boolean);
   procedure DegToDEG_MM_SS2(fAngle: Real; var iDEG: SmallInt; var iMM: SmallInt; var rSS: Real);
+  function DEGToHHMMStr(rDeg: Real; bIncludeSS: Boolean): string;
   function HH_MM_SSToDeg(iHH, iMM: Word; rSS: Real): Real;
   function DEG_MM_SSToDeg(iDEG, iMM: SmallInt; rSS: Real): Real;
+  procedure SizeVsDistToDEG(fDist, fSize: Real; var fAngleDeg: Real; var iDEG: SmallInt; var iMM: SmallInt; var iSS: SmallInt; var iMS: SmallInt);
   function DayOfYear(dtDate: TDateTime): Integer;
   function DaysOfMonth(dtDate: TDateTime): Word;
   function GetDST(dtDate: TDateTime; sDST: string; iDST_DIFF: Integer): Integer;
@@ -136,6 +138,10 @@ uses
   procedure CalcAZCoo(iDEC_DEG, iDEC_MIN: SmallInt; rDEC_SS: Real; iHA_HH, iHA_MIN, iHA_SS: SmallInt;
     rSin_fGLat, rCos_fGLat: Real;
     var fAz: Real; var fHgt: Real);
+
+  function GetSunHgt(dtWT: TDateTime; iDST_HH,iUTC_HH,iGLng_DEG,iGLng_MIN: Integer;
+    rSin_fGLat, rCos_fGLat: Real): Real;
+
   procedure CalcMoonOfMonth(dtDate: TDateTime;
     var iFullMoon: Word;
     var iNewMoon: Word;
@@ -224,8 +230,27 @@ uses
 
   function Get_arcsec(fPlanetRatio,fDist_AU: Real): Real;
   function GetSensorViewAngleDeg(fPixSize_mym,fMegaPix,fFocalLength_mm: Real): Real;
+  function StartsWith(sText,sStart: string): Boolean;
+
 
 implementation
+
+function StartsWith(sText,sStart: string): Boolean;
+var
+  iLen: Integer;
+begin
+  Result := false;
+  iLen := Length(sStart);
+  if(sText = '') or (sStart = '') or (Length(sText) < iLen) then
+    exit;
+
+  iLen := Length(sStart);
+  sText := Uppercase(sText);
+  sStart := Uppercase(sStart);
+
+  Result := (LeftStr(sText,iLen) = sStart);
+
+end;
 
 function GetSensorViewAngleDeg(fPixSize_mym,fMegaPix,fFocalLength_mm: Real): Real;
 begin
@@ -1133,8 +1158,8 @@ begin
   //rLAngle := rLAngle + Inclination*0.9; // Linear approximation term
   //rLAngle := rLAngle + Inclination*5; // Linear approximation term
 
-  if(sType = 'C') and (Inclination > 10) then
-    rLAngle := rLAngle + 52; // inclination correction term
+  //if(sType = 'C') and (Inclination > 10) then
+  //  rLAngle := rLAngle + 52; // inclination correction term
 
   if(rLAngle > 360) then rLAngle := rLAngle - 360;
 
@@ -1159,9 +1184,6 @@ begin
     else
       iSize := iSize0 - (iSize0 - Trunc(50*rSizeProz));
 
-    //if(iSize < 16) then
-    //  ShowMessage('Linesize: ' + IntToStr(iSize) + ', Planet: ' + sLabel);
-
     if(Image <> nil) then
     begin
       Image.Width := iSize;
@@ -1171,7 +1193,7 @@ begin
 
   if(iSize > 2) then
   begin
-    While (sAngle<eAngle) Do
+    While (sAngle < eAngle) Do
     Begin
       GetPos(sAngle,x1,y1);
       Dest.LineTo(x1,y1);
@@ -1251,7 +1273,43 @@ End;
 
 function HourToHHMMStr(rHour: Real): string;
 begin
-  Result := format('%.2d',[Trunc(rHour)]) + ':' + format('%.2d',[Round((rHour-Trunc(rHour))*60)])
+  //Result := format('%.2d',[Trunc(rHour)]) + ':' + format('%.2d',[Round((rHour-Trunc(rHour))*60)])
+  Result := format('%.2d',[Trunc(rHour)]) + ':' + format('%.2d',[Trunc((rHour-Trunc(rHour))*60)])
+end;
+
+function DEGToHHMMStr(rDeg: Real; bIncludeSS: Boolean): string;
+var
+  iDEG, iMM, iSS: Integer;
+  rMM, rSS: Real;
+  bIsPos: Boolean;
+  sSign: string;
+begin
+  bIsPos := (rDeg >= 0);
+
+  if(bIsPos) then
+    sSign := ''
+  else
+  begin
+    rDeg := abs(rDeg);
+    sSign := '-';
+  end;
+
+  rMM := 60.0*(rDeg - Trunc(rDeg));
+
+  iDEG := Trunc(rDeg);
+  iMM := Trunc(rMM);
+
+  if(bIncludeSS) then
+  begin
+    rSS := 60.0*(rMM - Trunc(rMM));
+    iSS := Trunc(rSS);
+    Result := format('%.2d',[iDEG]) + '°' + format('%.2d',[iMM]) + '''' + format('%.2d',[iSS]) + '''''';
+  end
+  else
+    Result := format('%.2d',[iDEG]) + '°' + format('%.2d',[iMM]) + '''';
+
+  Result := sSign + Result;
+
 end;
 
 function DaysOfMonth(dtDate: TDateTime): Word;
@@ -1279,6 +1337,52 @@ begin
       Result := 'USA';
   end;
 
+end;
+
+function GetSunHgt(dtWT: TDateTime; iDST_HH,iUTC_HH,iGLng_DEG,iGLng_MIN: Integer;
+    rSin_fGLat, rCos_fGLat: Real): Real;
+var
+  iRA_HH, iRA_MM, iRA_SS: Word;
+  iDEC_DEG: SmallInt;
+  iDEC_MM, iDEC_SS: SmallInt;
+  iHA_HH,iHA_MM,iHA_SS,iHA_MS: Word;
+  rAz, rHgt: Real;
+  dtST, dtRA, dtHA: TDateTime;
+  dJulDat: Double;
+  rRA_SS: Real;
+  rDEC_SS: Real;
+  rLambdaSun, rMSun: Real;
+begin
+  rLambdaSun := 0;
+  rMSun := 0;
+
+  rAz:=0; rHgt:=0;
+
+  iRA_HH:=0; iRA_MM:=0; iRA_SS:=0;
+  iDEC_DEG:=0; iDEC_MM:=0; iDEC_SS:=0;
+  iHA_HH:=0;iHA_MM:=0;iHA_SS:=0;iHA_MS:=0;
+
+  dJulDat := 0;
+
+  dtST := GetSIDTime(dtWT,iDST_HH,iUTC_HH,iGLng_DEG,iGLng_MIN,dJulDat);
+
+  GetSunCoo(dtWT,
+    iDST_HH,iUTC_HH, rLambdaSun, rMSun,
+    iRA_HH, iRA_MM, rRA_SS,
+    iDEC_DEG, iDEC_MM, rDEC_SS);
+
+  iRA_SS := Trunc(rRA_SS);
+  iDEC_SS := Trunc(rDEC_SS);
+
+  dtRA := EncodeTime(iRA_HH, iRA_MM, iRA_SS, Trunc(1000*(rRA_SS-iRA_SS)));
+  dtHA := GetHA(dtST,dtRA);
+
+  DeCodeTime(dtHA,iHA_HH, iHA_MM, iHA_SS, iHA_MS);
+  CalcAZCoo(iDEC_DEG,iDEC_MM,iDEC_SS,iHA_HH,iHA_MM,iHA_SS,
+    rSin_fGLat, rCos_fGLat,
+    rAz,rHgt);
+
+  Result := rHgt;
 end;
 
 function CalcMoonRiseAndMoonSet(
@@ -2886,6 +2990,19 @@ begin
     iMM := iSign*iMM
   else
     rSS := iSign*rSS;
+
+end;
+
+procedure SizeVsDistToDEG(fDist, fSize: Real; var fAngleDeg: Real; var iDEG: SmallInt; var iMM: SmallInt; var iSS: SmallInt; var iMS: SmallInt);
+var
+  rSS: Real;
+begin
+  fAngleDeg := arctan(fSize/fDist);
+  fAngleDeg := fAngleDeg * 180.0/Pi;
+
+  DegToDEG_MM_SS2(fAngleDeg,iDEG,iMM,rSS);
+  iSS := Trunc(rSS);
+  iMS := Trunc(1000*(rSS-iSS));
 
 end;
 

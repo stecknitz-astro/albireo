@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="11"/>
+    <Version Value="12"/>
     <PathDelim Value="\"/>
     <General>
-      <MainUnit Value="0"/>
+      <Flags>
+        <CompatibilityMode Value="True"/>
+      </Flags>
       <Title Value="Albireo - Astronomy Toolbox"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
@@ -20,14 +22,110 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="1"/>
-      <MinorVersionNr Value="3"/>
+      <MinorVersionNr Value="4"/>
+      <RevisionNr Value="3"/>
       <BuildNr Value="1"/>
       <Language Value="0407"/>
       <Attributes pvaPatched="True"/>
-      <StringTable Comments="Astronomy Software" CompanyName="Frank Szemkus" InternalName="Albireo" LegalCopyright="(c) Frank Szemkus" LegalTrademarks="Albireo Toobox Corp." OriginalFilename="Albireo.exe" ProductName="Albireo" ProductVersion="1.3"/>
+      <StringTable Comments="Astronomy Software" CompanyName="Frank Szemkus" InternalName="Albireo" LegalCopyright="(c) Frank Szemkus" LegalTrademarks="Albireo Toobox Corp." OriginalFilename="Albireo.exe" ProductName="Albireo" ProductVersion="1.4"/>
     </VersionInfo>
-    <BuildModes Count="1" Active="Default">
+    <BuildModes Count="3" Active="Prod">
       <Item1 Name="Default" Default="True"/>
+      <Item2 Name="Debug">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value="..\executable\Albireo"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir)"/>
+            <UnitOutputDirectory Value="..\lib\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <CodeGeneration>
+            <Checks>
+              <IOChecks Value="True"/>
+              <RangeChecks Value="True"/>
+              <OverflowChecks Value="True"/>
+              <StackChecks Value="True"/>
+            </Checks>
+            <VerifyObjMethodCallValidity Value="True"/>
+            <Optimizations>
+              <OptimizationLevel Value="3"/>
+            </Optimizations>
+            <SmallerCode Value="True"/>
+          </CodeGeneration>
+          <Linking>
+            <LinkSmart Value="True"/>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
+          </Linking>
+          <Other>
+            <Verbosity>
+              <ShoLineNum Value="True"/>
+            </Verbosity>
+            <CompilerMessages>
+              <IgnoredMessages idx5024="True"/>
+            </CompilerMessages>
+            <CustomOptions Value="-dLAZARUS"/>
+            <OtherDefines Count="1">
+              <Define0 Value="LAZARUS"/>
+            </OtherDefines>
+          </Other>
+        </CompilerOptions>
+      </Item2>
+      <Item3 Name="Prod">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value="..\executable\Albireo"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir)"/>
+            <UnitOutputDirectory Value="..\lib\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <CodeGeneration>
+            <Checks>
+              <IOChecks Value="True"/>
+              <RangeChecks Value="True"/>
+              <OverflowChecks Value="True"/>
+              <StackChecks Value="True"/>
+            </Checks>
+            <Optimizations>
+              <OptimizationLevel Value="3"/>
+            </Optimizations>
+            <SmallerCode Value="True"/>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <DebugInfoType Value="dsDwarf3"/>
+              <UseLineInfoUnit Value="False"/>
+            </Debugging>
+            <LinkSmart Value="True"/>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
+          </Linking>
+          <Other>
+            <Verbosity>
+              <ShoLineNum Value="True"/>
+            </Verbosity>
+            <CompilerMessages>
+              <IgnoredMessages idx5024="True"/>
+            </CompilerMessages>
+            <CustomOptions Value="-dLAZARUS"/>
+            <OtherDefines Count="1">
+              <Define0 Value="LAZARUS"/>
+            </OtherDefines>
+          </Other>
+        </CompilerOptions>
+      </Item3>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
@@ -49,12 +147,13 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="60">
+    <Units Count="63">
       <Unit0>
         <Filename Value="AstroToolBox.lpr"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="14"/>
-        <CursorPos X="18" Y="31"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="3"/>
+        <CursorPos X="30" Y="32"/>
         <UsageCount Value="204"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -64,16 +163,17 @@
         <ComponentName Value="F__ASTROTOOLBOX"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="6114"/>
-        <CursorPos X="16" Y="6133"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="1727"/>
+        <CursorPos Y="1740"/>
+        <ComponentState Value="2"/>
         <UsageCount Value="204"/>
         <Bookmarks Count="5">
-          <Item0 X="17" Y="7764" ID="4"/>
-          <Item1 X="5" Y="12577" ID="8"/>
-          <Item2 X="6" Y="7114" ID="5"/>
-          <Item3 X="37" Y="8123" ID="2"/>
-          <Item4 Y="16588" ID="1"/>
+          <Item0 X="17" Y="7803" ID="4"/>
+          <Item1 X="5" Y="12597" ID="8"/>
+          <Item2 X="6" Y="7149" ID="5"/>
+          <Item3 X="6" Y="14478" ID="1"/>
+          <Item4 X="15" Y="7498" ID="2"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -84,31 +184,25 @@
         <ComponentName Value="F__PREFS"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="4"/>
-        <TopLine Value="140"/>
-        <CursorPos X="23" Y="146"/>
+        <EditorIndex Value="9"/>
+        <CursorPos X="54" Y="145"/>
         <UsageCount Value="200"/>
-        <Bookmarks Count="1">
-          <Item0 Y="260"/>
-        </Bookmarks>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="U_ALib.pas"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="214"/>
-        <CursorPos X="150" Y="232"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="339"/>
+        <CursorPos X="30" Y="203"/>
         <UsageCount Value="132"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="U_AConst.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="12"/>
-        <TopLine Value="13"/>
-        <CursorPos X="21" Y="36"/>
+        <EditorIndex Value="13"/>
+        <TopLine Value="12"/>
+        <CursorPos X="26" Y="21"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -117,7 +211,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="573"/>
         <CursorPos X="131" Y="577"/>
-        <UsageCount Value="191"/>
+        <UsageCount Value="180"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit5>
       <Unit6>
@@ -126,16 +220,19 @@
         <ComponentName Value="F__TIMESTAT"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="22"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="1483"/>
+        <CursorPos X="20" Y="1491"/>
         <UsageCount Value="205"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit6>
       <Unit7>
         <Filename Value="U_Translation.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="6"/>
-        <TopLine Value="527"/>
-        <CursorPos X="43" Y="541"/>
+        <EditorIndex Value="10"/>
+        <TopLine Value="11"/>
+        <CursorPos X="11" Y="34"/>
         <UsageCount Value="203"/>
         <Loaded Value="True"/>
       </Unit7>
@@ -146,22 +243,21 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="U_AOVis"/>
-        <EditorIndex Value="14"/>
-        <TopLine Value="458"/>
-        <CursorPos X="37" Y="473"/>
+        <EditorIndex Value="15"/>
+        <TopLine Value="1790"/>
+        <CursorPos X="3" Y="1741"/>
         <UsageCount Value="202"/>
         <Bookmarks Count="1">
           <Item0 X="42" Y="842" ID="9"/>
         </Bookmarks>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit8>
       <Unit9>
         <Filename Value="AO-EP.dat"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="44"/>
         <CursorPos X="74" Y="55"/>
-        <UsageCount Value="191"/>
+        <UsageCount Value="180"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit9>
       <Unit10>
@@ -178,7 +274,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="89"/>
         <CursorPos X="11" Y="10"/>
-        <UsageCount Value="191"/>
+        <UsageCount Value="180"/>
       </Unit11>
       <Unit12>
         <Filename Value="u_devices.pas"/>
@@ -195,21 +291,21 @@
         <Filename Value="Devices.dat"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="6" Y="2"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit13>
       <Unit14>
         <Filename Value="Userdata\Pictures.dat"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="74" Y="6"/>
-        <UsageCount Value="92"/>
+        <UsageCount Value="81"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit14>
       <Unit15>
         <Filename Value="DBChanges.txt"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="11" Y="8"/>
-        <UsageCount Value="191"/>
+        <UsageCount Value="180"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit15>
       <Unit16>
@@ -231,17 +327,18 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="U_About"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="9"/>
-        <CursorPos X="55" Y="15"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="13"/>
+        <CursorPos X="27" Y="13"/>
         <UsageCount Value="201"/>
+        <Loaded Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="C:\lazarus\lcl\interfacebase.pp"/>
         <UnitName Value="InterfaceBase"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="56" Y="30"/>
-        <UsageCount Value="91"/>
+        <UsageCount Value="80"/>
       </Unit18>
       <Unit19>
         <Filename Value="u_setprefsinfo.pas"/>
@@ -284,9 +381,9 @@
         <Filename Value="u_albireolib.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="U_AlbireoLib"/>
-        <EditorIndex Value="13"/>
-        <TopLine Value="300"/>
-        <CursorPos X="4" Y="326"/>
+        <EditorIndex Value="14"/>
+        <TopLine Value="1830"/>
+        <CursorPos X="19" Y="1844"/>
         <UsageCount Value="204"/>
         <Bookmarks Count="1">
           <Item0 X="20" Y="1251" ID="3"/>
@@ -309,9 +406,12 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="U_DSGVO"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="21"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="16"/>
+        <CursorPos X="40" Y="22"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit24>
       <Unit25>
         <Filename Value="u_astrocalc.pas"/>
@@ -319,12 +419,14 @@
         <ComponentName Value="F__ASTROCALC"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="15"/>
-        <TopLine Value="389"/>
-        <CursorPos X="16" Y="405"/>
+        <EditorIndex Value="16"/>
+        <TopLine Value="1642"/>
+        <CursorPos X="81" Y="1659"/>
         <UsageCount Value="200"/>
+        <Bookmarks Count="1">
+          <Item0 X="10" Y="1622"/>
+        </Bookmarks>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit25>
       <Unit26>
         <Filename Value="u_startup.pas"/>
@@ -333,17 +435,17 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="U_STARTUP"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="32"/>
-        <CursorPos X="15" Y="35"/>
+        <EditorIndex Value="6"/>
+        <CursorPos X="26" Y="8"/>
         <UsageCount Value="201"/>
+        <Loaded Value="True"/>
       </Unit26>
       <Unit27>
         <Filename Value="u_abase.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="U_ABase"/>
-        <EditorIndex Value="16"/>
-        <TopLine Value="52"/>
+        <EditorIndex Value="17"/>
+        <TopLine Value="41"/>
         <CursorPos X="3" Y="78"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -379,7 +481,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="6"/>
         <CursorPos X="29" Y="12"/>
-        <UsageCount Value="190"/>
+        <UsageCount Value="179"/>
       </Unit30>
       <Unit31>
         <Filename Value="u_newcam.pas"/>
@@ -440,11 +542,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="U_StrmDlg"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="12"/>
         <CursorPos X="2" Y="3"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit36>
       <Unit37>
         <Filename Value="u_horcust.pas"/>
@@ -453,11 +554,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="U_HorCust"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <CursorPos X="2" Y="3"/>
         <UsageCount Value="208"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit37>
       <Unit38>
         <Filename Value="C:\lazarus\fpc\3.2.0\source\packages\rtl-objpas\src\inc\strutils.pp"/>
@@ -465,7 +565,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="30"/>
         <CursorPos X="10" Y="48"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit38>
       <Unit39>
         <Filename Value="C:\lazarus\components\tachart\taseries.pas"/>
@@ -473,289 +573,312 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="307"/>
         <CursorPos X="14" Y="328"/>
-        <UsageCount Value="64"/>
+        <UsageCount Value="53"/>
       </Unit39>
       <Unit40>
         <Filename Value="u_reglib.pas"/>
         <UnitName Value="U_RegLib"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="13" Y="10"/>
-        <UsageCount Value="189"/>
+        <UsageCount Value="178"/>
       </Unit40>
       <Unit41>
-        <Filename Value="C:\lazarus\lcl\grids.pas"/>
-        <UnitName Value="Grids"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="9925"/>
-        <CursorPos Y="9942"/>
-        <UsageCount Value="1"/>
-      </Unit41>
-      <Unit42>
         <Filename Value="COPYING.txt"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="20"/>
         <CursorPos X="67" Y="16"/>
-        <UsageCount Value="169"/>
+        <UsageCount Value="202"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit41>
+      <Unit42>
+        <Filename Value="LICENSE.txt"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="18"/>
+        <CursorPos Y="675"/>
+        <UsageCount Value="202"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit42>
       <Unit43>
-        <Filename Value="LICENSE.txt"/>
-        <IsPartOfProject Value="True"/>
-        <EditorIndex Value="9"/>
-        <TopLine Value="642"/>
-        <CursorPos Y="675"/>
-        <UsageCount Value="169"/>
-        <Loaded Value="True"/>
-        <DefaultSyntaxHighlighter Value="None"/>
-      </Unit43>
-      <Unit44>
-        <Filename Value="..\source-old-commercialunits\u_reglib.pas"/>
+        <Filename Value="Z:\source-old-commercialunits\u_reglib.pas"/>
         <UnitName Value="U_RegLib"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2"/>
         <CursorPos X="17" Y="21"/>
-        <UsageCount Value="3"/>
-      </Unit44>
-      <Unit45>
+        <UsageCount Value="2"/>
+      </Unit43>
+      <Unit44>
         <Filename Value="ReadMe.txt"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="8"/>
-        <CursorPos X="80" Y="3"/>
-        <UsageCount Value="167"/>
+        <EditorIndex Value="19"/>
+        <CursorPos X="138" Y="24"/>
+        <UsageCount Value="201"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="None"/>
-      </Unit45>
-      <Unit46>
-        <Filename Value="C:\lazarus\fpc\3.2.0\source\rtl\objpas\sysutils\osutilsh.inc"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="30"/>
-        <CursorPos X="20" Y="47"/>
-        <UsageCount Value="1"/>
-      </Unit46>
-      <Unit47>
-        <Filename Value="C:\lazarus\fpc\3.2.0\source\rtl\win\sysutils.pp"/>
-        <UnitName Value="SysUtils"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="1425"/>
-        <CursorPos X="3" Y="1434"/>
-        <UsageCount Value="1"/>
-      </Unit47>
-      <Unit48>
-        <Filename Value="..\Doc\ToDo.txt"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="56" Y="9"/>
-        <UsageCount Value="1"/>
-        <DefaultSyntaxHighlighter Value="None"/>
-      </Unit48>
-      <Unit49>
-        <Filename Value="C:\lazarus\lcl\lresources.pp"/>
-        <UnitName Value="LResources"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="5342"/>
-        <CursorPos Y="5359"/>
-        <UsageCount Value="1"/>
-      </Unit49>
-      <Unit50>
+      </Unit44>
+      <Unit45>
         <Filename Value="C:\Users\Frank\AppData\Local\Albireo\ATB.ini"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="12" Y="14"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
         <DefaultSyntaxHighlighter Value="Ini"/>
-      </Unit50>
-      <Unit51>
+      </Unit45>
+      <Unit46>
         <Filename Value="u_adbinfo.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="F__ADBINFO"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="8"/>
         <TopLine Value="54"/>
-        <CursorPos X="18" Y="58"/>
-        <UsageCount Value="137"/>
+        <CursorPos X="70" Y="54"/>
+        <UsageCount Value="201"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
-      </Unit51>
-      <Unit52>
-        <Filename Value="..\ToDo.txt"/>
+      </Unit46>
+      <Unit47>
+        <Filename Value="Z:\ToDo.txt"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="599"/>
         <CursorPos X="6" Y="624"/>
-        <UsageCount Value="50"/>
+        <UsageCount Value="39"/>
         <DefaultSyntaxHighlighter Value="None"/>
-      </Unit52>
-      <Unit53>
+      </Unit47>
+      <Unit48>
         <Filename Value="Z:\Albireo\_Backup-12-2019\source\U_AstroToolBox.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="4"/>
-      </Unit53>
-      <Unit54>
-        <Filename Value="..\..\2021-07-OPEN_SOURCE\source\U_AstroToolBox.pas"/>
+        <UsageCount Value="3"/>
+      </Unit48>
+      <Unit49>
+        <Filename Value="Z:\2021-07-OPEN_SOURCE\source\U_AstroToolBox.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="11059"/>
         <CursorPos X="56" Y="11086"/>
-        <UsageCount Value="4"/>
-      </Unit54>
-      <Unit55>
+        <UsageCount Value="3"/>
+      </Unit49>
+      <Unit50>
         <Filename Value="C:\lazarus\lcl\lclintf.pas"/>
         <UnitName Value="LCLIntf"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="66"/>
         <CursorPos X="10" Y="83"/>
-        <UsageCount Value="21"/>
-      </Unit55>
-      <Unit56>
+        <UsageCount Value="10"/>
+      </Unit50>
+      <Unit51>
         <Filename Value="E:\Development\Lazarus\Albireo\ToDo.txt"/>
-        <EditorIndex Value="17"/>
-        <TopLine Value="606"/>
-        <CursorPos X="9" Y="635"/>
-        <UsageCount Value="27"/>
-        <Loaded Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="640"/>
+        <CursorPos X="5" Y="684"/>
+        <UsageCount Value="96"/>
         <DefaultSyntaxHighlighter Value="None"/>
-      </Unit56>
-      <Unit57>
+      </Unit51>
+      <Unit52>
         <Filename Value="C:\lazarus\lcl\forms.pp"/>
         <UnitName Value="Forms"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="733"/>
         <CursorPos X="3" Y="750"/>
-        <UsageCount Value="15"/>
-        <Loaded Value="True"/>
-      </Unit57>
-      <Unit58>
+        <UsageCount Value="13"/>
+      </Unit52>
+      <Unit53>
         <Filename Value="u_astrocalc.lfm"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
-      </Unit58>
-      <Unit59>
+      </Unit53>
+      <Unit54>
         <Filename Value="U_Prefs.lfm"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="19" Y="10"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit54>
+      <Unit55>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\objpas\sysutils\sysstrh.inc"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="41" Y="26"/>
+        <UsageCount Value="17"/>
+      </Unit55>
+      <Unit56>
+        <Filename Value="E:\Development\Lazarus\Albireo\source\U_AstroToolBox.lfm"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="101"/>
+        <CursorPos X="9" Y="111"/>
+        <UsageCount Value="5"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit56>
+      <Unit57>
+        <Filename Value="E:\Development\Lazarus\Albireo\source\u_aovis.lfm"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="5"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit57>
+      <Unit58>
+        <Filename Value="E:\Development\Lazarus\Albireo\source\_U_AstroToolBox (2).lfm"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="41"/>
+        <CursorPos X="22" Y="47"/>
+        <UsageCount Value="5"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit58>
+      <Unit59>
+        <Filename Value="E:\Development\Lazarus\Albireo\source\U_AstroToolBox.pas"/>
+        <ComponentName Value="F__ASTROTOOLBOX"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="19" Y="4"/>
+        <UsageCount Value="5"/>
       </Unit59>
+      <Unit60>
+        <Filename Value="U_AstroToolBox.lfm"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="7" Y="6"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit60>
+      <Unit61>
+        <Filename Value="C:\lazarus\lcl\spin.pp"/>
+        <UnitName Value="Spin"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="157"/>
+        <CursorPos X="14" Y="216"/>
+        <UsageCount Value="32"/>
+      </Unit61>
+      <Unit62>
+        <Filename Value="D:\Development\Lazarus\Albireo\ToDo.txt"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="651"/>
+        <CursorPos X="5" Y="685"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="None"/>
+      </Unit62>
     </Units>
     <OtherDefines Count="1">
       <Define0 Value="LAZARUS"/>
     </OtherDefines>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="3300" Column="78" TopLine="3272"/>
+        <Filename Value="u_astrocalc.pas"/>
+        <Caret Line="375" Column="24" TopLine="356"/>
       </Position1>
       <Position2>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="3305" Column="78" TopLine="3277"/>
+        <Filename Value="u_astrocalc.pas"/>
+        <Caret Line="1631" Column="28" TopLine="1618"/>
       </Position2>
       <Position3>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="474" Column="76" TopLine="458"/>
+        <Filename Value="u_astrocalc.pas"/>
+        <Caret Line="2875" Column="20" TopLine="2870"/>
       </Position3>
       <Position4>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="648" Column="57" TopLine="620"/>
+        <Filename Value="u_astrocalc.pas"/>
+        <Caret Line="1674" Column="10" TopLine="1656"/>
       </Position4>
       <Position5>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="649" Column="70" TopLine="621"/>
+        <Filename Value="u_astrocalc.pas"/>
+        <Caret Line="1644" TopLine="1631"/>
       </Position5>
       <Position6>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="651" Column="72" TopLine="623"/>
+        <Filename Value="u_astrocalc.pas"/>
+        <Caret Line="1645" TopLine="1631"/>
       </Position6>
       <Position7>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="653" Column="70" TopLine="625"/>
+        <Filename Value="u_astrocalc.pas"/>
+        <Caret Line="1644" TopLine="1631"/>
       </Position7>
       <Position8>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="756" Column="63" TopLine="729"/>
+        <Filename Value="u_astrocalc.pas"/>
+        <Caret Line="1645" TopLine="1631"/>
       </Position8>
       <Position9>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="757" Column="91" TopLine="730"/>
+        <Filename Value="u_astrocalc.pas"/>
+        <Caret Line="1644" TopLine="1631"/>
       </Position9>
       <Position10>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="759" Column="75" TopLine="732"/>
+        <Filename Value="u_astrocalc.pas"/>
+        <Caret Line="1659" Column="90" TopLine="1637"/>
       </Position10>
       <Position11>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="766" Column="66" TopLine="739"/>
+        <Filename Value="u_astrocalc.pas"/>
+        <Caret Line="1656" Column="30" TopLine="1639"/>
       </Position11>
       <Position12>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="768" Column="59" TopLine="741"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="13497" Column="25" TopLine="13490"/>
       </Position12>
       <Position13>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="770" Column="76" TopLine="743"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="13075" Column="17" TopLine="13073"/>
       </Position13>
       <Position14>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="771" Column="79" TopLine="744"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="13074" Column="17" TopLine="13072"/>
       </Position14>
       <Position15>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="822" Column="75" TopLine="795"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="17919" TopLine="17905"/>
       </Position15>
       <Position16>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="838" Column="75" TopLine="811"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="1049" Column="17" TopLine="1043"/>
       </Position16>
       <Position17>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="841" Column="74" TopLine="814"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="1051" Column="17" TopLine="1045"/>
       </Position17>
       <Position18>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="842" Column="77" TopLine="815"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="14735" Column="5" TopLine="14721"/>
       </Position18>
       <Position19>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="883" Column="42" TopLine="855"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="15108" Column="3" TopLine="15106"/>
       </Position19>
       <Position20>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="2549" Column="76" TopLine="2522"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="1455" Column="31" TopLine="1440"/>
       </Position20>
       <Position21>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="2550" Column="79" TopLine="2523"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="1722" Column="3" TopLine="1718"/>
       </Position21>
       <Position22>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="2567" Column="56" TopLine="2540"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="16343" Column="11" TopLine="16341"/>
       </Position22>
       <Position23>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="2579" Column="56" TopLine="2552"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="1456" Column="32" TopLine="1441"/>
       </Position23>
       <Position24>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="3262" Column="79" TopLine="3234"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="1709" Column="37" TopLine="1701"/>
       </Position24>
       <Position25>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="3267" Column="79" TopLine="3239"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="1722" TopLine="1698"/>
       </Position25>
       <Position26>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="3300" Column="78" TopLine="3272"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="14760" Column="18" TopLine="14731"/>
       </Position26>
       <Position27>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="3305" Column="78" TopLine="3277"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="1457" Column="25" TopLine="1442"/>
       </Position27>
       <Position28>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="3940" Column="23" TopLine="3928"/>
+        <Caret Line="1714" Column="26" TopLine="1705"/>
       </Position28>
       <Position29>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="1287" Column="29" TopLine="1272"/>
+        <Caret Line="14757" Column="17" TopLine="14745"/>
       </Position29>
+      <Position30>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="1457" Column="25" TopLine="1442"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
@@ -775,15 +898,13 @@
         <OverflowChecks Value="True"/>
         <StackChecks Value="True"/>
       </Checks>
+      <VerifyObjMethodCallValidity Value="True"/>
       <Optimizations>
         <OptimizationLevel Value="3"/>
       </Optimizations>
       <SmallerCode Value="True"/>
     </CodeGeneration>
     <Linking>
-      <Debugging>
-        <GenerateDebugInfo Value="False"/>
-      </Debugging>
       <LinkSmart Value="True"/>
       <Options>
         <Win32>

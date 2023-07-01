@@ -1,7 +1,7 @@
 object F__TIMESTAT: TF__TIMESTAT
-  Left = 2505
+  Left = -1305
   Height = 659
-  Top = 179
+  Top = 220
   Width = 811
   BorderIcons = [biSystemMenu]
   Caption = 'Sonne und Mond'
@@ -12,7 +12,7 @@ object F__TIMESTAT: TF__TIMESTAT
   OnKeyPress = FormKeyPress
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '2.0.10.0'
+  LCLVersion = '2.2.4.0'
   object L__DATETIME: TLabel
     Left = 536
     Height = 19

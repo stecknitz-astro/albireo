@@ -101,6 +101,7 @@ begin
     if(sText = 'Ausleserauschen [e-]') then begin Result := 'Read noise [e-]'; exit; end;
     if(sText = 'Austrittspupille') then begin Result := 'Exit Pupil'; exit; end;
     if(sText = 'Auswahl Sternbild') then begin Result := 'Constellation Selection'; exit; end;
+    if(sText = 'Auswahl zurücksetzen') then begin Result := 'Reset Selection'; exit; end;
     if(sText = 'Äußeres') then begin Result := 'Outer'; exit; end;
     if(sText = 'Äußeres (Asteroiden - Pluto)') then begin Result := 'Outer (Asteroids - Pluto)'; exit; end;
     if(sText = 'Azimut') then begin Result := 'Azimuth'; exit; end;
@@ -241,6 +242,7 @@ begin
     if(sText = 'Inneres (Merkur - Mars)') then begin Result := 'Inner (Mercury - Mars)'; exit; end;
     if(sText = 'Intervall') then begin Result := 'Interval'; exit; end;
     if(sText = 'Jetzt') then begin Result := 'Now'; exit; end;
+    if(sText = 'Jetzt Spenden') then begin Result := 'Donate Now'; exit; end;
     if(sText = 'Julianische Zeit') then begin Result := 'Julian Time'; exit; end;
     if(sText = 'Kamera') then begin Result := 'Camera'; exit; end;
     if(sText = 'Kamera öffnen') then begin Result := 'Open Camera'; exit; end;
@@ -552,6 +554,7 @@ begin
     if(sText = 'Distances') then begin Result := 'Entfernungen'; exit; end;
     if(sText = 'Distance Calculation') then begin Result := 'Entfernungsumrechnung'; exit; end;
     if(sText = 'Donate') then begin Result := 'Spende'; exit; end;
+    if(sText = 'Donate Now') then begin Result := 'Jetzt Spenden'; exit; end;
     if(sText = 'Donations') then begin Result := 'Spenden'; exit; end;
     if(sText = 'DST Delay in Hours') then begin Result := 'Sommerzeit/Winterzeit-Zeitverschiebung in Stunden'; exit; end;
     if(sText = 'Earth') then begin Result := 'Erde'; exit; end;
@@ -725,6 +728,7 @@ begin
     if(sText = 'Registration Form') then begin Result := 'Registrierungsformular'; exit; end;
     if(sText = 'Remove') then begin Result := 'Entfernen'; exit; end;
     if(sText = 'Reset') then begin Result := 'Zurücksetzen'; exit; end;
+    if(sText = 'Reset Selection') then begin Result := 'Auswahl zurücksetzen'; exit; end;
     if(sText = 'Resolving Atmosph.: 1 ''''') then begin Result := 'Auflösung Atmosph.: 1 '''''; exit; end;
     if(sText = 'Resolving Eye: 1 ''') then begin Result := 'Auflösung Auge: 1 '''; exit; end;
     if(sText = 'Resolving Hubble: 0.05 ''''') then begin Result := 'Auflösung Hubble: 0.05 '''''; exit; end;

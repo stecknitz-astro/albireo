@@ -74,6 +74,7 @@ const
  ciAOF_SM_AS = 22;
  ciAOF_COO_EQU_RA = 23;
  ciAOF_COO_EQU_DEC = 24;
+ ciAOF_TNO = 25;
 
  // Page index
  ciPAGE_ALBIREO = 0;
@@ -95,9 +96,6 @@ const
  crMagPosStd_G = 10.0;
  crMagPosStdZoom_G = 11.0;
 
- csREALTIMESTOPPED_DE = 'Echtzeitdarstellung angehalten';
- csREALTIMESTOPPED_EN = 'Real-Time mode is stopped';
-
  // Streaming Support
  csCurTime = 'CurrentTime.txt';
  csSidTime = 'SiderialTime.txt';
@@ -111,6 +109,9 @@ const
  csText3 = 'Text3.txt';
  csRandomRecomNGC = 'RandomRecomNGC.txt';
  csAObjectDist = 'AObjectDist.txt';
+
+type
+  TGenMapCmd = (mcdNone, mcdResetSign); // Special commands to generate the map
 
 type
   { TF__ASTROTOOLBOX }
@@ -148,7 +149,6 @@ type
     CBX__TELESCOPE_DEF: TCheckBox;
     CBX__CERES: TCheckBox;
     CBX__PLUTO: TCheckBox;
-    CBX__EXACTMATCH: TCheckBox;
     CBX__GOTOOUT: TCheckBox;
     CBX__LT: TCheckBox;
     ED__AZ_DEG: TEdit;
@@ -180,10 +180,14 @@ type
     ED__WT_SS: TEdit;
     GBX__ADEV: TGroupBox;
     GRD__RECOM_PROP: TStringGrid;
+    IL__MENUITEMS: TImageList;
+    IMG__BIGLOGO: TImage;
     IMG__MOON_CORNER: TImage;
     IMG__RECOMMEND: TImage;
     IMG__MW: TImage;
     IMG__SOLSYS: TImage;
+    L__SUN_HGT: TLabel;
+    L__OC_SEP: TLabel;
     L__SENSOR_ZOOMED: TLabel;
     L__LIVETABLES: TLabel;
     L__ANGLE_PA: TLabel;
@@ -253,6 +257,10 @@ type
     MenuItem14: TMenuItem;
     MenuItem15: TMenuItem;
     MenuItem16: TMenuItem;
+    PMENU__MAP_FULL: TMenuItem;
+    PMENU__TNO: TMenuItem;
+    Separator1: TMenuItem;
+    MENU__RESETSIGN: TMenuItem;
     MENU__ORBITPARA: TMenuItem;
     MENU__EYEFAC: TMenuItem;
     MENU__ASTROPHOTO_SIGNAL: TMenuItem;
@@ -310,6 +318,7 @@ type
     MENU__SPCLASS: TMenuItem;
     MENU__LCLASS: TMenuItem;
     MENU__SHOW_STARS: TMenuItem;
+    P__TYPE: TPanel;
     P__ZOOM_MINUS: TPanel;
     P__ZOOM: TPanel;
     P__ZOOM_PLUS: TPanel;
@@ -460,7 +469,7 @@ type
     IMG__HOR: TImage;
     IMG__ADEV_PHOTO: TImage;
     IMG__POS_MOON: TImage;
-    Label1: TLabel;
+    L__FIRSTRUN_INFO: TLabel;
     L__DEEPSKY: TLabel;
     L__DS_CONSTELLATION: TLabel;
     L__HD_R: TLabel;
@@ -591,6 +600,13 @@ type
     P__NAVIG: TPanel;
     P__TABLE_TITLE: TPanel;
     P__VISIBLE: TPanel;
+    RB__RECOM_Q: TRadioButton;
+    RB__RECOM_G: TRadioButton;
+    RB__RECOM_PN: TRadioButton;
+    RB__RECOM_N: TRadioButton;
+    RB__RECOM_OC: TRadioButton;
+    RB__RECOM_GC: TRadioButton;
+    RB__RECOM_ALL: TRadioButton;
     RB1: TRadioButton;
     RB2: TRadioButton;
     RB3: TRadioButton;
@@ -640,7 +656,7 @@ type
     SHP__ZD: TShape;
     SHP__ZL: TShape;
     SHP__ZR: TShape;
-    SHP__ZU: TShape;
+    SPL__NAV: TSplitter;
     SPL__DS_IMG: TSplitter;
     SPL__TELPROP: TSplitter;
     SPL__DEV: TSplitter;
@@ -703,7 +719,6 @@ type
     procedure CBX__AZ_SCALEClick(Sender: TObject);
     procedure CBX__CERESChange(Sender: TObject);
     procedure CBX__LTClick(Sender: TObject);
-    procedure CBX__EXACTMATCHClick(Sender: TObject);
     procedure CBX__PLUTOChange(Sender: TObject);
     procedure CBX__TELESCOPE_DEFChange(Sender: TObject);
     procedure CB__ADEV_NAMEChange(Sender: TObject);
@@ -829,6 +844,7 @@ type
     procedure MENU__MY_TELClick(Sender: TObject);
     procedure MENU__ORBITPARAClick(Sender: TObject);
     procedure MENU__REFRESH_APPClick(Sender: TObject);
+    procedure MENU__RESETSIGNClick(Sender: TObject);
     procedure MENU__SCLASS_AClick(Sender: TObject);
     procedure MENU__SCLASS_ALLClick(Sender: TObject);
     procedure MENU__SCLASS_BClick(Sender: TObject);
@@ -867,7 +883,9 @@ type
     procedure MENU__VISIBLE_ONLYClick(Sender: TObject);
     procedure MENU__GRD_MAG_6Click(Sender: TObject);
     procedure MENU__WEBSITEClick(Sender: TObject);
+    procedure PMENU__MAP_FULLClick(Sender: TObject);
     procedure PMENU__RA_SCALAClick(Sender: TObject);
+    procedure PMENU__TNOClick(Sender: TObject);
     procedure P__ASTROCALCClick(Sender: TObject);
     procedure P__ASTROCALCMouseEnter(Sender: TObject);
     procedure P__ASTROCALCMouseLeave(Sender: TObject);
@@ -1010,8 +1028,17 @@ type
     procedure RB__PChange(Sender: TObject);
     procedure RB__PNChange(Sender: TObject);
     procedure RB__QChange(Sender: TObject);
+    procedure RB__RECOM_ALLClick(Sender: TObject);
+    procedure RB__RECOM_GCClick(Sender: TObject);
+    procedure RB__RECOM_GClick(Sender: TObject);
+    procedure RB__RECOM_NClick(Sender: TObject);
+    procedure RB__RECOM_OCClick(Sender: TObject);
+    procedure RB__RECOM_PNClick(Sender: TObject);
+    procedure RB__RECOM_QClick(Sender: TObject);
     procedure RB__SChange(Sender: TObject);
     procedure RB__SClick(Sender: TObject);
+    procedure SHP__MCMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure SHP__ZINMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure SHP__ZOUTMouseUp(Sender: TObject; Button: TMouseButton;
@@ -1031,10 +1058,13 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure SHP__ZRMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    (*
     procedure SHP__ZUMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure SHP__ZUMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    *)
+
     procedure TB__LTMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer
       );
     procedure TB__LTMouseUp(Sender: TObject; Button: TMouseButton;
@@ -1086,6 +1116,7 @@ type
     miUTC_HH: SmallInt;
     miBirthYear: Integer;
     miRefreshRateMinutes: SmallInt;
+    mfTimezoneDiff: Real;
 
     miGLat_DEG_DEF: SmallInt;
     miGLat_MIN_DEF: SmallInt;
@@ -1151,6 +1182,7 @@ type
     miShowStarDescr: SmallInt; // Show brightest star descriptions in starmap: 0: None, 1: Low, 2: High descriptive
     mbShowConstellations: Boolean;
     mbShowPoleP: Boolean; // Show pole precession path
+    mbShowTNO: Boolean; // Show trans-Neptunian objects
 
     mbSearch: Boolean; // Search Mode
     mbSearchMsg: Boolean; // Display waring messages only 1 time per serach
@@ -1228,6 +1260,8 @@ type
 
     mrEyeFacH: Real; // Visual horizon view height
     mfSensorDeg: Real; // Sensor View Angle in Degree
+
+    mGenMapCmd: TGenMapCmd;
 
     {$IFDEF Darwin}
     mbOnStarmapPaintBusy: Boolean;
@@ -1420,6 +1454,7 @@ type
     procedure MoveZoom(iXProz,iYProz: Integer);
     procedure SwitchNavigation();
     procedure SwitchTimeControl();
+    procedure SwitchFull();
     procedure InvalidateZoom();
     procedure ControlZoomPanel();
     procedure ShowHorizonMovePanels(X, Y: Integer);
@@ -1432,6 +1467,9 @@ type
     procedure OpenADBInfo();
     procedure RefreshApp();
     function GetSelADev(var iIndex: Integer): TADevice;
+    procedure SetVisuNow();
+    procedure NextReComPic();
+    procedure PrevReComPic();
 
   public
 
@@ -1453,6 +1491,21 @@ implementation
 {$R *.lfm}
 
 { TF__ASTROTOOLBOX }
+
+procedure TF__ASTROTOOLBOX.SetVisuNow();
+begin
+  ClearSearch;
+
+  SetNow();
+  ReCalcPlanetPos(Now);
+
+  case PC__WORKBENCH.ActivePageIndex of
+    ciPAGE_DB: ShowAOTable();
+    ciPAGE_STARMAP: CleanStartOfStarmap();
+    ciPAGE_SOLSYS: ShowSolSys();
+  end;
+
+end;
 
 procedure TF__ASTROTOOLBOX.RefreshApp();
 begin
@@ -1651,6 +1704,28 @@ begin
   miZoomLvl := 0;
 end;
 
+procedure TF__ASTROTOOLBOX.SwitchFull();
+begin
+  PMENU__MAP_FULL.Checked := not PMENU__MAP_FULL.Checked;
+
+  MENU__VIEW_TIMECONTROL.Checked := not PMENU__MAP_FULL.Checked;
+
+  P__SELECT.Visible:= MENU__VIEW_TIMECONTROL.Checked;
+
+  MENU_VIEW_NAVIGATION.Checked := not PMENU__MAP_FULL.Checked;
+  P__NAVIG.Visible := MENU_VIEW_NAVIGATION.Checked;
+  SB__MAIN.Visible := not PMENU__MAP_FULL.Checked;
+
+  if(PC__WORKBENCH.ActivePageIndex = ciPAGE_STARMAP) then
+  begin
+    InvalidateZoom();
+    P__MAGSIZE.Visible := not PMENU__MAP_FULL.Checked;
+    P__SETTIME.Visible := not PMENU__MAP_FULL.Checked;
+    CleanStartOfStarmap();
+  end;
+
+end;
+
 procedure TF__ASTROTOOLBOX.SwitchTimeControl();
 begin
   MENU__VIEW_TIMECONTROL.Checked := not MENU__VIEW_TIMECONTROL.Checked;
@@ -1662,6 +1737,7 @@ begin
     InvalidateZoom();
     CleanStartOfStarmap();
   end;
+  PMENU__MAP_FULL.Checked := (not MENU__VIEW_TIMECONTROL.Checked) and (MENU_VIEW_NAVIGATION.Checked);
 end;
 
 
@@ -1680,6 +1756,7 @@ begin
 
     CleanStartOfStarmap();
   end;
+  PMENU__MAP_FULL.Checked := (not MENU__VIEW_TIMECONTROL.Checked) and (MENU_VIEW_NAVIGATION.Checked);
 end;
 
 procedure TF__ASTROTOOLBOX.MoveZoom(iXProz,iYProz: Integer);
@@ -1780,7 +1857,7 @@ procedure TF__ASTROTOOLBOX.ExecAOSearch();
 var
   bCheckSearchText: Boolean;
   iLen: Integer;
-  sQStr,sNormStr: string;
+  sNormStr: string;
 begin
 
   sNormStr := Trim(Uppercase(ED__SEARCH.Text));
@@ -1792,27 +1869,22 @@ begin
 
   SetTimePlayOFF(); // Avoid starmap autorecalc during (extended) search!
 
-  if(iLen = 2) and (LeftStr(sNormStr,1) = 'M') then
+  sNormStr := AnsiReplaceStr(sNormStr,'MESSIER ','M');
+  sNormStr := AnsiReplaceStr(sNormStr,'MESSIER','M');
+
+  if(iLen = 2) and (LeftStr(sNormStr,1) = 'M') and (sNormStr[2] in ['0'..'9']) then
   begin
-    sQStr := 'M -> Messier M00..?';
-
-    if(MessageDlg('Requester',sQStr,mtConfirmation,[mbYes,mbNo],0) = mrYes) then
-      sNormStr := AnsiReplaceStr(sNormStr,'M','M00');
-
+    sNormStr := AnsiReplaceStr(sNormStr,'M','M00');
     iLen := Length(sNormStr);
   end;
 
-  if(iLen = 3) and (LeftStr(sNormStr,1) = 'M') then
+  if(iLen = 3) and (LeftStr(sNormStr,1) = 'M') and (sNormStr[2] in ['0'..'9']) and (sNormStr[3] in ['0'..'9']) then
   begin
-    sQStr := 'M -> Messier M0..?';
-
-    if(MessageDlg('Requester',sQStr,mtConfirmation,[mbYes,mbNo],0) = mrYes) then
-      sNormStr := AnsiReplaceStr(sNormStr,'M','M0');
-
+    sNormStr := AnsiReplaceStr(sNormStr,'M','M0');
     iLen := Length(sNormStr);
   end;
 
-  bCheckSearchText :=  (iLen > 3);
+  bCheckSearchText :=  (iLen > 2);
 
   if(bCheckSearchText) then
   begin
@@ -1919,7 +1991,6 @@ begin
     msSearch := AnsiReplaceStr(msSearch,'-','');
     msSearch := AnsiReplaceStr(msSearch,'/','');
     *)
-    msSearch := AnsiReplaceStr(msSearch,'MESSIER','M');
     msSearch := NormalizeSearchArg(msSearch);
 
     mbSearch := true;
@@ -1934,11 +2005,6 @@ begin
   if(mbTimePlay) then
   begin
     SwitchTimePlay();
-
-    if(msLANG_ID = 'DE') then
-      L__BOTTOM_INFO.Caption:= csREALTIMESTOPPED_DE
-    else
-      L__BOTTOM_INFO.Caption:= csREALTIMESTOPPED_EN;
 
     Application.ProcessMessages;
   end;
@@ -2754,6 +2820,18 @@ begin
         GRD__RECOM_PROP.Cells[0,GRD__RECOM_PROP.RowCount-1] := 'Data';
 
       GRD__RECOM_PROP.RowCount := GRD__RECOM_PROP.RowCount + 1;
+      if(msLANG_ID = 'DE') then
+      begin
+        GRD__RECOM_PROP.Cells[0,GRD__RECOM_PROP.RowCount-1] := 'Typ:';
+        GRD__RECOM_PROP.Cells[1,GRD__RECOM_PROP.RowCount-1] := (mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType;
+      end
+      else
+      begin
+        GRD__RECOM_PROP.Cells[0,GRD__RECOM_PROP.RowCount-1] := 'Type:';
+        GRD__RECOM_PROP.Cells[1,GRD__RECOM_PROP.RowCount-1] := (mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType;
+      end;
+
+      GRD__RECOM_PROP.RowCount := GRD__RECOM_PROP.RowCount + 1;
 
       GRD__RECOM_PROP.Cells[0,GRD__RECOM_PROP.RowCount-1] := 'RA';
       GRD__RECOM_PROP.Cells[1,GRD__RECOM_PROP.RowCount-1] :=
@@ -2999,6 +3077,8 @@ begin
               GRD__RECOM_P.Cells[1,GRD__RECOM_P.RowCount-1] := 'Planet'
             else if ((molAOList[i] as TPlanet).sPlanetType = 'p') then
               GRD__RECOM_P.Cells[1,GRD__RECOM_P.RowCount-1] := 'Zwergplanet'
+            else if (Uppercase((molAOList[i] as TPlanet).sPlanetType) = 'T') then
+              GRD__RECOM_P.Cells[1,GRD__RECOM_P.RowCount-1] := 'TNO'
             else
               GRD__RECOM_P.Cells[1,GRD__RECOM_P.RowCount-1] := 'Asteroid';
 
@@ -3026,6 +3106,8 @@ begin
               GRD__RECOM_P.Cells[1,GRD__RECOM_P.RowCount-1] := 'Planet'
             else if ((molAOList[i] as TPlanet).sPlanetType = 'p') then
               GRD__RECOM_P.Cells[1,GRD__RECOM_P.RowCount-1] := 'Dwarf planet'
+            else if (Uppercase((molAOList[i] as TPlanet).sPlanetType) = 'T') then
+              GRD__RECOM_P.Cells[1,GRD__RECOM_P.RowCount-1] := 'TNO'
             else
               GRD__RECOM_P.Cells[1,GRD__RECOM_P.RowCount-1] := 'Asteroid';
 
@@ -3729,11 +3811,6 @@ procedure TF__ASTROTOOLBOX.DateRefresh();
 begin
   mdtStart := 0;
   mdtStart0 := 0;
-  //mbTimePlay := false;
-
-  //P__NOW.Visible:=true;
-
-  P__COUNTRIES.Visible := true;
 
   ReCalcPlanetPos(CB__WT.Date);
   TrigST();
@@ -3779,10 +3856,6 @@ begin
     else
       miTimePlayMode := miTimePlayMode - 1; // accelerate mode
   end;
-
-  //P__NOW.Visible:=false;
-
-  P__COUNTRIES.Visible := false;
 
   CB__WT.Enabled := false;
   ED__WT_HH.Enabled := false;
@@ -4207,15 +4280,16 @@ begin
   SHP__SUN.Repaint;
   SHP__SUN_INCL.Repaint;
 
-  // Set Sun inlcination panel
-  SHP__SUN_INCL.Left := P__INCL.Width div 2 - (SHP__SUN_INCL.Width div 2);
-  SHP__SUN_INCL.Top := P__INCL.Height div 2 - (SHP__SUN_INCL.Height div 2);
-
   // Set SUN
   iXCenter := (IMG__SOLSYS.Width div 2);
   iYCenter := (IMG__SOLSYS.Height div 2);// - SHP__SUN_INCL.Height;
   iZCenter := (P__INCL.Height div 2);
 
+  // Set Sun inlcination panel
+  SHP__SUN_INCL.Left := iXCenter - (SHP__SUN_INCL.Width div 2);
+  SHP__SUN_INCL.Top := iZCenter - (SHP__SUN_INCL.Height div 2);
+
+  // Set SUN solar system panel
   SHP__SUN.Left := iXCenter - (SHP__SUN.Width div 2);
   SHP__SUN.Top := iYCenter - (SHP__SUN.Height div 2);
 
@@ -7004,77 +7078,38 @@ begin
 
   sLabel := NormalizeSearchArg(GetAOLabel(AObject,msLANG_ID));
 
-  if(CBX__EXACTMATCH.Checked) then
+  Result :=
+    (sLabel = msSearch) or
+    StartsWith(NormalizeSearchArg(AObject.sName_DE), msSearch) or
+    StartsWith(NormalizeSearchArg(AObject.sName_EN), msSearch);
+
+  if(not Result) then
   begin
-
-    //if(AnsicontainsStr(NormalizeSearchArg(AObject.sName_DE),'CAPH')) then
-    //  ShowMessage('Stop!');
-
-    Result :=
-      (sLabel = msSearch) or
-      (NormalizeSearchArg(AObject.sName_DE) = msSearch) or
-      (NormalizeSearchArg(AObject.sName_EN) = msSearch);
-
-    if(not Result) then
+    if(AObject.sAOType = 'S') then
     begin
-      if(AObject.sAOType = 'S') then
-      begin
-        Result :=
-          (NormalizeSearchArg((AObject as TStar).sSym) = msSearch) or
-          (NormalizeSearchArg((AObject as TStar).sCatNo) = msSearch) or
-          (NormalizeSearchArg((AObject as TStar).sCon) = msSearch);
-      end;
-
-      if(AObject.sAOType = 'G') or
-        (AObject.sAOType = 'GC') or
-        (AObject.sAOType = 'OC') or
-        (AObject.sAOType = 'N') or
-        (AObject.sAOType = 'PN') then
-      begin
-        Result :=
-          (NormalizeSearchArg((AObject as TInterstellarObject).sMessier) = msSearch) or
-          (NormalizeSearchArg((AObject as TInterstellarObject).sNGC) = msSearch) or
-          (NormalizeSearchArg((AObject as TInterstellarObject).sCatNo) = msSearch) or
-          (NormalizeSearchArg((AObject as TInterstellarObject).sCon) = msSearch);
-      end;
+      Result :=
+        StartsWith(NormalizeSearchArg((AObject as TStar).sSym),msSearch) or
+        StartsWith(NormalizeSearchArg((AObject as TStar).sCatNo),msSearch) or
+        StartsWith(NormalizeSearchArg((AObject as TStar).sCon),msSearch);
     end;
-  end
-  else
-  begin
-    Result :=
-      (AnsiContainsStr(sLabel,msSearch)) or
-      (AnsiContainsStr(NormalizeSearchArg(AObject.sName_DE),msSearch)) or
-      (AnsiContainsStr(NormalizeSearchArg(AObject.sName_EN),msSearch));
 
-    if(not Result) then
+    if(AObject.sAOType = 'G') or
+      (AObject.sAOType = 'GC') or
+      (AObject.sAOType = 'OC') or
+      (AObject.sAOType = 'N') or
+      (AObject.sAOType = 'PN') then
     begin
-      if(AObject.sAOType = 'S') then
-      begin
-        Result :=
-          (AnsiContainsStr(NormalizeSearchArg((AObject as TStar).sSym),msSearch)) or
-          (AnsiContainsStr(NormalizeSearchArg((AObject as TStar).sCatNo),msSearch)) or
-          (AnsiContainsStr(NormalizeSearchArg((AObject as TStar).sCon),msSearch));
-      end;
-
-      if(AObject.sAOType = 'G') or
-        (AObject.sAOType = 'GC') or
-        (AObject.sAOType = 'OC') or
-        (AObject.sAOType = 'N') or
-        (AObject.sAOType = 'PN') then
-      begin
-        Result :=
-          (AnsiContainsStr(NormalizeSearchArg((AObject as TInterstellarObject).sMessier),msSearch)) or
-          (AnsiContainsStr(NormalizeSearchArg((AObject as TInterstellarObject).sNGC),msSearch)) or
-          (AnsiContainsStr(NormalizeSearchArg((AObject as TInterstellarObject).sCatNo),msSearch)) or
-          (AnsiContainsStr(NormalizeSearchArg((AObject as TInterstellarObject).sCon),msSearch));
-      end;
+      Result :=
+        (NormalizeSearchArg((AObject as TInterstellarObject).sMessier) = msSearch) or
+        (NormalizeSearchArg((AObject as TInterstellarObject).sNGC) = msSearch) or
+        (NormalizeSearchArg((AObject as TInterstellarObject).sCatNo) = msSearch) or
+        (NormalizeSearchArg((AObject as TInterstellarObject).sCon) = msSearch);
     end;
   end;
 
   if(Result) then
   begin
     mbSearchFound := true;
-    //if(CBX__EXACTMATCH.Checked) then mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
   end;
 
 end;
@@ -7456,13 +7491,15 @@ var
   MeteorShower: TMeteorShower;
   bCanVisu: Boolean;
   bObjectFound, bObjectFoundAndDisplayed: Boolean;
-  iLeft, iTop: Integer;
+  iLeft, iTop, iDSReq: Integer;
   sSignName: string;
   sLabel: string;
 begin
   bObjectFound := false;
   bObjectFoundAndDisplayed := false;
   mslVisibleAOList.Clear;
+
+  iDSReq := 50000;
 
   WinControl.DisableAlign;
 
@@ -7648,12 +7685,14 @@ begin
       if((molAOList[i] as TAObject).sAOType = 'S') and ((molAOList[i] as TStar).rM > mrMagPos) then
         continue;
 
-      if(((molAOList[i] as TAObject).sAOType = 'G') and ((molAOList[i] as TGalaxy).rM > mrMagPos_G)) then
+      if(
+        ((molAOList[i] as TAObject).sAOType = 'G') and ((molAOList[i] as TGalaxy).rM > mrMagPos_G) and ((molAOList[i] as TInterstellarObject).sMessier = '')
+        ) then
         continue;
     end
     else
     begin
-      if((i mod 500000) = 0) then
+      if((i mod iDSReq) = 0) and (i > iDSReq)then
       begin
         //Application.ProcessMessages;
 
@@ -7818,7 +7857,7 @@ begin
         end;
 
         bObjectFoundAndDisplayed := true;
-        if(CBX__EXACTMATCH.Checked) then mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
+        //mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
 
       end
       else
@@ -7878,6 +7917,9 @@ begin
         (molAOList[i] as TAObject).L__AO.Parent := WinControl;
         (molAOList[i] as TAObject).L__AO.Visible := true;
       end;
+
+      if(mGenMapCmd = mcdResetSign) then
+        (molAOList[i] as TStar).bSelSign := false;
 
       // Show constellation names near beta-stars by default. There are some exceptions...
       if(
@@ -8040,7 +8082,7 @@ begin
         (molAOList[i] as TAObject).SHP.Width := 20;
         (molAOList[i] as TAObject).SHP.Visible:=true; // Display found object in any case.
         bObjectFoundAndDisplayed := true;
-        if(CBX__EXACTMATCH.Checked) then mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
+        //mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
       end
       else
       begin
@@ -8089,6 +8131,9 @@ begin
       if ((not mbShowAsteroids) and ((molAOList[i] as TPlanet).sPlanetType = 'A')) then
         continue;
 
+      if ((not mbShowTNO) and (Uppercase((molAOList[i] as TPlanet).sPlanetType) = 'T')) then
+        continue;
+
       (molAOList[i] as TAObject).SHP.PopupMenu := PMENU__AOBJECT;
 
       PlotSolSysBodyPath(iR0, iX0, iY0, dtST, i); //, SkyBitmap);
@@ -8104,7 +8149,7 @@ begin
        (molAOList[i] as TAObject).SHP.Width := 20;
        (molAOList[i] as TAObject).SHP.Visible:=true; // Display found object in any case.
        bObjectFoundAndDisplayed := true;
-       if(CBX__EXACTMATCH.Checked) then mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
+       //mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
       end
       else
       begin
@@ -8193,10 +8238,12 @@ begin
         (molAOList[i] as TAObject).SHP.Visible:=true; // Display found object in any case.
 
         bObjectFoundAndDisplayed := true;
-        if(CBX__EXACTMATCH.Checked) then mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
+        //mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
 
       end
-      else if((molAOList[i] as TGalaxy).rM > mrMagPos_G) or (mbSearch and (not mbShowGalaxies)) then  // contiune for too faint galaxies or searched object not found
+      else if (
+        (((molAOList[i] as TGalaxy).rM > mrMagPos_G) and ((molAOList[i] as TInterstellarObject).sMessier = '')) or (mbSearch and (not mbShowGalaxies))
+        ) then  // contiune for too faint, non-messier galaxies or searched object not found
         continue
       else if((molAOList[i] as TGalaxy).SHP = nil) then
       begin
@@ -8205,6 +8252,9 @@ begin
       end;
 
       (molAOList[i] as TAObject).SHP.Shape := stEllipse;
+
+      //if(AnsiContainsStr((molAOList[i] as TInterstellarObject).sMessier,'105')) then
+      //  ShowMessage('Height: ' + IntToStr((molAOList[i] as TAObject).SHP.Height));
 
       SetInterstellarObjectShapeColor(molAOList[i] as TInterstellarObject);
 
@@ -8252,7 +8302,7 @@ begin
        (molAOList[i] as TAObject).SHP.Width := 20;
        (molAOList[i] as TAObject).SHP.Visible:=true; // Display found object in any case.
        bObjectFoundAndDisplayed := true;
-       if(CBX__EXACTMATCH.Checked) then mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
+       //mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
 
       end
       else
@@ -8300,7 +8350,7 @@ begin
        (molAOList[i] as TAObject).SHP.Width := 20;
        (molAOList[i] as TAObject).SHP.Visible:=true; // Display found object in any case.
        bObjectFoundAndDisplayed := true;
-       if(CBX__EXACTMATCH.Checked) then mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
+       //mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
 
       end;
 
@@ -8346,7 +8396,7 @@ begin
        (molAOList[i] as TAObject).SHP.Width := 20;
        (molAOList[i] as TAObject).SHP.Visible:=true; // Display found object in any case.
        bObjectFoundAndDisplayed := true;
-       if(CBX__EXACTMATCH.Checked) then mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
+       //mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
 
       end;
 
@@ -8391,7 +8441,7 @@ begin
        (molAOList[i] as TAObject).SHP.Width := 20;
        (molAOList[i] as TAObject).SHP.Visible:=true; // Display found object in any case.
        bObjectFoundAndDisplayed := true;
-       if(CBX__EXACTMATCH.Checked) then mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
+       //mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
 
       end;
 
@@ -8436,7 +8486,7 @@ begin
        (molAOList[i] as TAObject).SHP.Width := 20;
        (molAOList[i] as TAObject).SHP.Visible:=true; // Display found object in any case.
        bObjectFoundAndDisplayed := true;
-       if(CBX__EXACTMATCH.Checked) then mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
+       //mbSearch := false; // Stop search for any higher magnitudes in GenStarMap()!
       end;
 
       // Adjust Shape Position
@@ -9397,6 +9447,9 @@ begin
             iSignIndex:=0;
             Sign := GetSignObj(Trim((molAOList[i] as TStar).sCon),molSignList,iSignIndex);
 
+            if(Sign <> nil) and (mGenMapCmd = mcdResetSign) then
+              Sign.bSelected := false;
+
             if(Sign <> nil) and (Sign.bSelected) then
               Panel.Canvas.Pen.Color := clYellow
             else
@@ -9439,9 +9492,10 @@ end;
 
 procedure TF__ASTROTOOLBOX.SetNow();
 begin
-  SetTime(Now);
-  mdtStart0 := Now;//GetWTime();
-  mdtStart := Now;
+
+  SetTime(Now - 0*mfTimeZoneDiff);
+  mdtStart0 := Now - 0*mfTimeZoneDiff;
+  mdtStart := Now - 0*mfTimeZoneDiff;
 end;
 
 procedure TF__ASTROTOOLBOX.ShowTimeStat();
@@ -9602,20 +9656,7 @@ begin
     miGLat_DEG, miGLat_MIN,
     miUTC_HH,
     iDay,miDST_HH,-18*60,mrDwn_AM_HH_A, mrDwn_PM_HH_A);
-  (*
-  MM__MW.Clear;
-  MM__MW.Lines.Add('mrRise_HH: ' + FloatToStr(mrRise_HH));
-  MM__MW.Lines.Add('mrSet_HH: ' + FloatToStr(mrSet_HH));
-  MM__MW.Lines.Add('');
-  MM__MW.Lines.Add('mrDwn_AM_HH_C: ' + FloatToStr(mrDwn_AM_HH_C));
-  MM__MW.Lines.Add('mrDwn_PM_HH_C: ' + FloatToStr(mrDwn_PM_HH_C));
-  MM__MW.Lines.Add('');
-  MM__MW.Lines.Add('mrDwn_AM_HH_N: ' + FloatToStr(mrDwn_AM_HH_N));
-  MM__MW.Lines.Add('mrDwn_PM_HH_N: ' + FloatToStr(mrDwn_PM_HH_N));
-  MM__MW.Lines.Add('');
-  MM__MW.Lines.Add('mrDwn_AM_HH_A: ' + FloatToStr(mrDwn_AM_HH_A));
-  MM__MW.Lines.Add('mrDwn_PM_HH_A: ' + FloatToStr(mrDwn_PM_HH_A));
-  *)
+
   P__DAWN_AM_C.Visible := false;
   P__DAWN_AM_N.Visible:=false;
   P__DAWN_AM_A.Visible:=false;
@@ -9710,11 +9751,13 @@ begin
     if(mrDwn_PM_HH_C > -1) then
     begin
       // OK. Civil TW ends before MN!
-      P__DAWN_PM_N.Left := Round(iXLen*mrDwn_PM_HH_C/24.0);
+      P__DAWN_PM_N.Left := Trunc(iXLen*mrDwn_PM_HH_C/24.0);
       if(mrDwn_PM_HH_N > 0) then
         P__DAWN_PM_N.Width := Round(iXLen*mrDwn_PM_HH_N/24.0 - iXLen*mrDwn_PM_HH_C/24.0)
       else
         P__DAWN_PM_N.Width := Round(iXLen - iXLen*mrDwn_PM_HH_C/24.0); // No end of civil tw: Until Midnight!
+
+      P__DAWN_PM_N.Width := P__DAWN_PM_N.Width + 1; // Avoid gap
 
       P__DAWN_PM_N.Visible := true;
     end
@@ -9728,7 +9771,7 @@ begin
     if(mrDwn_PM_HH_N > -1) then
     begin
       // OK. Nautical TW ends before MN!
-      P__DAWN_PM_A.Left := Round(iXLen*mrDwn_PM_HH_N/24.0);
+      P__DAWN_PM_A.Left := Trunc(iXLen*mrDwn_PM_HH_N/24.0);
       if(mrDwn_PM_HH_A > 0) then
         P__DAWN_PM_A.Width := Round(iXLen*mrDwn_PM_HH_A/24.0 - iXLen*mrDwn_PM_HH_N/24.0)
       else
@@ -9746,8 +9789,9 @@ begin
     if(mrDwn_PM_HH_A > -1) then
     begin
       // OK. Astronomical TW ends before MN!
-      P__NIGHT_PM.Left := Round(iXLen*mrDwn_PM_HH_A/24.0);
-      P__NIGHT_PM.Width := Round(iXLen - iXLen*mrDwn_PM_HH_A/24.0);
+      P__NIGHT_PM.Left := Trunc(iXLen*mrDwn_PM_HH_A/24.0);
+      //P__NIGHT_PM.Width := Round(iXLen - iXLen*mrDwn_PM_HH_A/24.0);
+      P__NIGHT_PM.Width := Round(P__DATETIME_VISU.Width - P__NIGHT_PM.Left);
 
       P__NIGHT_PM.Visible := true;
     end
@@ -9781,39 +9825,9 @@ begin
     if(rDiffDST > 0) then
     begin
       P__DAWN_AM_PREV_PM.Width := Round(rDiffDST*iXLen/24.0);
-      //MM__MW.Lines.Add('P__DAWN_AM_PREV_PM.Width: ' + IntToStr(P__DAWN_AM_PREV_PM.Width));
       P__DAWN_AM_PREV_PM.left := 0;
       P__DAWN_AM_PREV_PM.visible := true;
     end;
-
-   (*  ODER
-    if(mrDwn_AM_HH_C > 1) and (mrDwn_AM_HH_C < 2) then
-    begin
-      rDiffDST :=  mrDwn_AM_HH_C - 1;
-      P__DAWN_AM_PREV_PM.Color := P__DAWN_AM_C.Color;
-      P__DAWN_AM_PREV_PM.Width := Round((1.0-rDiffDST)*iXLen/24.0);
-      P__DAWN_AM_PREV_PM.left := 0;
-      P__DAWN_AM_PREV_PM.visible := true;
-    end;
-
-    if(mrDwn_AM_HH_N > 1) and (mrDwn_AM_HH_N < 2) then
-    begin
-      rDiffDST :=  mrDwn_AM_HH_N - 1;
-      P__DAWN_AM_PREV_PM.Color := P__DAWN_AM_N.Color;
-      P__DAWN_AM_PREV_PM.Width := Round((1.0-rDiffDST)*iXLen/24.0);
-      P__DAWN_AM_PREV_PM.left := 0;
-      P__DAWN_AM_PREV_PM.visible := true;
-    end;
-
-    if(mrDwn_AM_HH_A > 1) and (mrDwn_AM_HH_A < 2) then
-    begin
-      rDiffDST :=  mrDwn_AM_HH_A - 1;
-      P__DAWN_AM_PREV_PM.Color := P__DAWN_AM_A.Color;
-      P__DAWN_AM_PREV_PM.Width := Round((1.0-rDiffDST)*iXLen/24.0);
-      P__DAWN_AM_PREV_PM.left := 0;
-      P__DAWN_AM_PREV_PM.visible := true;
-    end;
-   *)
 
   end;
 
@@ -10318,6 +10332,8 @@ begin
              GRD__AO.Cells[3,iRow] := 'Äußerer Pl.'
             else if ((molAOList[i] as TPlanet).sPlanetType = 'p') then
               GRD__AO.Cells[3,iRow] := 'Zwergplanet'
+            else if (Uppercase((molAOList[i] as TPlanet).sPlanetType) = 'T') then
+              GRD__AO.Cells[3,iRow] := 'TNO'
             else if ((molAOList[i] as TPlanet).sPlanetType = 'E') then
               GRD__AO.Cells[3,iRow] := 'Terra'
             else
@@ -10337,6 +10353,8 @@ begin
              GRD__AO.Cells[3,iRow] := 'Outer Pl.'
             else if ((molAOList[i] as TPlanet).sPlanetType = 'p') then
               GRD__AO.Cells[3,iRow] := 'Dwarf Planet'
+            else if (Uppercase((molAOList[i] as TPlanet).sPlanetType) = 'T') then
+              GRD__AO.Cells[3,iRow] := 'TNO'
             else
               GRD__AO.Cells[3,iRow] := 'Asteroid';
           end;
@@ -12574,6 +12592,8 @@ begin
     if(CB__SIGNS.Items.Count > 0) then
       CB__SIGNS.ItemIndex:=0;
 
+    IniCountries();
+
     case PC__WORKBENCH.ActivePageIndex of
       ciPAGE_STARMAP: CleanStartOfStarmap();
     end;
@@ -12668,6 +12688,7 @@ begin
   ED__WT_SS.Text := format('%.2d',[iWT_SS]);
 
   TrigST();
+
 end;
 
 procedure TF__ASTROTOOLBOX.CalcRZ(iST_HH, iST_MM, iST_SS, iHA_HH, iHA_MM, iHA_SS: Word);
@@ -12798,6 +12819,8 @@ procedure TF__ASTROTOOLBOX.SetTime(dtDateTime: TDateTime);
 var
   iHH, iMM, iSS, iMS: Word;
 begin
+  dtDateTime := dtDateTime - mfTimezoneDiff;
+
   CB__WT.Date := dtDateTime;
 
   DecodeTime(dtDateTime,iHH, iMM, iSS, iMS);
@@ -12816,6 +12839,7 @@ var
   dJulDat: Double;
   dtWT, dtST: TDateTime;
   iHH, iMM, iSS, iMS: Word;
+  rSunHgt: Real;
 begin
   dJulDat := 0;
 
@@ -12832,6 +12856,18 @@ begin
     StrToInt(ED__RZ_MM.Text),
     StrToInt(ED__RZ_SS.Text)
     );
+
+  rSunHgt := GetSunHgt(GetWTime(),miDST_HH,miUTC_HH,miGLng_DEG, miGLng_MIN,mrSin_fGLat,mrCos_fGLat);
+
+  if(rSunHgt > 0) then
+    L__SUN_HGT.Font.Color := clYellow
+  else
+    L__SUN_HGT.Font.Color := clRed;
+
+  if(msLANG_ID = 'DE') then
+    L__SUN_HGT.Caption:= 'Sonnenstand: ' + DEGToHHMMStr(rSunHgt,false)
+  else
+    L__SUN_HGT.Caption:= 'Solar Altitude: ' + DEGToHHMMStr(rSunHgt,false);
 
 end;
 
@@ -13103,6 +13139,8 @@ begin
     gsAlbireoLocalDir := GetLocalUserAppDataPath() + '\Albireo\';
   {$ENDIF LINUX}
 
+  mGenMapCmd := mcdNone;
+
   grecAOIndexControl.iMaxMessier:=0;
   grecAOIndexControl.iMax_Q:=0;
   grecAOIndexControl.iMin_Q:=0;
@@ -13205,6 +13243,8 @@ begin
   mbShowEComets := false;
   miShowMilkyway := 1;
   mbShowAsteroids := false;
+  mbShowTNO := false;
+
   miShowStarDescr := 1; // Start with low star description level
   PMENU__STAR_DESCR_LOW.Checked:=true;
   PMENU__STAR_DESCR_HIGH.Checked:=false;
@@ -13728,6 +13768,10 @@ begin
   L__MAGSIZE.Caption:= AnsiReplaceStr(FloatToStrF(mrMagPos,ffFixed,8,1),',','.');
   L__MAGSIZE_G.Caption:= AnsiReplaceStr(FloatToStrF(mrMagPos_G,ffFixed,8,1),',','.');
   PC__MAG.ActivePageIndex:=0;
+
+  P__KOCHAB.Height := 32;
+  P__KOCHABMETHOD.Visible:=false;
+  P__KOCHAB_CONTROL.Caption:='[]';
 
 end;
 
@@ -14430,6 +14474,13 @@ begin
   RefreshApp();
 end;
 
+procedure TF__ASTROTOOLBOX.MENU__RESETSIGNClick(Sender: TObject);
+begin
+  mGenMapCmd := mcdResetSign;
+  CleanStartOfStarMap();
+  mGenMapCmd := mcdNone;
+end;
+
 procedure TF__ASTROTOOLBOX.MENU__SCLASS_AClick(Sender: TObject);
 begin
   OnSelSpecClass(0,3);
@@ -14702,9 +14753,19 @@ begin
   ExecOpen(gcsWebInfo);
 end;
 
+procedure TF__ASTROTOOLBOX.PMENU__MAP_FULLClick(Sender: TObject);
+begin
+  SwitchFull();
+end;
+
 procedure TF__ASTROTOOLBOX.PMENU__RA_SCALAClick(Sender: TObject);
 begin
   ActivateAOFeature(ciAOF_COO_EQU_RA, not PMENU__RA_SCALA.Checked);
+end;
+
+procedure TF__ASTROTOOLBOX.PMENU__TNOClick(Sender: TObject);
+begin
+  ActivateAOFeature(ciAOF_TNO, not PMENU__TNO.Checked);
 end;
 
 procedure TF__ASTROTOOLBOX.P__ASTROCALCClick(Sender: TObject);
@@ -15143,6 +15204,7 @@ procedure TF__ASTROTOOLBOX.MENU__ABOUTClick(Sender: TObject);
 begin
   F__ABOUT := TF__ABOUT.Create(nil);
   F__ABOUT.msLANG_ID:=msLANG_ID;
+  IniText(F__ABOUT,msLANG_ID);
   F__ABOUT.ShowModal;
   F__ABOUT.Destroy;
 end;
@@ -15351,10 +15413,6 @@ begin
     mdtStart0 := GetWTime();
     mbTimePlay := true;
 
-    //P__NOW.Visible := false;
-
-    P__COUNTRIES.Visible := false;
-
     CB__WT.Enabled := false;
     ED__WT_HH.Enabled := false;
     ED__WT_MM.Enabled := false;
@@ -15388,10 +15446,6 @@ begin
     mdtStart0 := 0;
     mbTimePlay := false;
     TIMER__GENMAP.Enabled:=false;
-
-    //P__NOW.Visible:=true;
-
-    P__COUNTRIES.Visible := true;
 
     CB__WT.Enabled := true;
     ED__WT_HH.Enabled := true;
@@ -15752,10 +15806,10 @@ begin
       mrSin_fGLat_DEF := mrSin_fGLat;
       mrCos_fGLat_DEF := mrCos_fGLat;
       miUTC_HH_DEF := miUTC_HH;
+      mfTimezoneDiff := 0;
     end;
 
     mbChangedLoc := true;
-
     mrSin_fGLat := sin(Pi*(miGLat_DEG + miGLat_MIN/60.0)/180.0);
     mrCos_fGLat := cos(Pi*(miGLat_DEG + miGLat_MIN/60.0)/180.0);
 
@@ -15769,9 +15823,11 @@ begin
     mrCos_fGLat := cos(Pi*(miGLat_DEG + miGLat_MIN/60.0)/180.0);
 
     miUTC_HH := EarthLocation.iTimeZone;
-    SetTime(GetWTime() - ((miUTC_HH_DEF - miUTC_HH)/24.0));
+    mfTimezoneDiff := (miUTC_HH_DEF - miUTC_HH)/24.0;
 
-    //P__NOW.Visible := false;
+    SetTimePanels();
+
+    SetTime(GetWTime());
 
     B__LOC_RESET.Visible:=true;
   end;
@@ -15794,6 +15850,7 @@ begin
     mrSin_fGLat := mrSin_fGLat_DEF;
     mrCos_fGLat := mrCos_fGLat_DEF;
     miUTC_HH := miUTC_HH_DEF;
+    mfTimezoneDiff := 0;
 
     mbChangedLoc := false;
 
@@ -15803,8 +15860,11 @@ begin
     CB__COUNTRIES.ItemIndex:=0;
     CB__CITIES.ItemIndex:=0;
 
-    //P__NOW.Visible := true;
     B__LOC_RESET.Visible:=false;
+
+    SetTimePanels();
+
+    SetVisuNow();
   end;
 end;
 
@@ -15937,25 +15997,6 @@ begin
   else
     IniLiveTableMode();
 
-end;
-
-procedure TF__ASTROTOOLBOX.CBX__EXACTMATCHClick(Sender: TObject);
-begin
-  if(Trim(ED__SEARCH.Text) <> '') then
-  begin
-    if(CBX__EXACTMATCH.Checked) then
-      ExecAOSearch()
-    else
-    begin
-      if(msLANG_ID = 'DE') and (MessageDlg('Rückfrage','Die Suche ohne extakte Übereinstimmung kann u.U. mehrere Minuten in Anspruch nehmen. Suche wirklich fortsetzten?',
-        mtConfirmation,[mbYes,mbNo],0) = mrYes) then
-        ExecAOSearch();
-
-      if(msLANG_ID = 'EN') and (MessageDlg('Request','Search without exact match could take serveral minutes. Continue?',
-        mtConfirmation,[mbYes,mbNo],0) = mrYes) then
-        ExecAOSearch();
-    end;
-  end;
 end;
 
 procedure TF__ASTROTOOLBOX.CBX__PLUTOChange(Sender: TObject);
@@ -16292,17 +16333,10 @@ begin
   // Switch selection status!
   if(Sign <> nil) then
   begin
-    (*
-    if((molAOList[iAOIndex] as TStar).bSelSign) then
-      ShowMessage('Index: ' + IntToStr(iAOIndex) + ', bSelSign is TRUE')
-    else
-      ShowMessage('Index: ' + IntToStr(iAOIndex) + ', bSelSign is FALSE');
-    *)
     (molAOList[iAOIndex] as TStar).bSelSign := not Sign.bSelected; // Save selection status in star object
 
     SignActive(iSignIndex,not Sign.bSelected);
     CleanStartOfStarMap();
-    //GenMap(P__STARMAP);
   end;
 
 end;
@@ -16522,17 +16556,7 @@ end;
 
 procedure TF__ASTROTOOLBOX.P__NOWClick(Sender: TObject);
 begin
-  ClearSearch;
-
-  SetNow();
-  ReCalcPlanetPos(Now);
-
-  case PC__WORKBENCH.ActivePageIndex of
-    ciPAGE_DB: ShowAOTable();
-    ciPAGE_STARMAP: CleanStartOfStarmap();
-    ciPAGE_SOLSYS: ShowSolSys();
-  end;
-
+  SetVisuNow();
 end;
 
 procedure TF__ASTROTOOLBOX.P__PKClick(Sender: TObject);
@@ -16764,6 +16788,11 @@ begin
     begin
       PMENU__ASTEROIDS.Checked := bActive;
       mbShowAsteroids := PMENU__ASTEROIDS.Checked;
+    end;
+    ciAOF_TNO:
+    begin
+      PMENU__TNO.Checked := bActive;
+      mbShowTNO := PMENU__TNO.Checked;
     end;
     ciAOF_STAR_DESCR_LOW:
     begin
@@ -16999,10 +17028,84 @@ end;
 
 procedure TF__ASTROTOOLBOX.P__RECOM_LEFTClick(Sender: TObject);
 begin
+  PrevReComPic();
+end;
+
+procedure TF__ASTROTOOLBOX.PrevReComPic();
+var
+  bFound: Boolean;
+begin
+  bFound := false;
   if(miRecomIndex > 0) then
   begin
     Dec(miRecomIndex);
-    if(miRecomIndex > -1) and (mslRecommendedPics.Count > miRecomIndex) then
+
+    // Find next lower type specific index, if required
+    if(RB__RECOM_ALL.Checked) then
+    begin
+      bFound := true;
+    end
+    else
+    begin
+      bFound := false;
+      if(RB__RECOM_GC.Checked) then
+      begin
+        while ((miRecomIndex >= 0) and ((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType <> 'GC')) do
+        begin
+          Dec(miRecomIndex);
+        end;
+        if((miRecomIndex >= 0) and (((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType = 'GC'))) then
+          bFound := true;
+      end
+      else if (RB__RECOM_OC.Checked) then
+      begin
+        while ((miRecomIndex >= 0) and ((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType <> 'OC')) do
+        begin
+          Dec(miRecomIndex);
+        end;
+        if((miRecomIndex >= 0) and (((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType = 'OC'))) then
+          bFound := true;
+      end
+      else if (RB__RECOM_N.Checked) then
+      begin
+        while ((miRecomIndex >= 0) and ((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType <> 'N')) do
+        begin
+          Dec(miRecomIndex);
+        end;
+        if((miRecomIndex >= 0) and (((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType = 'N'))) then
+          bFound := true;
+      end
+      else if (RB__RECOM_PN.Checked) then
+      begin
+        while ((miRecomIndex >= 0) and ((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType <> 'PN')) do
+        begin
+          Dec(miRecomIndex);
+        end;
+        if((miRecomIndex >= 0) and (((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType = 'PN'))) then
+          bFound := true;
+      end
+      else if (RB__RECOM_G.Checked) then
+      begin
+        while ((miRecomIndex >= 0) and ((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType <> 'G')) do
+        begin
+          Dec(miRecomIndex);
+        end;
+        if((miRecomIndex >= 0) and (((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType = 'G'))) then
+          bFound := true;
+      end
+      else if (RB__RECOM_Q.Checked) then
+      begin
+        while ((miRecomIndex >= 0) and ((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType <> 'Q')) do
+        begin
+          Dec(miRecomIndex);
+        end;
+        if((miRecomIndex >= 0) and (((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType = 'Q'))) then
+          bFound := true;
+      end;
+
+    end;
+
+    if((bFound) and (mslRecommendedPics.Count > miRecomIndex) and (miRecomIndex > -1)) then
       ShowRecomImg();
   end;
 
@@ -17017,10 +17120,84 @@ end;
 
 procedure TF__ASTROTOOLBOX.P__RECOM_RIGHTClick(Sender: TObject);
 begin
-  if(miRecomIndex < mslRecommendedPics.Count - 2) then
+  NextReComPic();
+end;
+
+procedure TF__ASTROTOOLBOX.NextReComPic();
+var
+  bFound: Boolean;
+begin
+  bFound := false;
+  if(miRecomIndex < mslRecommendedPics.Count - 1) then
   begin
     Inc(miRecomIndex);
-    if(miRecomIndex > -1) and (mslRecommendedPics.Count > miRecomIndex) then
+
+    // Find next higher type specific index, if required
+    if(RB__RECOM_ALL.Checked) then
+    begin
+      bFound := true;
+    end
+    else
+    begin
+      bFound := false;
+      if(RB__RECOM_GC.Checked) then
+      begin
+        while ((mslRecommendedPics.Count > miRecomIndex) and ((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType <> 'GC')) do
+        begin
+          Inc(miRecomIndex);
+        end;
+        if((mslRecommendedPics.Count > miRecomIndex) and (((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType = 'GC'))) then
+          bFound := true;
+      end
+      else if (RB__RECOM_OC.Checked) then
+      begin
+        while ((mslRecommendedPics.Count > miRecomIndex) and ((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType <> 'OC')) do
+        begin
+          Inc(miRecomIndex);
+        end;
+        if((mslRecommendedPics.Count > miRecomIndex) and (((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType = 'OC'))) then
+          bFound := true;
+      end
+      else if (RB__RECOM_N.Checked) then
+      begin
+        while ((mslRecommendedPics.Count > miRecomIndex) and ((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType <> 'N')) do
+        begin
+          Inc(miRecomIndex);
+        end;
+        if((mslRecommendedPics.Count > miRecomIndex) and (((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType = 'N'))) then
+          bFound := true;
+      end
+      else if (RB__RECOM_PN.Checked) then
+      begin
+        while ((mslRecommendedPics.Count > miRecomIndex) and ((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType <> 'PN')) do
+        begin
+          Inc(miRecomIndex);
+        end;
+        if((mslRecommendedPics.Count > miRecomIndex) and (((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType = 'PN'))) then
+          bFound := true;
+      end
+      else if (RB__RECOM_G.Checked) then
+      begin
+        while ((mslRecommendedPics.Count > miRecomIndex) and ((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType <> 'G')) do
+        begin
+          Inc(miRecomIndex);
+        end;
+        if((mslRecommendedPics.Count > miRecomIndex) and (((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType = 'G'))) then
+          bFound := true;
+      end
+      else if (RB__RECOM_Q.Checked) then
+      begin
+        while ((mslRecommendedPics.Count > miRecomIndex) and ((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType <> 'Q')) do
+        begin
+          Inc(miRecomIndex);
+        end;
+        if((mslRecommendedPics.Count > miRecomIndex) and (((mslRecommendedPics.Objects[miRecomIndex] as TInterstellarObject).sAOType = 'Q'))) then
+          bFound := true;
+      end;
+
+    end;
+
+    if(bFound) and (miRecomIndex > -1) and (mslRecommendedPics.Count > miRecomIndex) then
       ShowRecomImg();
   end;
 
@@ -17431,6 +17608,54 @@ begin
   end;
 end;
 
+procedure TF__ASTROTOOLBOX.RB__RECOM_ALLClick(Sender: TObject);
+begin
+  miRecomIndex := 0;
+  NextReComPic();
+end;
+
+procedure TF__ASTROTOOLBOX.RB__RECOM_GCClick(Sender: TObject);
+begin
+  miRecomIndex := 0;
+  P__RECOM_LEFT.Font.Color := clGray;
+  NextReComPic();
+end;
+
+procedure TF__ASTROTOOLBOX.RB__RECOM_GClick(Sender: TObject);
+begin
+  miRecomIndex := 0;
+  P__RECOM_LEFT.Font.Color := clGray;
+  NextReComPic();
+end;
+
+procedure TF__ASTROTOOLBOX.RB__RECOM_NClick(Sender: TObject);
+begin
+  miRecomIndex := 0;
+  P__RECOM_LEFT.Font.Color := clGray;
+  NextReComPic();
+end;
+
+procedure TF__ASTROTOOLBOX.RB__RECOM_OCClick(Sender: TObject);
+begin
+  miRecomIndex := 0;
+  P__RECOM_LEFT.Font.Color := clGray;
+  NextReComPic();
+end;
+
+procedure TF__ASTROTOOLBOX.RB__RECOM_PNClick(Sender: TObject);
+begin
+  miRecomIndex := 0;
+  P__RECOM_LEFT.Font.Color := clGray;
+  NextReComPic();
+end;
+
+procedure TF__ASTROTOOLBOX.RB__RECOM_QClick(Sender: TObject);
+begin
+  miRecomIndex := 0;
+  P__RECOM_LEFT.Font.Color := clGray;
+  NextReComPic();
+end;
+
 procedure TF__ASTROTOOLBOX.RB__SChange(Sender: TObject);
 begin
   SetP__MAGSIZE(false);
@@ -17448,6 +17673,12 @@ end;
 procedure TF__ASTROTOOLBOX.RB__SClick(Sender: TObject);
 begin
   RB__S.Font.Color:=clGreen; RB__S.Repaint;
+end;
+
+procedure TF__ASTROTOOLBOX.SHP__MCMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  ShowTimeStat();
 end;
 
 procedure TF__ASTROTOOLBOX.SHP__ZINMouseUp(Sender: TObject; Button: TMouseButton;
@@ -17720,18 +17951,20 @@ begin
   MoveZoom(10,0);
 end;
 
+(*
 procedure TF__ASTROTOOLBOX.SHP__ZUMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  SHP__ZU.Color:=clFuchsia;
+//  SHP__ZU.Color:=clFuchsia;
 end;
 
 procedure TF__ASTROTOOLBOX.SHP__ZUMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  SHP__ZU.Color:=clAqua;
+//  SHP__ZU.Color:=clAqua;
   MoveZoom(0,-10);
 end;
+*)
 
 procedure TF__ASTROTOOLBOX.TB__LTMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
@@ -17877,12 +18110,6 @@ begin
       if(mbTimePlay) then
       begin
         SwitchTimePlay(); // Stop always real-time after fast Refresh inluding previous real-time mode.
-
-        if(msLANG_ID = 'DE') then
-          L__BOTTOM_INFO.Caption:= csREALTIMESTOPPED_DE
-        else
-          L__BOTTOM_INFO.Caption:= csREALTIMESTOPPED_EN;
-
       end;
     end;
   end;

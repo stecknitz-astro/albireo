@@ -1,18 +1,24 @@
 object F__DSGVO: TF__DSGVO
-  Left = 2689
+  Left = 651
   Height = 553
-  Top = 356
+  Top = 238
   Width = 681
   Caption = 'Datenschutz'
   ClientHeight = 553
   ClientWidth = 681
+  Color = 1052688
   OnShow = FormShow
-  LCLVersion = '2.0.10.0'
+  LCLVersion = '2.2.2.0'
   object MM__DE: TMemo
     Left = 62
     Height = 443
     Top = 16
     Width = 579
+    Color = clMaroon
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clYellow
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     Lines.Strings = (
       'Datenschutzerklärung'
       '-----------------------'
@@ -40,6 +46,8 @@ object F__DSGVO: TF__DSGVO
       'Um welche Daten es sich im Einzelnen handelt, findest Du in der Datenschutzerklärung auf stecknitz-astronomie.de '
       'unter der Adresse https://www.stecknitz-astronomie.de/datenschutzerklaerung/.'
     )
+    ParentFont = False
+    ScrollBars = ssVertical
     TabOrder = 0
   end
   object MM__EN: TMemo
@@ -47,6 +55,11 @@ object F__DSGVO: TF__DSGVO
     Height = 70
     Top = 475
     Width = 572
+    Color = clMaroon
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clYellow
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
     Lines.Strings = (
       'Data privacy statement'
       '------------------------'
@@ -76,6 +89,8 @@ object F__DSGVO: TF__DSGVO
       'If you need more information about the privacy statment of  www.stecknitz-astronomie.de please'
       'go to site  https://www.stecknitz-astronomie.de/datenschutzerklaerung/.'
     )
+    ParentFont = False
+    ScrollBars = ssVertical
     TabOrder = 1
   end
 end

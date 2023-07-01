@@ -1341,7 +1341,7 @@ begin
   sMKKTypeDE:=''; sMKKTypeEN:='';
   GRD__AOV_PROP.RowCount := 2; // Because of Multistar usage the grid must be correctly initalized each call of this procedure
 
-  GetMKKFromSpecType((mAObject as TStar).sSpType,miMStarIndex,sMKKTypeDE,sMKKTypeEN);
+  GetMKKFromSpecType((mAObject as TStar),miMStarIndex,sMKKTypeDE,sMKKTypeEN);
 
   if(((mAObject as TStar).sSym <> '') and ((mAObject as TStar).sCon <> '')) then
     P__AOVIS_CAPTION.Caption := (mAObject as TStar).sSym + ' ' + (mAObject as TInterStellarObject).sCon
@@ -2759,6 +2759,22 @@ begin
         Caption:='Zwergplanet - Details'
       else
         Caption:='Dwarf Planet - Details';
+    end;
+
+    if((mAObject as TPlanet).sPlanetType = 'T') then
+    begin
+      if(msLANG_ID = 'DE') then
+        Caption:='Transneptunischer Zwergplanet - Details'
+      else
+        Caption:='trans-Neptunian Dwarf Planet - Details';
+    end;
+
+    if((mAObject as TPlanet).sPlanetType = 't') then
+    begin
+      if(msLANG_ID = 'DE') then
+        Caption:='Transneptunischer Asteroid - Details'
+      else
+        Caption:='trans-Neptunian Asteroid - Details';
     end;
 
     ShowAOData_P();

@@ -1,7 +1,7 @@
 object F__STREAMING: TF__STREAMING
-  Left = -1575
+  Left = 296
   Height = 604
-  Top = 69
+  Top = 348
   Width = 540
   BorderIcons = [biSystemMenu]
   Caption = 'Streaming'

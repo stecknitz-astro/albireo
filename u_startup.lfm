@@ -1,34 +1,34 @@
 object F__STARTUP: TF__STARTUP
-  Left = 2723
-  Height = 364
-  Top = 241
-  Width = 478
+  Left = -1214
+  Height = 367
+  Top = 265
+  Width = 492
   BorderIcons = [biSystemMenu]
   BorderStyle = bsNone
   Caption = 'F__STARTUP'
-  ClientHeight = 364
-  ClientWidth = 478
+  ClientHeight = 367
+  ClientWidth = 492
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '2.0.10.0'
+  LCLVersion = '2.2.4.0'
   object P__BACKGROUND: TPanel
     Left = 0
-    Height = 364
+    Height = 367
     Top = 0
-    Width = 478
+    Width = 492
     Align = alClient
     BevelColor = clBlack
     BevelOuter = bvNone
-    ClientHeight = 364
-    ClientWidth = 478
+    ClientHeight = 367
+    ClientWidth = 492
     Color = clBlack
     ParentColor = False
     TabOrder = 0
     object IMG__BACKGROUND: TImage
       Left = 0
-      Height = 347
+      Height = 350
       Top = 0
-      Width = 478
+      Width = 492
       Align = alClient
       Center = True
       Picture.Data = {
@@ -1792,9 +1792,9 @@ object F__STARTUP: TF__STARTUP
       ParentFont = False
     end
     object L__VERSION: TLabel
-      Left = 330
+      Left = 160
       Height = 100
-      Top = 80
+      Top = 110
       Width = 152
       Alignment = taCenter
       AutoSize = False
@@ -1810,9 +1810,9 @@ object F__STARTUP: TF__STARTUP
       WordWrap = True
     end
     object L__TITLE: TLabel
-      Left = 32
+      Left = 40
       Height = 110
-      Top = 16
+      Top = 8
       Width = 400
       Alignment = taCenter
       AutoSize = False
@@ -1831,13 +1831,13 @@ object F__STARTUP: TF__STARTUP
     object P__BOTTOM: TPanel
       Left = 0
       Height = 17
-      Top = 347
-      Width = 478
+      Top = 350
+      Width = 492
       Align = alBottom
       BevelColor = clBlue
       BevelOuter = bvNone
       ClientHeight = 17
-      ClientWidth = 478
+      ClientWidth = 492
       Color = 1052704
       ParentColor = False
       TabOrder = 0

@@ -1,7 +1,7 @@
 object F__AOVIS: TF__AOVIS
-  Left = 2249
+  Left = -1396
   Height = 703
-  Top = 146
+  Top = 162
   Width = 1074
   Caption = 'Object Visualisation'
   ClientHeight = 703
@@ -15,7 +15,7 @@ object F__AOVIS: TF__AOVIS
   OnShow = FormShow
   OnWindowStateChange = FormWindowStateChange
   Position = poMainFormCenter
-  LCLVersion = '2.0.10.0'
+  LCLVersion = '2.2.4.0'
   object P__AOVIS_CAPTION: TPanel
     Left = 0
     Height = 50
@@ -28190,16 +28190,16 @@ object F__AOVIS: TF__AOVIS
       end
       object TS__SIZECOMP: TTabSheet
         Caption = 'Größenvergleich'
-        ClientHeight = 877
-        ClientWidth = 1544
+        ClientHeight = 623
+        ClientWidth = 1064
         object P__MAIN_SIZECOMP: TPanel
           Left = 0
-          Height = 877
+          Height = 623
           Top = 0
-          Width = 1544
+          Width = 1064
           Align = alClient
-          ClientHeight = 877
-          ClientWidth = 1544
+          ClientHeight = 623
+          ClientWidth = 1064
           Color = clBlack
           ParentColor = False
           TabOrder = 0
@@ -28216,7 +28216,7 @@ object F__AOVIS: TF__AOVIS
             Stretch = True
           end
           object IMG__REF: TImage
-            Left = 1025
+            Left = 545
             Height = 272
             Top = 112
             Width = 70
@@ -28226,7 +28226,7 @@ object F__AOVIS: TF__AOVIS
             Stretch = True
           end
           object SHP__REF: TShape
-            Left = 1068
+            Left = 588
             Height = 58
             Top = 72
             Width = 48
@@ -28284,18 +28284,18 @@ object F__AOVIS: TF__AOVIS
           end
           object P__SCALING: TPanel
             Left = 1
-            Height = 875
+            Height = 621
             Top = 1
             Width = 63
             Align = alLeft
-            ClientHeight = 875
+            ClientHeight = 621
             ClientWidth = 63
             Color = 2101264
             ParentColor = False
             TabOrder = 0
             object TB__AOV: TTrackBar
               Left = 1
-              Height = 843
+              Height = 589
               Top = 31
               Width = 40
               Frequency = 10
@@ -28365,23 +28365,23 @@ object F__AOVIS: TF__AOVIS
       end
       object TS__HRD: TTabSheet
         Caption = 'HR-Diagramm'
-        ClientHeight = 877
-        ClientWidth = 1544
+        ClientHeight = 623
+        ClientWidth = 1064
         object P__HRD: TPanel
           Left = 0
-          Height = 877
+          Height = 623
           Top = 0
-          Width = 1544
+          Width = 1064
           Align = alClient
           BevelColor = clBlack
-          ClientHeight = 877
-          ClientWidth = 1544
+          ClientHeight = 623
+          ClientWidth = 1064
           Color = clBlack
           ParentColor = False
           TabOrder = 0
           object IMG_HRD: TImage
             Left = 1
-            Height = 875
+            Height = 621
             Top = 1
             Width = 1143
             Align = alLeft
@@ -35017,22 +35017,22 @@ object F__AOVIS: TF__AOVIS
             Visible = False
           end
           object P__HRDATA: TPanel
-            Left = 1144
-            Height = 875
+            Left = 1063
+            Height = 621
             Top = 1
-            Width = 399
+            Width = 0
             Align = alClient
             Caption = 'P__HRDATA'
-            ClientHeight = 875
-            ClientWidth = 399
+            ClientHeight = 621
+            ClientWidth = 0
             Color = 1052688
             ParentColor = False
             TabOrder = 0
             object GRD__HRD_MK: TStringGrid
-              Left = 1
+              Left = 0
               Height = 248
               Top = 1
-              Width = 397
+              Width = 0
               Align = alTop
               AlternateColor = 4605510
               Anchors = [akTop, akRight]
@@ -35055,10 +35055,10 @@ object F__AOVIS: TF__AOVIS
               TabOrder = 0
             end
             object CHART__SPEC: TChart
-              Left = 1
+              Left = 0
               Height = 218
               Top = 249
-              Width = 397
+              Width = 0
               AxisList = <              
                 item
                   Marks.LabelFont.Color = clWhite
@@ -35115,18 +35115,18 @@ object F__AOVIS: TF__AOVIS
       end
       object TS__MOONS: TTabSheet
         Caption = 'Mond(e)'
-        ClientHeight = 877
-        ClientWidth = 1544
+        ClientHeight = 623
+        ClientWidth = 1064
         TabVisible = False
         object P__MOONS: TPanel
           Left = 0
-          Height = 821
+          Height = 567
           Top = 56
-          Width = 1544
+          Width = 1064
           Align = alClient
           Anchors = [akRight, akBottom]
-          ClientHeight = 821
-          ClientWidth = 1544
+          ClientHeight = 567
+          ClientWidth = 1064
           Color = clBlack
           Font.CharSet = ANSI_CHARSET
           Font.Color = clMaroon
@@ -35141,7 +35141,7 @@ object F__AOVIS: TF__AOVIS
             Left = 1
             Height = 27
             Top = 1
-            Width = 1542
+            Width = 1062
             Align = alTop
             Color = 4605510
             Font.CharSet = ANSI_CHARSET
@@ -35158,9 +35158,9 @@ object F__AOVIS: TF__AOVIS
           end
           object IMG__MOON: TImage
             Left = 386
-            Height = 792
+            Height = 538
             Top = 28
-            Width = 1157
+            Width = 677
             Align = alClient
             OnClick = IMG__MOONClick
             Proportional = True
@@ -35168,11 +35168,11 @@ object F__AOVIS: TF__AOVIS
           end
           object P__MOONS_INFO: TPanel
             Left = 1
-            Height = 792
+            Height = 538
             Top = 28
             Width = 385
             Align = alLeft
-            ClientHeight = 792
+            ClientHeight = 538
             ClientWidth = 385
             Color = 1052688
             ParentColor = False
@@ -35353,10 +35353,10 @@ object F__AOVIS: TF__AOVIS
           Left = 0
           Height = 56
           Top = 0
-          Width = 1544
+          Width = 1064
           Align = alTop
           ClientHeight = 56
-          ClientWidth = 1544
+          ClientWidth = 1064
           Color = 2105376
           ParentColor = False
           TabOrder = 1
@@ -35495,24 +35495,24 @@ object F__AOVIS: TF__AOVIS
       end
       object TS__PHOTOS: TTabSheet
         Caption = 'Fotos'
-        ClientHeight = 877
-        ClientWidth = 1544
+        ClientHeight = 623
+        ClientWidth = 1064
         object P__MYPHOTOS: TPanel
           Left = 0
-          Height = 846
+          Height = 592
           Top = 0
-          Width = 1544
+          Width = 1064
           Align = alClient
-          ClientHeight = 846
-          ClientWidth = 1544
+          ClientHeight = 592
+          ClientWidth = 1064
           Color = 1052688
           ParentColor = False
           TabOrder = 0
           object PC__OBSERVATION: TPageControl
             Left = 1
-            Height = 844
+            Height = 590
             Top = 1
-            Width = 1542
+            Width = 1062
             ActivePage = TS__OBSERVATION_PHOTO_1
             Align = alClient
             Font.CharSet = ANSI_CHARSET
@@ -35526,24 +35526,24 @@ object F__AOVIS: TF__AOVIS
             TabOrder = 0
             object TS__OBSERVATION_PHOTO_1: TTabSheet
               Caption = 'Foto 1'
-              ClientHeight = 816
-              ClientWidth = 1534
+              ClientHeight = 562
+              ClientWidth = 1054
               object P__IMAGE1: TPanel
                 Left = 0
-                Height = 816
+                Height = 562
                 Top = 0
-                Width = 1534
+                Width = 1054
                 Align = alClient
                 BevelColor = 1052688
-                ClientHeight = 816
-                ClientWidth = 1534
+                ClientHeight = 562
+                ClientWidth = 1054
                 TabOrder = 0
                 object IMG__AO_USER_1: TImage
                   Cursor = crHandPoint
                   Left = 1
-                  Height = 814
+                  Height = 560
                   Top = 1
-                  Width = 1532
+                  Width = 1052
                   Align = alClient
                   Center = True
                   OnClick = IMG__AO_USER_1Click
@@ -35586,23 +35586,23 @@ object F__AOVIS: TF__AOVIS
             end
             object TS__OBSERVATION_PHOTO_2: TTabSheet
               Caption = 'Foto 2'
-              ClientHeight = 546
-              ClientWidth = 986
+              ClientHeight = 562
+              ClientWidth = 1054
               object P__IMAGE2: TPanel
                 Left = 0
-                Height = 546
+                Height = 562
                 Top = 0
-                Width = 986
+                Width = 1054
                 Align = alClient
-                ClientHeight = 546
-                ClientWidth = 986
+                ClientHeight = 562
+                ClientWidth = 1054
                 TabOrder = 0
                 object IMG__AO_USER_2: TImage
                   Cursor = crHandPoint
                   Left = 1
-                  Height = 544
+                  Height = 560
                   Top = 1
-                  Width = 984
+                  Width = 1052
                   Align = alClient
                   Center = True
                   OnClick = IMG__AO_USER_2Click
@@ -35645,23 +35645,23 @@ object F__AOVIS: TF__AOVIS
             end
             object TS__OBSERVATION_PHOTO_3: TTabSheet
               Caption = 'Foto 3'
-              ClientHeight = 546
-              ClientWidth = 986
+              ClientHeight = 562
+              ClientWidth = 1054
               object P__IMAGE3: TPanel
                 Left = 0
-                Height = 546
+                Height = 562
                 Top = 0
-                Width = 986
+                Width = 1054
                 Align = alClient
-                ClientHeight = 546
-                ClientWidth = 986
+                ClientHeight = 562
+                ClientWidth = 1054
                 TabOrder = 0
                 object IMG__AO_USER_3: TImage
                   Cursor = crHandPoint
                   Left = 1
-                  Height = 544
+                  Height = 560
                   Top = 1
-                  Width = 984
+                  Width = 1052
                   Align = alClient
                   Center = True
                   OnClick = IMG__AO_USER_3Click
@@ -35707,18 +35707,18 @@ object F__AOVIS: TF__AOVIS
         object P__AOV_PHOTOBUTTONS: TPanel
           Left = 0
           Height = 31
-          Top = 846
-          Width = 1544
+          Top = 592
+          Width = 1064
           Align = alBottom
           BevelColor = 1052688
           BevelOuter = bvNone
           ClientHeight = 31
-          ClientWidth = 1544
+          ClientWidth = 1064
           Color = 1052688
           ParentColor = False
           TabOrder = 1
           object B__PHOTO_ADD: TButton
-            Left = 1420
+            Left = 940
             Height = 22
             Top = 5
             Width = 112
@@ -35728,7 +35728,7 @@ object F__AOVIS: TF__AOVIS
             TabOrder = 0
           end
           object B__PHOTO_DEL: TButton
-            Left = 1340
+            Left = 860
             Height = 22
             Top = 5
             Width = 75
