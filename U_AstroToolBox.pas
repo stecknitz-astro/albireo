@@ -1006,6 +1006,7 @@ type
     procedure P__SOLSYSClick(Sender: TObject);
     procedure P__SOLSYSPaint(Sender: TObject);
     procedure P__INCLPaint(Sender: TObject);
+    procedure P__STARMAPClick(Sender: TObject);
     procedure P__STARMAPMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
     procedure P__STARMAPMouseUp(Sender: TObject; Button: TMouseButton;
@@ -17245,6 +17246,11 @@ begin
     mbOnSolSysPaintBusy := false;
   end;
   {$ENDIF Darwin}
+end;
+
+procedure TF__ASTROTOOLBOX.P__STARMAPClick(Sender: TObject);
+begin
+
 end;
 
 procedure TF__ASTROTOOLBOX.P__STARMAPMouseMove(Sender: TObject;

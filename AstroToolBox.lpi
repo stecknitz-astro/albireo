@@ -164,15 +164,15 @@
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="9"/>
-        <TopLine Value="14743"/>
-        <CursorPos X="47" Y="14757"/>
+        <TopLine Value="17251"/>
+        <CursorPos X="3" Y="17253"/>
         <UsageCount Value="204"/>
         <Bookmarks Count="5">
-          <Item0 X="17" Y="7804" ID="4"/>
-          <Item1 X="5" Y="12595" ID="8"/>
-          <Item2 X="6" Y="7150" ID="5"/>
-          <Item3 X="6" Y="14486" ID="1"/>
-          <Item4 X="15" Y="7499" ID="2"/>
+          <Item0 X="17" Y="7805" ID="4"/>
+          <Item1 X="5" Y="12596" ID="8"/>
+          <Item2 X="6" Y="7151" ID="5"/>
+          <Item3 X="6" Y="14487" ID="1"/>
+          <Item4 X="15" Y="7500" ID="2"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -782,43 +782,43 @@
       </Position5>
       <Position6>
         <Filename Value="U_Prefs.pas"/>
-        <Caret Line="351" Column="3" TopLine="363"/>
+        <Caret Line="257" Column="6" TopLine="254"/>
       </Position6>
       <Position7>
         <Filename Value="U_Prefs.pas"/>
-        <Caret Line="257" Column="6" TopLine="254"/>
+        <Caret Line="115" Column="18" TopLine="99"/>
       </Position7>
       <Position8>
         <Filename Value="U_Prefs.pas"/>
-        <Caret Line="115" Column="18" TopLine="99"/>
+        <Caret Line="496" TopLine="484"/>
       </Position8>
       <Position9>
         <Filename Value="U_Prefs.pas"/>
-        <Caret Line="496" TopLine="484"/>
+        <Caret Line="498" TopLine="484"/>
       </Position9>
       <Position10>
         <Filename Value="U_Prefs.pas"/>
-        <Caret Line="498" TopLine="484"/>
+        <Caret Line="499" TopLine="484"/>
       </Position10>
       <Position11>
         <Filename Value="U_Prefs.pas"/>
-        <Caret Line="499" TopLine="484"/>
+        <Caret Line="496" TopLine="484"/>
       </Position11>
       <Position12>
         <Filename Value="U_Prefs.pas"/>
-        <Caret Line="496" TopLine="484"/>
+        <Caret Line="495" TopLine="483"/>
       </Position12>
       <Position13>
         <Filename Value="U_Prefs.pas"/>
-        <Caret Line="495" TopLine="483"/>
+        <Caret Line="496" TopLine="484"/>
       </Position13>
       <Position14>
-        <Filename Value="U_Prefs.pas"/>
-        <Caret Line="496" TopLine="484"/>
+        <Filename Value="U_AstroToolBox.pas"/>
+        <Caret Line="14745" Column="3" TopLine="14743"/>
       </Position14>
       <Position15>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="14745" Column="3" TopLine="14743"/>
+        <Caret Line="14758" Column="47" TopLine="14744"/>
       </Position15>
     </JumpHistory>
   </ProjectOptions>
