@@ -133,6 +133,7 @@ begin
     if(sText = 'Bitte lesen') then begin Result := 'Please read'; exit; end;
     if(sText = 'Bitte Sternbild auswählen') then begin Result := 'Please select constellation'; exit; end;
     if(sText = 'Bittiefe') then begin Result := 'Bit depth'; exit; end;
+    if(sText = 'Blau') then begin Result := 'Blue'; exit; end;
     if(sText = 'Blende') then begin Result := 'Diaphragm'; exit; end;
     if(sText = 'Braune Zwerge') then begin Result := 'Brown Dwarfs'; exit; end;
     if(sText = 'Brennweite') then begin Result := 'Focal length'; exit; end;
@@ -216,6 +217,7 @@ begin
     if(sText = 'Greenwich Zeitverschiebung bei Winterzeit') then begin Result := 'Greenwich Delay at Winter Time'; exit; end;
     if(sText = 'Grenzgröße') then begin Result := 'Max. Mag.'; exit; end;
     if(sText = 'Größenvergleich') then begin Result := 'Size comparison'; exit; end;
+    if(sText = 'Grün') then begin Result := 'Green'; exit; end;
     if(sText = 'Hersteller') then begin Result := 'Manufacturer'; exit; end;
     if(sText = 'Hervorheben') then begin Result := 'Highlight'; exit; end;
     if(sText = 'Heute') then begin Result := 'Today'; exit; end;
@@ -256,7 +258,7 @@ begin
     if(sText = 'Kommentar...') then begin Result := 'Comment...'; exit; end;
     if(sText = 'Kugelsternhaufen') then begin Result := 'Globular Cluster'; exit; end;
     if(sText = 'Kulmination') then begin Result := 'Culmination'; exit; end;
-    if(sText = 'Länge östl. Greenwich') then begin Result := 'Longitude east of Greenwich'; exit; end;
+    if(sText = 'Länge östl. Greenwich') then begin Result := 'Longitude Greenwich E'; exit; end;
     if(sText = 'Leuchtkraftklassen') then begin Result := 'Luminosity Classes'; exit; end;
     if(sText = 'Lichtjahre') then begin Result := 'Lightyears'; exit; end;
     if(sText = 'Lichtminuten') then begin Result := 'Lightminutes'; exit; end;
@@ -345,6 +347,7 @@ begin
     if(sText = 'Refreshrate [Minuten]') then begin Result := 'Refreshrate [Minutes]'; exit; end;
     if(sText = 'Registrierungsformular') then begin Result := 'Registration Form'; exit; end;
     if(sText = 'Rektaszension') then begin Result := 'Right Ascension'; exit; end;
+    if(sText = 'Rot') then begin Result := 'Red'; exit; end;
     if(sText = 'Scheinbare Größe') then begin Result := 'Apparent Size'; exit; end;
     if(sText = 'Scheinbare Helligkeit') then begin Result := 'Apparent Magnitude'; exit; end;
     if(sText = 'schwach') then begin Result := 'faint'; exit; end;
@@ -485,6 +488,7 @@ begin
     if(sText = '(Background limitation)') then begin Result := '(Hintergrundlimitierung)'; exit; end;
     if(sText = 'Background signal') then begin Result := 'Hintergrundsignal'; exit; end;
     if(sText = 'Bit depth') then begin Result := 'Bittiefe'; exit; end;
+    if(sText = 'Blue') then begin Result := 'Blau'; exit; end;
     if(sText = 'Brown Dwarfs') then begin Result := 'Braune Zwerge'; exit; end;
     if(sText = 'Calculate') then begin Result := 'Berechne'; exit; end;
     if(sText = 'Calculate object size') then begin Result := 'Berechne Objektgröße'; exit; end;
@@ -590,6 +594,7 @@ begin
     if(sText = 'Geog. Longitude') then begin Result := 'Geogr. Länge'; exit; end;
     if(sText = 'German') then begin Result := 'Deutsch'; exit; end;
     if(sText = 'Globular Cluster') then begin Result := 'Kugelsternhaufen'; exit; end;
+    if(sText = 'Green') then begin Result := 'Grün'; exit; end;
     if(sText = 'Greenwich Delay at Winter Time') then begin Result := 'Greenwich Zeitverschiebung bei Winterzeit'; exit; end;
     if(sText = 'Help') then begin Result := 'Hilfe'; exit; end;
     if(sText = 'Hide') then begin Result := 'Verbergen'; exit; end;
@@ -629,7 +634,7 @@ begin
     if(sText = 'Lightyears') then begin Result := 'Lichtjahre'; exit; end;
     if(sText = 'Line Thickness') then begin Result := 'Linienstärke'; exit; end;
     if(sText = 'Location') then begin Result := 'Standort'; exit; end;
-    if(sText = 'Longitude east of Greenwich') then begin Result := 'Länge östl. Greenwich'; exit; end;
+    if(sText = 'Longitude Greenwich E') then begin Result := 'Länge östl. Greenwich'; exit; end;
     if(sText = 'Low') then begin Result := 'Wenig'; exit; end;
     if(sText = 'Low PC Resources') then begin Result := 'Geringe PC-Ressourcen'; exit; end;
     if(sText = 'Luminosity Classes') then begin Result := 'Leuchtkraftklassen'; exit; end;
@@ -724,6 +729,7 @@ begin
     if(sText = 'Realistic') then begin Result := 'Realistisch'; exit; end;
     if(sText = 'Real-Time START') then begin Result := 'Echtzeit START'; exit; end;
     if(sText = 'Real-Time STOP') then begin Result := 'Echtzeit STOP'; exit; end;
+    if(sText = 'Red') then begin Result := 'Rot'; exit; end;
     if(sText = 'Refreshrate [Minutes]') then begin Result := 'Refreshrate [Minuten]'; exit; end;
     if(sText = 'Registration Form') then begin Result := 'Registrierungsformular'; exit; end;
     if(sText = 'Remove') then begin Result := 'Entfernen'; exit; end;

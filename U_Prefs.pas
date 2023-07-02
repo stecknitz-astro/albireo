@@ -60,12 +60,17 @@ type
     GBX__COUNTRIES: TGroupBox;
     GBX__CITY: TGroupBox;
     GBX__GOTO_OUT: TGroupBox;
+    GBX__CNST: TGroupBox;
     Image1: TImage;
     IMG__HOR_1: TImage;
     IMG__HOR_0: TImage;
     IMG__DE: TImage;
     IMG__BUTTONS: TImage;
     IMG__EN: TImage;
+    L__LTHICKNESS: TLabel;
+    L__CNST_COL_RED: TLabel;
+    L__CNST_COL_LIME: TLabel;
+    L__CNST_COL_BLUE: TLabel;
     L__GOTO_OUT: TLabel;
     L__HORPIC: TLabel;
     LB__CITY: TListBox;
@@ -81,6 +86,9 @@ type
     L__GLAT_MIN: TLabel;
     L__GDEG: TLabel;
     L__GLAT: TLabel;
+    RB__CNST_COL_RED: TRadioButton;
+    RB__CNST_COL_LIME: TRadioButton;
+    RB__CNST_COL_BLUE: TRadioButton;
     RB__HOR_2: TRadioButton;
     RB__HOR_0: TRadioButton;
     RB__HOR_1: TRadioButton;
@@ -127,6 +135,7 @@ type
     miLThickness: ShortInt; // Visualisation Line Thickness
     miLandscapeNo: Integer; // Horizon View
     msGotoOutputDir: string; // Directory for GoTo control files
+    mCColor: TColor;
 
   end;
 
@@ -274,7 +283,7 @@ procedure TF__PREFS.B__RESETClick(Sender: TObject);
 begin
   msDST := 'MESZ';
   msCountry := 'Deutschland';
-  msCity := 'Frankfurt a. M.'; // Berkenthin
+  msCity := 'Frankfurt a. M.';
 
   miGLat_DEG := 50; // 53
   miGLat_MIN := 7;  // 40
@@ -293,6 +302,9 @@ begin
   RB__HOR_0.Checked:=true;
   RB__HOR_1.Checked:=false;
   RB__HOR_2.Checked:=false;
+
+  miLThickness := 2;
+  mCColor := clRed;
 
   {$IFDEF LINUX}
   ED__GOTO_OUT.Text := '~/';
@@ -369,6 +381,15 @@ begin
   mbHDust := CBX__HDUST.Checked;
   miLThickness := ED__LTHICKNESS.Value;
 
+  if(RB__CNST_COL_RED.Checked) then
+    mCColor := clRed
+  else if (RB__CNST_COL_LIME.Checked) then
+    mCColor := clLime
+  else if(RB__CNST_COL_BLUE.checked) then
+    mCColor := clAqua
+  else
+    mCColor := clRed;
+
   if(RB__HOR_0.Checked) then
     miLandscapeNo := 0
   else if(RB__HOR_1.Checked) then
@@ -422,6 +443,15 @@ begin
 
   ED__LTHICKNESS.Value := miLThickness;
 
+  if(mCColor = clRed) then
+    begin RB__CNST_COL_RED.Checked := true; RB__CNST_COL_LIME.Checked := false; RB__CNST_COL_BLUE.Checked := false; end
+  else if (mCColor = clLime) then
+    begin RB__CNST_COL_RED.Checked := false; RB__CNST_COL_LIME.Checked := true; RB__CNST_COL_BLUE.Checked := false; end
+  else if(mCColor = clAqua) then
+    begin RB__CNST_COL_RED.Checked := false; RB__CNST_COL_LIME.Checked := false; RB__CNST_COL_BLUE.Checked := true; end
+  else
+    begin RB__CNST_COL_RED.Checked := true; RB__CNST_COL_LIME.Checked := false; RB__CNST_COL_BLUE.Checked := false; end;
+
   case miLandscapeNo of
     0:
     begin
@@ -464,6 +494,14 @@ begin
   IniFile.WriteInteger('CONF','LANDSCAPE',miLandscapeNo);
   IniFile.WriteString('CONF','GOTOOUTDIR',msGotoOutputDir);
   IniFile.WriteInteger('CONF','RSCLVL',giRSCLvl);
+  if(mCColor = clRed) then
+    begin IniFile.WriteInteger('CONF','CCOLOR',0); end
+  else if (mCColor = clLime) then
+    begin IniFile.WriteInteger('CONF','CCOLOR',1); end
+  else if(mCColor = clAqua) then
+    begin IniFile.WriteInteger('CONF','CCOLOR',2); end
+  else
+    begin IniFile.WriteInteger('CONF','CCOLOR',0); end;
 
   if(mbHDust) then
     IniFile.WriteInteger('CONF','HDUST',1)

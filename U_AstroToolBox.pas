@@ -1144,6 +1144,7 @@ type
     miLThickness: ShortInt; // Visualisation line thickness
     msTinyStarFirstCatNo: string; // First *imported* tiny star id
     miTinyStarBlockWidth: Integer; // Width of tiny star block to jump over in GenStarMap();
+    mCColor: TColor;
 
     msUserPath: string;
 
@@ -9280,15 +9281,15 @@ begin
     PlotRing(Panel,bgColor,iR0,iX0,iY0,100);
   end;
 
-  Panel.Canvas.Pen.Color := clRed;
+  Panel.Canvas.Pen.Color := mCColor;
   Panel.Canvas.Pen.Width:=miLThickness;
   Panel.Canvas.Brush.Color:=clBlue;
   Panel.Canvas.Brush.Style:=bsClear;
-  Panel.Canvas.Font.Color := clRed;
+  Panel.Canvas.Font.Color := mCColor;
 
   if(miStarmapView = 0) and (not mbZoomMode) then
   begin
-    Panel.Canvas.Pen.Width:=3;
+    //Panel.Canvas.Pen.Width:=3;
     Panel.Canvas.EllipseC(iX0,iY0,iY0+2,iY0+2);
     Panel.Canvas.Font.Size := 10;
 
@@ -9299,8 +9300,7 @@ begin
 
       if((i mod 10) = 0) then
       begin
-        Panel.Canvas.Pen.Color:=clRed;
-        Panel.Canvas.Pen.Width:=3;
+        Panel.Canvas.Pen.Color:=mCColor;
         Panel.Canvas.Line(Round(iX0+iY0*sin(rAngle)),Round(iY0+iY0*cos(rAngle)),
           Round(iX0+(iY0+9)*sin(rAngle)),Round(iY0+(iY0+9)*cos(rAngle)));
 
@@ -9313,8 +9313,7 @@ begin
       end
       else if((i mod 5) = 0) then
       begin
-        Panel.Canvas.Pen.Color:=clRed;
-        Panel.Canvas.Pen.Width:=2;
+        Panel.Canvas.Pen.Color:=mCColor;
 
         Panel.Canvas.Line(Round(iX0+iY0*sin(rAngle)),Round(iY0+iY0*cos(rAngle)),
           Round(iX0+(iY0+7)*sin(rAngle)),Round(iY0+(iY0+7)*cos(rAngle)));
@@ -9322,7 +9321,6 @@ begin
       else if((i mod 2) = 0) then
       begin
         Panel.Canvas.Pen.Color:=clBlue;
-        Panel.Canvas.Pen.Width:=2;
 
         Panel.Canvas.Line(Round(iX0+iY0*sin(rAngle)),Round(iY0+iY0*cos(rAngle)),
           Round(iX0+(iY0+6)*sin(rAngle)),Round(iY0+(iY0+6)*cos(rAngle)));
@@ -9339,7 +9337,7 @@ begin
     if(msLANG_ID = 'EN') then
       Panel.Canvas.TextOut(iX0-iY0-50,iY0,'E');
 
-    Panel.Canvas.Font.Color := clRed;
+    Panel.Canvas.Font.Color := mCColor;
     Panel.Canvas.Font.Size := 12;
 
     // Print Zenith Cross
@@ -9453,7 +9451,7 @@ begin
             if(Sign <> nil) and (Sign.bSelected) then
               Panel.Canvas.Pen.Color := clYellow
             else
-              Panel.Canvas.Pen.Color := clRed;
+              Panel.Canvas.Pen.Color := mCColor;
 
             Panel.Canvas.Brush.Color:=clSkyBlue;
 
@@ -12935,6 +12933,7 @@ begin
   F__PREFS.miLandscapeNo := miLandscapeNo;
   F__PREFS.msGotoOutputDir:=msGotoOutputDir;
   F__PREFS.CBX__LOWHIGHRES.Checked:=(giRSCLvl = 0);
+  F__PREFS.mCColor := mCColor;
 
   if(F__PREFS.ShowModal = mrOK) then
   begin
@@ -12955,6 +12954,7 @@ begin
     miLThickness := F__PREFS.miLThickness;
     miLandscapeNo := F__PREFS.miLandscapeNo;
     msGotoOutputDir := F__PREFS.msGotoOutputDir;
+    mCColor := F__PREFS.mCColor;
 
     if(F__PREFS.CBX__LOWHIGHRES.Checked) then
       giRSCLvl := 0
@@ -13122,9 +13122,9 @@ begin
   {$ENDIF LINUX}
 
   {$IFDEF Windows}
-  ED__WT_HH.Font.Size := 34;
-  ED__WT_MM.Font.Size := 34;
-  ED__WT_SS.Font.Size := 34;
+  ED__WT_HH.Font.Size := 28;
+  ED__WT_MM.Font.Size := 28;
+  ED__WT_SS.Font.Size := 28;
 
   P__MAGSIZE.Width:=70;
   {$ENDIF Windows}
@@ -13509,6 +13509,14 @@ begin
 
     mbHDust := (IniFile.ReadInteger('CONF','HDUST',1) = 1);
     miLThickness := IniFile.ReadInteger('CONF','LTHICKNESS',1);
+
+    if(IniFile.ReadInteger('CONF','CCOLOR',0) = 0) then
+      mCCOLOR := clRed
+    else if(IniFile.ReadInteger('CONF','CCOLOR',0) = 1) then
+      mCCOLOR := clLime
+    else if(IniFile.ReadInteger('CONF','CCOLOR',0) = 2) then
+      mCCOLOR := clAqua;
+
     PMENU__LT_1.Checked:=(miLThickness = 1);
     PMENU__LT_2.Checked:=(miLThickness = 2);
     PMENU__LT_3.Checked:=(miLThickness = 3);
