@@ -165,7 +165,7 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="9"/>
         <TopLine Value="17251"/>
-        <CursorPos X="3" Y="17253"/>
+        <CursorPos X="37" Y="17270"/>
         <UsageCount Value="204"/>
         <Bookmarks Count="5">
           <Item0 X="17" Y="7805" ID="4"/>
@@ -743,7 +743,7 @@
         <Filename Value="..\..\..\Albireo\ToDo.txt"/>
         <TopLine Value="657"/>
         <CursorPos X="18" Y="666"/>
-        <UsageCount Value="16"/>
+        <UsageCount Value="17"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit61>
