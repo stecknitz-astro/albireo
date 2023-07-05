@@ -75,6 +75,7 @@ const
  ciAOF_COO_EQU_RA = 23;
  ciAOF_COO_EQU_DEC = 24;
  ciAOF_TNO = 25;
+ ciAOF_VOIDS = 26;
 
  // Page index
  ciPAGE_ALBIREO = 0;
@@ -257,6 +258,7 @@ type
     MenuItem14: TMenuItem;
     MenuItem15: TMenuItem;
     MenuItem16: TMenuItem;
+    PMENU__VOIDS: TMenuItem;
     PMENU__MAP_FULL: TMenuItem;
     PMENU__TNO: TMenuItem;
     Separator1: TMenuItem;
@@ -886,6 +888,7 @@ type
     procedure PMENU__MAP_FULLClick(Sender: TObject);
     procedure PMENU__RA_SCALAClick(Sender: TObject);
     procedure PMENU__TNOClick(Sender: TObject);
+    procedure PMENU__VOIDSClick(Sender: TObject);
     procedure P__ASTROCALCClick(Sender: TObject);
     procedure P__ASTROCALCMouseEnter(Sender: TObject);
     procedure P__ASTROCALCMouseLeave(Sender: TObject);
@@ -1185,6 +1188,7 @@ type
     mbShowConstellations: Boolean;
     mbShowPoleP: Boolean; // Show pole precession path
     mbShowTNO: Boolean; // Show trans-Neptunian objects
+    mbShowVOIDS: Boolean; // Show void locations
 
     mbSearch: Boolean; // Search Mode
     mbSearchMsg: Boolean; // Display waring messages only 1 time per serach
@@ -8021,12 +8025,20 @@ begin
         if( (molAOList[i] as TStar).sSpType = 'MARK-VOID')
           and ((molAOList[i] as TAObject).SHP <> nil) then
         begin
-          (molAOList[i] as TAObject).SHP.OnMouseUp := @AOVisOnMouseUp;
-        end;
+          if(mbShowVoids) then
+          begin
+            (molAOList[i] as TAObject).SHP.OnMouseUp := @AOVisOnMouseUp;
 
-        (molAOList[i] as TAObject).SHP.ShowHint := true;
-        (molAOList[i] as TAObject).SHP.Tag:=i;
-        (molAOList[i] as TAObject).SHP.Parent := WinControl;
+            (molAOList[i] as TAObject).SHP.ShowHint := true;
+            (molAOList[i] as TAObject).SHP.Tag:=i;
+            (molAOList[i] as TAObject).SHP.Parent := WinControl;
+          end
+          else
+          begin
+            (molAOList[i] as TAObject).SHP.Visible:=false;
+            (molAOList[i] as TAObject).SHP.Parent := nil;
+          end;
+        end;
       end;
 
       // Plot meteor shower image near main star
@@ -14777,6 +14789,11 @@ begin
   ActivateAOFeature(ciAOF_TNO, not PMENU__TNO.Checked);
 end;
 
+procedure TF__ASTROTOOLBOX.PMENU__VOIDSClick(Sender: TObject);
+begin
+  ActivateAOFeature(ciAOF_Voids, not PMENU__VOIDS.Checked);
+end;
+
 procedure TF__ASTROTOOLBOX.P__ASTROCALCClick(Sender: TObject);
 begin
   P__ASTROCALC.Color:=$00101010;
@@ -16802,6 +16819,11 @@ begin
     begin
       PMENU__TNO.Checked := bActive;
       mbShowTNO := PMENU__TNO.Checked;
+    end;
+    ciAOF_VOIDS:
+    begin
+      PMENU__VOIDS.Checked := bActive;
+      mbShowVoids := PMENU__VOIDS.Checked;
     end;
     ciAOF_STAR_DESCR_LOW:
     begin
