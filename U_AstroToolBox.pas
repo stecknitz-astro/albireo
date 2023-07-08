@@ -84,6 +84,7 @@ const
  ciPAGE_STARMAP = 3;
  ciPAGE_DEVICES = 4;
  ciPAGE_SOLSYS = 5;
+ ciPAGE_SPACELAB = 6;
 
  // Animation Refresh Time
  ciGraphFastRefreshTime = 1000;
@@ -258,9 +259,12 @@ type
     MenuItem14: TMenuItem;
     MenuItem15: TMenuItem;
     MenuItem16: TMenuItem;
+    MENU__FULLSCREEN: TMenuItem;
+    P__SPACELAB: TPanel;
     PMENU__VOIDS: TMenuItem;
     PMENU__MAP_FULL: TMenuItem;
     PMENU__TNO: TMenuItem;
+    SCB__SPACELAB: TScrollBox;
     Separator1: TMenuItem;
     MENU__RESETSIGN: TMenuItem;
     MENU__ORBITPARA: TMenuItem;
@@ -665,6 +669,7 @@ type
     GRD__RECOM_P: TStringGrid;
     GRD__RECOM_MS: TStringGrid;
     GRD__RECOM_ECL: TStringGrid;
+    TS__SPACELAB: TTabSheet;
     TB__SOLSYS: TTrackBar;
     TIMER__STRM_VIEWFLIP: TTimer;
     TIMER__STRM_DATA: TTimer;
@@ -831,6 +836,7 @@ type
     procedure MENU__ASTRPHOTO_SIMAGEClick(Sender: TObject);
     procedure MENU__DONATIONClick(Sender: TObject);
     procedure MENU__EYEFACClick(Sender: TObject);
+    procedure MENU__FULLSCREENClick(Sender: TObject);
     procedure MENU__GOTOClick(Sender: TObject);
     procedure MENU__KOCHABClick(Sender: TObject);
     procedure MENU__LCLASS_0Click(Sender: TObject);
@@ -1713,6 +1719,7 @@ end;
 procedure TF__ASTROTOOLBOX.SwitchFull();
 begin
   PMENU__MAP_FULL.Checked := not PMENU__MAP_FULL.Checked;
+  MENU__FULLSCREEN.Checked := PMENU__MAP_FULL.Checked;
 
   MENU__VIEW_TIMECONTROL.Checked := not PMENU__MAP_FULL.Checked;
 
@@ -1722,13 +1729,22 @@ begin
   P__NAVIG.Visible := MENU_VIEW_NAVIGATION.Checked;
   SB__MAIN.Visible := not PMENU__MAP_FULL.Checked;
 
-  if(PC__WORKBENCH.ActivePageIndex = ciPAGE_STARMAP) then
-  begin
-    InvalidateZoom();
-    P__MAGSIZE.Visible := not PMENU__MAP_FULL.Checked;
-    P__SETTIME.Visible := not PMENU__MAP_FULL.Checked;
-    CleanStartOfStarmap();
-  end;
+  WindowState := wsFullScreen;
+
+  case PC__WORKBENCH.ActivePageIndex of
+    ciPAGE_STARMAP:
+    begin
+      InvalidateZoom();
+      P__MAGSIZE.Visible := not PMENU__MAP_FULL.Checked;
+      P__SETTIME.Visible := not PMENU__MAP_FULL.Checked;
+      CleanStartOfStarmap();
+    end;
+    ciPAGE_SOLSYS:
+    begin
+      ExecSolSys();
+    end;
+
+  end; // case
 
 end;
 
@@ -4094,16 +4110,29 @@ procedure TF__ASTROTOOLBOX.ShowAstroCalc(ADevice: TADevice);
 var
   bCameraCheckedIni: Boolean;
 begin
-  F__ASTROCALC := TF__ASTROCALC.Create(nil);
+  if(not Assigned(F__ASTROCALC)) then
+  begin
+    F__ASTROCALC := TF__ASTROCALC.Create(nil);
 
+    // Put form in Panel
+    F__ASTROCALC.Parent := SCB__SPACELAB;
+    F__ASTROCALC.Width := SCB__SPACELAB.Width;
+    F__ASTROCALC.Height:=SCB__SPACELAB.Height;
+    F__ASTROCALC.Align := alClient;
+    F__ASTROCALC.BorderStyle:=bsNone;
+
+    F__ASTROCALC.Show; //ShowModal;
+  end;
   F__ASTROCALC.msLANG_ID := msLANG_ID;
   F__ASTROCALC.msAlbireoLocalDir:=gsAlbireoLocalDir;
 
+  (*
   F__ASTROCALC.mbSetFormDim := true;
   F__ASTROCALC.miFormTop := P__SELECT.Height;
   F__ASTROCALC.miFormLeft := P__NAVIG.Width;
   F__ASTROCALC.miFormHeight := PC__WORKBENCH.Height + P__SETTIME.Height;
   F__ASTROCALC.miFormWidth:= PC__WORKBENCH.Width;
+  *)
 
   if(ADevice <> nil) then
   begin
@@ -4135,14 +4164,6 @@ begin
   end;
 
   bCameraCheckedIni := F__ASTROCALC.CBX__CAMERA_STD.Checked;
-  (*
-  F__ASTROCALC.Left := P__NAVIG.Width + 2;  // 352
-  F__ASTROCALC.Top := P__SELECT.Height + 2;  // 92
-  F__ASTROCALC.Height := PC__WORKBENCH.Height;  // 804
-  F__ASTROCALC.Width := PC__WORKBENCH.Width; // 906
-  *)
-
-  F__ASTROCALC.Show; //ShowModal;
 
   // This code  until 'end' could be failed because we have a non-modal form!
   if(F__ASTROCALC.CBX__CAMERA_STD.Checked) and (ADevice <> nil) then
@@ -4168,6 +4189,8 @@ begin
 
     mbADEVChanged:=true;
   end;
+
+  PC__WORKBENCH.ActivePageIndex := ciPAGE_SPACELAB;
 
   //F__ASTROCALC.Destroy;
 end;
@@ -14167,6 +14190,7 @@ end;
 
 procedure TF__ASTROTOOLBOX.L__ASTROCALCClick(Sender: TObject);
 begin
+  PC__WORKBENCH.ActivePageIndex := ciPAGE_SPACELAB;
   EnableMenu('MENU__ASTROCALC');
   ShowAstroCalc(nil);
 end;
@@ -14403,6 +14427,11 @@ begin
   if(miStarMapView > 0) then
     CleanStartOfStarmap();
 
+end;
+
+procedure TF__ASTROTOOLBOX.MENU__FULLSCREENClick(Sender: TObject);
+begin
+  SwitchFull();
 end;
 
 procedure TF__ASTROTOOLBOX.MENU__GOTOClick(Sender: TObject);
