@@ -259,6 +259,7 @@ type
     MenuItem14: TMenuItem;
     MenuItem15: TMenuItem;
     MenuItem16: TMenuItem;
+    MENU__NOW: TMenuItem;
     MENU__FULLSCREEN: TMenuItem;
     P__SPACELAB: TPanel;
     PMENU__VOIDS: TMenuItem;
@@ -850,6 +851,7 @@ type
     procedure MENU__LCLASS_ALLClick(Sender: TObject);
     procedure MENU__MAPClick(Sender: TObject);
     procedure MENU__MY_TELClick(Sender: TObject);
+    procedure MENU__NOWClick(Sender: TObject);
     procedure MENU__ORBITPARAClick(Sender: TObject);
     procedure MENU__REFRESH_APPClick(Sender: TObject);
     procedure MENU__RESETSIGNClick(Sender: TObject);
@@ -14511,6 +14513,11 @@ end;
 procedure TF__ASTROTOOLBOX.MENU__MY_TELClick(Sender: TObject);
 begin
   ExecDevices();
+end;
+
+procedure TF__ASTROTOOLBOX.MENU__NOWClick(Sender: TObject);
+begin
+  SetVisuNow();
 end;
 
 procedure TF__ASTROTOOLBOX.MENU__ORBITPARAClick(Sender: TObject);
