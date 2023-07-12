@@ -110,6 +110,24 @@ type
     procedure UD__BIRTH_YEARChanging(Sender: TObject; var AllowChange: Boolean);
   private
     { private declarations }
+    FiGLat_DEG: SmallInt;
+    FiGLat_MIN: SmallInt;
+    FiGLng_DEG: SmallInt;
+    FiGLng_MIN: SmallInt;
+    FiDST_HH: SmallInt;
+    FiUTC_HH: SmallInt;
+    FsLANG_ID: string;
+    FbSwitchLANG: Boolean; // Remember, if language switch has occurred
+    FiBirthYear: Integer;
+    FiRefreshRateMinutes: SmallInt;
+    FiFirstStart: SmallInt;
+    FsCountry, FsCity, FsDST: string;
+    FbHDust: Boolean; // Horizon Dust Effect
+    FiLThickness: ShortInt; // Visualisation Line Thickness
+    FiLandscapeNo: Integer; // Horizon View
+    FsGotoOutputDir: string; // Directory for GoTo control files
+    FCColor: TColor;
+    FsAlbireoLocalDir: string;
 
     procedure UseData();
     procedure ShowData();
@@ -117,25 +135,26 @@ type
 
   public
     { public declarations }
-    msAlbireoLocalDir: string;
-
-    miGLat_DEG: SmallInt;
-    miGLat_MIN: SmallInt;
-    miGLng_DEG: SmallInt;
-    miGLng_MIN: SmallInt;
-    miDST_HH: SmallInt;
-    miUTC_HH: SmallInt;
-    msLANG_ID: string;
-    mbSwitchLANG: Boolean; // Remember, if language switch has occurred
-    miBirthYear: Integer;
-    miRefreshRateMinutes: SmallInt;
-    miFirstStart: SmallInt;
-    msCountry, msCity, msDST: string;
-    mbHDust: Boolean; // Horizon Dust Effect
-    miLThickness: ShortInt; // Visualisation Line Thickness
-    miLandscapeNo: Integer; // Horizon View
-    msGotoOutputDir: string; // Directory for GoTo control files
-    mCColor: TColor;
+    property msAlbireoLocalDir: string read FsAlbireoLocalDir write FsAlbireoLocalDir;
+    property miGLat_DEG: SmallInt read FiGLat_DEG write FiGLat_DEG;
+    property miGLat_MIN: SmallInt read FiGLat_MIN write FiGLat_MIN;
+    property miGLng_DEG: SmallInt read FiGLng_DEG write FiGLng_DEG;
+    property miGLng_MIN: SmallInt read FiGLng_MIN write FiGLng_MIN;
+    property miDST_HH: SmallInt read FiDST_HH write FiDST_HH;
+    property miUTC_HH: SmallInt read FiUTC_HH write FiUTC_HH;
+    property msLANG_ID: string read FsLANG_ID write FsLANG_ID;
+    property mbSwitchLANG: Boolean read FbSwitchLANG write FbSwitchLANG; // Remember, if language switch has occurred
+    property miBirthYear: Integer read FiBirthYear write FiBirthYear;
+    property miRefreshRateMinutes: SmallInt read FiRefreshRateMinutes write FiRefreshRateMinutes;
+    property miFirstStart: SmallInt read FiFirstStart write FiFirstStart;
+    property msCountry: string read FsCountry write FsCountry;
+    property msCity: string read FsCity write FsCity;
+    property msDST: string read FsDST write FsDST;
+    property mbHDust: Boolean read FbHDust write FbHDust; // Horizon Dust Effect
+    property miLThickness: ShortInt read FiLThickness write FiLThickness; // Visualisation Line Thickness
+    property miLandscapeNo: Integer read FiLandscapeNo write FiLandscapeNo; // Horizon View
+    property msGotoOutputDir: string read FsGotoOutputDir write FsGotoOutputDir; // Directory for GoTo control files
+    property mCColor: TColor read FCColor write FCColor;
 
   end;
 

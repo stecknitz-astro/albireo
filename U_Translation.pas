@@ -251,7 +251,7 @@ begin
     if(sText = 'Kameramodell') then begin Result := 'Camera Model'; exit; end;
     if(sText = 'Kataloge') then begin Result := 'Catalogs'; exit; end;
     if(sText = 'Kein Bild verfügbar') then begin Result := 'No Picture available'; exit; end;
-    if(sText = 'Kochab Einnordungspanel') then begin Result := 'Kochab northing panel'; exit; end;
+    if(sText = 'Kochab-Einnordungspanel') then begin Result := 'Kochab northing panel'; exit; end;
     if(sText = 'Kohlenstoffklassen') then begin Result := 'Carbon Classes'; exit; end;
     if(sText = 'Kometen') then begin Result := 'Comets'; exit; end;
     if(sText = 'Kommentar') then begin Result := 'Comment'; exit; end;
@@ -618,7 +618,7 @@ begin
     if(sText = 'Interval') then begin Result := 'Intervall'; exit; end;
     if(sText = 'I accept the terms of licensing') then begin Result := 'Ich akzeptiere die Lizenzbedingungen'; exit; end;
     if(sText = 'Julian Time') then begin Result := 'Julianische Zeit'; exit; end;
-    if(sText = 'Kochab northing panel') then begin Result := 'Kochab Einnordungspanel'; exit; end;
+    if(sText = 'Kochab northing panel') then begin Result := 'Kochab-Einnordungspanel'; exit; end;
     if(sText = 'Labels') then begin Result := 'Beschriftungen'; exit; end;
     if(sText = 'Latitude') then begin Result := 'Geographische Breite'; exit; end;
     if(sText = 'Language') then begin Result := 'Sprache'; exit; end;

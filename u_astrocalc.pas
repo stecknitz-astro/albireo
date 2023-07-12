@@ -371,6 +371,15 @@ type
     mCamera: TCamera;
     mdVal_km: Double;
 
+    FsLANG_ID: string;
+    FADevice: TADevice;
+    FsAlbireoLocalDir: string;
+    FbCamHasAdded: Boolean;
+    FrS0, FrBGL, FfExpTimeSec, FfStarSaturSec: Real;
+    FbSetFormDim: Boolean;
+    FiFormLeft, FiFormTop, FiFormHeight, FiFormWidth: Integer;
+    FfSensorDeg: Real;
+
     function GetCnt(iMax,iMin,iVal: Integer; bUp: Boolean): Integer;
     procedure CalcDist(iMode: Integer; sValEdit: string);
     procedure CalcTravelTime();
@@ -422,21 +431,27 @@ type
     procedure CalcPlanetSizeAngle(rDist_Mkm, rSize_Mkm: Real);
 
   public
-    msLANG_ID: string;
-    mADevice: TADevice;
-    msAlbireoLocalDir: string;
     mslCustCameraList: TStringList;
-    mbCamHasAdded: Boolean;
-    mrS0, mrBGL, mfExpTimeSec, mfStarSaturSec: Real;
-    //mbIsRegistered: Boolean;
-    mbSetFormDim: Boolean;
-    miFormLeft, miFormTop, miFormHeight, miFormWidth: Integer;
-    mfSensorDeg: Real;
 
     procedure IniCamera(sManufacturer, sModel: string; var Camera: TCamera);
     procedure IniAstroCalc();
     procedure ActivateCamera();
     procedure GetCameraModels();
+
+    property msLANG_ID: string read FsLANG_ID write FsLANG_ID;
+    property mADevice: TADevice read FADevice write FADevice;
+    property msAlbireoLocalDir: string read FsAlbireoLocalDir write FsAlbireoLocalDir;
+    property mbCamHasAdded: Boolean read FbCamHasAdded write FbCamHasAdded;
+    property mrS0: Real read FrS0 write FrS0;
+    property mrBGL: Real read FrBGL write FrBGL;
+    property mfExpTimeSec: Real read FfExpTimeSec write FfExpTimeSec;
+    property mfStarSaturSec: Real read FfStarSaturSec write FfStarSaturSec;
+    property mbSetFormDim: Boolean read FbSetFormDim write FbSetFormDim;
+    property miFormLeft: Integer read FiFormLeft write FiFormLeft;
+    property miFormTop: Integer read FiFormTop write FiFormTop;
+    property miFormHeight: Integer read FiFormHeight write FiFormHeight;
+    property miFormWidth: Integer read FiFormWidth write FiFormWidth;
+    property mfSensorDeg: Real read FfSensorDeg write FfSensorDeg;
 
   end;
 

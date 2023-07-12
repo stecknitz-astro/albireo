@@ -163,8 +163,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="9"/>
-        <TopLine Value="14518"/>
-        <CursorPos X="46" Y="14523"/>
+        <TopLine Value="1105"/>
+        <CursorPos Y="1138"/>
         <UsageCount Value="204"/>
         <Bookmarks Count="6">
           <Item0 X="17" Y="7834" ID="4"/>
@@ -184,8 +184,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="8"/>
-        <TopLine Value="485"/>
-        <CursorPos X="4" Y="491"/>
+        <TopLine Value="128"/>
+        <CursorPos X="29" Y="133"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -232,8 +232,8 @@
         <Filename Value="U_Translation.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="10"/>
-        <TopLine Value="252"/>
-        <CursorPos X="36" Y="264"/>
+        <TopLine Value="612"/>
+        <CursorPos X="70" Y="621"/>
         <UsageCount Value="203"/>
         <Loaded Value="True"/>
       </Unit7>
@@ -421,8 +421,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="16"/>
-        <TopLine Value="1642"/>
-        <CursorPos X="81" Y="1659"/>
+        <TopLine Value="354"/>
+        <CursorPos Y="434"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit25>
@@ -739,9 +739,9 @@
       <Unit61>
         <Filename Value="..\..\..\Albireo\ToDo.txt"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="661"/>
-        <CursorPos X="5" Y="695"/>
-        <UsageCount Value="20"/>
+        <TopLine Value="663"/>
+        <CursorPos X="32" Y="695"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit61>
@@ -760,123 +760,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="4124" TopLine="4096"/>
+        <Caret Line="4124" TopLine="4108"/>
       </Position1>
       <Position2>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="4153" TopLine="4137"/>
+        <Caret Line="4180" Column="3" TopLine="4154"/>
       </Position2>
       <Position3>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="4156" TopLine="4137"/>
+        <Caret Line="87" Column="2" TopLine="69"/>
       </Position3>
       <Position4>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="4171" TopLine="4154"/>
+        <Caret Line="4100" TopLine="4083"/>
       </Position4>
       <Position5>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="4099" TopLine="4081"/>
+        <Caret Line="4101" TopLine="4069"/>
       </Position5>
       <Position6>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="4100" TopLine="4081"/>
+        <Caret Line="14181" Column="3" TopLine="14179"/>
       </Position6>
       <Position7>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="4113" TopLine="4085"/>
+        <Caret Line="1389" Column="28" TopLine="1374"/>
       </Position7>
       <Position8>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="4114" TopLine="4086"/>
+        <Caret Line="4110" Column="29" TopLine="4099"/>
       </Position8>
       <Position9>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="4124" TopLine="4108"/>
+        <Caret Line="14791" Column="3" TopLine="14788"/>
       </Position9>
       <Position10>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="4180" Column="3" TopLine="4154"/>
+        <Caret Line="1467" Column="25" TopLine="1452"/>
       </Position10>
       <Position11>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="87" Column="2" TopLine="69"/>
+        <Caret Line="1719" Column="3" TopLine="1715"/>
       </Position11>
       <Position12>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="4100" TopLine="4083"/>
+        <Caret Line="1725" Column="29" TopLine="1717"/>
       </Position12>
       <Position13>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="4101" TopLine="4069"/>
+        <Caret Line="14428" Column="12" TopLine="14423"/>
       </Position13>
       <Position14>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="14181" Column="3" TopLine="14179"/>
+        <Caret Line="1469" Column="25" TopLine="1454"/>
       </Position14>
       <Position15>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="1389" Column="28" TopLine="1374"/>
+        <Caret Line="1744" Column="7" TopLine="1724"/>
       </Position15>
       <Position16>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="4110" Column="29" TopLine="4099"/>
+        <Caret Line="14280" Column="3" TopLine="14277"/>
       </Position16>
       <Position17>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="14791" Column="3" TopLine="14788"/>
+        <Caret Line="1364" Column="25" TopLine="1349"/>
       </Position17>
       <Position18>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="1467" Column="25" TopLine="1452"/>
+        <Caret Line="5080" Column="38" TopLine="5078"/>
       </Position18>
       <Position19>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="1719" Column="3" TopLine="1715"/>
+        <Caret Line="1735" Column="68" TopLine="1728"/>
       </Position19>
       <Position20>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="1725" Column="29" TopLine="1717"/>
+        <Caret Line="16614" Column="3" TopLine="16611"/>
       </Position20>
       <Position21>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="14428" Column="12" TopLine="14423"/>
+        <Caret Line="16616" Column="3" TopLine="16616"/>
       </Position21>
       <Position22>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="1469" Column="25" TopLine="1454"/>
+        <Caret Line="14520" Column="16" TopLine="14518"/>
       </Position22>
       <Position23>
-        <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="1744" Column="7" TopLine="1724"/>
+        <Filename Value="U_Prefs.pas"/>
+        <Caret Line="479" Column="23" TopLine="466"/>
       </Position23>
       <Position24>
-        <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="14280" Column="3" TopLine="14277"/>
+        <Filename Value="U_Prefs.pas"/>
+        <Caret Line="139" Column="6" TopLine="124"/>
       </Position24>
       <Position25>
-        <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="1364" Column="25" TopLine="1349"/>
+        <Filename Value="U_Prefs.pas"/>
+        <Caret Line="160" Column="22" TopLine="127"/>
       </Position25>
       <Position26>
-        <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="5080" Column="38" TopLine="5078"/>
+        <Filename Value="U_Prefs.pas"/>
+        <Caret Line="142" Column="26" TopLine="124"/>
       </Position26>
       <Position27>
-        <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="1735" Column="68" TopLine="1728"/>
+        <Filename Value="U_Prefs.pas"/>
+        <Caret Line="139" Column="9" TopLine="124"/>
       </Position27>
       <Position28>
         <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="16614" Column="3" TopLine="16611"/>
+        <Caret Line="15" Column="40" TopLine="1255"/>
       </Position28>
       <Position29>
-        <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="16616" Column="3" TopLine="16616"/>
+        <Filename Value="u_astrocalc.pas"/>
+        <Caret Line="454" Column="66" TopLine="425"/>
       </Position29>
       <Position30>
-        <Filename Value="U_AstroToolBox.pas"/>
-        <Caret Line="14520" Column="16" TopLine="14518"/>
+        <Filename Value="u_astrocalc.pas"/>
+        <Caret Line="1464" Column="11" TopLine="1444"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>
