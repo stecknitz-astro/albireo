@@ -186,6 +186,20 @@ type
     molMoonList: TObjectList;
     msMissingFile: string;
 
+    FsAlbireoLocalDir: string;
+
+    FsLANG_ID: string;
+    FsUserPicFileName: string;
+
+    FrSin_fGLat, FrCos_fGLat: Real;
+    FiDST_HH,FiUTC_HH,FiGLng_DEG,FiGLng_MIN: SmallInt;
+    FdtWT: TDateTime;
+    FbTimePlay: Boolean;
+    FiAltRow, FiLatRow: Integer;
+
+    FiMStarCnt: Integer; // 0: Single Star, 1: Double Star; 2: Triple Star, ...
+    FiMStarIndex: Integer; // Current Multi-Star Index (0,1,...)
+
     procedure CalcAOWidth(sType: string; iRefWidth: Integer);
     function GetUserFileID(): string;
     function GetUserFileIndex(sID: string): Integer;
@@ -215,24 +229,27 @@ type
 
   public
     { public declarations }
-    msAlbireoLocalDir: string;
-
     mAObject: TAObject;
-    msLANG_ID: string;
-    mslUserFiles: TStringList;
-    msUserPicFileName: string;
     molSignList: TObjectList;
+    mslUserFiles: TStringList;
 
-    mrSin_fGLat, mrCos_fGLat: Real;
-    miDST_HH,miUTC_HH,miGLng_DEG,miGLng_MIN: SmallInt;
-    mdtWT: TDateTime;
-    mbTimePlay: Boolean;
-    miAltRow, miLatRow: Integer;
+    property msAlbireoLocalDir: string read FsAlbireoLocalDir write FsAlbireoLocalDir;
+    property msLANG_ID: string read FsLANG_ID write FsLANG_ID;
+    property msUserPicFileName: string read FsUserPicFileName write FsUserPicFileName;
+    property mrSin_fGLat: Real read FrSin_fGLat write FrSin_fGLat;
+    property mrCos_fGLat: Real read FrCos_fGLat write FrCos_fGLat;
+    property miDST_HH: SmallInt read FiDST_HH write FiDST_HH;
+    property miUTC_HH: SmallInt read FiUTC_HH write FiUTC_HH;
+    property miGLng_DEG: SmallInt read FiGLng_DEG write FiGLng_DEG;
+    property miGLng_MIN: SmallInt read FiGLng_MIN write FiGLng_MIN;
+    property mdtWT: TDateTime read FdtWT write FdtWT;
+    property mbTimePlay: Boolean read FbTimePlay write FbTimePlay;
+    property miAltRow: Integer read FiAltRow write FiAltRow;
+    property miLatRow: Integer read FiLatRow write FiLatRow;
+    property miMStarCnt: Integer read FiMStarCnt write FiMStarCnt; // 0: Single Star, 1: Double Star; 2: Triple Star, ...
+    property miMStarIndex: Integer read FiMStarIndex write FiMStarIndex; // Current Multi-Star Index (0,1,...)
 
-    miMStarCnt: Integer; // 0: Single Star, 1: Double Star; 2: Triple Star, ...
-    miMStarIndex: Integer; // Current Multi-Star Index (0,1,...)
-
-  end; 
+  end;
 
 var
   F__AOVIS: TF__AOVIS;

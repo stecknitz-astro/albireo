@@ -16,6 +16,7 @@ object F__AOVIS: TF__AOVIS
   OnWindowStateChange = FormWindowStateChange
   Position = poMainFormCenter
   LCLVersion = '2.2.4.0'
+  WindowState = wsMaximized
   object P__AOVIS_CAPTION: TPanel
     Left = 0
     Height = 50
