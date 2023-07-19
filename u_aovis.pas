@@ -123,6 +123,7 @@ type
     SHP__CORE_HE: TShape;
     SHP__HRD: TShape;
     SHP__REF: TShape;
+    SPL__AOVIS: TSplitter;
     TB__AOV: TTrackBar;
     TGB__STARSTRUCT: TToggleBox;
     TIMER__COO: TTimer;
@@ -176,6 +177,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure SHP__REFMouseWheel(Sender: TObject; Shift: TShiftState;
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+    procedure SPL__AOVISMoved(Sender: TObject);
     procedure TB__AOVMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure TGB__STARSTRUCTClick(Sender: TObject);
@@ -226,6 +228,8 @@ type
     procedure ShowAstroPic(bPicExists: Boolean; sPath: string);
     procedure VisuAOData();
     procedure ShowStarImage(IMG: TImage; sSpecID: string);
+    procedure ResizeStarStructure();
+    procedure ResizeStarStructTable();
 
   public
     { public declarations }
@@ -262,6 +266,18 @@ implementation
 {$R *.lfm}
 
 { TF__AOVIS }
+
+procedure TF__AOVIS.ResizeStarStructTable();
+begin
+  GRD__STARSTRUCT.ColWidths[0] := 130;
+  GRD__STARSTRUCT.ColWidths[1] := P__DATA.Width - GRD__STARSTRUCT.ColWidths[0];
+end;
+
+procedure TF__AOVIS.ResizeStarStructure();
+begin
+  if(LeftStr((mAObject as TAObject).sAOType,1) = 'S') and (PC__MAIN_VISU.ActivePageIndex = 0) then
+    ShowStarStruc(miMStarIndex);
+end;
 
 procedure TF__AOVIS.VisuAOData();
 var
@@ -945,10 +961,7 @@ begin
   end;
 
   GRD__STARSTRUCT.Visible := true;
-  (*
-  iXCenter := P__MAIN_PICTURE.Width div 2;
-  iYCenter := P__MAIN_PICTURE.Height div 2;
-  *)
+  ResizeStarStructTable();
 
   iXCenter := P__VISU.Width div 2;
   iYCenter := P__VISU.Height div 2;
@@ -3011,9 +3024,7 @@ end;
 
 procedure TF__AOVIS.FormResize(Sender: TObject);
 begin
-  if(LeftStr((mAObject as TAObject).sAOType,1) = 'S') and (PC__MAIN_VISU.ActivePageIndex = 0) then
-    ShowStarStruc(miMStarIndex);
-
+  ResizeStarStructure();
 end;
 
 procedure TF__AOVIS.CB__MOONSChange(Sender: TObject);
@@ -3260,7 +3271,7 @@ begin
           6:
           begin
             if(AnsiContainsStr(sSPType,'I')) then
-              Canvas.Brush.Color := clBlack; //SHP__CORE_FE.Brush.Color;
+              Canvas.Brush.Color := clGray; //SHP__CORE_FE.Brush.Color;
           end;
         end; // case..
 
@@ -3387,6 +3398,11 @@ procedure TF__AOVIS.SHP__REFMouseWheel(Sender: TObject; Shift: TShiftState;
   WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
 begin
   ZoomObjects(WheelDelta);
+end;
+
+procedure TF__AOVIS.SPL__AOVISMoved(Sender: TObject);
+begin
+  ResizeStarStructTable();
 end;
 
 procedure TF__AOVIS.TB__AOVMouseUp(Sender: TObject; Button: TMouseButton;

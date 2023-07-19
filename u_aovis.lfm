@@ -1,7 +1,7 @@
 object F__AOVIS: TF__AOVIS
-  Left = -1396
+  Left = -1537
   Height = 703
-  Top = 162
+  Top = 92
   Width = 1074
   Caption = 'Object Visualisation'
   ClientHeight = 703
@@ -146,10 +146,10 @@ object F__AOVIS: TF__AOVIS
             Left = 1
             Height = 579
             Top = 43
-            Width = 729
+            Width = 724
             Align = alClient
             ClientHeight = 579
-            ClientWidth = 729
+            ClientWidth = 724
             Color = clBlack
             ParentColor = False
             TabOrder = 1
@@ -157,7 +157,7 @@ object F__AOVIS: TF__AOVIS
               Left = 1
               Height = 504
               Top = 1
-              Width = 727
+              Width = 722
               Align = alClient
               Center = True
               OnClick = IMG__AOVISClick
@@ -21256,19 +21256,19 @@ object F__AOVIS: TF__AOVIS
               Left = 1
               Height = 73
               Top = 505
-              Width = 727
+              Width = 722
               Align = alBottom
               BevelInner = bvLowered
               BevelWidth = 3
               ClientHeight = 73
-              ClientWidth = 727
+              ClientWidth = 722
               TabOrder = 1
               Visible = False
               object P__COMMENT_TITLE: TPanel
                 Left = 6
                 Height = 27
                 Top = 6
-                Width = 715
+                Width = 710
                 Align = alTop
                 Alignment = taLeftJustify
                 Caption = 'Kommentar'
@@ -21288,7 +21288,7 @@ object F__AOVIS: TF__AOVIS
                 Left = 6
                 Height = 29
                 Top = 33
-                Width = 715
+                Width = 710
                 Align = alTop
                 Color = 4605510
                 Font.CharSet = ANSI_CHARSET
@@ -21303,9 +21303,9 @@ object F__AOVIS: TF__AOVIS
               end
             end
             object IMG__FULLCONVECTION: TImage
-              Left = 436
+              Left = 824
               Height = 640
-              Top = 132
+              Top = 120
               Width = 648
               Picture.Data = {
                 1754506F727461626C654E6574776F726B47726170686963A151030089504E47
@@ -28186,6 +28186,15 @@ object F__AOVIS: TF__AOVIS
               ParentFont = False
               Visible = False
             end
+          end
+          object SPL__AOVIS: TSplitter
+            Left = 725
+            Height = 579
+            Top = 43
+            Width = 5
+            Align = alRight
+            OnMoved = SPL__AOVISMoved
+            ResizeAnchor = akRight
           end
         end
       end
