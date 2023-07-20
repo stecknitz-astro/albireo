@@ -2746,6 +2746,8 @@ end;
       Result := 0.01
     else if(AnsiContainsStr(sSpType,'VI')) then
       Result := 0.1
+    else if(AnsiContainsStr(sSpType,'IV')) then
+        Result := 5 // Subgiant
     else if(AnsiContainsStr(sSpType,'V')) then
     begin
       if(LeftStr(sSpType,1) = 'O') then

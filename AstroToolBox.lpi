@@ -244,10 +244,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="U_AOVis"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="15"/>
-        <TopLine Value="941"/>
-        <CursorPos X="27" Y="964"/>
+        <TopLine Value="706"/>
+        <CursorPos X="66" Y="724"/>
+        <ComponentState Value="2"/>
         <UsageCount Value="202"/>
         <Bookmarks Count="1">
           <Item0 X="42" Y="875" ID="9"/>
@@ -385,8 +385,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="U_AlbireoLib"/>
         <EditorIndex Value="14"/>
-        <TopLine Value="1830"/>
-        <CursorPos X="19" Y="1844"/>
+        <TopLine Value="2732"/>
+        <CursorPos X="16" Y="2751"/>
         <UsageCount Value="204"/>
         <Bookmarks Count="1">
           <Item0 X="20" Y="1251" ID="3"/>
@@ -740,9 +740,10 @@
       </Unit60>
       <Unit61>
         <Filename Value="..\..\..\Albireo\ToDo.txt"/>
-        <TopLine Value="667"/>
-        <CursorPos X="45" Y="700"/>
-        <UsageCount Value="22"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="668"/>
+        <CursorPos X="5" Y="702"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit61>
@@ -761,122 +762,122 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="890" Column="18" TopLine="862"/>
+        <Caret Line="309" TopLine="282"/>
       </Position1>
       <Position2>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="947" Column="18" TopLine="919"/>
+        <Caret Line="288" TopLine="281"/>
       </Position2>
       <Position3>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="1018" Column="24" TopLine="996"/>
+        <Caret Line="309" TopLine="281"/>
       </Position3>
       <Position4>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="1019" Column="24" TopLine="996"/>
+        <Caret Line="695" TopLine="678"/>
       </Position4>
       <Position5>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="1021" Column="24" TopLine="996"/>
+        <Caret Line="696" TopLine="678"/>
       </Position5>
       <Position6>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="1023" Column="24" TopLine="996"/>
+        <Caret Line="697" TopLine="678"/>
       </Position6>
       <Position7>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="1024" Column="24" TopLine="996"/>
+        <Caret Line="699" TopLine="678"/>
       </Position7>
       <Position8>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="1026" Column="24" TopLine="998"/>
+        <Caret Line="702" TopLine="678"/>
       </Position8>
       <Position9>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="1027" Column="24" TopLine="999"/>
+        <Caret Line="704" TopLine="678"/>
       </Position9>
       <Position10>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="1029" Column="24" TopLine="1001"/>
+        <Caret Line="705" TopLine="678"/>
       </Position10>
       <Position11>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="1030" Column="24" TopLine="1002"/>
+        <Caret Line="707" TopLine="679"/>
       </Position11>
       <Position12>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="1040" Column="26" TopLine="1012"/>
+        <Caret Line="708" TopLine="680"/>
       </Position12>
       <Position13>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="1041" Column="26" TopLine="1013"/>
+        <Caret Line="710" TopLine="682"/>
       </Position13>
       <Position14>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="1042" Column="26" TopLine="1014"/>
+        <Caret Line="711" TopLine="683"/>
       </Position14>
       <Position15>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="1044" Column="26" TopLine="1016"/>
+        <Caret Line="713" TopLine="685"/>
       </Position15>
       <Position16>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="1045" Column="26" TopLine="1017"/>
+        <Caret Line="715" TopLine="703"/>
       </Position16>
       <Position17>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="949" Column="80" TopLine="929"/>
+        <Caret Line="717" TopLine="703"/>
       </Position17>
       <Position18>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="3009" TopLine="2997"/>
+        <Caret Line="719" TopLine="703"/>
       </Position18>
       <Position19>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="270" Column="34" TopLine="258"/>
+        <Caret Line="724" TopLine="703"/>
       </Position19>
       <Position20>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="271" Column="20" TopLine="259"/>
+        <Caret Line="725" TopLine="703"/>
       </Position20>
       <Position21>
         <Filename Value="u_aovis.pas"/>
+        <Caret Line="731" TopLine="703"/>
       </Position21>
       <Position22>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="75" Column="20" TopLine="47"/>
+        <Caret Line="311" Column="24" TopLine="284"/>
       </Position22>
       <Position23>
         <Filename Value="u_aovis.pas"/>
-        <Caret Line="155" Column="30" TopLine="127"/>
+        <Caret Line="205" Column="26" TopLine="189"/>
       </Position23>
       <Position24>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="898" Column="18" TopLine="870"/>
+        <Filename Value="u_albireolib.pas"/>
+        <Caret Line="1835" Column="103" TopLine="1830"/>
       </Position24>
       <Position25>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="958" TopLine="928"/>
+        <Filename Value="u_albireolib.pas"/>
       </Position25>
       <Position26>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="3397" TopLine="3387"/>
+        <Filename Value="u_albireolib.pas"/>
+        <Caret Line="2871" Column="24" TopLine="2843"/>
       </Position26>
       <Position27>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="228" Column="41" TopLine="220"/>
+        <Filename Value="u_albireolib.pas"/>
+        <Caret Line="2944" Column="99" TopLine="2928"/>
       </Position27>
       <Position28>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="272" Column="18" TopLine="244"/>
+        <Filename Value="u_albireolib.pas"/>
+        <Caret Line="2983" Column="25" TopLine="2967"/>
       </Position28>
       <Position29>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="273" Column="66" TopLine="245"/>
+        <Filename Value="u_albireolib.pas"/>
+        <Caret Line="2752" Column="5" TopLine="2645"/>
       </Position29>
       <Position30>
-        <Filename Value="u_aovis.pas"/>
-        <Caret Line="906" Column="18" TopLine="878"/>
+        <Filename Value="u_albireolib.pas"/>
+        <Caret Line="2749" Column="38" TopLine="2732"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>
