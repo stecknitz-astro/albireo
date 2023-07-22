@@ -1482,7 +1482,12 @@ begin
   slSpecList.DelimitedText:=sSpecType;
 
   if(iMStarIndex < slSpecList.Count) then
-    Result := slSpecList[iMStarIndex]
+  begin
+    Result := slSpecList[iMStarIndex];
+    // Prevent too short spec ids (e.g. M2-I and Result is M2);
+    if((Length(Result) < 3) and (slSpecList.Count > 1) and (iMStarIndex = 0)) then
+      Result := Result + slSpecList[1]; // e.g. Result is now M2I
+  end
   else
     Result := '';
 
@@ -1506,16 +1511,16 @@ begin
 
   if(length(sSingleSpecType) >= 2) then
     begin
-      if(sSingleSpecType[2] = '0') then iPart := 0;
-      if(sSingleSpecType[2] = '1') then iPart := 1;
-      if(sSingleSpecType[2] = '2') then iPart := 2;
-      if(sSingleSpecType[2] = '3') then iPart := 3;
-      if(sSingleSpecType[2] = '4') then iPart := 4;
-      if(sSingleSpecType[2] = '5') then iPart := 5;
-      if(sSingleSpecType[2] = '6') then iPart := 6;
-      if(sSingleSpecType[2] = '7') then iPart := 7;
-      if(sSingleSpecType[2] = '8') then iPart := 8;
-      if(sSingleSpecType[2] = '9') then iPart := 9;
+      if(sSingleSpecType[2] = '0') then iPart := 0
+      else if(sSingleSpecType[2] = '1') then iPart := 1
+      else if(sSingleSpecType[2] = '2') then iPart := 2
+      else if(sSingleSpecType[2] = '3') then iPart := 3
+      else if(sSingleSpecType[2] = '4') then iPart := 4
+      else if(sSingleSpecType[2] = '5') then iPart := 5
+      else if(sSingleSpecType[2] = '6') then iPart := 6
+      else if(sSingleSpecType[2] = '7') then iPart := 7
+      else if(sSingleSpecType[2] = '8') then iPart := 8
+      else if(sSingleSpecType[2] = '9') then iPart := 9;
     end;
 
     if (AnsiContainsStr(LeftStr(sSingleSpecType,4),'O')) then

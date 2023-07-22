@@ -47,6 +47,7 @@ type
     CHRT__MOONPOSConstantLine3: TConstantLine;
     CHRT__MOONPOSLineSeries1: TLineSeries;
     GRD__HRD_MK: TStringGrid;
+    GRD__STARSTRUCT: TStringGrid;
     IMG__FULLCONVECTION: TImage;
     L__REL: TLabel;
     L__PLANET: TLabel;
@@ -64,6 +65,9 @@ type
     LINE__RED: TConstantLine;
     LINE__SUNCMP: TLineSeries;
     ODLG__JPG: TOpenPictureDialog;
+    P__SUPERNOVA_TITLE: TPanel;
+    P__HEAVYELFUSION: TPanel;
+    P__STARSTRUCT: TPanel;
     P__SCALE_OPTIONS: TPanel;
     P__SCALING: TPanel;
     P__PLANET_MOONS: TPanel;
@@ -72,7 +76,6 @@ type
     ED__COMMENT: TEdit;
     GRD__AOV_PROP: TStringGrid;
     GRD__MOON: TStringGrid;
-    GRD__STARSTRUCT: TStringGrid;
     IMG_HRD: TImage;
     IMG__AO: TImage;
     IMG__AOVIS: TImage;
@@ -124,6 +127,7 @@ type
     SHP__HRD: TShape;
     SHP__REF: TShape;
     SPL__AOVIS: TSplitter;
+    GRD__HEAVYELFUSION: TStringGrid;
     TB__AOV: TTrackBar;
     TGB__STARSTRUCT: TToggleBox;
     TIMER__COO: TTimer;
@@ -894,7 +898,7 @@ var
   sName_CZone, sName_FCZone, sName_CZone_HT: string;
   sName_RZone, sName_RZone_HT: string;
   sName_Core, sName_Core_H, sName_Core_deg: string;
-  sName_He_IA, sName_C_O_IA, sName_He_50MK_IA, sName_F_HE_Fe, sName_Fe_IA: string;
+  sName_He_IA, sName_C_O_IA, sName_He_50MK_IA, sName_F_C, sName_F_C_Fe: string;
   sSPType, sSpecID: string;
   iTMin,iTMax,iSTemp: Integer;
 begin
@@ -922,6 +926,7 @@ begin
   if(TGB__STARSTRUCT.State = cbUnchecked) then
     exit;
 
+  sName_F_C  := 'Fusion C+C->O,Na,Mg,Ne (700 Mio K.)';
   if(msLANG_ID = 'DE') then
   begin
     sName_Surface := 'Oberfläche';
@@ -937,8 +942,8 @@ begin
     sName_He_IA := 'He inaktiv';
     sName_He_50MK_IA := 'He inaktiv (50 Mio. K)';
     sName_C_O_IA := 'C + O inaktiv';
-    sName_F_HE_Fe  := 'Fusion schwerer Elemente bis Fe (500 Mio K.)';
-    sName_Fe_IA := 'Eisenkern (inaktiv)';
+    sName_F_C_Fe  := 'Fus. schwerer El. bis Fe (1000 Mio K.) < 10 Jahre!';
+    //sName_Fe_IA := 'Eisenkern (inaktiv)';
   end
   else
   begin
@@ -955,8 +960,8 @@ begin
     sName_He_IA := 'He inactive';
     sName_He_50MK_IA := 'He inactive (50 Mio. K)';
     sName_C_O_IA := 'C + O inactive';
-    sName_F_HE_Fe  := 'Fusion heavier elements up to Fe (500 Mio K.)';
-    sName_Fe_IA := 'Ferrum core (inactive)';
+    sName_F_C_Fe  := 'Fus. heavier elm. up to Fe (1000 Mio K.) < 10 Years!';
+    //sName_Fe_IA := 'Ferrum core (inactive)';
 
   end;
 
@@ -1213,11 +1218,12 @@ begin
       GRD__STARSTRUCT.Cells[1,4] := 'Fusion He+He+He->C (100 Mio. K)';
 
       GRD__STARSTRUCT.Cells[0,5] := sName_Core;
-      GRD__STARSTRUCT.Cells[1,5] := sName_F_HE_Fe;
+      GRD__STARSTRUCT.Cells[1,5] := sName_F_C;
 
       GRD__STARSTRUCT.Cells[0,6] := sName_Core;
-      GRD__STARSTRUCT.Cells[1,6] := sName_Fe_IA;
+      GRD__STARSTRUCT.Cells[1,6] := sName_F_C_Fe;
 
+      P__HEAVYELFUSION.Visible := true; // show fusion path to supernova!
     end;
 
   end;
@@ -2497,6 +2503,10 @@ begin
     GRD__HRD_MK.Cells[0,9] := 'RD';
     GRD__HRD_MK.Cells[0,10] := 'BD';
 
+    GRD__HEAVYELFUSION.ColWidths[0] := 160;
+    GRD__HEAVYELFUSION.ColWidths[1] := 90;
+    GRD__HEAVYELFUSION.ColWidths[2] := 70;
+
     if(msLANG_ID = 'DE') then
     begin
       B__ADD_USR_PIC.Caption:='Eigenes JPG in Bibliothek kopieren';
@@ -2512,6 +2522,32 @@ begin
       GRD__HRD_MK.Cells[1,8] := 'Weiße Zwerge';
       GRD__HRD_MK.Cells[1,9] := 'Rote Zwerge';
       GRD__HRD_MK.Cells[1,10] := 'Braune Zwerge';
+
+      P__SUPERNOVA_TITLE.Caption := 'Weiterer Fusionsweg zur SUPERNOVA';
+
+      GRD__HEAVYELFUSION.Cells[0,0] := 'Fusionsprozess';
+      GRD__HEAVYELFUSION.Cells[1,0] := 'Temperatur';
+      GRD__HEAVYELFUSION.Cells[2,0] := 'Dauer';
+      GRD__HEAVYELFUSION.Cells[0,1] := 'Ne+He->Mg,Si';
+      GRD__HEAVYELFUSION.Cells[1,1] := '1200 Mio K';
+      GRD__HEAVYELFUSION.Cells[2,1] := '10 Jahre';
+      GRD__HEAVYELFUSION.Cells[0,2] := 'O+He->S,P,Mg,Si';
+      GRD__HEAVYELFUSION.Cells[1,2] := '1800 Mio K';
+      GRD__HEAVYELFUSION.Cells[2,2] := '6 Monate';
+      GRD__HEAVYELFUSION.Cells[0,3] := 'Si+He->S,S+He->Ar,...';
+      GRD__HEAVYELFUSION.Cells[1,3] := '5000 Mio K';
+      GRD__HEAVYELFUSION.Cells[2,3] := '1 Tag';
+      GRD__HEAVYELFUSION.Cells[0,4] := 'Ar+He->Ca,Ca+He->Ti,...';
+      GRD__HEAVYELFUSION.Cells[1,4] := '5000 Mio K';
+      GRD__HEAVYELFUSION.Cells[2,4] := '1 Tag';
+      GRD__HEAVYELFUSION.Cells[0,5] := 'Ti+He->Cr,Cr+He->Fe,...';
+      GRD__HEAVYELFUSION.Cells[1,5] := '5000 Mio K';
+      GRD__HEAVYELFUSION.Cells[2,5] := '1 Tag';
+      GRD__HEAVYELFUSION.Cells[0,6] := 'Fe+He->Ni ENDOTHERM';
+      GRD__HEAVYELFUSION.Cells[1,6] := '5000 Mio K';
+      GRD__HEAVYELFUSION.Cells[2,6] := '1 Tag';
+      GRD__HEAVYELFUSION.Cells[0,7] := 'SUPERNOVA!';
+
     end
     else
     begin
@@ -2528,6 +2564,32 @@ begin
       GRD__HRD_MK.Cells[1,8] := 'White Dwarfs';
       GRD__HRD_MK.Cells[1,9] := 'Red Dwarfs';
       GRD__HRD_MK.Cells[1,10] := 'Brown Dwarfs';
+
+      P__SUPERNOVA_TITLE.Caption := 'Further fusion path to SUPERNOVA';
+
+      GRD__HEAVYELFUSION.Cells[0,0] := 'Fusion Process';
+      GRD__HEAVYELFUSION.Cells[1,0] := 'Temperature';
+      GRD__HEAVYELFUSION.Cells[2,0] := 'Duration';
+      GRD__HEAVYELFUSION.Cells[0,1] := 'Ne+He->Mg,Si';
+      GRD__HEAVYELFUSION.Cells[1,1] := '1200 Mio K';
+      GRD__HEAVYELFUSION.Cells[2,1] := '10 Years';
+      GRD__HEAVYELFUSION.Cells[0,2] := 'O+He->S,P,Mg,Si';
+      GRD__HEAVYELFUSION.Cells[1,2] := '1800 Mio K';
+      GRD__HEAVYELFUSION.Cells[2,2] := '6 Months';
+      GRD__HEAVYELFUSION.Cells[0,3] := 'Si+He->S,S+He->Ar,...';
+      GRD__HEAVYELFUSION.Cells[1,3] := '5000 Mio K';
+      GRD__HEAVYELFUSION.Cells[2,3] := '1 Day';
+      GRD__HEAVYELFUSION.Cells[0,4] := 'Ar+He->Ca,Ca+He->Ti,...';
+      GRD__HEAVYELFUSION.Cells[1,4] := '5000 Mio K';
+      GRD__HEAVYELFUSION.Cells[2,4] := '1 Day';
+      GRD__HEAVYELFUSION.Cells[0,5] := 'Ti+He->Cr,Cr+He->Fe,...';
+      GRD__HEAVYELFUSION.Cells[1,5] := '5000 Mio K';
+      GRD__HEAVYELFUSION.Cells[2,5] := '1 Day';
+      GRD__HEAVYELFUSION.Cells[0,6] := 'Fe+He->Ni ENDOTHERM';
+      GRD__HEAVYELFUSION.Cells[1,6] := '5000 Mio K';
+      GRD__HEAVYELFUSION.Cells[2,6] := '1 Day';
+      GRD__HEAVYELFUSION.Cells[0,7] := 'SUPERNOVA!';
+
     end;
   end;
 
