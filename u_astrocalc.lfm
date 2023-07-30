@@ -31350,9 +31350,9 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__EARTH_DIAMETER: TLabel
         Cursor = crHandPoint
-        Left = 169
+        Left = 240
         Height = 25
-        Top = 664
+        Top = 632
         Width = 40
         Caption = 'Erde'
         Font.CharSet = ANSI_CHARSET
@@ -31371,7 +31371,7 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__AE_MERCURY: TLabel
         Cursor = crHandPoint
-        Left = 224
+        Left = 280
         Height = 25
         Top = 568
         Width = 142
@@ -31393,7 +31393,7 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__AE_VENUS: TLabel
         Cursor = crHandPoint
-        Left = 312
+        Left = 296
         Height = 25
         Top = 544
         Width = 67
@@ -31414,7 +31414,7 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__AE_EARTH: TLabel
         Cursor = crHandPoint
-        Left = 336
+        Left = 304
         Height = 25
         Top = 520
         Width = 53
@@ -31435,7 +31435,7 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__AE_MARS: TLabel
         Cursor = crHandPoint
-        Left = 344
+        Left = 312
         Height = 25
         Top = 496
         Width = 57
@@ -31456,7 +31456,7 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__AE_JUPITER: TLabel
         Cursor = crHandPoint
-        Left = 352
+        Left = 320
         Height = 25
         Top = 472
         Width = 75
@@ -31477,7 +31477,7 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__AE_SATURN: TLabel
         Cursor = crHandPoint
-        Left = 368
+        Left = 328
         Height = 25
         Top = 448
         Width = 73
@@ -31498,7 +31498,7 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__AE_URANUS: TLabel
         Cursor = crHandPoint
-        Left = 376
+        Left = 336
         Height = 25
         Top = 424
         Width = 77
@@ -31519,7 +31519,7 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__AE_NEPTUN: TLabel
         Cursor = crHandPoint
-        Left = 384
+        Left = 344
         Height = 25
         Top = 400
         Width = 81
@@ -31540,7 +31540,7 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__AE_PLUTO: TLabel
         Cursor = crHandPoint
-        Left = 400
+        Left = 352
         Height = 25
         Top = 376
         Width = 61
@@ -31561,9 +31561,9 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__SUN_DIAMETER: TLabel
         Cursor = crHandPoint
-        Left = 176
+        Left = 256
         Height = 25
-        Top = 640
+        Top = 608
         Width = 57
         Caption = 'Sonne'
         Font.CharSet = ANSI_CHARSET
@@ -31582,9 +31582,9 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__LY_ALPACENTAURI: TLabel
         Cursor = crHandPoint
-        Left = 632
+        Left = 408
         Height = 25
-        Top = 264
+        Top = 256
         Width = 132
         Caption = 'Alpha Centauri'
         Font.CharSet = ANSI_CHARSET
@@ -31603,9 +31603,9 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__LY_M42: TLabel
         Cursor = crHandPoint
-        Left = 648
+        Left = 432
         Height = 25
-        Top = 240
+        Top = 232
         Width = 170
         Caption = 'Orion-Nebel (M42)'
         Font.CharSet = ANSI_CHARSET
@@ -31624,9 +31624,9 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__LY_D_COMA: TLabel
         Cursor = crHandPoint
-        Left = 872
+        Left = 544
         Height = 25
-        Top = 120
+        Top = 128
         Width = 125
         Caption = 'Coma-Haufen'
         Font.CharSet = ANSI_CHARSET
@@ -31645,9 +31645,9 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__LY_D_TWINQ: TLabel
         Cursor = crHandPoint
-        Left = 912
+        Left = 560
         Height = 25
-        Top = 64
+        Top = 104
         Width = 112
         Caption = 'Twin-Quasar'
         Font.CharSet = ANSI_CHARSET
@@ -31666,7 +31666,7 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__AU_VOYAGER2: TLabel
         Cursor = crHandPoint
-        Left = 544
+        Left = 368
         Height = 25
         Top = 328
         Width = 103
@@ -31687,11 +31687,11 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__LY_D_VUNIV: TLabel
         Cursor = crHandPoint
-        Left = 944
+        Left = 656
         Height = 25
-        Top = 40
-        Width = 192
-        Caption = 'Sichtbares Universum'
+        Top = 48
+        Width = 367
+        Caption = 'Beobachtungshorizont (Partikelhorizont)'
         Font.CharSet = ANSI_CHARSET
         Font.Color = clAqua
         Font.Height = -19
@@ -31708,9 +31708,9 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__LY_D_VIRGO_DIST: TLabel
         Cursor = crHandPoint
-        Left = 773
+        Left = 528
         Height = 25
-        Top = 144
+        Top = 152
         Width = 219
         Alignment = taRightJustify
         Caption = 'Entfernung Virgohaufen'
@@ -31730,9 +31730,9 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__LY_D_M31_DIST: TLabel
         Cursor = crHandPoint
-        Left = 696
+        Left = 496
         Height = 25
-        Top = 168
+        Top = 176
         Width = 276
         Alignment = taRightJustify
         Caption = 'Entfernung Andromedagalaxie'
@@ -31752,7 +31752,7 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__AU_NEWHORIZONS_DIST: TLabel
         Cursor = crHandPoint
-        Left = 448
+        Left = 360
         Height = 25
         Top = 352
         Width = 139
@@ -31774,9 +31774,9 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__LY_D_MILKYWAY_DIAM: TLabel
         Cursor = crHandPoint
-        Left = 672
+        Left = 456
         Height = 25
-        Top = 216
+        Top = 208
         Width = 223
         Alignment = taRightJustify
         Caption = 'Durchmesser Milchstraße'
@@ -31796,9 +31796,9 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__MOON_DIAMETER_DIAM: TLabel
         Cursor = crHandPoint
-        Left = 16
+        Left = 221
         Height = 25
-        Top = 696
+        Top = 656
         Width = 174
         Alignment = taRightJustify
         Caption = 'Durchmesser Mond'
@@ -31818,7 +31818,7 @@ object F__ASTROCALC: TF__ASTROCALC
       end
       object L__AU_VOYAGER1: TLabel
         Cursor = crHandPoint
-        Left = 584
+        Left = 376
         Height = 25
         Top = 304
         Width = 103
@@ -31870,6 +31870,59 @@ object F__ASTROCALC: TF__ASTROCALC
         ParentFont = False
         TabOrder = 8
         Text = '0'
+      end
+      object L__LY_EH: TLabel
+        Left = 608
+        Height = 22
+        Top = 80
+        Width = 154
+        Caption = 'Ereignishorizont'
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clAqua
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Font.Style = [fsBold, fsUnderline]
+        ParentColor = False
+        ParentFont = False
+        OnClick = L__LY_EHClick
+        OnMouseDown = L__LY_EHMouseDown
+        OnMouseEnter = L__LY_EHMouseEnter
+        OnMouseLeave = L__LY_EHMouseLeave
+      end
+      object ED__AM_LDD: TEdit
+        Left = 43
+        Height = 30
+        Top = 243
+        Width = 165
+        Color = clSilver
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clMaroon
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Font.Style = [fsBold]
+        OnChange = ED__AM_LDDChange
+        ParentFont = False
+        TabOrder = 9
+        Text = '0'
+      end
+      object L__AM_LDD: TLabel
+        Left = 41
+        Height = 25
+        Top = 219
+        Width = 73
+        Caption = 'Lichttage'
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clSilver
+        Font.Height = -19
+        Font.Name = 'Segoe UI Light'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        ParentColor = False
+        ParentFont = False
       end
     end
     object TS__ANGLES: TTabSheet

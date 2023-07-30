@@ -4125,6 +4125,9 @@ begin
 
     F__ASTROCALC.Show; //ShowModal;
   end;
+
+  IniText(F__ASTROCALC,msLANG_ID);
+
   F__ASTROCALC.msLANG_ID := msLANG_ID;
   F__ASTROCALC.msAlbireoLocalDir:=gsAlbireoLocalDir;
 
@@ -12632,6 +12635,7 @@ begin
 
     case PC__WORKBENCH.ActivePageIndex of
       ciPAGE_STARMAP: CleanStartOfStarmap();
+      ciPAGE_SPACELAB: ExecAlbireo(); // Switch to first page to prevent exception violation to re-set the languuage here.
     end;
 
   finally

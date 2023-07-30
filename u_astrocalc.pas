@@ -56,6 +56,7 @@ type
     CB__PXC_OBJ_DETAIL_UNIT: TComboBox;
     CB__PXC_SFORMAT: TComboBox;
     CB__TRAVELSPEED: TComboBox;
+    ED__AM_LDD: TEdit;
     ED__AM_MPC: TEdit;
     ED__APERTURE: TSpinEdit;
     ED__DEG2: TEdit;
@@ -101,6 +102,8 @@ type
     IMG__ANGLE_DE: TImage;
     IMG__AM_DIST: TImage;
     IMG__AM_DIST1: TImage;
+    L__AM_LDD: TLabel;
+    L__LY_EH: TLabel;
     L__TRAVELTIME_RES: TLabel;
     L__TRAVELTIMECALC: TLabel;
     L__ANGLE_ALPHAZENTAURI: TLabel;
@@ -295,6 +298,7 @@ type
     procedure ED__AM_KMChange(Sender: TObject);
     procedure ED__AM_KMMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure ED__AM_LDDChange(Sender: TObject);
     procedure ED__AM_LHHChange(Sender: TObject);
     procedure ED__AM_LMMChange(Sender: TObject);
     procedure ED__AM_LSSChange(Sender: TObject);
@@ -352,6 +356,11 @@ type
     procedure L__LY_D_COMAClick(Sender: TObject);
     procedure L__LY_D_MILKYWAYClick(Sender: TObject);
     procedure L__LY_D_VUNIVClick(Sender: TObject);
+    procedure L__LY_EHClick(Sender: TObject);
+    procedure L__LY_EHMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure L__LY_EHMouseEnter(Sender: TObject);
+    procedure L__LY_EHMouseLeave(Sender: TObject);
     procedure L__LY_M42Click(Sender: TObject);
     procedure L__MOON_ANGLEClick(Sender: TObject);
     procedure L__MOON_DIAMETER_DIAMMouseDown(Sender: TObject;
@@ -1375,8 +1384,6 @@ procedure TF__ASTROCALC.IniAstroCalc();
 var
   iStarDiam: Integer;
 begin
-  IniText(F__ASTROCALC,msLANG_ID);
-
   if(msLANG_ID = 'DE') then
   begin
     L__ISCALE.Caption := '(Abbildungsmaßstab)';
@@ -1742,6 +1749,9 @@ begin
       dVal:= dValEdit * 3.26 * 1000000;
       ED__AM_LY.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
 
+      dVal := dValEdit * 3.26 * (365) * 1000000;
+      ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,8,2);
+
       dVal := dValEdit * 3.26 * (365*24) * 1000000;
       ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,8,2);
 
@@ -1767,6 +1777,9 @@ begin
       dVal := dValEdit * 3.26;
       ED__AM_LY.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
 
+      dVal := dValEdit * 3.26 * (365);
+      ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,8,2);
+
       dVal := dValEdit * 3.26 * (365*24);
       ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,8,2);
 
@@ -1791,6 +1804,9 @@ begin
 
       dVal := dValEdit / 3.26;
       ED__AM_PC.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
+
+      dVal := dValEdit * (365);
+      ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,8,2);
 
       dVal := dValEdit * (365*24);
       ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,8,2);
@@ -1821,6 +1837,9 @@ begin
       dVal := dValEdit / (365*24);
       ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,8,2);
 
+      dVal := dValEdit / (24);
+      ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,8,2);
+
       dVal := dValEdit * (60);
       ED__AM_LMM.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
 
@@ -1846,6 +1865,9 @@ begin
       dVal := dValEdit / (365*24*60);
       ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,8,2);
 
+      dVal := dValEdit / (24*60);
+      ED__AM_LDD.Text:=FloatToStrF(dVal,ffFixed,8,2);
+
       dVal := dValEdit / 60;
       ED__AM_LHH.Text:=FloatToStrF(dVal,ffFixed,8,2);
 
@@ -1870,6 +1892,9 @@ begin
 
       dVal := dValEdit / (365*24*60*60);
       ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,8,2);
+
+      dVal := dValEdit / (24 * 60 * 60);
+      ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,8,2);
 
       dVal := dValEdit / (60 * 60);
       ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,8,2);
@@ -1897,6 +1922,9 @@ begin
 
       dVal := dValEdit / (365*24*60*60);
       ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,8,2);
+
+      dVal := dValEdit / (24*60*60);
+      ED__AM_LDD.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
 
       dVal := dValEdit / (60*60);
       ED__AM_LHH.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
@@ -1929,6 +1957,9 @@ begin
       dVal := dValEdit / (365*24*60*60);
       ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,8,2);
 
+      dVal := dValEdit / (24*60*60);
+      ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,8,2);
+
       dVal := dValEdit / (60*60);
       ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,8,2);
 
@@ -1937,6 +1968,34 @@ begin
 
       dVal := dValEdit;
       ED__AM_LSS.Text:=FloatToStrF(dVal,ffExponent,8,2);
+
+    end;
+    8: // Lightdays edited
+    begin
+      dVal := dValEdit / 3.26 / (365*24) / 1000000;
+      ED__AM_MPC.Text:=FloatToStrF(dVal,ffExponent,8,2);
+
+      dVal := dValEdit / 3.26 / (365*24);
+      ED__AM_PC.Text:=FloatToStrF(dVal,ffExponent,8,2);
+
+      dVal := dValEdit / 365;
+      ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,8,2);
+
+      dVal := dValEdit *24;
+      ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,8,2);
+
+      dVal := dValEdit * (24*60);
+      ED__AM_LMM.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
+
+      dVal := dValEdit * (24*3600);
+      ED__AM_LSS.Text:=FloatToStrF(dVal,ffExponent,8,2);
+
+      dVal := 360*60*60/(3.26*365)*dValEdit/(2*Pi);
+      ED__AM_AU.Text:=FloatToStrF(dVal,ffExponent,8,2);
+
+      dVal:= dValEdit * (24*3600) * 300000;
+      mdVal_km := dVal;
+      ED__AM_KM.Text:=FloatToStrF(dVal,ffExponent,8,2);
 
     end;
   end;
@@ -2912,6 +2971,12 @@ begin
   PrepareDistEdits();
 end;
 
+procedure TF__ASTROCALC.ED__AM_LDDChange(Sender: TObject);
+begin
+  if(ED__AM_LDD.Focused) then
+    CalcDist(8,ED__AM_LDD.Text);
+end;
+
 procedure TF__ASTROCALC.ED__AM_LHHChange(Sender: TObject);
 begin
   if(ED__AM_LHH.Focused) then
@@ -3369,7 +3434,7 @@ procedure TF__ASTROCALC.L__AE_PLUTOClick(Sender: TObject);
 begin
   ED__AM_AU.SetFocus;
   ED__AM_AU.Text := '39,482';
-  CalcDist(6,'39.482');
+  CalcDist(6,'39,482');
 end;
 
 procedure TF__ASTROCALC.L__AE_SATURNClick(Sender: TObject);
@@ -3476,21 +3541,21 @@ procedure TF__ASTROCALC.L__AU_NEWHORIZONSClick(Sender: TObject);
 begin
   ED__AM_AU.SetFocus;
   ED__AM_AU.Text := '43,65';
-  CalcDist(6,'43.65');
+  CalcDist(6,'43,65');
 end;
 
 procedure TF__ASTROCALC.L__AU_VOYAGER1Click(Sender: TObject);
 begin
   ED__AM_AU.SetFocus;
   ED__AM_AU.Text := '144,61';
-  CalcDist(6,'144.61');
+  CalcDist(6,'144,61');
 end;
 
 procedure TF__ASTROCALC.L__AU_VOYAGER2Click(Sender: TObject);
 begin
   ED__AM_AU.SetFocus;
   ED__AM_AU.Text := '119,75';
-  CalcDist(6,'119.75');
+  CalcDist(6,'119,75');
 end;
 
 
@@ -3499,7 +3564,7 @@ procedure TF__ASTROCALC.L__LY_ALPACENTAURIClick(Sender: TObject);
 begin
   ED__AM_LY.SetFocus;
   ED__AM_LY.Text := '4,34';
-  CalcDist(2,'4.34');
+  CalcDist(2,'4,34');
 end;
 
 procedure TF__ASTROCALC.L__LY_D_M31Click(Sender: TObject);
@@ -3540,8 +3605,31 @@ end;
 procedure TF__ASTROCALC.L__LY_D_VUNIVClick(Sender: TObject);
 begin
   ED__AM_PC.SetFocus;
-  ED__AM_PC.Text := '3.200.000.000';
-  CalcDist(1,'3200000000');
+  ED__AM_PC.Text := '14.200.000.000';
+  CalcDist(1,'14200000000');
+end;
+
+procedure TF__ASTROCALC.L__LY_EHClick(Sender: TObject);
+begin
+  ED__AM_PC.SetFocus;
+  ED__AM_PC.Text := '5.430.000.000';
+  CalcDist(1,'5430000000');
+end;
+
+procedure TF__ASTROCALC.L__LY_EHMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  MDownDistLabel(Sender as TLabel);
+end;
+
+procedure TF__ASTROCALC.L__LY_EHMouseEnter(Sender: TObject);
+begin
+  EnterDistLabel(Sender as TLabel);
+end;
+
+procedure TF__ASTROCALC.L__LY_EHMouseLeave(Sender: TObject);
+begin
+  LeaveDistLabel(Sender as TLabel);
 end;
 
 procedure TF__ASTROCALC.L__LY_M42Click(Sender: TObject);
@@ -3564,8 +3652,6 @@ end;
 procedure TF__ASTROCALC.L__MOON_DIAMETER_DIAMMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  //_CatchWarn_ButtonShiftXY(Button, Shift, X, Y);
-
   MDownDistLabel(Sender as TLabel);
 end;
 

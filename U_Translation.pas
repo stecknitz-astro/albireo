@@ -118,6 +118,7 @@ begin
     if(sText = 'Benutzerdefiniert') then begin Result := 'User defined'; exit; end;
     if(sText = 'Benutzerdefiniert...') then begin Result := 'Customer...'; exit; end;
     if(sText = 'Benutze dB (Dezibel)') then begin Result := 'Use dB (Decibel)'; exit; end;
+    if(sText = 'Beobachtungshorizont (Partikelhorizont)') then begin Result := 'Particle Horizon'; exit; end;
     if(sText = 'Beobachtungszeit') then begin Result := 'Observation Time'; exit; end;
     if(sText = 'Berechne') then begin Result := 'Calculate'; exit; end;
     if(sText = 'Berechne Objektgröße') then begin Result := 'Calculate object size'; exit; end;
@@ -184,6 +185,7 @@ begin
     if(sText = 'Entfernungsumrechnung') then begin Result := 'Distance Calculation'; exit; end;
     if(sText = 'Entfernungen') then begin Result := 'Distances'; exit; end;
     if(sText = 'Erde') then begin Result := 'Earth'; exit; end;
+    if(sText = 'Ereignishorizont') then begin Result := 'Event Horizon'; exit; end;
     if(sText = 'Ergebnis') then begin Result := 'Result'; exit; end;
     if(sText = 'Ermittelt') then begin Result := 'Investigated'; exit; end;
     if(sText = 'Erscheinungsjahr') then begin Result := 'Launch year'; exit; end;
@@ -264,6 +266,7 @@ begin
     if(sText = 'Lichtminuten') then begin Result := 'Lightminutes'; exit; end;
     if(sText = 'Lichtsekunden') then begin Result := 'Lightseconds'; exit; end;
     if(sText = 'Lichtstunden') then begin Result := 'Lighthours'; exit; end;
+    if(sText = 'Lichttage') then begin Result := 'Lightdays'; exit; end;
     if(sText = 'Linienstärke') then begin Result := 'Line Thickness'; exit; end;
     if(sText = 'Lizenzschlüssel') then begin Result := 'License key'; exit; end;
     if(sText = 'Lizenzschlüssel übernehmen') then begin Result := 'Process license key'; exit; end;
@@ -346,6 +349,7 @@ begin
     if(sText = 'Referenzdunkelstrom [e-/s]') then begin Result := 'Dark current reference [e-/s]'; exit; end;
     if(sText = 'Refreshrate [Minuten]') then begin Result := 'Refreshrate [Minutes]'; exit; end;
     if(sText = 'Registrierungsformular') then begin Result := 'Registration Form'; exit; end;
+    if(sText = 'Reisezeitberechnung') then begin Result := 'Travel time calc'; exit; end;
     if(sText = 'Rektaszension') then begin Result := 'Right Ascension'; exit; end;
     if(sText = 'Rot') then begin Result := 'Red'; exit; end;
     if(sText = 'Scheinbare Größe') then begin Result := 'Apparent Size'; exit; end;
@@ -573,6 +577,7 @@ begin
     if(sText = 'Equatorial') then begin Result := 'Parallaktisch'; exit; end;
     if(sText = 'Equatorial Mount') then begin Result := 'Parallaktische Montierung'; exit; end;
     if(sText = 'Equatorial System') then begin Result := 'Äquatoriales System'; exit; end;
+    if(sText = 'Event Horizon') then begin Result := 'Ereignishorizont'; exit; end;
     if(sText = 'Exact Match') then begin Result := 'Exakte Übereinstimmung'; exit; end;
     if(sText = 'Examples') then begin Result := 'Beispiele'; exit; end;
     if(sText = 'Exit Pupil') then begin Result := 'Austrittspupille'; exit; end;
@@ -628,6 +633,7 @@ begin
     if(sText = 'License Assistant') then begin Result := 'Lizensierungsassistent'; exit; end;
     if(sText = 'License Form') then begin Result := 'Lizensierung'; exit; end;
     if(sText = 'License key') then begin Result := 'Lizenzschlüssel'; exit; end;
+    if(sText = 'Lightdays') then begin Result := 'Lichttage'; exit; end;
     if(sText = 'Lighthours') then begin Result := 'Lichtstunden'; exit; end;
     if(sText = 'Lightminutes') then begin Result := 'Lichtminuten'; exit; end;
     if(sText = 'Lightseconds') then begin Result := 'Lichtsekunden'; exit; end;
@@ -699,6 +705,7 @@ begin
     if(sText = 'Outer') then begin Result := 'Äußeres'; exit; end;
     if(sText = 'Outer (Asteroids - Pluto') then begin Result := 'Äußeres (Asteroiden - Pluto)'; exit; end;
     if(sText = 'Output Directory') then begin Result := 'Output Verzeichnis'; exit; end;
+    if(sText = 'Particle Horizon') then begin Result := 'Beobachtungshorizont (Partikelhorizont)'; exit; end;
     if(sText = 'Personal Data') then begin Result := 'Persönliche Daten'; exit; end;
     if(sText = 'Perspektive: Ecliptic Projection') then begin Result := 'Perspektive: Ekliptikprojektion'; exit; end;
     if(sText = 'Perspektive: Inclination view') then begin Result := 'Perspektive: Neigungsansicht'; exit; end;
@@ -801,6 +808,7 @@ begin
     if(sText = 'Time Zone') then begin Result := 'Zeitzone'; exit; end;
     if(sText = 'TN') then begin Result := 'DN'; exit; end;
     if(sText = 'Today') then begin Result := 'Heute'; exit; end;
+    if(sText = 'Travel time calc') then begin Result := 'Reisezeitberechnung'; exit; end;
     if(sText = 'Trace') then begin Result := 'Bewegungsbahn'; exit; end;
     if(sText = 'Type') then begin Result := 'Typ'; exit; end;
     if(sText = 'Unit') then begin Result := 'Einheit'; exit; end;
