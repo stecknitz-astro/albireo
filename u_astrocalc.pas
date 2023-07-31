@@ -555,7 +555,6 @@ begin
   if (not Assigned(DistLabel)) then
     exit;
 
-  DistLabel.Font.Color:=clLvCol;
 end;
 
 
@@ -563,8 +562,6 @@ procedure TF__ASTROCALC.EnterDistLabel(DistLabel: TLabel);
 begin
   if (not Assigned(DistLabel)) then
     exit;
-
-  DistLabel.Font.Color:=clSlCol;
 
 end;
 

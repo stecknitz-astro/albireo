@@ -31356,7 +31356,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 40
         Caption = 'Erde'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clLime
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31377,7 +31377,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 142
         Caption = 'Sonne - Merkur'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clYellow
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31399,7 +31399,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 67
         Caption = '- Venus'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clYellow
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31420,7 +31420,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 53
         Caption = '- Erde'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clYellow
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31441,7 +31441,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 57
         Caption = '- Mars'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clYellow
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31462,7 +31462,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 75
         Caption = '- Jupiter'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clYellow
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31483,7 +31483,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 73
         Caption = '- Saturn'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clYellow
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31504,7 +31504,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 77
         Caption = '- Uranus'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clYellow
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31525,7 +31525,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 81
         Caption = '- Neptun'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clYellow
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31546,7 +31546,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 61
         Caption = '- Pluto'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clYellow
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31567,7 +31567,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 57
         Caption = 'Sonne'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clLime
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31588,7 +31588,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 132
         Caption = 'Alpha Centauri'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clRed
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31609,7 +31609,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 170
         Caption = 'Orion-Nebel (M42)'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clRed
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31630,7 +31630,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 125
         Caption = 'Coma-Haufen'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clRed
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31651,7 +31651,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 112
         Caption = 'Twin-Quasar'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clRed
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31672,7 +31672,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 103
         Caption = '- Voyager 2'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clYellow
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31688,14 +31688,14 @@ object F__ASTROCALC: TF__ASTROCALC
       object L__LY_D_VUNIV: TLabel
         Cursor = crHandPoint
         Left = 656
-        Height = 25
+        Height = 22
         Top = 48
-        Width = 367
+        Width = 377
         Caption = 'Beobachtungshorizont (Partikelhorizont)'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clFuchsia
         Font.Height = -19
-        Font.Name = 'Segoe UI'
+        Font.Name = 'Arial'
         Font.Pitch = fpVariable
         Font.Quality = fqDraft
         Font.Style = [fsBold, fsUnderline]
@@ -31715,7 +31715,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Alignment = taRightJustify
         Caption = 'Entfernung Virgohaufen'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clRed
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31737,7 +31737,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Alignment = taRightJustify
         Caption = 'Entfernung Andromedagalaxie'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clRed
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31759,7 +31759,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Alignment = taRightJustify
         Caption = '- New Horizons'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clYellow
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31781,7 +31781,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Alignment = taRightJustify
         Caption = 'Durchmesser Milchstraße'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clRed
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31803,7 +31803,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Alignment = taRightJustify
         Caption = 'Durchmesser Mond'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clLime
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31824,7 +31824,7 @@ object F__ASTROCALC: TF__ASTROCALC
         Width = 103
         Caption = '- Voyager 1'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clYellow
         Font.Height = -19
         Font.Name = 'Segoe UI'
         Font.Pitch = fpVariable
@@ -31872,13 +31872,14 @@ object F__ASTROCALC: TF__ASTROCALC
         Text = '0'
       end
       object L__LY_EH: TLabel
+        Cursor = crHandPoint
         Left = 608
         Height = 22
-        Top = 80
+        Top = 72
         Width = 154
         Caption = 'Ereignishorizont'
         Font.CharSet = ANSI_CHARSET
-        Font.Color = clAqua
+        Font.Color = clFuchsia
         Font.Height = -19
         Font.Name = 'Arial'
         Font.Pitch = fpVariable
