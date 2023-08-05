@@ -180,14 +180,17 @@ type
     ED__SEARCH: TEdit;
     ED__WT_MM: TEdit;
     ED__WT_SS: TEdit;
-    GBX__ADEV: TGroupBox;
     GRD__RECOM_PROP: TStringGrid;
+    GRD__TELPROP: TStringGrid;
     IL__MENUITEMS: TImageList;
     IMG__BIGLOGO: TImage;
     IMG__MOON_CORNER: TImage;
     IMG__RECOMMEND: TImage;
     IMG__MW: TImage;
     IMG__SOLSYS: TImage;
+    L__MOON_CUL_TITLE: TLabel;
+    L__MOON_CUL: TLabel;
+    L__SUNCUL_TITLE: TLabel;
     L__SUN_HGT: TLabel;
     L__OC_SEP: TLabel;
     L__SENSOR_ZOOMED: TLabel;
@@ -200,6 +203,7 @@ type
     L__GOTOOUT: TLabel;
     L__ASTROCALC: TLabel;
     L__SOLSYS_CERES: TLabel;
+    L__SUN_CUL: TLabel;
     L__ZERO_S: TLabel;
     L__ATYPE: TLabel;
     L__AZ: TLabel;
@@ -261,6 +265,7 @@ type
     MenuItem16: TMenuItem;
     MENU__NOW: TMenuItem;
     MENU__FULLSCREEN: TMenuItem;
+    P__ADEV: TPanel;
     P__SPACELAB: TPanel;
     PMENU__VOIDS: TMenuItem;
     PMENU__MAP_FULL: TMenuItem;
@@ -472,7 +477,6 @@ type
     P__AONAME: TPanel;
     P__AOTYPE: TPanel;
     GRD__AO: TStringGrid;
-    GRD__TELPROP: TStringGrid;
     IMG__HOR: TImage;
     IMG__ADEV_PHOTO: TImage;
     IMG__POS_MOON: TImage;
@@ -2494,6 +2498,7 @@ end;
 procedure TF__ASTROTOOLBOX.SetMainInfoData(Date: TDateTime);
 var
   rMoonR_HH, rMoonS_HH, rHgtMax: Real;
+  rSunCul_HH, rMoonCul_HH: Real;
   dtTimeMR,dtTimeMS,dtTimeCul: TDateTime;
 begin
   dtTimeMR:=0;dtTimeMS:=0;dtTimeCul:=0;rHgtMax:=0;
@@ -2537,10 +2542,14 @@ begin
     end;
   end;
 
+  rSunCul_HH := mrRise_HH + 0.5*(mrSet_HH - mrRise_HH);
   L__SUN_RISE.Caption := IntToStr(Trunc(mrRise_HH)) + ':' + Format('%.2d',[Trunc((mrRise_HH - Trunc(mrRise_HH))*60)]);
+  L__SUN_CUL.Caption := IntToStr(Trunc(rSunCul_HH)) + ':' + Format('%.2d',[Trunc((rSunCul_HH - Trunc(rSunCul_HH))*60)]);
   L__SUN_SET.Caption := IntToStr(Trunc(mrSet_HH)) + ':' + Format('%.2d',[Trunc((mrSet_HH - Trunc(mrSet_HH))*60)]);
 
+  rMoonCul_HH := (dtTimeCul - Trunc(dtTimeCul))*24;
   L__MOON_RISE.Caption := IntToStr(Trunc(rMoonR_HH)) + ':' + Format('%.2d',[Trunc((rMoonR_HH - Trunc(rMoonR_HH))*60)]);
+  L__MOON_CUL.Caption := IntToStr(Trunc(rMoonCul_HH)) + ':' + Format('%.2d',[Trunc((rMoonCul_HH - Trunc(rMoonCul_HH))*60)]);
   L__MOON_SET.Caption := IntToStr(Trunc(rMoonS_HH)) + ':' + Format('%.2d',[Trunc((rMoonS_HH - Trunc(rMoonS_HH))*60)]);
 
 end;

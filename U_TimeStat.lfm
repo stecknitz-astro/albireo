@@ -1,12 +1,12 @@
 object F__TIMESTAT: TF__TIMESTAT
-  Left = -1305
-  Height = 659
-  Top = 220
-  Width = 811
+  Left = -1357
+  Height = 786
+  Top = 122
+  Width = 782
   BorderIcons = [biSystemMenu]
   Caption = 'Sonne und Mond'
-  ClientHeight = 659
-  ClientWidth = 811
+  ClientHeight = 786
+  ClientWidth = 782
   KeyPreview = True
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
@@ -32,9 +32,9 @@ object F__TIMESTAT: TF__TIMESTAT
   end
   object PC__SUNANDMOON: TPageControl
     Left = 0
-    Height = 419
+    Height = 546
     Top = 240
-    Width = 811
+    Width = 782
     ActivePage = TS__TIMETABLE
     Align = alClient
     TabIndex = 1
@@ -42,17 +42,17 @@ object F__TIMESTAT: TF__TIMESTAT
     OnChange = PC__SUNANDMOONChange
     object TS__CURR: TTabSheet
       Caption = 'Ausgewählt'
-      ClientHeight = 391
-      ClientWidth = 803
+      ClientHeight = 518
+      ClientWidth = 774
       object P__SUN: TPanel
         Left = 0
         Height = 149
         Top = 0
-        Width = 803
+        Width = 774
         Align = alTop
         Caption = 'Sonne'
         ClientHeight = 149
-        ClientWidth = 803
+        ClientWidth = 774
         Color = 1052688
         Font.CharSet = ANSI_CHARSET
         Font.Color = clWhite
@@ -64,7 +64,7 @@ object F__TIMESTAT: TF__TIMESTAT
         ParentFont = False
         TabOrder = 0
         object GBX__SUNSET: TGroupBox
-          Left = 502
+          Left = 473
           Height = 147
           Top = 1
           Width = 300
@@ -456,13 +456,13 @@ object F__TIMESTAT: TF__TIMESTAT
       end
       object P__MOON: TPanel
         Left = 0
-        Height = 242
+        Height = 369
         Top = 149
-        Width = 803
+        Width = 774
         Align = alClient
         Caption = 'P__MOON'
-        ClientHeight = 242
-        ClientWidth = 803
+        ClientHeight = 369
+        ClientWidth = 774
         Color = clBlack
         ParentColor = False
         TabOrder = 1
@@ -3153,17 +3153,17 @@ object F__TIMESTAT: TF__TIMESTAT
     end
     object TS__TIMETABLE: TTabSheet
       Caption = 'Monatsübersicht'
-      ClientHeight = 391
-      ClientWidth = 803
+      ClientHeight = 518
+      ClientWidth = 774
       object GRD__RISE_SET: TStringGrid
         Left = 0
-        Height = 351
+        Height = 478
         Top = 40
-        Width = 803
+        Width = 774
         Align = alClient
         AlternateColor = 4605510
         Color = 1052688
-        ColCount = 6
+        ColCount = 7
         DefaultColWidth = 105
         DefaultRowHeight = 18
         FixedColor = clRed
@@ -3182,10 +3182,10 @@ object F__TIMESTAT: TF__TIMESTAT
         Left = 0
         Height = 40
         Top = 0
-        Width = 803
+        Width = 774
         Align = alTop
         ClientHeight = 40
-        ClientWidth = 803
+        ClientWidth = 774
         Color = 4605510
         ParentColor = False
         TabOrder = 1
@@ -3227,13 +3227,13 @@ object F__TIMESTAT: TF__TIMESTAT
     end
     object TS__CHART: TTabSheet
       Caption = 'Diagramm'
-      ClientHeight = 391
-      ClientWidth = 803
+      ClientHeight = 518
+      ClientWidth = 774
       object CHART__SM: TChart
         Left = 0
-        Height = 341
+        Height = 468
         Top = 0
-        Width = 803
+        Width = 774
         AxisList = <        
           item
             Grid.Color = clMaroon
@@ -3286,11 +3286,11 @@ object F__TIMESTAT: TF__TIMESTAT
       object P__DCONTROL: TPanel
         Left = 0
         Height = 50
-        Top = 341
-        Width = 803
+        Top = 468
+        Width = 774
         Align = alBottom
         ClientHeight = 50
-        ClientWidth = 803
+        ClientWidth = 774
         Color = 4605510
         Font.CharSet = ANSI_CHARSET
         Font.Color = clSilver
@@ -3354,13 +3354,13 @@ object F__TIMESTAT: TF__TIMESTAT
     end
     object TS__ECLIPSE_SUN: TTabSheet
       Caption = 'Sonnenfinsternisse'
-      ClientHeight = 391
-      ClientWidth = 803
+      ClientHeight = 518
+      ClientWidth = 774
       object GRD__ECLIPSE_SUN: TStringGrid
         Left = 0
-        Height = 391
+        Height = 518
         Top = 0
-        Width = 803
+        Width = 774
         Align = alClient
         AlternateColor = 4605510
         Color = 1052688
@@ -3392,13 +3392,13 @@ object F__TIMESTAT: TF__TIMESTAT
     end
     object TS__ECLIPSE_MOON: TTabSheet
       Caption = 'Mondfinsternisse'
-      ClientHeight = 391
-      ClientWidth = 803
+      ClientHeight = 518
+      ClientWidth = 774
       object GRD__ECLIPSE_MOON: TStringGrid
         Left = 0
-        Height = 391
+        Height = 518
         Top = 0
-        Width = 803
+        Width = 774
         Align = alClient
         AlternateColor = 4605510
         Color = 1052688
@@ -3434,11 +3434,11 @@ object F__TIMESTAT: TF__TIMESTAT
     Left = 0
     Height = 120
     Top = 120
-    Width = 811
+    Width = 782
     Align = alTop
     BevelOuter = bvNone
     ClientHeight = 120
-    ClientWidth = 811
+    ClientWidth = 782
     Color = clBlack
     ParentColor = False
     TabOrder = 1
@@ -21735,11 +21735,11 @@ object F__TIMESTAT: TF__TIMESTAT
     Left = 0
     Height = 120
     Top = 0
-    Width = 811
+    Width = 782
     Align = alTop
     BevelOuter = bvNone
     ClientHeight = 120
-    ClientWidth = 811
+    ClientWidth = 782
     Color = 1376301
     ParentColor = False
     TabOrder = 2
@@ -21747,7 +21747,7 @@ object F__TIMESTAT: TF__TIMESTAT
       Left = 0
       Height = 120
       Top = 0
-      Width = 811
+      Width = 782
       Align = alClient
       Center = True
       Picture.Data = {

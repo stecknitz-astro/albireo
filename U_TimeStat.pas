@@ -1379,19 +1379,21 @@ begin
   begin
     GRD__RISE_SET.Cells[0,0] := 'Tag';
     GRD__RISE_SET.Cells[1,0] := 'Sonnenaufgang';
-    GRD__RISE_SET.Cells[2,0] := 'Sonnenuntergang';
-    GRD__RISE_SET.Cells[3,0] := 'Mondaufgang';
-    GRD__RISE_SET.Cells[4,0] := 'Mondkulmination';
-    GRD__RISE_SET.Cells[5,0] := 'Monduntergang';
+    GRD__RISE_SET.Cells[2,0] := 'Kulmination';
+    GRD__RISE_SET.Cells[3,0] := 'Sonnenuntergang';
+    GRD__RISE_SET.Cells[4,0] := 'Mondaufgang';
+    GRD__RISE_SET.Cells[5,0] := 'Mondkulmination';
+    GRD__RISE_SET.Cells[6,0] := 'Monduntergang';
   end
   else
   begin
     GRD__RISE_SET.Cells[0,0] := 'Day';
     GRD__RISE_SET.Cells[1,0] := 'Sunrise';
-    GRD__RISE_SET.Cells[2,0] := 'Sunset';
-    GRD__RISE_SET.Cells[3,0] := 'Moonrise';
-    GRD__RISE_SET.Cells[4,0] := 'Moon Culmination';
-    GRD__RISE_SET.Cells[5,0] := 'Moonset';
+    GRD__RISE_SET.Cells[2,0] := 'Culmination';
+    GRD__RISE_SET.Cells[3,0] := 'Sunset';
+    GRD__RISE_SET.Cells[4,0] := 'Moonrise';
+    GRD__RISE_SET.Cells[5,0] := 'Moon Culmination';
+    GRD__RISE_SET.Cells[6,0] := 'Moonset';
   end;
 
   iRow := 0;
@@ -1502,14 +1504,15 @@ begin
 
     GRD__RISE_SET.Cells[0,iRow] := Trim(FormatDateTime('ddd',iDay) + ' ' + DateToStr(iDay) + ' ' + sDST);
     GRD__RISE_SET.Cells[1,iRow] := HourToHHMMStr(rRise_HH);
-    GRD__RISE_SET.Cells[2,iRow] := HourToHHMMStr(rSet_HH);
-    GRD__RISE_SET.Cells[3,iRow] := TimeToStr(dtTimeMR);
+    GRD__RISE_SET.Cells[2,iRow] := HourToHHMMStr(rRise_HH + 0.5*(rSet_HH - rRise_HH));
+    GRD__RISE_SET.Cells[3,iRow] := HourToHHMMStr(rSet_HH);
+    GRD__RISE_SET.Cells[4,iRow] := FormatDateTime('hh:mm',dtTimeMR);// TimeToStr(dtTimeMR);
     if(sMoonInfo = '') then
-      GRD__RISE_SET.Cells[4,iRow] := TimeToStr(dtTimeCul)
+      GRD__RISE_SET.Cells[5,iRow] := FormatDateTime('hh:mm',dtTimeCul)
     else
-      GRD__RISE_SET.Cells[4,iRow] := TimeToStr(dtTimeCul) + ' ' + sMoonInfo;
+      GRD__RISE_SET.Cells[5,iRow] := FormatDateTime('hh:mm',dtTimeCul) + ' ' + sMoonInfo;
 
-    GRD__RISE_SET.Cells[5,iRow] := TimeToStr(dtTimeMS);
+    GRD__RISE_SET.Cells[6,iRow] := FormatDateTime('hh:mm',dtTimeMS);
 
     rNight := (rRise_HH - 2) + (24 - rSet_HH - 2);
     if(rNight < 0) then rNight := 0;
