@@ -245,6 +245,7 @@ begin
     if(sText = 'Inneres') then begin Result := 'Inner'; exit; end;
     if(sText = 'Inneres (Merkur - Mars)') then begin Result := 'Inner (Mercury - Mars)'; exit; end;
     if(sText = 'Intervall') then begin Result := 'Interval'; exit; end;
+    if(sText = 'Jahr') then begin Result := 'Year'; exit; end;
     if(sText = 'Jetzt') then begin Result := 'Now'; exit; end;
     if(sText = 'Jetzt Spenden') then begin Result := 'Donate Now'; exit; end;
     if(sText = 'Julianische Zeit') then begin Result := 'Julian Time'; exit; end;
@@ -823,6 +824,7 @@ begin
     if(sText = 'Visualisation') then begin Result := 'Visualisierung'; exit; end;
     if(sText = 'Vis. Horizon Limit') then begin Result := 'Vis. Horizonthöhe'; exit; end;
     if(sText = 'Welcome to Albireo!') then begin Result := 'Willkommen bei Albireo!'; exit; end;
+    if(sText = 'Year') then begin Result := 'Jahr'; exit; end;
     if(sText = 'Year of Birth') then begin Result := 'Geburtsjahr'; exit; end;
     if(sText = 'Your firstname') then begin Result := 'Dein Vorname'; exit; end;
     if(sText = 'Your surname') then begin Result := 'Dein Zuname'; exit; end;

@@ -31113,7 +31113,7 @@ object F__ASTROCALC: TF__ASTROCALC
       object L__AM_LY: TLabel
         Left = 43
         Height = 25
-        Top = 120
+        Top = 139
         Width = 76
         Caption = 'Lichtjahre'
         Font.CharSet = ANSI_CHARSET
@@ -31128,7 +31128,7 @@ object F__ASTROCALC: TF__ASTROCALC
       object ED__AM_LY: TEdit
         Left = 41
         Height = 30
-        Top = 144
+        Top = 163
         Width = 168
         Color = clSilver
         Font.CharSet = ANSI_CHARSET
@@ -31249,7 +31249,7 @@ object F__ASTROCALC: TF__ASTROCALC
       object L__AM_LSS1: TLabel
         Left = 43
         Height = 25
-        Top = 488
+        Top = 516
         Width = 22
         Caption = 'AE'
         Font.CharSet = ANSI_CHARSET
@@ -31264,7 +31264,7 @@ object F__ASTROCALC: TF__ASTROCALC
       object ED__AM_AU: TEdit
         Left = 41
         Height = 30
-        Top = 512
+        Top = 540
         Width = 168
         Color = clSilver
         Font.CharSet = ANSI_CHARSET
@@ -31283,7 +31283,7 @@ object F__ASTROCALC: TF__ASTROCALC
       object L__AM_KM: TLabel
         Left = 41
         Height = 25
-        Top = 576
+        Top = 604
         Width = 24
         Caption = 'km'
         Font.CharSet = ANSI_CHARSET
@@ -31298,7 +31298,7 @@ object F__ASTROCALC: TF__ASTROCALC
       object ED__AM_KM: TEdit
         Left = 40
         Height = 30
-        Top = 600
+        Top = 628
         Width = 168
         Color = clSilver
         Font.CharSet = ANSI_CHARSET
@@ -31895,7 +31895,7 @@ object F__ASTROCALC: TF__ASTROCALC
       object ED__AM_LDD: TEdit
         Left = 43
         Height = 30
-        Top = 243
+        Top = 255
         Width = 165
         Color = clSilver
         Font.CharSet = ANSI_CHARSET
@@ -31913,7 +31913,7 @@ object F__ASTROCALC: TF__ASTROCALC
       object L__AM_LDD: TLabel
         Left = 41
         Height = 25
-        Top = 219
+        Top = 231
         Width = 73
         Caption = 'Lichttage'
         Font.CharSet = ANSI_CHARSET
@@ -44406,8 +44406,8 @@ object F__ASTROCALC: TF__ASTROCALC
           Height = 456
           Top = 8
           Width = 920
-          ActivePage = TS__SETTINGS
-          TabIndex = 0
+          ActivePage = TS__NYQUIST
+          TabIndex = 2
           TabOrder = 0
           object TS__SETTINGS: TTabSheet
             Caption = 'Einstellungen'
@@ -45468,40 +45468,6 @@ object F__ASTROCALC: TF__ASTROCALC
                 ParentFont = False
                 TabOrder = 0
               end
-              object RBG__SEEING: TRadioGroup
-                Left = 16
-                Height = 233
-                Top = 32
-                Width = 440
-                AutoFill = True
-                Caption = 'Picering Seeing Scale'
-                ChildSizing.LeftRightSpacing = 6
-                ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-                ChildSizing.EnlargeVertical = crsHomogenousChildResize
-                ChildSizing.ShrinkHorizontal = crsScaleChilds
-                ChildSizing.ShrinkVertical = crsScaleChilds
-                ChildSizing.Layout = cclLeftToRightThenTopToBottom
-                ChildSizing.ControlsPerLine = 1
-                ClientHeight = 212
-                ClientWidth = 436
-                Color = clForm
-                Items.Strings = (
-                  '01 - Extremely BAD. Diameter > 13'''''
-                  '02 - Very BAD. Diameter approx. up to 13'''''
-                  '03 - Almost very BAD. Diameter up to > 6'''' and < 13'''''
-                  '04 - BAD. Diffraction arcs sometimes visible, Diam > 5'''''
-                  '05 - NORMAL. Diffraction arcs frequently visible, Diam. > 4'''''
-                  '06 - BETTER.  Diffraction arcs constantly visible, Diam. > 3'''''
-                  '07 - GOOD.   Diffraction circles sometimes visible, Diam. > 2'''''
-                  '08 - QUITE GOOD. Little picture movement, Diam. < 2'''''
-                  '09 - VERY GOOD. Picture somtimes frozen'
-                  '10 - PERFECT. Complete frozen star diffraction pattern'
-                )
-                OnClick = RBG__SEEINGClick
-                ParentBackground = False
-                ParentColor = False
-                TabOrder = 1
-              end
               object L__NYQUIST_TITLE: TLabel
                 Left = 472
                 Height = 16
@@ -45663,14 +45629,41 @@ object F__ASTROCALC: TF__ASTROCALC
                 ParentColor = False
                 ParentFont = False
               end
-              object GBX__OPT_FL: TGroupBox
+              object CB__SEEING: TComboBox
                 Left = 16
-                Height = 94
-                Top = 272
-                Width = 440
-                Caption = 'Optimale Brennweiten'
-                ClientHeight = 73
-                ClientWidth = 436
+                Height = 24
+                Top = 59
+                Width = 317
+                Font.CharSet = ANSI_CHARSET
+                Font.Color = clBlack
+                Font.Height = -13
+                Font.Name = 'Arial'
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                Font.Style = [fsBold, fsUnderline]
+                ItemHeight = 16
+                Items.Strings = (
+                  '01- Extremely BAD. Diameter > 13'''''
+                  '02 - Very BAD. Diameter approx. Up to 113'''''
+                  '03 - Almost very BAD. Diameter between 6'''' and 13 '''''
+                  '04 - BAD. Diffraction arcs sometimes visible, Diam > 5'''''
+                  '05 - NORMAL. Diffraction arcs frequently visible, Diam. > 4'''''
+                  '06 - BETTER. Diffraction arcs constantly visible. Diam. > 3'''''
+                  '07 - GOOD. Diffraction CIRCLES sometimes visible. Diam > 2'''''
+                  '08 - QUITE GOOD. Little picture movement. Diam < 2'''''
+                  '09 - VERY GOOD. Picture sometimes frozen.'
+                  '10 - PERFECT. Comletely frozen star diffraction pattern,'
+                )
+                OnChange = CB__SEEINGChange
+                ParentFont = False
+                TabOrder = 1
+              end
+              object L__SEEING_TITLE: TLabel
+                Left = 16
+                Height = 16
+                Top = 40
+                Width = 142
+                Caption = 'Picering Seeing Scale'
                 Font.CharSet = ANSI_CHARSET
                 Font.Color = clBlack
                 Font.Height = -13
@@ -45678,10 +45671,35 @@ object F__ASTROCALC: TF__ASTROCALC
                 Font.Pitch = fpVariable
                 Font.Quality = fqDraft
                 Font.Style = [fsBold]
+                ParentColor = False
                 ParentFont = False
+              end
+              object L__OPT_FL_TITLE: TLabel
+                Left = 24
+                Height = 16
+                Top = 99
+                Width = 143
+                Caption = 'Optimale Brennweiten'
+                Font.CharSet = ANSI_CHARSET
+                Font.Color = clBlack
+                Font.Height = -13
+                Font.Name = 'Arial'
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                Font.Style = [fsBold]
+                ParentColor = False
+                ParentFont = False
+              end
+              object P__OPT_FL: TPanel
+                Left = 21
+                Height = 77
+                Top = 123
+                Width = 434
+                ClientHeight = 77
+                ClientWidth = 434
                 TabOrder = 2
                 object L__LIMG_TITLE: TLabel
-                  Left = 20
+                  Left = 16
                   Height = 16
                   Top = 8
                   Width = 332
@@ -45704,7 +45722,15 @@ object F__ASTROCALC: TF__ASTROCALC
                   Top = 8
                   Width = 36
                   Caption = '-- mm'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
                   ParentColor = False
+                  ParentFont = False
                 end
                 object L__DSIMG_TITLE: TLabel
                   Left = 16
@@ -45714,7 +45740,15 @@ object F__ASTROCALC: TF__ASTROCALC
                   Alignment = taRightJustify
                   AutoSize = False
                   Caption = 'Für DeepSky bei ausgew. Seeing (große Bel.-Zeiten):'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
                   ParentColor = False
+                  ParentFont = False
                 end
                 object L__DSIMG: TLabel
                   Left = 376
@@ -45722,7 +45756,15 @@ object F__ASTROCALC: TF__ASTROCALC
                   Top = 40
                   Width = 36
                   Caption = '-- mm'
+                  Font.CharSet = ANSI_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -13
+                  Font.Name = 'Arial'
+                  Font.Pitch = fpVariable
+                  Font.Quality = fqDraft
+                  Font.Style = [fsBold]
                   ParentColor = False
+                  ParentFont = False
                 end
               end
             end

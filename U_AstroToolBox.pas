@@ -2497,16 +2497,21 @@ end;
 
 procedure TF__ASTROTOOLBOX.SetMainInfoData(Date: TDateTime);
 var
-  rMoonR_HH, rMoonS_HH, rHgtMax: Real;
+  rMoonR_HH, rMoonS_HH, rHgtMaxMoon: Real;
   rSunCul_HH, rMoonCul_HH: Real;
   dtTimeMR,dtTimeMS,dtTimeCul: TDateTime;
+  iDEC_DEG, iDEC_MM: SmallInt;
+  rDEC_SEC: Real;
+  iRA_HH, iRA_MM: Word;
+  rRA_SEC: Real;
+  rLambdaSun, rMSun, rAz, rHgt: Real;
 begin
-  dtTimeMR:=0;dtTimeMS:=0;dtTimeCul:=0;rHgtMax:=0;
+  dtTimeMR:=0;dtTimeMS:=0;dtTimeCul:=0;rHgtMaxMoon:=0;
 
   CalcMoonRiseAndMoonSet(Date,
     miDST_HH,miUTC_HH,miGLng_DEG,miGLng_MIN,
     mrSin_fGLat, mrCos_fGLat,
-    dtTimeMR,dtTimeMS,dtTimeCul,rHgtMax);
+    dtTimeMR,dtTimeMS,dtTimeCul,rHgtMaxMoon);
 
   rMoonR_HH := (dtTimeMR - Trunc(dtTimeMR))*24;
   rMoonS_HH := (dtTimeMS - Trunc(dtTimeMS))*24;
@@ -2543,13 +2548,34 @@ begin
   end;
 
   rSunCul_HH := mrRise_HH + 0.5*(mrSet_HH - mrRise_HH);
+
+  // Calc sun's height at its culmination
+  rLambdaSun:=0; rMSUN:=0;
+  iRA_HH:=0; iRA_MM:=0; rRA_SEC:=0;
+  iDEC_DEG:=0; iDEC_MM:=0; rDEC_SEC:=0;
+  rAz:=0; rHgt:=0;
+
+  GetSunCoo(Trunc(Date) + rSunCul_HH/24.0,
+  miDST_HH,miUTC_HH, rLambdaSun, rMSun,
+  iRA_HH, iRA_MM, rRA_SEC,
+  iDEC_DEG, iDEC_MM, rDEC_SEC);
+
+  EquToAZCoo(Trunc(Date) + rSunCul_HH/24.0,
+    miDST_HH,miUTC_HH,
+    miGLng_DEG,miGLng_MIN,
+    mrSin_fGLat, mrCos_fGLat,
+    iDEC_DEG, iDEC_MM, rDEC_SEC,
+    iRA_HH, iRA_MM, rRA_SEC,
+    rAz, rHgt
+    );
+
   L__SUN_RISE.Caption := IntToStr(Trunc(mrRise_HH)) + ':' + Format('%.2d',[Trunc((mrRise_HH - Trunc(mrRise_HH))*60)]);
-  L__SUN_CUL.Caption := IntToStr(Trunc(rSunCul_HH)) + ':' + Format('%.2d',[Trunc((rSunCul_HH - Trunc(rSunCul_HH))*60)]);
+  L__SUN_CUL.Caption := IntToStr(Trunc(rSunCul_HH)) + ':' + Format('%.2d',[Trunc((rSunCul_HH - Trunc(rSunCul_HH))*60)]) + ' (' +IntToStr(Round(rHgt)) + '°)';
   L__SUN_SET.Caption := IntToStr(Trunc(mrSet_HH)) + ':' + Format('%.2d',[Trunc((mrSet_HH - Trunc(mrSet_HH))*60)]);
 
   rMoonCul_HH := (dtTimeCul - Trunc(dtTimeCul))*24;
   L__MOON_RISE.Caption := IntToStr(Trunc(rMoonR_HH)) + ':' + Format('%.2d',[Trunc((rMoonR_HH - Trunc(rMoonR_HH))*60)]);
-  L__MOON_CUL.Caption := IntToStr(Trunc(rMoonCul_HH)) + ':' + Format('%.2d',[Trunc((rMoonCul_HH - Trunc(rMoonCul_HH))*60)]);
+  L__MOON_CUL.Caption := IntToStr(Trunc(rMoonCul_HH)) + ':' + Format('%.2d',[Trunc((rMoonCul_HH - Trunc(rMoonCul_HH))*60)]) + ' (' +IntToStr(Round(rHgtMaxMoon)) + '°)';
   L__MOON_SET.Caption := IntToStr(Trunc(rMoonS_HH)) + ':' + Format('%.2d',[Trunc((rMoonS_HH - Trunc(rMoonS_HH))*60)]);
 
 end;
@@ -7938,12 +7964,12 @@ begin
         (molAOList[i] as TAObject).IMG.Left := (molAOList[i] as TAObject).IMG.Left - (molAOList[i] as TAObject).IMG.Width div 2 ; //4;
       end;
 
-      // Print Labels of brightest stars or alpha stars
+      // Print Labels of brightest stars or alpha stars (in full overview for horizon heights more the 20 degree and not in zoom mode)
       if(mbZoomMode) then iBrightStarLabel_M := 4
       else iBrightStarLabel_M := 2;
 
       if(
-       (
+       ( ((rHgt > 20) or (miStarmapView > 0) or (mbZoomMode)) and
        (((molAOList[i] as TStar).rM < iBrightStarLabel_M) and (miShowStarDescr = 1)) or
        ((((molAOList[i] as TStar).sSym = 'alpha') or (LeftStr((molAOList[i] as TStar).sSym,3) = 'alf')) and (miShowStarDescr = 2))
        )
@@ -13186,8 +13212,10 @@ begin
 
   {$IFDEF LINUX}
     gsAlbireoLocalDir := GetLocalUserAppDataPath() + '.albireo/';
+    TB__TIME_24H.ShowHint:=false;
   {$ELSE}
     gsAlbireoLocalDir := GetLocalUserAppDataPath() + '\Albireo\';
+    TB__TIME_24H.ShowHint:=true;
   {$ENDIF LINUX}
 
   mGenMapCmd := mcdNone;
@@ -13311,7 +13339,6 @@ begin
 
   ReadDSImgList();
 
-  // Free version restrictions
   B__ASTROCALC.Visible:=true;
   MENU__ADB.Visible:=true; // Available for developers only to adjust asteroid ephemerides
   MENU__COMMENT.Visible:=true;

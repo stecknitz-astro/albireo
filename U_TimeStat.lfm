@@ -3186,7 +3186,7 @@ object F__TIMESTAT: TF__TIMESTAT
         Align = alTop
         ClientHeight = 40
         ClientWidth = 774
-        Color = 4605510
+        Color = clGray
         ParentColor = False
         TabOrder = 1
         object RB__MONTH: TRadioButton

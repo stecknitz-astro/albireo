@@ -56,6 +56,7 @@ type
     CB__PXC_OBJ_DETAIL_UNIT: TComboBox;
     CB__PXC_SFORMAT: TComboBox;
     CB__TRAVELSPEED: TComboBox;
+    CB__SEEING: TComboBox;
     ED__AM_LDD: TEdit;
     ED__AM_MPC: TEdit;
     ED__APERTURE: TSpinEdit;
@@ -95,13 +96,18 @@ type
     GBX__EXP_SN_CALC: TGroupBox;
     GBX__PXC_SENSOR: TGroupBox;
     GBX__RESULT: TGroupBox;
-    GBX__OPT_FL: TGroupBox;
     GBX__SIGNAL: TGroupBox;
     IMG__ORBITALPARAMS: TImage;
     IMG__ANGLE_EN: TImage;
     IMG__ANGLE_DE: TImage;
     IMG__AM_DIST: TImage;
     IMG__AM_DIST1: TImage;
+    L__DSIMG: TLabel;
+    L__DSIMG_TITLE: TLabel;
+    L__LIMG: TLabel;
+    L__LIMG_TITLE: TLabel;
+    L__OPT_FL_TITLE: TLabel;
+    L__SEEING_TITLE: TLabel;
     L__AM_LDD: TLabel;
     L__LY_EH: TLabel;
     L__TRAVELTIME_RES: TLabel;
@@ -118,14 +124,10 @@ type
     L__ANGLE_URANUS: TLabel;
     L__ANGLE_SATURN: TLabel;
     L__APERTURE: TLabel;
-    L__DSIMG: TLabel;
-    L__DSIMG_TITLE: TLabel;
     L__FOCALLENGTH: TLabel;
     L__FRATIO: TLabel;
     L__FRATIO_TITLE: TLabel;
     L__ISCALE: TLabel;
-    L__LIMG: TLabel;
-    L__LIMG_TITLE: TLabel;
     L__AM_PC1: TLabel;
     L__ANG_DEG_APPSIZE: TLabel;
     L__50_EXPTIME: TLabel;
@@ -240,6 +242,7 @@ type
     L__SUN_DIAMETER: TLabel;
     L__TELTYPE: TLabel;
     L__TELTYPE_TITLE: TLabel;
+    P__OPT_FL: TPanel;
     P__CAMERA: TPanel;
     P__CAMERA_TITLE: TPanel;
     P__CAMSETTINGS: TPanel;
@@ -270,7 +273,6 @@ type
     P__NYQUIST_TITLE: TPanel;
     P__TELESCOPE: TPanel;
     P__TELESCOPE_TITLE: TPanel;
-    RBG__SEEING: TRadioGroup;
     TS__SETTINGS: TTabSheet;
     TB__BG_MAG: TTrackBar;
     TB__DC_SIGNAL: TTrackBar;
@@ -293,6 +295,7 @@ type
     procedure CB__PXC_MANUFChange(Sender: TObject);
     procedure CB__PXC_MODELChange(Sender: TObject);
     procedure CB__PXC_SFORMATChange(Sender: TObject);
+    procedure CB__SEEINGChange(Sender: TObject);
     procedure CB__TRAVELSPEEDChange(Sender: TObject);
     procedure ED__AM_AUChange(Sender: TObject);
     procedure ED__AM_KMChange(Sender: TObject);
@@ -371,7 +374,6 @@ type
     procedure L__SUN_DIAMETERClick(Sender: TObject);
     procedure L__EARTH_DIAMETERClick(Sender: TObject);
     procedure L__MOON_DIAMETERClick(Sender: TObject);
-    procedure RBG__SEEINGClick(Sender: TObject);
     procedure TB__BG_MAGChange(Sender: TObject);
     procedure TB__DC_SIGNALChange(Sender: TObject);
     procedure TB__STAR_MAGChange(Sender: TObject);
@@ -1364,7 +1366,7 @@ var
   iIndex: Integer;
 begin
   Result := 0;
-  iIndex := RBG__SEEING.ItemIndex;
+  iIndex := CB__SEEING.ItemIndex;
 
   if(iIndex > 7) then
     Result := 2
@@ -1452,7 +1454,7 @@ begin
     L__D_AIRY.Caption:= FloatToStrF(1.22*550/1000000000 *1000/ED__APERTURE.Value *180/Pi *3600,ffFixed,8,1) + ' ''''';
   end;
 
-  RBG__SEEING.ItemIndex := 4; // Normal seeing
+  CB__SEEING.ItemIndex := 4; // Normal seeing
 
   iStarDiam := GetStarDiscDiam();
   L__RES_ATMOSPH.Caption:= FloatToStrF(iStarDiam/2.0,ffFixed,8,1) + '''''';
@@ -1747,23 +1749,23 @@ begin
       ED__AM_LY.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
 
       dVal := dValEdit * 3.26 * (365) * 1000000;
-      ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit * 3.26 * (365*24) * 1000000;
-      ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit * 3.26 * (365*24*60) * 1000000;
-      ED__AM_LMM.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LMM.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit * 3.26 * (365*24*3600) * 1000000;
-      ED__AM_LSS.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LSS.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := 360*60*60*dValEdit/(2*Pi) * 1000000;
-      ED__AM_AU.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_AU.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit * 3.26 * (365*24*3600) * 300000 * 1000000;
       mdVal_km := dVal;
-      ED__AM_KM.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_KM.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
     end;
     1: // Parsec edited
@@ -1775,98 +1777,101 @@ begin
       ED__AM_LY.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
 
       dVal := dValEdit * 3.26 * (365);
-      ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit * 3.26 * (365*24);
-      ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit * 3.26 * (365*24*60);
-      ED__AM_LMM.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LMM.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit * 3.26 * (365*24*3600);
-      ED__AM_LSS.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LSS.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := 360*60*60*dValEdit/(2*Pi);
-      ED__AM_AU.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_AU.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit * 3.26 * (365*24*3600) * 300000;
       mdVal_km := dVal;
-      ED__AM_KM.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_KM.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
     end;
     2: // Lightyear edited
     begin
       dVal := dValEdit / 3.26 / 1000000;
-      ED__AM_MPC.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_MPC.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / 3.26;
       ED__AM_PC.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
 
       dVal := dValEdit * (365);
-      ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      if(dVal > 1e6) then
+        ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,8,2)
+      else
+        ED__AM_LDD.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
 
       dVal := dValEdit * (365*24);
-      ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit * (365*24*60);
-      ED__AM_LMM.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LMM.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit * (365*24*3600);
-      ED__AM_LSS.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LSS.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := 360*60*60/3.26*dValEdit/(2*Pi);
-      ED__AM_AU.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_AU.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit * (365*24*3600) * 300000;
       mdVal_km := dVal;
-      ED__AM_KM.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_KM.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
     end;
 
     3: // Lighthours edited
     begin
       dVal := dValEdit / 3.26 / (365*24) / 1000000;
-      ED__AM_MPC.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_MPC.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / 3.26 / (365*24);
-      ED__AM_PC.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_PC.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / (365*24);
-      ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / (24);
-      ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit * (60);
       ED__AM_LMM.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
 
       dVal := dValEdit * (3600);
-      ED__AM_LSS.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LSS.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := 360*60*60/(3.26*365*24)*dValEdit/(2*Pi);
-      ED__AM_AU.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_AU.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal:= dValEdit * (3600) * 300000;
       mdVal_km := dVal;
-      ED__AM_KM.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_KM.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
     end;
     4: // Lightminutes edited
     begin
       dVal := dValEdit / 3.26 / (365*24*60) / 1000000;
-      ED__AM_MPC.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_MPC.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / 3.26 / (365*24*60);
-      ED__AM_PC.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_PC.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / (365*24*60);
-      ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / (24*60);
-      ED__AM_LDD.Text:=FloatToStrF(dVal,ffFixed,8,2);
+      ED__AM_LDD.Text:=FloatToStrF(dVal,ffFixed,3,2);
 
       dVal := dValEdit / 60;
-      ED__AM_LHH.Text:=FloatToStrF(dVal,ffFixed,8,2);
+      ED__AM_LHH.Text:=FloatToStrF(dVal,ffFixed,3,2);
 
       dVal := dValEdit * (60);
       ED__AM_LSS.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
@@ -1876,25 +1881,25 @@ begin
 
       dVal := dValEdit * (60) * 300000;
       mdVal_km := dVal;
-      ED__AM_KM.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_KM.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
     end;
     5: // Lightseconds edited
     begin
       dVal := dValEdit / 3.26 / (365*24*60*60) / 1000000;
-      ED__AM_PC.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_PC.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / 3.26 / (365*24*60*60);
-      ED__AM_PC.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_PC.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / (365*24*60*60);
-      ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / (24 * 60 * 60);
-      ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / (60 * 60);
-      ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / 60;
       ED__AM_LMM.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
@@ -1904,7 +1909,7 @@ begin
 
       dVal := dValEdit * 300000;
       mdVal_km := dVal;
-      ED__AM_KM.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_KM.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
     end;
     6: // AU edited (calulatd in Ls)
@@ -1912,22 +1917,22 @@ begin
       dValEdit := dValEdit * 499.004784;
 
       dVal := dValEdit / 3.26 / (365*24*60*60) / 1000000;
-      ED__AM_MPC.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_MPC.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / 3.26 / (365*24*60*60);
-      ED__AM_PC.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_PC.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / (365*24*60*60);
-      ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / (24*60*60);
-      ED__AM_LDD.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
+      ED__AM_LDD.Text:=FormatFloat('#,##0.0000', dVal, FormatSettings);
 
       dVal := dValEdit / (60*60);
-      ED__AM_LHH.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
+      ED__AM_LHH.Text:=FormatFloat('#,##0.0000', dVal, FormatSettings);
 
       dVal := dValEdit / 60;
-      ED__AM_LMM.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
+      ED__AM_LMM.Text:=FormatFloat('#,##0.0000', dVal, FormatSettings);
 
       dVal := dValEdit;
       ED__AM_LSS.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
@@ -1941,58 +1946,69 @@ begin
     begin
       mdVal_km := dValEdit;
       dVal := dValEdit / 149597870.7;
-      ED__AM_AU.Text:=FormatFloat('#,##0.000', dVal, FormatSettings);
+      if(dVal > 0.01) then
+        ED__AM_AU.Text:=FormatFloat('#,##0.000', dVal, FormatSettings)
+      else
+        ED__AM_AU.Text:= FloatToStrF(dVal,ffExponent,3,2);
 
       dValEdit := dValEdit * 0.00000333564; // Conversion in km -> Ls
 
       dVal := dValEdit / 3.26 / (365*24*60*60) / 1000000;
-      ED__AM_MPC.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_MPC.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / 3.26 / (365*24*60*60);
-      ED__AM_PC.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_PC.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / (365*24*60*60);
-      ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / (24*60*60);
-      ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      if(dVal > 0.1) then
+        ED__AM_LDD.Text:=FormatFloat('#,##0.00', dVal, FormatSettings)
+      else if(dVal > 1e-3) then
+        ED__AM_LDD.Text:=FormatFloat('#,##0.0000', dVal, FormatSettings)
+      else
+        ED__AM_LDD.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / (60*60);
-      ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      if(dVal > 0.01) then
+        ED__AM_LHH.Text:=FormatFloat('#,##0.0000', dVal, FormatSettings)
+      else
+        ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / 60;
-      ED__AM_LMM.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LMM.Text:=FormatFloat('#,##0.0000', dVal, FormatSettings);
 
       dVal := dValEdit;
-      ED__AM_LSS.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LSS.Text:=FormatFloat('#,##0.0000', dVal, FormatSettings);
 
     end;
     8: // Lightdays edited
     begin
       dVal := dValEdit / 3.26 / (365*24) / 1000000;
-      ED__AM_MPC.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_MPC.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / 3.26 / (365*24);
-      ED__AM_PC.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_PC.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := dValEdit / 365;
-      ED__AM_LY.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LY.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
 
       dVal := dValEdit *24;
-      ED__AM_LHH.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LHH.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
 
       dVal := dValEdit * (24*60);
       ED__AM_LMM.Text:=FormatFloat('#,##0.00', dVal, FormatSettings);
 
       dVal := dValEdit * (24*3600);
-      ED__AM_LSS.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_LSS.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal := 360*60*60/(3.26*365)*dValEdit/(2*Pi);
-      ED__AM_AU.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_AU.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
       dVal:= dValEdit * (24*3600) * 300000;
       mdVal_km := dVal;
-      ED__AM_KM.Text:=FloatToStrF(dVal,ffExponent,8,2);
+      ED__AM_KM.Text:=FloatToStrF(dVal,ffExponent,3,2);
 
     end;
   end;
@@ -2943,6 +2959,11 @@ begin
   ShowCameraProps();
 end;
 
+procedure TF__ASTROCALC.CB__SEEINGChange(Sender: TObject);
+begin
+  ShowCameraProps();
+end;
+
 procedure TF__ASTROCALC.CB__TRAVELSPEEDChange(Sender: TObject);
 begin
   CalcTravelTime();
@@ -3348,7 +3369,7 @@ begin
     IMG__ANGLE_DE.Visible:=false;
     IMG__ANGLE_EN.Visible:=true;
 
-    GBX__OPT_FL.Caption := 'Optimal focal lengths';
+    L__OPT_FL_TITLE.Caption := 'Optimal focal lengths';
     L__LIMG_TITLE.Caption := 'Lucky Imaging (short exposures):';
     L__DSIMG_TITLE.Caption := 'For DeepSky with selected seeing (long exposures):';
     P__SETTINGS.Caption:='Telescope & Camera Sensor';
@@ -3365,7 +3386,7 @@ begin
   end
   else
   begin
-    GBX__OPT_FL.Caption := 'Optimale Brennweiten';
+    L__OPT_FL_TITLE.Caption := 'Optimale Brennweiten';
     L__LIMG_TITLE.Caption := 'Lucky Imaging (kleine Bel.-Zeiten):';
     L__DSIMG_TITLE.Caption := 'Für DeepSky bei ausgew. Seeing (große Bel.-Zeiten):';
     P__SETTINGS.Caption:='Teleskop & Kamerasensor';
@@ -3604,6 +3625,17 @@ begin
   ED__AM_PC.SetFocus;
   ED__AM_PC.Text := '14.200.000.000';
   CalcDist(1,'14200000000');
+  if(msLang_ID = 'DE') then
+    MessageDlg('Diese Distanz kann in Wirklichkeit nie erreicht werden,'
+      + #13 + #10 + 'da sie aufgrund der Hubble''schen Raumausdehnung jenseites des Ereignishorizonts liegt.'
+      + #13 + #10 + 'Dahinter bewegen sich alle Objekte mit Überlichtgeschwindigkeit von uns weg.',
+      mtInformation,[mbOK],0)
+  else
+    MessageDlg('But this distance cannot be achieved,'
+      + #13 + #10 + 'because of the hubble space expansion it is behind the event horizon.'
+      + #13 + #10 + 'Any object there moves with overlight speed away from us.',
+      mtInformation,[mbOK],0);
+
 end;
 
 procedure TF__ASTROCALC.L__LY_EHClick(Sender: TObject);
@@ -3692,11 +3724,6 @@ begin
   ED__AM_KM.SetFocus;
   ED__AM_KM.Text := '3476';
   CalcDist(7,'3476');
-end;
-
-procedure TF__ASTROCALC.RBG__SEEINGClick(Sender: TObject);
-begin
-  ShowCameraProps();
 end;
 
 procedure TF__ASTROCALC.TB__BG_MAGChange(Sender: TObject);
