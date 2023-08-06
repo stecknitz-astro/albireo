@@ -13212,10 +13212,14 @@ begin
 
   {$IFDEF LINUX}
     gsAlbireoLocalDir := GetLocalUserAppDataPath() + '.albireo/';
-    TB__TIME_24H.ShowHint:=false;
+    TB__TIME_24H.TickStyle:=tsNone;
+    TB__MAG.TickStyle:=tsNone;
+    TB__MAG_G.TickStyle:=tsNone;
   {$ELSE}
     gsAlbireoLocalDir := GetLocalUserAppDataPath() + '\Albireo\';
-    TB__TIME_24H.ShowHint:=true;
+    TB__TIME_24H.TickStyle:=tsAuto;
+    TB__MAG.TickStyle:=tsAuto;
+    TB__MAG_G.TickStyle:=tsAuto;
   {$ENDIF LINUX}
 
   mGenMapCmd := mcdNone;
