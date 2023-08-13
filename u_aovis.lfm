@@ -1,7 +1,7 @@
 object F__AOVIS: TF__AOVIS
-  Left = -1921
+  Left = 2066
   Height = 989
-  Top = 18
+  Top = 27
   Width = 1737
   Caption = 'Object Visualisation'
   ClientHeight = 989
@@ -28123,36 +28123,10 @@ object F__AOVIS: TF__AOVIS
             Color = 1052688
             ParentColor = False
             TabOrder = 2
-            object GRD__AOV_PROP: TStringGrid
-              Left = 1
-              Height = 511
-              Top = 1
-              Width = 331
-              Align = alTop
-              AlternateColor = 4605510
-              Anchors = [akTop, akRight]
-              Color = 1052688
-              ColCount = 2
-              DefaultColWidth = 220
-              DefaultRowHeight = 18
-              FixedColor = clRed
-              FixedCols = 0
-              Font.CharSet = ANSI_CHARSET
-              Font.Color = clSilver
-              Font.Height = -11
-              Font.Name = 'Segoe UI'
-              Font.Pitch = fpVariable
-              Font.Quality = fqDraft
-              Font.Style = [fsBold]
-              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goSmoothScroll]
-              ParentFont = False
-              RowCount = 15
-              TabOrder = 0
-            end
             object L__OBJINFO: TLabel
               Left = 1
               Height = 15
-              Top = 512
+              Top = 1
               Width = 331
               Align = alTop
               Caption = '< Klicken Sie auf das Bild, um Beschreibungen anzuzeigen'
@@ -28168,19 +28142,19 @@ object F__AOVIS: TF__AOVIS
             end
             object P__STARSTRUCT: TPanel
               Left = 1
-              Height = 337
-              Top = 527
+              Height = 392
+              Top = 472
               Width = 331
-              Align = alClient
-              ClientHeight = 337
+              Align = alBottom
+              ClientHeight = 392
               ClientWidth = 331
-              TabOrder = 1
+              TabOrder = 0
               object GRD__STARSTRUCT: TStringGrid
                 Left = 1
-                Height = 167
+                Height = 150
                 Top = 1
                 Width = 329
-                Align = alTop
+                Align = alClient
                 Anchors = [akTop, akRight]
                 Color = 1052688
                 ColCount = 2
@@ -28197,11 +28171,11 @@ object F__AOVIS: TF__AOVIS
               end
               object P__HEAVYELFUSION: TPanel
                 Left = 1
-                Height = 168
-                Top = 168
+                Height = 240
+                Top = 151
                 Width = 329
-                Align = alClient
-                ClientHeight = 168
+                Align = alBottom
+                ClientHeight = 240
                 ClientWidth = 329
                 TabOrder = 1
                 Visible = False
@@ -28222,7 +28196,7 @@ object F__AOVIS: TF__AOVIS
                 end
                 object GRD__HEAVYELFUSION: TStringGrid
                   Left = 1
-                  Height = 135
+                  Height = 207
                   Top = 32
                   Width = 327
                   Align = alClient
@@ -28241,6 +28215,114 @@ object F__AOVIS: TF__AOVIS
                   TabOrder = 1
                 end
               end
+            end
+            object P__VISPROP: TPanel
+              Left = 1
+              Height = 448
+              Top = 16
+              Width = 331
+              Align = alClient
+              Caption = 'P__VISPROP'
+              ClientHeight = 448
+              ClientWidth = 331
+              TabOrder = 1
+              object GRD__AOV_PROP: TStringGrid
+                Left = 1
+                Height = 299
+                Top = 1
+                Width = 329
+                Align = alClient
+                AlternateColor = 4605510
+                Anchors = [akTop, akRight]
+                Color = 1052688
+                ColCount = 2
+                DefaultColWidth = 220
+                DefaultRowHeight = 18
+                FixedColor = clRed
+                FixedCols = 0
+                Font.CharSet = ANSI_CHARSET
+                Font.Color = clSilver
+                Font.Height = -11
+                Font.Name = 'Segoe UI'
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                Font.Style = [fsBold]
+                Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goSmoothScroll]
+                ParentFont = False
+                RowCount = 15
+                TabOrder = 0
+              end
+              object CHART__CUL_GRAPH: TChart
+                Left = 1
+                Height = 132
+                Top = 315
+                Width = 329
+                AxisList = <                
+                  item
+                    Marks.LabelFont.CharSet = ANSI_CHARSET
+                    Marks.LabelFont.Color = clYellow
+                    Marks.LabelFont.Pitch = fpVariable
+                    Marks.LabelFont.Quality = fqDraft
+                    Marks.LabelBrush.Style = bsClear
+                    Marks.Range.Max = 90
+                    Marks.Range.Min = -90
+                    Marks.Range.UseMax = True
+                    Marks.Range.UseMin = True
+                    Minors = <>
+                    Range.Max = 90
+                    Range.Min = -90
+                    Range.UseMax = True
+                    Range.UseMin = True
+                    Title.LabelFont.Orientation = 900
+                    Title.LabelBrush.Style = bsClear
+                  end                
+                  item
+                    Alignment = calBottom
+                    Marks.LabelFont.CharSet = ANSI_CHARSET
+                    Marks.LabelFont.Color = clYellow
+                    Marks.LabelFont.Pitch = fpVariable
+                    Marks.LabelFont.Quality = fqDraft
+                    Marks.LabelBrush.Style = bsClear
+                    Minors = <>
+                    Range.Min = 24
+                    Range.UseMax = True
+                    Range.UseMin = True
+                    Title.LabelBrush.Style = bsClear
+                  end>
+                BackColor = clGray
+                Title.Text.Strings = (
+                  'TAChart'
+                )
+                Align = alBottom
+                Color = 4605510
+                object CHART__CUL_GRAPHLineSeries1: TLineSeries
+                  LinePen.Color = clRed
+                end
+              end
+              object L__CUL_GRAPH: TLabel
+                Left = 1
+                Height = 15
+                Top = 300
+                Width = 329
+                Align = alBottom
+                Alignment = taCenter
+                Caption = 'Kulminationsgraph'
+                Font.CharSet = ANSI_CHARSET
+                Font.Color = clYellow
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                ParentColor = False
+                ParentFont = False
+              end
+            end
+            object SPL__AO_PROPS: TSplitter
+              Cursor = crVSplit
+              Left = 1
+              Height = 8
+              Top = 464
+              Width = 331
+              Align = alBottom
+              ResizeAnchor = akBottom
             end
           end
           object SPL__AOVIS: TSplitter

@@ -40,15 +40,20 @@ type
     CBX__REL: TCheckBox;
     CB__MOONS: TComboBox;
     CB__MSTAR_SEL: TComboBox;
+    CHART__CUL_GRAPH: TChart;
+    CHART__CUL_GRAPHLineSeries1: TLineSeries;
     CHRT__MOONPOS: TChart;
     CHART__SPEC: TChart;
     CHRT__MOONPOSConstantLine1: TConstantLine;
     CHRT__MOONPOSConstantLine2: TConstantLine;
     CHRT__MOONPOSConstantLine3: TConstantLine;
     CHRT__MOONPOSLineSeries1: TLineSeries;
+    GRD__AOV_PROP: TStringGrid;
+    GRD__HEAVYELFUSION: TStringGrid;
     GRD__HRD_MK: TStringGrid;
     GRD__STARSTRUCT: TStringGrid;
     IMG__FULLCONVECTION: TImage;
+    L__CUL_GRAPH: TLabel;
     L__REL: TLabel;
     L__PLANET: TLabel;
     L__MOON1: TLabel;
@@ -65,8 +70,9 @@ type
     LINE__RED: TConstantLine;
     LINE__SUNCMP: TLineSeries;
     ODLG__JPG: TOpenPictureDialog;
-    P__SUPERNOVA_TITLE: TPanel;
     P__HEAVYELFUSION: TPanel;
+    P__SUPERNOVA_TITLE: TPanel;
+    P__VISPROP: TPanel;
     P__STARSTRUCT: TPanel;
     P__SCALE_OPTIONS: TPanel;
     P__SCALING: TPanel;
@@ -74,7 +80,6 @@ type
     P__MOONPOS: TPanel;
     P__HRDATA: TPanel;
     ED__COMMENT: TEdit;
-    GRD__AOV_PROP: TStringGrid;
     GRD__MOON: TStringGrid;
     IMG_HRD: TImage;
     IMG__AO: TImage;
@@ -126,8 +131,8 @@ type
     SHP__CORE_HE: TShape;
     SHP__HRD: TShape;
     SHP__REF: TShape;
+    SPL__AO_PROPS: TSplitter;
     SPL__AOVIS: TSplitter;
-    GRD__HEAVYELFUSION: TStringGrid;
     TB__AOV: TTrackBar;
     TGB__STARSTRUCT: TToggleBox;
     TIMER__COO: TTimer;
@@ -206,6 +211,8 @@ type
     FiMStarCnt: Integer; // 0: Single Star, 1: Double Star; 2: Triple Star, ...
     FiMStarIndex: Integer; // Current Multi-Star Index (0,1,...)
 
+    FrHourCul_U, FrHourRise, FrHourCul_O, FrHourSet: Real; // Decimal-Hour of culminations, rise and set
+
     procedure CalcAOWidth(sType: string; iRefWidth: Integer);
     function GetUserFileID(): string;
     function GetUserFileIndex(sID: string): Integer;
@@ -234,6 +241,7 @@ type
     procedure ShowStarImage(IMG: TImage; sSpecID: string);
     procedure ResizeStarStructure();
     procedure ResizeStarStructTable();
+    procedure EvalCulminationGraph();
 
   public
     { public declarations }
@@ -270,6 +278,163 @@ implementation
 {$R *.lfm}
 
 { TF__AOVIS }
+
+procedure TF__AOVIS.EvalCulminationGraph();
+var
+  i, iDayHourSplit: Integer;
+  rHH: Float;
+  rAz, rHgt: Real;
+  rLambdaSun, rMSUN: Real;
+  iDEC_DEG, iDEC_MM: SmallInt;
+  rDEC_SEC: Real;
+  iRA_HH, iRA_MM: Word;
+  rRA_SEC: Real;
+  rHgtPrev: Real;
+  rHgtMin, rHgtMax: Real;
+begin
+  FrHourRise := 999;
+  FrHourSet := 999;
+  FrHourCul_O := 999;
+  FrHourCul_U := 999;
+
+  rAz := 0;
+  rHgtPrev := -999; rHgt := 0;
+  rHgtMin := 999; rHgtMax := -999;
+
+  iDayHourSplit := 60;
+  for i:=1 to 24*iDayHourSplit do
+  begin
+    rHH := i/(1.0*iDayHourSplit);
+
+    if((mAObject as TAObject).sAOType = 'SUN') then
+    begin
+      rLambdaSun:=0; rMSUN:=0;
+      iRA_HH:=0; iRA_MM:=0; rRA_SEC:=0;
+      iDEC_DEG:=0; iDEC_MM:=0; rDEC_SEC:=0;
+
+      GetSunCoo(Trunc(mdtWT) + rHH/24.0,
+      miDST_HH,miUTC_HH, rLambdaSun, rMSun,
+      iRA_HH, iRA_MM, rRA_SEC,
+      iDEC_DEG, iDEC_MM, rDEC_SEC);
+
+      EquToAZCoo(Trunc(mdtWT) + rHH/24.0,
+        miDST_HH,miUTC_HH,
+        miGLng_DEG,miGLng_MIN,
+        mrSin_fGLat, mrCos_fGLat,
+        iDEC_DEG, iDEC_MM, iDEC_MM,
+        iRA_HH, iRA_MM, rDEC_SEC,
+        rAz, rHgt
+        );
+
+    end
+    else if((mAObject as TAObject).sAOType = 'MOON') then
+    begin
+      rLambdaSun:=0; rMSUN:=0;
+      iRA_HH:=0; iRA_MM:=0; rRA_SEC:=0;
+      iDEC_DEG:=0; iDEC_MM:=0; rDEC_SEC:=0;
+
+      GetMoonCoo(Trunc(mdtWT) + rHH/24.0,
+        miDST_HH,miUTC_HH,rLambdaSun,rMSun,
+        iRA_HH, iRA_MM, rRA_SEC,
+        iDEC_DEG, iDEC_MM, rDEC_SEC);
+
+      EquToAZCoo(Trunc(mdtWT) + rHH/24.0,
+        miDST_HH,miUTC_HH,
+        miGLng_DEG,miGLng_MIN,
+        mrSin_fGLat, mrCos_fGLat,
+        iDEC_DEG, iDEC_MM, iDEC_MM,
+        iRA_HH, iRA_MM, rDEC_SEC,
+        rAz, rHgt
+        );
+
+    end
+    else
+      EquToAZCoo(Trunc(mdtWT) + rHH/24.0,
+        miDST_HH,miUTC_HH,
+        miGLng_DEG,miGLng_MIN,
+        mrSin_fGLat, mrCos_fGLat,
+        (mAObject as TAObject).iDec_Deg, (mAObject as TAObject).iDec_Min, (mAObject as TAObject).rDec_Sec,
+        (mAObject as TAObject).iRA_Hours, (mAObject as TAObject).iRA_Min, (mAObject as TAObject).rRA_Sec,
+        rAz, rHgt
+        );
+
+    (CHART__CUL_GRAPH.Series[0] as TLineSeries).AddXY(rHH,rHgt);
+
+    if(rHgtPrev <= 0) and (rHgtPrev > -999) and (rHgt > 0) then
+      FrHourRise := rHH;
+
+    if(rHgtPrev > 0) and (rHgt <= 0) then
+      FrHourSet := rHH;
+
+    if(rHgtPrev > 0) and (rHgt <= 0) then
+      FrHourSet := rHH;
+
+    if(rHgtMax < rHgt) then
+    begin
+      rHgtMax := rHgt;
+      FrHourCul_O := rHH;
+    end;
+
+    if(rHgtMin > rHgt) then
+    begin
+      rHgtMin := rHgt;
+      FrHourCul_U := rHH;
+    end;
+
+    rHgtPrev := rHgt;
+  end;
+
+  GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+
+  GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+
+  if(msLANG_ID = 'DE') then
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Untere Kulmination'
+  else
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Lower Culmination';
+
+  if(FrHourCul_U <> 999) then
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := HourToHHMMStr(FrHourCul_U)
+  else
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := '-';
+
+  GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+
+  if(msLANG_ID = 'DE') then
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Aufgang'
+  else
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Rise';
+
+  if(FrHourRise <> 999) then
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := HourToHHMMStr(FrHourRise)
+  else
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := '-';
+
+  GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+
+  if(msLANG_ID = 'DE') then
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Kulmination'
+  else
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Culmination';
+
+  if(FrHourCul_O <> 999) then
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := HourToHHMMStr(FrHourCul_O)
+  else
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := '-';
+
+  GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
+
+  if(msLANG_ID = 'DE') then
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Untergang'
+  else
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Set';
+
+  if(FrHourSet <> 999) then
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := HourToHHMMStr(FrHourSet)
+  else
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := '-';
+
+end;
 
 procedure TF__AOVIS.ResizeStarStructTable();
 begin
@@ -3054,6 +3219,7 @@ begin
 
   CalcAOWidth(mAObject.sAOType,TB__AOV.Max - TB__AOV.Position);
 
+  EvalCulminationGraph();
 end;
 
 procedure TF__AOVIS.FormCreate(Sender: TObject);

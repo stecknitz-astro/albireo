@@ -261,6 +261,7 @@ begin
     if(sText = 'Kommentar...') then begin Result := 'Comment...'; exit; end;
     if(sText = 'Kugelsternhaufen') then begin Result := 'Globular Cluster'; exit; end;
     if(sText = 'Kulmination') then begin Result := 'Culmination'; exit; end;
+    if(sText = 'Kulminationsgraph') then begin Result := 'Culmination Graph'; exit; end;
     if(sText = 'Länge östl. Greenwich') then begin Result := 'Longitude Greenwich E'; exit; end;
     if(sText = 'Leuchtkraftklassen') then begin Result := 'Luminosity Classes'; exit; end;
     if(sText = 'Lichtjahre') then begin Result := 'Lightyears'; exit; end;
@@ -524,6 +525,7 @@ begin
     if(sText = 'Conversion') then begin Result := 'Umrechnung'; exit; end;
     if(sText = 'Conversion of Orbital Parameters') then begin Result := 'Umrechnung Orbitalparameter'; exit; end;
     if(sText = 'Culmination') then begin Result := 'Kulmination'; exit; end;
+    if(sText = 'Culmination Graph') then begin Result := 'Kulminationsgraph'; exit; end;
     if(sText = 'Customer...') then begin Result := 'Benutzerdefiniert...'; exit; end;
     if(sText = 'Dark current 1/2-Temp. [°C]') then begin Result := 'Dunkelstrom 1/2-Temp. [°C]'; exit; end;
     if(sText = 'Dark current Ref.-Temp. [°C]') then begin Result := 'Dunkelstrom Ref.-Temp. [°C]'; exit; end;
