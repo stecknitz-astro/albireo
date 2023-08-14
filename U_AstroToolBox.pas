@@ -1735,7 +1735,8 @@ begin
   P__NAVIG.Visible := MENU_VIEW_NAVIGATION.Checked;
   SB__MAIN.Visible := not PMENU__MAP_FULL.Checked;
 
-  WindowState := wsFullScreen;
+  if(PMENU__MAP_FULL.Checked) then
+    WindowState := wsFullScreen;
 
   case PC__WORKBENCH.ActivePageIndex of
     ciPAGE_STARMAP:
@@ -13395,6 +13396,11 @@ end;
 procedure TF__ASTROTOOLBOX.FormKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
+  if(Key = VK_ESCAPE) and (WindowState = wsFullScreen) then
+  begin
+    SwitchFull();
+  end;
+
   case PC__WORKBENCH.ActivePageIndex of
     ciPAGE_STARMAP:
     begin
@@ -16829,16 +16835,28 @@ begin
       else
         PC__MAG.ActivePageIndex:=0;
 
+      if(PMENU__GALAXIES.Checked) then
+        PMENU__GALAXIES.ImageIndex:=-1 // Show check symbol
+      else
+        PMENU__GALAXIES.ImageIndex:=2; // Show icon
     end;
     ciAOF_Quasars:
     begin
       PMENU__Q.Checked := bActive;
       mbShowQuasars := PMENU__Q.Checked;
+      if(PMENU__Q.Checked) then
+        PMENU__Q.ImageIndex:=-1 // Show check symbol
+      else
+        PMENU__Q.ImageIndex:=20; // Show icon
     end;
     ciAOF_GlobularClusters:
     begin
       PMENU__GC.Checked := bActive;
       mbShowGlobularClusters := PMENU__GC.Checked;
+      if(PMENU__GC.Checked) then
+        PMENU__GC.ImageIndex:=-1 // Show check symbol
+      else
+        PMENU__GC.ImageIndex:=8; // Show icon
     end;
     ciAOF_SM_HS:
     begin
@@ -16864,16 +16882,28 @@ begin
     begin
       PMENU__N.Checked := bActive;
       mbShowGalacticNebula := PMENU__N.Checked;
+      if(PMENU__N.Checked) then
+        PMENU__N.ImageIndex:=-1 // Show check symbol
+      else
+        PMENU__N.ImageIndex:=21; // Show icon
     end;
     ciAOF_OpenClusters:
     begin
       PMENU__OC.Checked := bActive;
       mbShowOpenClusters := PMENU__OC.Checked;
+      if(PMENU__OC.Checked) then
+        PMENU__OC.ImageIndex:=-1 // Show check symbol
+      else
+        PMENU__OC.ImageIndex:=11; // Show icon
     end;
     ciAOF_PlanetaryNebula:
     begin
       PMENU__PN.Checked := bActive;
       mbShowPlanetaryNebula := PMENU__PN.Checked;
+      if(PMENU__PN.Checked) then
+        PMENU__PN.ImageIndex:=-1 // Show check symbol
+      else
+        PMENU__PN.ImageIndex:=14; // Show icon
     end;
     ciAOF_Sun:
     begin
@@ -16889,6 +16919,10 @@ begin
     begin
       PMENU__MESSIER.Checked := bActive;
       mbShowMessier := PMENU__MESSIER.Checked;
+      if(PMENU__MESSIER.Checked) then
+        PMENU__MESSIER.ImageIndex:=-1 // Show check symbol
+      else
+        PMENU__MESSIER.ImageIndex:=22; // Show icon
     end;
     ciAOF_ASTEROIDS:
     begin
