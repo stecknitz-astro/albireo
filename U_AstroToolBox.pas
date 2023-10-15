@@ -183,6 +183,7 @@ type
     GRD__RECOM_PROP: TStringGrid;
     GRD__TELPROP: TStringGrid;
     IL__MENUITEMS: TImageList;
+    IMG__CB: TImage;
     IMG__BIGLOGO: TImage;
     IMG__MOON_CORNER: TImage;
     IMG__RECOMMEND: TImage;
@@ -190,7 +191,10 @@ type
     IMG__SOLSYS: TImage;
     L__MOON_CUL_TITLE: TLabel;
     L__MOON_CUL: TLabel;
+    L__MOONCOL_TITLE: TLabel;
     L__SUNCUL_TITLE: TLabel;
+    L__SUNCOL_TITLE: TLabel;
+    L__MOON_COL: TLabel;
     L__SUN_HGT: TLabel;
     L__OC_SEP: TLabel;
     L__SENSOR_ZOOMED: TLabel;
@@ -204,6 +208,7 @@ type
     L__ASTROCALC: TLabel;
     L__SOLSYS_CERES: TLabel;
     L__SUN_CUL: TLabel;
+    L__SUN_COL: TLabel;
     L__ZERO_S: TLabel;
     L__ATYPE: TLabel;
     L__AZ: TLabel;
@@ -265,6 +270,8 @@ type
     MenuItem16: TMenuItem;
     MENU__NOW: TMenuItem;
     MENU__FULLSCREEN: TMenuItem;
+    P__RECOM_CON: TPanel;
+    P__RECOM_CON_TITLE: TPanel;
     P__ADEV: TPanel;
     P__SPACELAB: TPanel;
     PMENU__VOIDS: TMenuItem;
@@ -674,6 +681,8 @@ type
     GRD__RECOM_P: TStringGrid;
     GRD__RECOM_MS: TStringGrid;
     GRD__RECOM_ECL: TStringGrid;
+    GRD__RECOM_CON: TStringGrid;
+    TS__RECOM_CON: TTabSheet;
     TS__SPACELAB: TTabSheet;
     TB__SOLSYS: TTrackBar;
     TIMER__STRM_VIEWFLIP: TTimer;
@@ -1152,6 +1161,7 @@ type
 
     mslVisibleAOList: TStringList; // List of all visible astronomical objects
     molSignList: TObjectList; // List of astronomical constellations
+    mslConstCol: TStringList; // List of astronomical constellations and associated colors of map in IMG__CB
     molADevList: TObjectList; // List of all astronomical devices
     //molObservationList: TObjectList; // List of Observations
     molMeteorShowers: TObjectList;
@@ -1448,6 +1458,7 @@ type
     procedure SetTimeEditValues(bPlus: Boolean; iStep: Integer);
     procedure SetMainInfoData(Date: TDateTime);
     procedure ShowEclipsesForMonth(Date: TDateTime);
+    procedure ShowConstellationsForMonth(Date: TDateTime);
     procedure SetGenMapInterval(bSetFast: Boolean);
     procedure SetInterstellarObjectShapeColor(InterstellarObject: TInterstellarObject);
     procedure ShowStrmDlg();
@@ -1488,6 +1499,8 @@ type
     procedure SetVisuNow();
     procedure NextReComPic();
     procedure PrevReComPic();
+    function GetConstellationNameByCoo(iRA_HH, iRA_MM: Word; iDEC_DEG, iDEC_MM: SmallInt; iMode: SmallInt): string;
+    function GetRA_HH_OF_DATE(Date: TDateTime): Integer;
 
   public
 
@@ -1509,6 +1522,19 @@ implementation
 {$R *.lfm}
 
 { TF__ASTROTOOLBOX }
+
+function TF__ASTROTOOLBOX.GetConstellationNameByCoo(iRA_HH, iRA_MM: Word; iDEC_DEG, iDEC_MM: SmallInt; iMode: SmallInt): string;
+begin
+  Result := GetConstellationID(mslConstCol,IMG__CB,iRA_HH,iRA_MM,iDEC_DEG,iDEC_MM);
+  if(Result <> '') then
+  begin
+    if(iMode = 1) then
+      Result := GetSignName(Result,molSignList,msLANG_ID)
+    else if (iMode = 2) then
+      Result := GetSignName(Result,molSignList,msLANG_ID) + ' (' + Result +')';
+  end;
+
+end;
 
 procedure TF__ASTROTOOLBOX.SetVisuNow();
 begin
@@ -2405,6 +2431,234 @@ begin
 
 end;
 
+procedure TF__ASTROTOOLBOX.ShowConstellationsForMonth(Date: TDateTime);
+var
+  i: Integer;
+  Star: TStar;
+  iIndex: Integer;
+  iRA_HH: ShortInt;
+  iRA_HH_Comp, iRA_HH_1, iRA_HH_2: ShortInt;
+  iDEC_DEG: SmallInt;
+  iDECDiff: SmallInt;
+  bInRange: Boolean;
+  sNorthSouth, sAge: string;
+  iCircumpolar: ShortInt;
+begin
+  if(molSignList.Count = 0) then
+    exit;
+
+  Star := nil;
+  bInRange := false;
+
+  iRA_HH_Comp := GetRA_HH_OF_DATE(Date);
+  if(miGLat_DEG > 0) then
+    iDECDiff := 90 - miGLat_DEG
+  else
+    iDECDiff := 90 + miGLat_DEG;
+
+  GRD__RECOM_CON.RowCount:=2;
+
+  if(msLANG_ID = 'DE') then
+  begin
+    GRD__RECOM_CON.Cells[0,0] := 'Sternbild-ID';
+    GRD__RECOM_CON.Cells[1,0] := 'Sternbild-Name';
+    GRD__RECOM_CON.Cells[2,0] := 'Hauptstern';
+    GRD__RECOM_CON.Cells[3,0] := 'Himmel';
+    GRD__RECOM_CON.Cells[4,0] := 'Historie';
+    GRD__RECOM_CON.Cells[5,0] := 'Typ';
+  end
+  else
+  begin
+    GRD__RECOM_CON.Cells[0,0] := 'Const-ID';
+    GRD__RECOM_CON.Cells[1,0] := 'Constellation';
+    GRD__RECOM_CON.Cells[2,0] := 'Main Star';
+    GRD__RECOM_CON.Cells[3,0] := 'Sky';
+    GRD__RECOM_CON.Cells[4,0] := 'History';
+    GRD__RECOM_CON.Cells[5,0] := 'Type';
+  end;
+
+  for i:=0 to molSignList.Count-1 do
+  begin
+    // Eval leading star using offset 'grecAOIndexControl.iMin_S'
+    iCircumpolar := 0;
+    bInRange := false;
+
+    // Repair 1
+    iIndex := grecAOIndexControl.iMin_S + (molSignList[i] as TSign).iMainStarIndex - 9;   // -9: 3013 (Alphard) / 2942 (Sirrah) - Magic offset offset...
+    // Repair 2
+    if((molSignList[i] as TSign).iMainStarIndex <= 1661) then
+      iIndex := iIndex + 2
+    else if((molSignList[i] as TSign).iMainStarIndex <= 2123) then
+      iIndex := iIndex + 0
+    else if((molSignList[i] as TSign).iMainStarIndex <= 2227) then
+      iIndex := iIndex - 4
+    else if((molSignList[i] as TSign).iMainStarIndex <= 2232) then
+      iIndex := iIndex + 4
+    else if((molSignList[i] as TSign).iMainStarIndex <= 2255) then
+      iIndex := iIndex + 0
+    else if((molSignList[i] as TSign).iMainStarIndex <= 2287) then
+      iIndex := iIndex + 4;
+
+    if(iIndex >= 0) then
+    begin
+      Star := (molAOList[iIndex] as TStar);
+
+      //if((molSignList[i] as TSign).sCon = 'Mic') then
+      //  ShowMessage('Const Name: ' + (molSignList[i] as TSign).sConDE + ', MainStarIndex: ' + IntToStr((molSignList[i] as TSign).iMainStarIndex) + ', Star Name: ' + Star.sName_DE + ', Sym.: ' + Star.sSym + ', Cat.: ' + Star.sCatNo);
+
+      iRA_HH := Star.iRA_Hours;
+      iDEC_DEG := Star.iDec_Deg;
+
+      //if((molSignList[i] as TSign).sCon = 'Mic') then
+      //  ShowMessage('Star RA: ' + IntToStr(iRA_HH) + ', RA_Curr: ' + IntToStr(iRA_HH_Comp) + ', Star DEC: ' + IntToStr(iDEC_DEG) + ', Diff-DEC: ' + IntToStr(iDECDiff));
+
+      if(miGLat_DEG > 0) then
+      begin
+        if((90 - iDEC_DEG) < miGLat_DEG) then
+          iCircumpolar := 1;
+      end
+      else if(miGLat_DEG <= 0) then
+      begin
+        if((90 + iDEC_DEG) <= -miGLat_DEG) then
+          iCircumpolar := -1;
+      end;
+
+      if(iCircumpolar = 0) then
+      begin
+        iRA_HH_1 := iRA_HH_Comp - 7;
+        iRA_HH_2 := iRA_HH_Comp + 7;
+
+        // Check for RA-Range
+        if(iRA_HH_2 > 24) then
+          bInRange := ((iRA_HH <= (iRA_HH_2 - 24)) or (iRA_HH >= iRA_HH_1))
+        else if(iRA_HH_1 < 0) then
+          bInRange := ((iRA_HH <= iRA_HH_2) or (iRA_HH >= 24.0 + iRA_HH_2))
+        else
+          bInRange := (iRA_HH <= iRA_HH_2) and (iRA_HH >= iRA_HH_1);
+
+        // Check for DEC visibility (N/S Sky)
+        if(bInRange) then
+        begin
+          if(miGLat_DEG > 0) then
+          begin
+            bInRange := (iDEC_DEG > -iDECDiff);
+            //if((molSignList[i] as TSign).sCon = 'CrA') then
+            //  ShowMessage('Star DEC: ' + IntToStr(iDEC_DEG) + ', -Diff-DEC: ' + IntToStr(-iDECDiff));
+          end
+          else
+            bInRange :=  (iDEC_DEG < iDECDiff);
+        end;
+      end
+      else
+        bInRange := true;
+
+      if(bInRange) then
+      begin
+        GRD__RECOM_CON.Cells[0,GRD__RECOM_CON.RowCount-1] := (molSignList[i] as TSign).sCon;
+        GRD__RECOM_CON.Cells[1,GRD__RECOM_CON.RowCount-1] := GetSignName((molSignList[i] as TSign).sCon,molSignList,msLANG_ID);
+        if(msLANG_ID = 'DE') then
+        begin
+          if(Star.sName_DE <> '') then
+            GRD__RECOM_CON.Cells[2,GRD__RECOM_CON.RowCount-1] := Star.sName_DE
+          else if (Star.sSym <> '') then
+            GRD__RECOM_CON.Cells[2,GRD__RECOM_CON.RowCount-1] := Star.sSym
+          else
+            GRD__RECOM_CON.Cells[2,GRD__RECOM_CON.RowCount-1] := Star.sCatNo;
+
+          sNorthSouth := (molSignList[i] as TSign).sNorthSouth;
+
+          if(sNorthSouth = 'N') then
+            GRD__RECOM_CON.Cells[3,GRD__RECOM_CON.RowCount-1] := 'Nordhimmel'
+          else if(sNorthSouth = 'S') then
+            GRD__RECOM_CON.Cells[3,GRD__RECOM_CON.RowCount-1] := 'Südhimmel'
+          else if(sNorthSouth = 'N/S') then
+            GRD__RECOM_CON.Cells[3,GRD__RECOM_CON.RowCount-1] := 'Nord- und Südhimmel'
+          else if(sNorthSouth = 'N/s') then
+            GRD__RECOM_CON.Cells[3,GRD__RECOM_CON.RowCount-1] := 'Größtenteils Nordhimmel'
+          else if(sNorthSouth = 'n/S') then
+            GRD__RECOM_CON.Cells[3,GRD__RECOM_CON.RowCount-1] := 'Größtenteils Südhimmel'
+          else
+            GRD__RECOM_CON.Cells[3,GRD__RECOM_CON.RowCount-1] := '-';
+
+          sAge := (molSignList[i] as TSign).sHistory;
+
+          if(sAge = 'H') then
+            GRD__RECOM_CON.Cells[4,GRD__RECOM_CON.RowCount-1] := 'Historisch'
+          else if(sAge = 'M') then
+            GRD__RECOM_CON.Cells[4,GRD__RECOM_CON.RowCount-1] := 'Spätmittelalter bis 1700'
+          else if(sAge = 'N') then
+            GRD__RECOM_CON.Cells[4,GRD__RECOM_CON.RowCount-1] := 'Neuzeitlich ab 1700'
+          else
+            GRD__RECOM_CON.Cells[4,GRD__RECOM_CON.RowCount-1] := '-';
+
+          if((molSignList[i] as TSign).bZodiac) then
+            GRD__RECOM_CON.Cells[5,GRD__RECOM_CON.RowCount-1] := 'Ekliptik-Sternbild (Zodiak)'
+          else if(iCircumpolar = 1) then
+            GRD__RECOM_CON.Cells[5,GRD__RECOM_CON.RowCount-1] := 'Nördlich zirkumpolar'
+          else if(iCircumpolar = -1) then
+            GRD__RECOM_CON.Cells[5,GRD__RECOM_CON.RowCount-1] := 'Südlich zirkumpolar'
+          else
+            GRD__RECOM_CON.Cells[5,GRD__RECOM_CON.RowCount-1] := '-';
+
+        end
+        else
+        begin
+          if(Star.sName_DE <> '') then
+            GRD__RECOM_CON.Cells[2,GRD__RECOM_CON.RowCount-1] := Star.sName_DE
+          else if (Star.sSym <> '') then
+            GRD__RECOM_CON.Cells[2,GRD__RECOM_CON.RowCount-1] := Star.sSym
+          else
+            GRD__RECOM_CON.Cells[2,GRD__RECOM_CON.RowCount-1] := Star.sCatNo;
+
+          sNorthSouth := (molSignList[i] as TSign).sNorthSouth;
+
+          if(sNorthSouth = 'N') then
+            GRD__RECOM_CON.Cells[3,GRD__RECOM_CON.RowCount-1] := 'Northern Sky'
+          else if(sNorthSouth = 'S') then
+            GRD__RECOM_CON.Cells[3,GRD__RECOM_CON.RowCount-1] := 'Southern Sky'
+          else if(sNorthSouth = 'N/S') then
+            GRD__RECOM_CON.Cells[3,GRD__RECOM_CON.RowCount-1] := 'Northern and Southern Sky'
+          else if(sNorthSouth = 'N/s') then
+            GRD__RECOM_CON.Cells[3,GRD__RECOM_CON.RowCount-1] := 'Mainly North Sky'
+          else if(sNorthSouth = 'n/S') then
+            GRD__RECOM_CON.Cells[3,GRD__RECOM_CON.RowCount-1] := 'Mainly South Sky'
+          else
+            GRD__RECOM_CON.Cells[3,GRD__RECOM_CON.RowCount-1] := '-';
+
+          sAge := (molSignList[i] as TSign).sHistory;
+
+          if(sAge = 'H') then
+            GRD__RECOM_CON.Cells[4,GRD__RECOM_CON.RowCount-1] := 'Ancient'
+          else if(sAge = 'M') then
+            GRD__RECOM_CON.Cells[4,GRD__RECOM_CON.RowCount-1] := 'Late mean age up to 1700'
+          else if(sAge = 'N') then
+            GRD__RECOM_CON.Cells[4,GRD__RECOM_CON.RowCount-1] := 'New-Age since 1700'
+          else
+            GRD__RECOM_CON.Cells[4,GRD__RECOM_CON.RowCount-1] := '-';
+
+          if((molSignList[i] as TSign).bZodiac) then
+            GRD__RECOM_CON.Cells[5,GRD__RECOM_CON.RowCount-1] := 'Ekliptic (Zodiak)'
+          else if(iCircumpolar = 1) then
+            GRD__RECOM_CON.Cells[5,GRD__RECOM_CON.RowCount-1] := 'Circumpolar North'
+          else if(iCircumpolar = -1) then
+            GRD__RECOM_CON.Cells[5,GRD__RECOM_CON.RowCount-1] := 'Circumpolar South'
+          else
+            GRD__RECOM_CON.Cells[5,GRD__RECOM_CON.RowCount-1] := '-';
+
+        end;
+
+        GRD__RECOM_CON.RowCount:=GRD__RECOM_CON.RowCount+1;
+      end;
+
+    end;
+
+  end;
+
+  if(molSignList.Count > 0) and (GRD__RECOM_CON.RowCount > 2) then
+    GRD__RECOM_CON.RowCount:=GRD__RECOM_CON.RowCount-1; // Delete last empty line
+
+end;
+
 procedure TF__ASTROTOOLBOX.ShowEclipsesForMonth(Date: TDateTime);
 var
   i: Integer;
@@ -2505,9 +2759,22 @@ var
   rDEC_SEC: Real;
   iRA_HH, iRA_MM: Word;
   rRA_SEC: Real;
+  iDEC_DEG_M, iDEC_MM_M: SmallInt;
+  rDEC_SS_M: Real;
+  iRA_HH_M, iRA_MM_M: Word;
+  rRA_SS_M: Real;
   rLambdaSun, rMSun, rAz, rHgt: Real;
 begin
   dtTimeMR:=0;dtTimeMS:=0;dtTimeCul:=0;rHgtMaxMoon:=0;
+
+  rLambdaSun:=0; rMSUN:=0;
+  iRA_HH_M:=0; iRA_MM_M:=0; rRA_SS_M:=0;
+  iDEC_DEG_M:=0; iDEC_MM_M:=0; rDEC_SS_M:=0;
+
+  GetMoonCoo(Date,
+    miDST_HH,miUTC_HH,rLambdaSun,rMSun,
+    iRA_HH_M, iRA_MM_M, rRA_SS_M,
+    iDEC_DEG_M, iDEC_MM_M, rDEC_SS_M);
 
   CalcMoonRiseAndMoonSet(Date,
     miDST_HH,miUTC_HH,miGLng_DEG,miGLng_MIN,
@@ -2573,11 +2840,13 @@ begin
   L__SUN_RISE.Caption := IntToStr(Trunc(mrRise_HH)) + ':' + Format('%.2d',[Trunc((mrRise_HH - Trunc(mrRise_HH))*60)]);
   L__SUN_CUL.Caption := IntToStr(Trunc(rSunCul_HH)) + ':' + Format('%.2d',[Trunc((rSunCul_HH - Trunc(rSunCul_HH))*60)]) + ' (' +IntToStr(Round(rHgt)) + '°)';
   L__SUN_SET.Caption := IntToStr(Trunc(mrSet_HH)) + ':' + Format('%.2d',[Trunc((mrSet_HH - Trunc(mrSet_HH))*60)]);
+  L__SUN_COL.Caption := GetConstellationNameByCoo(iRA_HH,iRA_MM,iDEC_DEG,iDEC_MM,2);
 
   rMoonCul_HH := (dtTimeCul - Trunc(dtTimeCul))*24;
   L__MOON_RISE.Caption := IntToStr(Trunc(rMoonR_HH)) + ':' + Format('%.2d',[Trunc((rMoonR_HH - Trunc(rMoonR_HH))*60)]);
   L__MOON_CUL.Caption := IntToStr(Trunc(rMoonCul_HH)) + ':' + Format('%.2d',[Trunc((rMoonCul_HH - Trunc(rMoonCul_HH))*60)]) + ' (' +IntToStr(Round(rHgtMaxMoon)) + '°)';
   L__MOON_SET.Caption := IntToStr(Trunc(rMoonS_HH)) + ':' + Format('%.2d',[Trunc((rMoonS_HH - Trunc(rMoonS_HH))*60)]);
+  L__MOON_COL.Caption := GetConstellationNameByCoo(iRA_HH_M,iRA_MM_M,iDEC_DEG_M,iDEC_MM_M,2);
 
 end;
 
@@ -3012,6 +3281,18 @@ begin
   end;
 end;
 
+function TF__ASTROTOOLBOX.GetRA_HH_OF_DATE(Date: TDateTime): Integer;
+var
+  iYear,iMonth,iDay: Word;
+  dtWatchTime,dtSTime: TDateTime;
+begin
+  DecodeDate(Trunc(Date+1),iYear,iMonth,iDay);
+  dtWatchtime := EncodeDate(iYear,iMonth,iDay);
+  dtSTime := GetSiderialTimeExt(dtWatchtime);
+
+  Result := Round(dtSTime*24.0);
+end;
+
 procedure TF__ASTROTOOLBOX.GetRecommendations(Date: TDateTime);
 {22.09.2020/fs
 Show DeepSky recommendations
@@ -3020,9 +3301,8 @@ Show DeepSky recommendations
 var
   i, iGCnt, iFound, iRA_Comp, iRA_Object: Integer;
   sAOType: string;
-  //slDSImgList: TStringList;
-  dtWatchTime,dtSTime: TDateTime;
-  iYear,iMonth,iDay: Word;
+  //dtWatchTime,dtSTime: TDateTime;
+  //iYear,iMonth,iDay: Word;
   bInRange: Boolean;
   iDEC_HH_Object: SmallInt;
   bEastPos, bInner: Boolean;
@@ -3054,11 +3334,14 @@ begin
 
   iGCnt := 0;
   // Calc RA South at 00:00 current day
+  (*
   DecodeDate(Trunc(Date+1),iYear,iMonth,iDay);
   dtWatchtime := EncodeDate(iYear,iMonth,iDay);
   dtSTime := GetSiderialTimeExt(dtWatchtime);
 
   iRA_Comp := Round(dtSTime*24.0);
+  *)
+  iRA_Comp := GetRA_HH_OF_DATE(Date);
 
   for i:=0 to molAOList.Count-1 do
   begin
@@ -3886,10 +4169,11 @@ begin
   end;
 
   SetMainInfoData(CB__WT.Date);
+
   GetRecommendations(CB__WT.Date);
   ShowMeteoriteShowerGrid(CB__WT.Date);
-//  ShowMeteoriteShowerGrid(GetWTime());
   ShowEclipsesForMonth(CB__WT.Date);
+  ShowConstellationsForMonth(CB__WT.Date);
 
 end;
 
@@ -6224,6 +6508,7 @@ begin
 
       F__AOVIS.msLANG_ID := msLANG_ID;
       F__AOVIS.mAObject := (molAOList[iIndex] as TAObject);
+      F__AOVIS.msConstellation := GetConstellationNameByCoo(F__AOVIS.mAObject.iRA_Hours,F__AOVIS.mAObject.iRA_Min,F__AOVIS.mAObject.iDec_Deg,F__AOVIS.mAObject.iDec_Min,2);
       F__AOVIS.molSignList := molSignList;
       F__AOVIS.mrSin_fGLat := mrSin_fGLat;
       F__AOVIS.mrCos_fGLat := mrCos_fGLat;
@@ -12370,6 +12655,7 @@ begin
 
     ImportCatalog_MS(gsAlbireoLocalDir + 'AO-MS.dat');
     ImportSigns(molSignList,gsAlbireoLocalDir + 'Signs.dat');
+    mslConstCol.LoadFromFile(gsAlbireoLocalDir + 'ConstCol.dat');
     ImportEclipses(mslEclipses,gsAlbireoLocalDir);
 
     if(F__STARTUP <> nil) then
@@ -12518,6 +12804,7 @@ begin
 
   slBuffer := TStringList.Create;
   slBuffer.Delimiter:=';';
+  slBuffer.StrictDelimiter:=true;
 
   CB__SIGNS.Items.Clear;
 
@@ -12535,7 +12822,7 @@ begin
     Sign := nil;
     slBuffer.Clear;
     ReadLn(tfAO,sLine);
-    sLine := AnsiReplaceStr(sLine,' ','~');
+    //sLine := AnsiReplaceStr(sLine,' ','~');
 
     slBuffer.DelimitedText:=sLine;
     for i:=0 to slBuffer.Count-1 do
@@ -12543,10 +12830,11 @@ begin
       if(i = 0) then Sign := TSign.Create;
       Sign.bSelected:=false;
 
-      sVar := AnsiReplaceStr(slBuffer[i],'~',' ');
+      //sVar := AnsiReplaceStr(slBuffer[i],'~',' ');
+      sVar := slBuffer[i];
 
       case i of
-        0: Sign.sCon := sVar;
+        0: begin Sign.sCon := sVar; end;
         1:
         begin
 
@@ -12563,6 +12851,16 @@ begin
           Sign.sConDE := sVar;
         end;
         3: Sign.sConEN := sVar;
+        10: Sign.sNorthSouth:=sVar;
+        11:
+        begin
+          if(sVar = '1') then
+            Sign.bZodiac:=true
+          else
+            Sign.bZodiac:=false;
+        end;
+        12: Sign.sHistory:=sVar;
+        13: Sign.iMainStarIndex := StrToIntDef(sVar,0);
       end; // case
     end; // for
     if(Sign <> nil) then
@@ -13287,6 +13585,10 @@ begin
   molMeteorShowers := TObjectList.Create;
   molCBExt := TObjectList.Create;
 
+  mslConstCol := TStringList.Create;
+  //mslConstCol.Delimiter:=';';
+  mslConstCol.StrictDelimiter:=true;
+
   miGLng_DEG := 999;
   miGLat_DEG := 999;
 
@@ -13370,7 +13672,7 @@ begin
   molMeteorShowers.Free;
   molSignList.Free;
   mslVisibleAOList.Free;
-  //molAOList.Free;
+  mslConstCol.Free;
   molADevList.Free;
   molCBExt.Free;
   mslAsteroidsCometsDisplayed.Free;
@@ -13855,9 +14157,11 @@ begin
 
   SetTimePanels();
   GenTimeScale(true);
+
   GetRecommendations(Now);
   ShowMeteoriteShowerGrid(Now);
   ShowEclipsesForMonth(Now);
+  ShowConstellationsForMonth(Now);
 
   mrMagPos := crMagPosStd;
   mrMagPos_G := crMagPosStd_G;

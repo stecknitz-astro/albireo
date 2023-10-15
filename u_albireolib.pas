@@ -118,12 +118,118 @@ procedure FadeIn2(aBitMap: Graphics.TBitmap; IMG__HOR: TImage);
 procedure LoadDevices(olADevList: TObjectList);
 procedure SaveDevices(olADevList: TObjectList);
 function GenSolFrac(sSpType: string): Real;
+function GetConstellationID(slConstCol: TStringList; IMG__CB: TImage; iRA_HH, iRA_MM: Word; iDEC_DEG, iDEC_MM: SmallInt): string;
+procedure AutoCorrectConstellationColors(var iRed: Byte; var iGreen: Byte; var iBlue: Byte);
+function GetConstByRedColorVal(slConstCol: TStringList; iRedColorVal: Byte): string;
 
 type
   TRGBTripleArray = array[0..32767] of TRGBTriple;
   PRGBTripleArray = ^TRGBTripleArray;
 
 implementation
+
+function GetConstByRedColorVal(slConstCol: TStringList; iRedColorVal: Byte): string;
+var
+  i: Integer;
+  iRed: Byte;
+  bFound: Boolean;
+  slBuffer1, slBuffer2: TStringList;
+begin
+  bFound := false;
+  i:=0;
+
+  Result := '';
+
+  slBuffer1 := TStringList.Create;
+  slBuffer1.Delimiter := ';';
+  slBuffer1.StrictDelimiter:=true;
+
+  slBuffer2 := TStringList.Create;
+  slBuffer2.Delimiter := '/';
+  slBuffer2.StrictDelimiter:=true;
+
+  while ((i < slConstCol.Count) and (not bFound)) do
+  begin
+    slBuffer1.DelimitedText:=slConstCol[i];
+    slBuffer2.DelimitedText:=slBuffer1[1];
+
+    iRed := StrToInt(slBuffer2[0]);
+    if(iRed = iRedColorVal) then
+    begin
+      Result := slBuffer1[0];
+      bFound := true;
+    end;
+
+    Inc(i);
+  end;
+
+  slBuffer1.Free;
+  slBuffer2.Free;
+
+end;
+
+procedure AutoCorrectConstellationColors(var iRed: Byte; var iGreen: Byte; var iBlue: Byte);
+begin
+  if((iRed + iGreen) <> 255) then // Security-Check Red + Green should be always 255!
+  begin
+    // Slightly incorrect re-read from picture:Try to correct value automatically!
+    if((iRed + iGreen) = 256)then
+    begin
+      if( (((iRed-1) - 0) mod 10) = 0 ) then
+        iRed := iRed-1
+      else if( (((iRed-1) - 5) mod 10) = 0 ) then
+        iRed := iRed-1
+      else if( (((iRed-1) - 3) mod 10) = 0 ) then
+        iRed := iRed-1
+      else if( (((iRed-1) - 8) mod 10) = 0 ) then
+        iRed := iRed-1;
+    end
+    else if((iRed + iGreen) = 254)then
+    begin
+      if( (((iRed+1) - 0) mod 10) = 0 ) then
+        iRed := iRed+1
+      else if( (((iRed+1) - 5) mod 10) = 0 ) then
+        iRed := iRed+1
+      else if( (((iRed+1) - 3) mod 10) = 0 ) then
+        iRed := iRed+1
+      else if( (((iRed+1) - 8) mod 10) = 0 ) then
+        iRed := iRed+1;
+    end;
+  end;
+
+end;
+
+function GetConstellationID(slConstCol: TStringList; IMG__CB: TImage; iRA_HH, iRA_MM: Word; iDEC_DEG, iDEC_MM: SmallInt): string;
+{2023/08/20 / fs
+Returns the constellation-ID for any given rA and DEC value
+}
+var
+  iXLen, iYLen: Integer;
+  iXPos, iYPos: Integer;
+  Color: TColor;
+  iRed, iGreen, iBlue: Byte;
+begin
+  Result := '';
+
+  if(Assigned(IMG__CB.Picture) and Assigned(IMG__CB.Picture.Bitmap)) then
+  begin
+    iXLen := IMG__CB.Picture.Bitmap.Width;
+    iYLen := IMG__CB.Picture.Bitmap.Height;
+
+    iXPos := Round( ( 24.0-(iRA_HH + iRA_MM/60.0) )*iXLen/24.0 );
+    iYPos := Round( ( 90.0 - (iDEC_DEG + iDEC_MM/60.0) )*iYLen/180.0 );
+
+    Color := IMG__CB.Picture.Bitmap.Canvas.Pixels[iXPos, iYPos];
+    iRed := Color and $FF;
+    iGreen := (Color shr 8) and $FF;
+    iBlue := (Color shr 16) and $FF;
+
+    AutoCorrectConstellationColors(iRed,iGreen,iBlue);
+
+    Result := GetConstByRedColorVal(slConstCol,iRed);
+  end;
+
+end;
 
 procedure LoadDevices(olADevList: TObjectList);
 {2013/04/25 / fs

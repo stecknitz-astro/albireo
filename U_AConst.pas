@@ -401,7 +401,10 @@ type
     sConDE: string[100]; // German Name
     sConEN: string[100]; // English Name
     bSelected: Boolean;
-
+    sNorthSouth: string[5];
+    bZodiac: Boolean;
+    sHistory: string[1];
+    iMainStarIndex: Integer;
   end;
 
 type

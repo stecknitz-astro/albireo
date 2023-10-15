@@ -213,6 +213,8 @@ type
 
     FrHourCul_U, FrHourRise, FrHourCul_O, FrHourSet: Real; // Decimal-Hour of culminations, rise and set
 
+    FsConstellation: string;
+
     procedure CalcAOWidth(sType: string; iRefWidth: Integer);
     function GetUserFileID(): string;
     function GetUserFileIndex(sID: string): Integer;
@@ -242,6 +244,7 @@ type
     procedure ResizeStarStructure();
     procedure ResizeStarStructTable();
     procedure EvalCulminationGraph();
+    function GetConstellation(): string;
 
   public
     { public declarations }
@@ -264,6 +267,7 @@ type
     property miLatRow: Integer read FiLatRow write FiLatRow;
     property miMStarCnt: Integer read FiMStarCnt write FiMStarCnt; // 0: Single Star, 1: Double Star; 2: Triple Star, ...
     property miMStarIndex: Integer read FiMStarIndex write FiMStarIndex; // Current Multi-Star Index (0,1,...)
+    property msConstellation: string read FsConstellation write FsConstellation;
 
   end;
 
@@ -1573,12 +1577,9 @@ begin
       IMG__AOVIS.Hint := mAObject.sName_DE;
     end;
 
-    if((mAObject as TStar).sCon<> '') then
-    begin
-      GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Sternbild';
-      GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := GetSignName((mAObject as TStar).sCon,molSignList,msLANG_ID);
-      GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
-    end;
+    GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Sternbild';
+    GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := GetConstellation();
+    GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
     GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Scheinbare Helligkeit m';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStr(mAObject.rM);
@@ -1685,7 +1686,7 @@ begin
     if((mAObject as TStar).sCon<> '') then
     begin
       GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Constellation';
-      GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := GetSignName((mAObject as TStar).sCon,molSignList,msLANG_ID);
+      GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := GetConstellation();
       GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
     end;
 
@@ -2218,51 +2219,51 @@ var
   rArgPer: Real;
   iYYYY, iMM, iMDD: Integer;
 begin
-  if(msLANG_ID = 'DE') then  P__AOVIS_CAPTION.Caption := (mAObject as TAObject).sName_DE;
-  if(msLANG_ID = 'EN') then  P__AOVIS_CAPTION.Caption := (mAObject as TAObject).sName_EN;
+  if(msLANG_ID = 'DE') then  P__AOVIS_CAPTION.Caption := (mAObject as TAObject).sName_DE
+  else if(msLANG_ID = 'EN') then  P__AOVIS_CAPTION.Caption := (mAObject as TAObject).sName_EN;
 
   PutRA_DEC(3);
 
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Entfernung Erde (AE)';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Distance Earth (AU)';
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Entfernung Erde (AE)'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Distance Earth (AU)';
   GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStr((mAObject as TComet).rRho);
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Entfernung Sonne (AE)';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Distance Sonne (AU)';
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Entfernung Sonne (AE)'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Distance Sonne (AU)';
   GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStr((mAObject as TComet).rRs);
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Trop. Jahr';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Trop. Year';
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Trop. Jahr'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Trop. Year';
   GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStr((mAObject as TComet).rTp);
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Gr. Halbachse (AE)';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Semimajor Axis (AU)';
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Gr. Halbachse (AE)'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Semimajor Axis (AU)';
   GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStr((mAObject as TComet).rA);
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Elliptizität';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Eccentricity';
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Elliptizität'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Eccentricity';
   GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStr((mAObject as TComet).rE);
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Inklination';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Inclination';
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Inklination'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Inclination';
   GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStr((mAObject as TComet).rI);
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
   rArgPer := (mAObject as TComet).rOmegaQ - (mAObject as TComet).rOmega;
   if(rArgPer < 0) then rArgPer := rArgPer + 360;
 
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Perihel-Argument';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Argument of the perihelion';
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Perihel-Argument'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Argument of the perihelion';
   GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStr(rArgPer);
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Länge des aufsteigenden Knotens';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Longitude of the ascending node';
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Länge des aufsteigenden Knotens'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Longitude of the ascending node';
   GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStr((mAObject as TComet).rOmega);
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
@@ -2270,8 +2271,8 @@ begin
   iMM := 1 + Trunc(((mAObject as TComet).rP - iYYYY)*12);
   iMDD := 1 + Round((((mAObject as TComet).rP - iYYYY)*12 - (iMM-1))*30);
 
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Perihel Transit';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Perihelion Transit';
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Perihel Transit'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Perihelion Transit';
   GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := IntToStr(iYYYY) + '/' + IntToStr(iMM) + '/' + IntToStr(iMDD);
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
@@ -2279,31 +2280,30 @@ end;
 
 procedure TF__AOVIS.ShowAOData_G();
 begin
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Sternbild';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Constellation';
-  GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] :=
-    GetSignName((mAObject as TInterstellarObject).sCon,molSignList,msLANG_ID);
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Sternbild'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Constellation';
+  GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := GetConstellation();
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
   if((mAObject as TGalaxy).sGType <> '') then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Typ';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Type';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Typ'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Type';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := (mAObject as TGalaxy).sGType;
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
 
   if((mAObject as TGalaxy).iRadSpeed <> -999) then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Radialgeschw. [km/s]';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Radial Speed [km/s]';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Radialgeschw. [km/s]'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Radial Speed [km/s]';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := IntToStr((mAObject as TGalaxy).iRadSpeed);
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
 
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Magnituden';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Magnitudes';
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Magnituden'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Magnitudes';
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
   if((mAObject as TGalaxy).rMagB <> 999) then
@@ -2399,28 +2399,28 @@ begin
   GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := (mAObject as TInterstellarObject).sNGC;
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Laufzeitentfernung [MrdLj]';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Light-Travel Distance [MrdLy]';
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Laufzeitentfernung [MrdLj]'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Light-Travel Distance [MrdLy]';
   GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStr((mAObject as TInterstellarObject).rDist_XLY);
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Mitbewegte Entfernung [MPc]';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Comoving Distance [MPc]';
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Mitbewegte Entfernung [MPc]'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Comoving Distance [MPc]';
   GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStr((mAObject as TQuasar).fComDistMPc);
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
   if((mAObject as TQuasar).sQType <> '') then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Typ';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Type';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Typ'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Type';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := (mAObject as TQuasar).sQType;
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
 
   if((mAObject as TQuasar).fRadSpeed <> -999) then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Rotverschiebung';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Redshift';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Rotverschiebung'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Redshift';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStr((mAObject as TQuasar).fRedshift);
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
@@ -2429,40 +2429,39 @@ end;
 
 procedure TF__AOVIS.ShowAOData_N();
 begin
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Sternbild';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Constellation';
-  GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] :=
-    GetSignName((mAObject as TInterstellarObject).sCon,molSignList,msLANG_ID);
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Sternbild'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Constellation';
+  GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := GetConstellation();
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
   if((mAObject as TNebula).sNType <> '') then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Typ';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Type';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Typ'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Type';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := (mAObject as TNebula).sNType;
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
 
   if((mAObject as TNebula).iVisDim1 > 0) and ((mAObject as TNebula).iVisDim2 > 0) then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Ausdehnung';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Extent';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Ausdehnung'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Extent';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := IntToStr((mAObject as TNebula).iVisDim1) + ' * ' + IntToStr((mAObject as TNebula).iVisDim2);
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
 
   if((mAObject as TNebula).sStar <> '') then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Zentraler Stern';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Central Star';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Zentraler Stern'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Central Star';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := (mAObject as TNebula).sStar;
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
 
   if((mAObject as TNebula).rStar_M > -999) then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Stern-Magnitude';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Star Magnitude';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Stern-Magnitude'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Star Magnitude';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStr((mAObject as TNebula).rStar_M);
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
@@ -2470,24 +2469,23 @@ end;
 
 procedure TF__AOVIS.ShowAOData_PN();
 begin
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Sternbild';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Constellation';
-  GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] :=
-    GetSignName((mAObject as TInterstellarObject).sCon,molSignList,msLANG_ID);
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Sternbild'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Constellation';
+  GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := GetConstellation();
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
   if((mAObject as TPNebula).sPNType <> '') then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Typ';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Type';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Typ'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Type';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := (mAObject as TPNebula).sPNType;
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
 
   if((mAObject as TPNebula).rVisDim1 > 0) then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Ausdehnung (Bogensek.)';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Extent (arcsec)';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Ausdehnung (Bogensek.)'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Extent (arcsec)';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] :=
       FloatToStrF((mAObject as TPNebula).rVisDim1,ffFixed,8,2)
       + ' * ' + FloatToStrF((mAObject as TPNebula).rVisDim2,ffFixed,8,2);
@@ -2496,16 +2494,16 @@ begin
 
   if((mAObject as TPNebula).rM > 0) then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Magnitude';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Magnitude';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Magnitude'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Magnitude';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloattoStr((mAObject as TPNebula).rM);
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
 
   if((mAObject as TPNebula).rStar_M > 0) then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Stern-Magnitude';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Star Magnitude';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Stern-Magnitude'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Star Magnitude';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStr((mAObject as TPNebula).rStar_M);
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
@@ -2513,70 +2511,78 @@ end;
 
 procedure TF__AOVIS.ShowAOData_OC();
 begin
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Sternbild';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Constellation';
-  GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] :=
-    GetSignName((mAObject as TInterstellarObject).sCon,molSignList,msLANG_ID);
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Sternbild'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Constellation';
+  GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := GetConstellation();
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Typ';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Type';
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Typ'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Type';
   GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := (mAObject as TOpenCluster).sOCType;
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
   if((mAObject as TOpenCluster).iDiam_M > 0) then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Ausdehnung (Bogensek.)';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Extent (arcsec)';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Ausdehnung (Bogensek.)'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Extent (arcsec)';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := IntToStr((mAObject as TOpenCluster).iDiam_M);
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
 
   if((mAObject as TOpenCluster).rM > -999) then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Magnitude';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Magnitude';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Magnitude'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Magnitude';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloattoStr((mAObject as TOpenCluster).rM);
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
 
   if((mAObject as TOpenCluster).iNum > 0) then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := '#Sterne';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := '#Stars';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := '#Sterne'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := '#Stars';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := IntToStr((mAObject as TOpenCluster).iNum);
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
 
   if((mAObject as TOpenCluster).rAge > 0) then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Alter (MJ)';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Age (MY)';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Alter (MJ)'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Age (MY)';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStr((mAObject as TOpenCluster).rAge);
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
 end;
 
+function TF__AOVIS.GetConstellation(): string;
+begin
+  // Try old fashion manner first..
+  Result := GetSignName((mAObject as TInterstellarObject).sCon,molSignList,msLANG_ID);
+
+  if(Result = '') then
+    Result := msConstellation; // New fashion way!
+
+end;
+
 procedure TF__AOVIS.ShowAOData_GC();
 begin
-  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Sternbild';
-  if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Constellation';
-  GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] :=
-    GetSignName((mAObject as TInterstellarObject).sCon,molSignList,msLANG_ID);
+  if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Sternbild'
+  else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Constellation';
+  GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := GetConstellation();
   GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
 
   if((mAObject as TGlobularCluster).iGCType > 0) then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Typ';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Type';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Typ'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Type';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := IntToStr((mAObject as TGlobularCluster).iGCType);
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
 
   if((mAObject as TGlobularCluster).rVisDiam > 0) then
   begin
-    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Ausdehnung (Bogensek.)';
-    if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Extent (arcsec)';
+    if(msLANG_ID = 'DE') then  GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Ausdehnung (Bogensek.)'
+    else if(msLANG_ID = 'EN') then GRD__AOV_PROP.Cells[0,GRD__AOV_PROP.RowCount-1] := 'Extent (arcsec)';
     GRD__AOV_PROP.Cells[1,GRD__AOV_PROP.RowCount-1] := FloatToStr((mAObject as TGlobularCluster).rVisDiam);
     GRD__AOV_PROP.RowCount := GRD__AOV_PROP.RowCount+1;
   end;
