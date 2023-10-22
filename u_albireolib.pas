@@ -182,6 +182,8 @@ begin
       else if( (((iRed-1) - 3) mod 10) = 0 ) then
         iRed := iRed-1
       else if( (((iRed-1) - 8) mod 10) = 0 ) then
+        iRed := iRed-1
+      else
         iRed := iRed-1;
     end
     else if((iRed + iGreen) = 254)then
@@ -193,6 +195,8 @@ begin
       else if( (((iRed+1) - 3) mod 10) = 0 ) then
         iRed := iRed+1
       else if( (((iRed+1) - 8) mod 10) = 0 ) then
+        iRed := iRed+1
+      else
         iRed := iRed+1;
     end;
   end;
@@ -224,9 +228,12 @@ begin
     iGreen := (Color shr 8) and $FF;
     iBlue := (Color shr 16) and $FF;
 
-    AutoCorrectConstellationColors(iRed,iGreen,iBlue);
+    if(iRed + iGreen = 255) then
+    begin
+      AutoCorrectConstellationColors(iRed,iGreen,iBlue);
 
-    Result := GetConstByRedColorVal(slConstCol,iRed);
+      Result := GetConstByRedColorVal(slConstCol,iRed);
+    end;
   end;
 
 end;

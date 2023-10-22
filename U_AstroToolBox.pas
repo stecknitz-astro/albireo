@@ -6519,9 +6519,6 @@ begin
       F__AOVIS.mdtWT := GetWTime();
       F__AOVIS.mbTimePlay := mbTimePlay;
 
-      //if(LeftStr(F__AOVIS.mAObject.sAOType,1) = 'S') then
-      //  F__AOVIS.WindowState:=wsMaximized;
-
       F__AOVIS.P__USERCOMMENT.Visible := true;
       F__AOVIS.ED__COMMENT.Text:=(molAOList[iIndex] as TAObject).sComment;
       sCommentPrev := F__AOVIS.ED__COMMENT.Text;
@@ -6537,6 +6534,8 @@ begin
       end;
 
       F__AOVIS.Destroy;
+      if(PC__WORKBENCH.ActivePageIndex = ciPAGE_STARMAP) then
+        GenMap(P__STARMAP); //CleanStartOfStarMap();
     end;
 
   end;
@@ -13510,15 +13509,19 @@ begin
   mslEclipses := TStringList.Create;
 
   {$IFDEF LINUX}
-    gsAlbireoLocalDir := GetLocalUserAppDataPath() + '.albireo/';
+    gsAlbireoLocalDir := '../'; // GetLocalUserAppDataPath() + '.albireo/';
     TB__TIME_24H.TickStyle:=tsNone;
     TB__MAG.TickStyle:=tsNone;
     TB__MAG_G.TickStyle:=tsNone;
+    msGotoOutputDir := '~/';
+    msStrmDir := '~';
   {$ELSE}
     gsAlbireoLocalDir := GetLocalUserAppDataPath() + '\Albireo\';
     TB__TIME_24H.TickStyle:=tsAuto;
     TB__MAG.TickStyle:=tsAuto;
     TB__MAG_G.TickStyle:=tsAuto;
+    msGotoOutputDir := 'C:\';
+    msStrmDir := 'C:';
   {$ENDIF LINUX}
 
   mGenMapCmd := mcdNone;
@@ -13565,7 +13568,6 @@ begin
   miPlComPathWeeks := 4;
   miLandscapeNo := 0;
   mrS0 := 0;
-  msGotoOutputDir := 'C:\';
 
   MENU__HOR_0.Checked:=true;
 
@@ -13654,7 +13656,6 @@ begin
 
   TS__MAG_GAL.TabVisible := false;
 
-  msStrmDir := 'C:';
   miStrmDataPeriod := 60;
   miStrmViewFlipPeriod := 0; // Viewflip stopped
 
@@ -13885,7 +13886,14 @@ begin
     miGLng_MIN := IniFile.ReadInteger('CONF','GLNG_MIN',47);
     miDST_HH_DEF := IniFile.ReadInteger('CONF','DST_HH',1);
     miUTC_HH := IniFile.ReadInteger('CONF','UTC_HH',1);
-    msGotoOutputDir := IniFile.ReadString('CONF','GOTOOUTDIR','C:\');
+
+    {$IFDEF LINUX}
+      msGotoOutputDir := IniFile.ReadString('CONF','GOTOOUTDIR','~/');
+      msStrmDir := IniFile.ReadString('STREAM','STRMDIR','~');
+    {$ELSE}
+      msGotoOutputDir := IniFile.ReadString('CONF','GOTOOUTDIR','C:\');
+      msStrmDir := IniFile.ReadString('STREAM','STRMDIR','C:');
+    {$ENDIF LINUX}
 
     msLANG_ID := IniFile.ReadString('USER','LANGUAGE','DE');
     msCountry := IniFile.ReadString('USER','COUNTRY','');
@@ -13915,7 +13923,6 @@ begin
 
     miLandscapeNo := IniFile.ReadInteger('CONF','LANDSCAPE',0);
 
-    msStrmDir := IniFile.ReadString('STREAM','STRMDIR','C:');
     miStrmDataPeriod := IniFile.ReadInteger('STREAM','STRMPERIOD',60);
     miStrmViewFlipPeriod := IniFile.ReadInteger('STREAM','STRMVIEWFLIPPERIOD',60);
     msStrmText1_DE := IniFile.ReadString('STREAM','STRMTEXT1_DE','Sternenhimmel JETZT');
@@ -15576,7 +15583,7 @@ begin
   if(iIndex > -1) then
   begin
     ShowAOVis(iIndex);
-    GenMap(P__STARMAP);
+    //GenMap(P__STARMAP);
   end;
 
 end;

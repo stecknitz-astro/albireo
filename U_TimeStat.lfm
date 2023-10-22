@@ -1,7 +1,7 @@
 object F__TIMESTAT: TF__TIMESTAT
-  Left = 563
+  Left = -938
   Height = 786
-  Top = 122
+  Top = 103
   Width = 782
   BorderIcons = [biSystemMenu]
   Caption = 'Sonne und Mond'

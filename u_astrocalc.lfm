@@ -1,7 +1,7 @@
 object F__ASTROCALC: TF__ASTROCALC
-  Left = 288
+  Left = -1743
   Height = 831
-  Top = 88
+  Top = 50
   Width = 1549
   HorzScrollBar.Page = 1532
   VertScrollBar.Page = 814

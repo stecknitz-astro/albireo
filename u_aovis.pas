@@ -268,6 +268,7 @@ type
     property miMStarCnt: Integer read FiMStarCnt write FiMStarCnt; // 0: Single Star, 1: Double Star; 2: Triple Star, ...
     property miMStarIndex: Integer read FiMStarIndex write FiMStarIndex; // Current Multi-Star Index (0,1,...)
     property msConstellation: string read FsConstellation write FsConstellation;
+    procedure PrepareForm();
 
   end;
 
@@ -283,6 +284,22 @@ implementation
 
 { TF__AOVIS }
 
+procedure TF__AOVIS.PrepareForm();
+begin
+  PC__MAIN_VISU.ActivePageIndex:=0;
+
+  GRD__STARSTRUCT.Visible := false;
+  SHP__CORE.Visible:=false;
+  SHP__CORE2.Visible:=false;
+  SHP__CORE_HE.Visible:=false;
+  IMG__CORE_FE.Visible:=false;
+  SHP__CORE3.Visible:=false;
+  IMG__RADIATION.Visible:=false;
+  IMG__CONVECTION.Visible:=false;
+  IMG__FULLCONVECTION.Visible:=false;
+  P__HEAVYELFUSION.Visible := false;
+
+end;
 procedure TF__AOVIS.EvalCulminationGraph();
 var
   i, iDayHourSplit: Integer;
@@ -1076,15 +1093,7 @@ begin
 
   iTMin := 0; iTMax := 0; iSTemp := 0;
 
-  GRD__STARSTRUCT.Visible := false;
-  SHP__CORE.Visible:=false;
-  SHP__CORE2.Visible:=false;
-  SHP__CORE_HE.Visible:=false;
-  IMG__CORE_FE.Visible:=false;
-  SHP__CORE3.Visible:=false;
-  IMG__RADIATION.Visible:=false;
-  IMG__CONVECTION.Visible:=false;
-  IMG__FULLCONVECTION.Visible:=false;
+  PrepareForm();
 
   //ShowMessage(msAlbireoLocalDir + 'img\' + (mAObject as TStar).sSpecID + 'Star.jpg');
   sSPType := GetSingleSpecType((mAObject as TStar).sSpType,iMStarIndex);
@@ -3234,13 +3243,14 @@ begin
   if(FileExists(GetUserDir() + csPictureRes)) then
     mslUserFiles.LoadFromFile(GetUserDir() + csPictureRes);
 
-  PC__MAIN_VISU.ActivePageIndex:=0;
+  TIMER__COO.Enabled := false;
 
   miAltRow := -1;
   miLatRow := -1;
-  TIMER__COO.Enabled := false;
 
   msMissingFile := '';
+
+  PrepareForm();
 end;
 
 procedure TF__AOVIS.FormDestroy(Sender: TObject);

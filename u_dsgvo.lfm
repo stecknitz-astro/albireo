@@ -1,5 +1,5 @@
 object F__DSGVO: TF__DSGVO
-  Left = 651
+  Left = -945
   Height = 553
   Top = 238
   Width = 681
@@ -8,7 +8,7 @@ object F__DSGVO: TF__DSGVO
   ClientWidth = 681
   Color = 1052688
   OnShow = FormShow
-  LCLVersion = '2.2.2.0'
+  LCLVersion = '2.2.4.0'
   object MM__DE: TMemo
     Left = 62
     Height = 443
