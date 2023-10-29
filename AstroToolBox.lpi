@@ -690,8 +690,8 @@
       <Unit54>
         <Filename Value="..\..\..\Albireo\ToDo.txt"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="701"/>
-        <CursorPos X="37" Y="735"/>
+        <TopLine Value="703"/>
+        <CursorPos X="23" Y="736"/>
         <UsageCount Value="87"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="None"/>
