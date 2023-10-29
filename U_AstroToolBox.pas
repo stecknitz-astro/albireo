@@ -18411,6 +18411,8 @@ begin
   case PC__WORKBENCH.ActivePageIndex of
     ciPAGE_STARMAP:
       CleanStartOfStarMap();
+    ciPAGE_SOLSYS:
+      ShowSolSys();
   end;
 end;
 
