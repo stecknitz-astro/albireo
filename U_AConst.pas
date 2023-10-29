@@ -33,7 +33,7 @@ const
   gcsVersion = '1';
   gcsSubVersion = '4'; // New Features
   gcsBuildVersion = '4'; // Subfeatures / changes
-  gcsErrVersion = '0'; // Bugfixes / Hotfixes without any new features
+  gcsErrVersion = '1'; // Bugfixes / Hotfixes without any new features
 
   gcsCommVersion = 'OSS';
   //gciCommLvl = 1; //: SmallInt; // = 1; // 0: Low computation resources (uses smaller astro database), 1: Normal computation resources (uses standard astro database)

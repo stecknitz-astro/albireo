@@ -1083,13 +1083,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure SHP__ZRMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    (*
-    procedure SHP__ZUMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure SHP__ZUMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    *)
-
+    procedure SPL__NAVMoved(Sender: TObject);
     procedure TB__LTMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer
       );
     procedure TB__LTMouseUp(Sender: TObject; Button: TMouseButton;
@@ -18412,20 +18406,13 @@ begin
   MoveZoom(10,0);
 end;
 
-(*
-procedure TF__ASTROTOOLBOX.SHP__ZUMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure TF__ASTROTOOLBOX.SPL__NAVMoved(Sender: TObject);
 begin
-//  SHP__ZU.Color:=clFuchsia;
+  case PC__WORKBENCH.ActivePageIndex of
+    ciPAGE_STARMAP:
+      CleanStartOfStarMap();
+  end;
 end;
-
-procedure TF__ASTROTOOLBOX.SHP__ZUMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-//  SHP__ZU.Color:=clAqua;
-  MoveZoom(0,-10);
-end;
-*)
 
 procedure TF__ASTROTOOLBOX.TB__LTMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);

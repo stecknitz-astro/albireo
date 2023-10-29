@@ -151,13 +151,18 @@ begin
   while ((i < slConstCol.Count) and (not bFound)) do
   begin
     slBuffer1.DelimitedText:=slConstCol[i];
-    slBuffer2.DelimitedText:=slBuffer1[1];
-
-    iRed := StrToInt(slBuffer2[0]);
-    if(iRed = iRedColorVal) then
+    if(slBuffer1.Count > 1) then
     begin
-      Result := slBuffer1[0];
-      bFound := true;
+      slBuffer2.DelimitedText:=slBuffer1[1];
+      if(slBuffer2.Count > 0) then
+      begin
+        iRed := StrToInt(slBuffer2[0]);
+        if(iRed = iRedColorVal) then
+        begin
+          Result := slBuffer1[0];
+          bFound := true;
+        end;
+      end;
     end;
 
     Inc(i);
@@ -182,8 +187,6 @@ begin
       else if( (((iRed-1) - 3) mod 10) = 0 ) then
         iRed := iRed-1
       else if( (((iRed-1) - 8) mod 10) = 0 ) then
-        iRed := iRed-1
-      else
         iRed := iRed-1;
     end
     else if((iRed + iGreen) = 254)then
@@ -195,8 +198,6 @@ begin
       else if( (((iRed+1) - 3) mod 10) = 0 ) then
         iRed := iRed+1
       else if( (((iRed+1) - 8) mod 10) = 0 ) then
-        iRed := iRed+1
-      else
         iRed := iRed+1;
     end;
   end;
@@ -220,20 +221,23 @@ begin
     iXLen := IMG__CB.Picture.Bitmap.Width;
     iYLen := IMG__CB.Picture.Bitmap.Height;
 
-    iXPos := Round( ( 24.0-(iRA_HH + iRA_MM/60.0) )*iXLen/24.0 );
-    iYPos := Round( ( 90.0 - (iDEC_DEG + iDEC_MM/60.0) )*iYLen/180.0 );
+    iXPos := Trunc( ( 24.0-(iRA_HH + iRA_MM/60.0) )*iXLen/24.0 );
+    iYPos := Trunc( ( 90.0 - (iDEC_DEG + iDEC_MM/60.0) )*iYLen/180.0 );
+
+    if(iXPos >= iXLen) then
+      iXPos := iXLen - 1;
+
+    if(iYPos >= iYLen) then
+      iYPos := iYLen - 1;
 
     Color := IMG__CB.Picture.Bitmap.Canvas.Pixels[iXPos, iYPos];
     iRed := Color and $FF;
     iGreen := (Color shr 8) and $FF;
     iBlue := (Color shr 16) and $FF;
 
-    if(iRed + iGreen = 255) then
-    begin
-      AutoCorrectConstellationColors(iRed,iGreen,iBlue);
+    AutoCorrectConstellationColors(iRed,iGreen,iBlue);
 
-      Result := GetConstByRedColorVal(slConstCol,iRed);
-    end;
+    Result := GetConstByRedColorVal(slConstCol,iRed);
   end;
 
 end;
